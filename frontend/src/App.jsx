@@ -5,6 +5,7 @@ import Session from './screens/Session.jsx';
 import Report from './screens/Report.jsx';
 import LiveReport from './live/LiveReport.jsx';
 import InterviewComingSoon from './screens/InterviewComingSoon.jsx';
+import PolicyLab from './screens/PolicyLab.jsx';
 import { PERSONAS } from './data.js';
 import { defaultConfig } from './lib/config.js';
 import { simulateFull } from './lib/engine.js';
@@ -52,6 +53,7 @@ export default function App() {
   const nav = useMemo(() => [
     { id: 'home', label: 'Modes' },
     { id: 'setup', label: 'New session' },
+    { id: 'policy', label: 'Policy Lab' },
     { id: 'report', label: 'Last report', disabled: !result },
   ], [result]);
 
@@ -76,14 +78,15 @@ export default function App() {
                 </button>
               ))}
             </nav>
-            <span className={`mode-chip ${headerLive ? 'live' : 'demo'}`} title={headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.'}>
-              <i />{headerLive ? 'Backend live' : 'Simulated agents'}
+            <span className={`mode-chip ${view === 'policy' ? '' : headerLive ? 'live' : 'demo'}`} title={view === 'policy' ? 'Policy Lab uses the configured policy API.' : headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.'}>
+              <i />{view === 'policy' ? 'Policy sandbox' : headerLive ? 'Backend live' : 'Simulated agents'}
             </span>
           </div>
         </header>
       )}
 
-      {view === 'home' && <Home onStart={openSetup} onSample={sampleReport} roster={roster} />}
+      {view === 'home' && <Home onStart={openSetup} onSample={sampleReport} onPolicy={() => go('policy')} roster={roster} />}
+      {view === 'policy' && <PolicyLab onBack={() => go('home')} />}
       {view === 'setup' && config.mode === 'interview' && (
         <InterviewComingSoon onBack={() => go('home')} />
       )}

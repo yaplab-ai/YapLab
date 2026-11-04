@@ -1,0 +1,115 @@
+# YapLab Policy Lab — technical report content draft
+
+**AI for Good UAE · Education · 4 November 2026**
+
+Review draft for the organiser's template. Confirm team details and final
+pagination before submission. This draft describes a locally tested prototype;
+it does not claim legal compliance, educational effectiveness or deployment.
+
+## 1. Use case and requirements
+
+YapLab is a practice classroom of AI listeners. This extension targets university
+teachers and teaching assistants rehearsing in English. Alongside explaining a
+lesson to simulated students, an educator can examine the policies relevant to
+using AI-supported teaching tools and practise responding when information is
+incomplete. UAE sources form a reference case, with global and England examples
+for comparison. The intended outcome is a more inspectable human review process;
+improved teaching or governance outcomes have not been measured.
+
+The prototype must retrieve attributable sources, distinguish their jurisdictions
+and scope, release incident facts progressively, show different role views, and
+record concise human decisions with evidence references. It must preserve the
+existing classroom and work offline for repeatable software verification.
+
+## 2. Implemented architecture
+
+The existing React/Vite frontend connects to a FastAPI backend. Classroom
+rehearsal already uses a session orchestrator, parallel listener agents,
+source-grounded questions, moderation, answer evaluation and reports. The new
+Policy Lab has three tools: source search, structured review and staged exercises.
+
+The knowledge base is a packaged seven-entry catalogue of primary-source
+metadata and original paraphrases, including authority, URL, locator, dates,
+jurisdiction, document type and applicability cautions. Weighted lexical search
+uses a limited, disclosed alias list for terms such as captions and screen
+readers. This is a seed collection, not full-document ingestion, a distributed
+vector database or a complete account of applicable policy.
+
+Review defaults to deterministic topic matching and source-consideration
+selection. An explicit opt-in mode reuses the configured LLM client to choose
+among retrieved source IDs and curated requirement indexes. Schema and citation
+validation prevent the display of a model-invented source. Invalid output,
+abstention, timeout or provider error yields a visibly labelled deterministic
+fallback. This constrains output provenance; it does not prove relevance or
+legal applicability. No live policy-model evaluation has been performed.
+
+## 3. Policy mapping and candidate domain gaps
+
+The source catalogue includes UAE personal-data legislation and disability
+education rights, UAE AI ethics guidance, a school-specific inclusion example,
+UNESCO education/ethics guidance and England education guidance. School and
+foreign examples are labelled as comparative material rather than assumed UAE
+university obligations. The [source register](ai-for-good-policy-sources.md)
+contains links and locators; each result retains its applicability cautions.
+
+The scenarios expose three **candidate operational gaps** for institutional
+review, rather than established defects in national law:
+
+| Scenario | Information released over three stages | Question requiring institutional evidence |
+| --- | --- | --- |
+| Transcript disclosure | A disclosure is reported; sharing/retention facts emerge; a coordinated response is requested | Who owns containment, retention and communication when a rehearsal transcript identifies a learner? |
+| Caption failure | Captions fail; alternative formats and vendor terms emerge; a tested fallback plan is requested | How should teaching, accessibility and privacy owners agree a usable alternative without unnecessary disclosure? |
+| Practice feedback mistaken for a grade | A score causes confusion; gradebook and usability facts emerge; communication and review are needed | How should formative AI feedback be distinguished from official assessment and challenged when unclear? |
+
+UNESCO and England sources provide examples for human review, privacy and
+pedagogical scrutiny. Whether a particular university already resolves these
+questions remains unknown until its policies and responsible staff are consulted.
+
+## 4. Standards, supervision and audit
+
+Our [Y.3172 mapping](ai-for-good.md#y3172-mapping-an-architectural-analogy) assigns
+source, collector, preprocessing, model, policy, distribution and sink roles to
+application components. It is a conceptual adaptation from the standard's
+telecommunications context, not a conformance assertion. Citation validation and
+human supervision constrain how model outputs are used.
+
+The [AI Readiness 2.0 mapping](ai-for-good.md#ai-readiness-20-mapping) identifies
+project evidence for data, infrastructure, skills, innovation and policy. No
+national readiness score is calculated. Deployment capacity, energy use,
+institutional adoption and educational value remain unevaluated.
+
+An exercise has one shared stage counter and teacher, privacy and accessibility
+views. Future facts are withheld; each view receives only its released facts.
+Users can record a decision citing fact IDs. Audit views show common stage
+advances and that role's decisions. Roles are selectable simulation views, not
+authenticated institutional agents. Independent institutional-agent coordination
+has not been implemented. Auditability uses decision summaries, source IDs,
+retrieval metadata, review modes and fallback reasons, without private model
+chain-of-thought.
+
+## 5. Evaluation, limitations and reproduction
+
+On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
+9 policy tests, staged-scenario checks and 90 frontend tests passed. The frontend
+production build and offline API wheel/sdist build succeeded. An extracted-wheel
+API smoke check served seven source entries and three scenarios.
+
+The [offline evidence file](evidence/ai-for-good-offline.json) records four
+hand-authored retrieval probes, all meeting their stated top-three or abstention
+conditions. Three scenarios were traversed through all three stages and role
+views: 27 deterministic reviews returned only corpus citation IDs. These checks
+validate specific software behavior and packaging, not general retrieval
+accuracy, legal reasoning quality, educator benefit or real-model behavior.
+
+Input lengths, request admission, model-call slots, exercise capacity, action
+counts and retention are bounded. State and quotas are process-local; restarting
+clears them. These controls are not production authentication, tamper-resistant
+audit storage or account-level cost control. Synthetic cases should be used:
+pattern-based checks cannot reliably detect identifying information.
+
+Before submission, add institution-specific evidence and expert review, broaden
+and benchmark the corpus, confirm ITU knowledge-base import requirements, and
+decide whether to run a bounded live-provider evaluation. No publication, shared
+repository update, deployment or application submission occurred during this work.
+Reproduction commands and the explicit model opt-in are in the
+[engineering runbook](ai-for-good.md#verification-and-local-use).

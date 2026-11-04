@@ -412,6 +412,17 @@ def create_app(
             await asyncio.gather(*list(resource_close_tasks), return_exceptions=True)
 
     app = FastAPI(title="FrontRow", lifespan=lifespan)
+    from .policy.router import create_router as create_policy_router
+    from .policy.scenarios import router as policy_scenarios_router
+
+    policy_llm_mode = os.environ.get("FRONTROW_POLICY_LLM", "off").strip().lower()
+    if policy_llm_mode not in {"off", "configured"}:
+        raise RuntimeError("FRONTROW_POLICY_LLM must be off or configured")
+    app.include_router(create_policy_router(
+        llm=validation_llm if policy_llm_mode == "configured" else None,
+        model=base_config.llm_model_fast or base_config.llm_model,
+    ))
+    app.include_router(policy_scenarios_router)
     app.state.sessions = sessions
     app.state.sweep_sessions = sweep_sessions
     origins = os.environ.get("FRONTROW_CORS_ORIGINS", "*").split(",")

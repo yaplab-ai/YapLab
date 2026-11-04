@@ -1,0 +1,650 @@
+{
+  "recorded_at": "2026-11-04T17:31:17.747997+00:00",
+  "environment": "local TestClient, offline fake classroom, deterministic policy review",
+  "limitations": [
+    "Hand-authored smoke probes check software behavior, not retrieval accuracy on a representative dataset.",
+    "No live policy model, educator study, legal review or ITU-hosted KB import was evaluated.",
+    "Roles are selectable simulation views, not authenticated institutional agents."
+  ],
+  "retrieval_probes": [
+    {
+      "query": "Can we keep recordings with learner names?",
+      "expected_any_in_top_3": [
+        "uae-personal-data-protection"
+      ],
+      "observed_source_ids": [
+        "uae-personal-data-protection"
+      ],
+      "passed": true
+    },
+    {
+      "query": "Captions failed and a screen reader cannot read the slides.",
+      "expected_any_in_top_3": [
+        "uae-persons-with-disabilities-education"
+      ],
+      "observed_source_ids": [
+        "uae-persons-with-disabilities-education",
+        "uae-inclusive-education-schools"
+      ],
+      "passed": true
+    },
+    {
+      "query": "Can AI feedback decide a course grade?",
+      "expected_any_in_top_3": [
+        "england-generative-ai-education",
+        "unesco-generative-ai-education"
+      ],
+      "observed_source_ids": [
+        "england-generative-ai-education",
+        "unesco-ai-ethics-recommendation",
+        "uae-ai-ethics-self-assessment"
+      ],
+      "passed": true
+    },
+    {
+      "query": "quasar xylophone marsupial",
+      "expected_any_in_top_3": [],
+      "observed_source_ids": [],
+      "passed": true
+    }
+  ],
+  "scenario_walkthroughs": [
+    {
+      "scenario_id": "transcript-disclosure",
+      "stages": [
+        {
+          "stage": 1,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "uae-inclusive-education-schools"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 2,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b",
+                "td-2a",
+                "td-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b",
+                "td-2a",
+                "td-2c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1c",
+                "td-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "uae-inclusive-education-schools"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 3,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b",
+                "td-2a",
+                "td-2b",
+                "td-3a",
+                "td-3b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1b",
+                "td-2a",
+                "td-2c",
+                "td-3a",
+                "td-3c"
+              ],
+              "linked_policy_source_ids": [
+                "uae-personal-data-protection"
+              ],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "td-1a",
+                "td-1c",
+                "td-2b",
+                "td-3a",
+                "td-3b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "uae-inclusive-education-schools"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education"
+              ]
+            }
+          }
+        }
+      ],
+      "teacher_audit_event_count": 5
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stages": [
+        {
+          "stage": 1,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "accessibility"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "accessibility"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 2,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1b",
+                "cf-2a",
+                "cf-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c",
+                "cf-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c",
+                "cf-2a",
+                "cf-2c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "accessibility"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 3,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1b",
+                "cf-2a",
+                "cf-2b",
+                "cf-3a",
+                "cf-3b"
+              ],
+              "linked_policy_source_ids": [
+                "uae-inclusive-education-schools",
+                "uae-persons-with-disabilities-education"
+              ],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c",
+                "cf-2b",
+                "cf-3a",
+                "cf-3c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "cf-1a",
+                "cf-1c",
+                "cf-2a",
+                "cf-2c",
+                "cf-3a",
+                "cf-3b"
+              ],
+              "linked_policy_source_ids": [
+                "uae-inclusive-education-schools",
+                "uae-persons-with-disabilities-education"
+              ],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-persons-with-disabilities-education",
+                "uae-inclusive-education-schools"
+              ],
+              "topics": [
+                "accessibility",
+                "education"
+              ]
+            }
+          }
+        }
+      ],
+      "teacher_audit_event_count": 5
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stages": [
+        {
+          "stage": 1,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "fg-1a"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection"
+              ],
+              "topics": [
+                "privacy"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 2,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1b",
+                "fg-2a",
+                "fg-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-2a",
+                "fg-2c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection"
+              ],
+              "topics": [
+                "privacy"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1c",
+                "fg-2b"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility"
+              ]
+            }
+          }
+        },
+        {
+          "stage": 3,
+          "role_observations": {
+            "teacher": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1b",
+                "fg-2a",
+                "fg-2b",
+                "fg-3a",
+                "fg-3b",
+                "fg-3c"
+              ],
+              "linked_policy_source_ids": [
+                "england-generative-ai-education",
+                "uae-ai-ethics-self-assessment",
+                "unesco-generative-ai-education"
+              ],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "unesco-ai-ethics-recommendation",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "responsible_ai",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "privacy": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-2a",
+                "fg-2c",
+                "fg-3a",
+                "fg-3b"
+              ],
+              "linked_policy_source_ids": [
+                "england-generative-ai-education",
+                "uae-ai-ethics-self-assessment",
+                "unesco-generative-ai-education"
+              ],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "unesco-ai-ethics-recommendation",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "responsible_ai",
+                "education",
+                "human_oversight"
+              ]
+            },
+            "accessibility": {
+              "visible_fact_ids": [
+                "fg-1a",
+                "fg-1c",
+                "fg-2b",
+                "fg-3a",
+                "fg-3c"
+              ],
+              "linked_policy_source_ids": [],
+              "review_mode": "deterministic",
+              "review_citation_ids": [
+                "uae-personal-data-protection",
+                "uae-persons-with-disabilities-education",
+                "england-generative-ai-education"
+              ],
+              "topics": [
+                "privacy",
+                "accessibility",
+                "human_oversight"
+              ]
+            }
+          }
+        }
+      ],
+      "teacher_audit_event_count": 5
+    }
+  ],
+  "corpus_version": "2026-11-04",
+  "source_count": 7,
+  "all_retrieval_probes_passed": true
+}

@@ -92,7 +92,7 @@ function ModeCard({ m, roster, onStart, onSample }) {
   );
 }
 
-export default function Home({ onStart, onSample, roster }) {
+export default function Home({ onStart, onSample, onPolicy, roster }) {
   return (
     <main className="home">
       <section className="hero wrap">
@@ -171,6 +171,11 @@ export default function Home({ onStart, onSample, roster }) {
             </div>
           </div>
         ))}
+      </section>
+
+      <section className="wrap policy-home-callout" aria-labelledby="policy-home-title">
+        <div><p className="eyebrow">For teachers &amp; TAs</p><h2 id="policy-home-title">Think through the policy, too.</h2><p>Explore cited sources and practice decisions in a staged classroom scenario.</p></div>
+        <button className="btn btn-ghost" onClick={onPolicy}>Open Policy Lab <Icon name="arrow" size={16} /></button>
       </section>
 
       <section className="wrap section listen">

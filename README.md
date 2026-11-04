@@ -17,6 +17,20 @@ First built at BU DS+X 2026. Runs on NVIDIA Nemotron through Nebius Token Factor
 
 > **Naming:** the product is **YapLab**. The original code name, FrontRow, remains in the Python package (`frontrow`), the settings (`FRONTROW_*`), and the internal docs.
 
+## AI for Good UAE: Policy Lab prototype
+
+The current extension adds a policy exercise for university teachers and teaching
+assistants: explore source-linked UAE and global references, review a synthetic
+teaching situation, and work through incidents released one stage at a time to
+teacher, privacy and accessibility roles. Open **Policy Lab** from Home with the
+backend configured. Review mode and source applicability are shown with the
+results. The seed knowledge base is selective; the prototype does not certify
+legal compliance or measure educational outcomes.
+
+See the [engineering plan, requirements mapping and local setup](docs/ai-for-good.md)
+and [policy source notes](docs/ai-for-good-policy-sources.md). The existing
+classroom measurements below predate this extension.
+
 ## Powered by NVIDIA Nemotron on Nebius Token Factory
 
 In Nebius mode, every listener, summary, and answer-judging request uses NVIDIA Nemotron through Token Factory. API keys stay on the backend.

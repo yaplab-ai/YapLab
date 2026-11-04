@@ -1,0 +1,68 @@
+[
+  {
+    "id": "transcript-disclosure",
+    "title": "A transcript names a student",
+    "summary": "A teaching team responds to an unintended disclosure in a practice-class transcript.",
+    "stages": [
+      {"title": "The initial report", "facts": [
+        {"id": "td-1a", "text": "A teaching assistant reports that a practice transcript was shared with a small course team after class.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "td-1b", "text": "The teacher sees a line naming a student and describing a disability. The exercise uses invented people and does not contain the line itself.", "roles": ["teacher", "privacy"]},
+        {"id": "td-1c", "text": "The accessibility adviser knows a student may need support but has not seen the transcript or a diagnosis.", "roles": ["accessibility"]}
+      ]},
+      {"title": "What was shared", "facts": [
+        {"id": "td-2a", "text": "The teaching assistant says the transcript link was available to eight course staff; download history is unavailable.", "roles": ["teacher", "privacy"]},
+        {"id": "td-2b", "text": "The accessibility adviser learns that the affected student wants to keep participating without repeatedly explaining their needs.", "roles": ["teacher", "accessibility"]},
+        {"id": "td-2c", "text": "The retention setting and incident-reporting owner are unknown; check the institution's actual rules before deciding what to report or delete.", "roles": ["privacy"]}
+      ]},
+      {"title": "Institutional response", "facts": [
+        {"id": "td-3a", "text": "The course lead asks for a containment and communication plan before the next class, including who owns each action.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "td-3b", "text": "The adviser recommends asking the student privately about immediate support needs without requiring them to disclose a diagnosis again.", "roles": ["accessibility", "teacher"]},
+        {"id": "td-3c", "text": "Compare the applicable UAE personal-data framework with the institution's incident policy and any other jurisdiction involved; the scenario does not establish a legal reporting deadline.", "roles": ["privacy"], "policy_source_ids": ["uae-personal-data-protection"]}
+      ]}
+    ]
+  },
+  {
+    "id": "caption-failure",
+    "title": "Captions fail before a workshop",
+    "summary": "A teaching team must provide access when a planned captioning option fails.",
+    "stages": [
+      {"title": "A service interruption", "facts": [
+        {"id": "cf-1a", "text": "The live caption service for an English-language university workshop is unavailable shortly before it begins.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "cf-1b", "text": "The teacher can pause or change the activity but does not know which alternatives each student prefers.", "roles": ["teacher"]},
+        {"id": "cf-1c", "text": "The accessibility adviser knows that at least one attendee depends on captions; the attendee has not agreed to disclose their identity to the class.", "roles": ["accessibility", "privacy"]}
+      ]},
+      {"title": "Available alternatives", "facts": [
+        {"id": "cf-2a", "text": "An accessible written activity and a trained note-taker are available; their suitability has not yet been confirmed with the affected attendee.", "roles": ["teacher", "accessibility"]},
+        {"id": "cf-2b", "text": "A third-party caption tool is available, but its audio retention and data-processing terms have not been checked.", "roles": ["privacy", "teacher"]},
+        {"id": "cf-2c", "text": "The adviser can privately ask the attendee which immediate option is usable and whether postponement would be preferable.", "roles": ["accessibility"]}
+      ]},
+      {"title": "A repeatable plan", "facts": [
+        {"id": "cf-3a", "text": "The department asks for a fallback plan that assigns owners, avoids singling out attendees, and can be tested before future workshops.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "cf-3b", "text": "Check the applicable UAE higher-education requirements and institutional accommodations procedures. School-specific guidance may offer context but may not govern this university workshop.", "roles": ["accessibility", "teacher"], "policy_source_ids": ["uae-persons-with-disabilities-education", "uae-inclusive-education-schools"]},
+        {"id": "cf-3c", "text": "Before a vendor processes audio, the privacy team still needs the data terms and institutional approval route.", "roles": ["privacy"]}
+      ]}
+    ]
+  },
+  {
+    "id": "feedback-as-grade",
+    "title": "Feedback mistaken for a grade",
+    "summary": "Students confuse AI-generated practice feedback with an official grading decision.",
+    "stages": [
+      {"title": "A confusing message", "facts": [
+        {"id": "fg-1a", "text": "A student asks why a practice tool gave their presentation a failing grade, although the exercise was meant to be formative.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "fg-1b", "text": "The teacher finds that the feedback display used a numerical score without clearly saying that it was not an official grade.", "roles": ["teacher"]},
+        {"id": "fg-1c", "text": "The accessibility adviser has heard that the display was difficult to interpret with a screen reader, but has not yet tested it.", "roles": ["accessibility"]}
+      ]},
+      {"title": "Investigation", "facts": [
+        {"id": "fg-2a", "text": "The course team confirms that the official gradebook did not receive the practice score.", "roles": ["teacher", "privacy"]},
+        {"id": "fg-2b", "text": "The student says the score discouraged them from seeking help; the adviser requests a usable explanation and an accessible way to challenge the feedback.", "roles": ["teacher", "accessibility"]},
+        {"id": "fg-2c", "text": "The team has not established which student data the feedback provider retained or whether it can correct stored results.", "roles": ["privacy"]}
+      ]},
+      {"title": "Decision and comparison", "facts": [
+        {"id": "fg-3a", "text": "The course lead asks for a correction to affected students and a human-owned plan for reviewing feedback before the next activity.", "roles": ["teacher", "privacy", "accessibility"]},
+        {"id": "fg-3b", "text": "Compare UAE AI ethics guidance with UNESCO and England education guidance as contextual references; verify local applicability and avoid treating any guidance as an automatic grading rule.", "roles": ["teacher", "privacy"], "policy_source_ids": ["uae-ai-ethics-self-assessment", "unesco-generative-ai-education", "england-generative-ai-education"]},
+        {"id": "fg-3c", "text": "Test any revised explanation and challenge route with assistive technology and invite feedback from affected students.", "roles": ["accessibility", "teacher"]}
+      ]}
+    ]
+  }
+]

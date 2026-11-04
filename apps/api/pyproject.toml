@@ -48,4 +48,4 @@ where = ["."]
 include = ["frontrow*"]
 
 [tool.setuptools.package-data]
-frontrow = ["voices.json", "models/*.joblib", "models/*.json", "models/*.md", "models/*.txt"]
+frontrow = ["voices.json", "models/*.joblib", "models/*.json", "models/*.md", "models/*.txt", "policy/*.json"]
