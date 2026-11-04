@@ -54,8 +54,8 @@ among retrieved source IDs and curated requirement indexes. Schema and citation
 validation prevent the display of a model-invented source. Invalid output,
 abstention, timeout or provider error yields a visibly labelled deterministic
 fallback. This constrains output provenance; it does not prove relevance or
-legal applicability. The separate coordination path has one bounded live-model
-evaluation, described below; the free-text review selector was not live-tested.
+legal applicability. The separate coordination path has two bounded live-model
+evaluations, described below; the free-text review selector was not live-tested.
 
 ## 3. Policy mapping and candidate domain gaps
 

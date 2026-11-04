@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-04",
+  "assessed_base_commit": "190aeec",
+  "result": "Local demonstration complete; final submission artifacts and evidence partial, blocked or missing as itemized in docs/ai-for-good-readiness.md",
+  "official_reference": "https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485",
+  "new_provider_calls": 0,
+  "external_uploads": 0,
+  "historical_input": {
+    "path": "docs/evidence/ai-for-good-coordination-live-v2-2026-11-04.json",
+    "sha256": "9328e5afe7a7978a4bb4552975dafacb4f4c0e7f6dbf4774b706f953a7972a78",
+    "protocol_version": "2",
+    "corpus_version": "2026-11-04.3",
+    "source_commit": "b4394bd"
+  },
+  "checks": {
+    "recorded_review_tests": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deterministic_export_check": "passed",
+    "general_kb_check": "passed: 10 documents,29 chunks",
+    "uaeu_kb_check": "passed: 13 documents,38 chunks",
+    "changed_markdown_local_links": "passed",
+    "historical_evidence_files": "unchanged"
+  },
+  "browser_check": [
+    "Viewer renders explicit historical/offline/current-protocol limits and 24/27,6/9 results.",
+    "Expanded caption-stage-2 teacher record shows delay_workshop, cf-1a/cf-2a, privacy-law/England source IDs and saved scope/summary/limits.",
+    "Static HTML has no scripts or external assets; source hyperlinks require user navigation."
+  ],
+  "artifacts": {
+    "viewer": "docs/evidence/ai-for-good-recorded-live-review.html",
+    "viewer_sha256": "96974d0468d3b1f2c50bbaece9da9c03d197fb92b2b0b008cb5a4846be7d97f4",
+    "screenshot": "docs/evidence/ai-for-good-recorded-live-review-2026-11-04.jpg",
+    "screenshot_sha256": "93801e3babc8743ef8d1a7a2c2a178a640c2e0e7b3662eb87d48ecfc7cbb4791"
+  },
+  "remaining": [
+    "team/contact and repository/publication decisions",
+    "supported runtime for final template rendering and <=5-page verification",
+    "organiser final destination/timezone/team-sheet and hosted-KB instructions",
+    "summary/full-text, audit-summary and sandbox/fine-tuning requirement clarification",
+    "expert source-fit/domain-gap assessment",
+    "current protocol3/corpus.4 provider evidence not run; further approval needed for paid calls",
+    "optional initial video missing; required if shortlisted"
+  ]
+}

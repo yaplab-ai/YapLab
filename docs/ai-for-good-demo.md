@@ -102,6 +102,11 @@ proposals and rejects configured network/speech providers.
 
 ## Official deliverables and current gaps
 
+Use the [readiness checklist](ai-for-good-readiness.md) for the consolidated
+status and the [historical live-evidence viewer](evidence/ai-for-good-recorded-live-review.html)
+for actual saved model selections. Opening that viewer makes no model calls;
+it is separate from the scripted classroom/policy walkthrough above.
+
 The [official event page](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485),
 checked 4 November 2026, lists a maximum five-page report, GitHub repository and
 knowledge base, plus an optional initial demo video of at most seven minutes

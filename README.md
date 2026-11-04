@@ -19,6 +19,9 @@ First built at BU DS+X 2026. Runs on NVIDIA Nemotron through Nebius Token Factor
 
 ## AI for Good UAE: Policy Lab prototype
 
+See the [current submission-readiness checklist](docs/ai-for-good-readiness.md)
+for completed local work, evidence gaps and delivery inputs still needed.
+
 The current extension adds a policy exercise for university teachers and teaching
 assistants: explore source-linked UAE and global references, review a synthetic
 teaching situation, and work through incidents released one stage at a time to
