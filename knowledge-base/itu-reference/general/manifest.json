@@ -4,7 +4,7 @@
   "status": "local_notebook_input_prepared",
   "hosted_import_verified": false,
   "embedding_index_built": false,
-  "corpus_version": "2026-11-04.2",
+  "corpus_version": "2026-11-04.3",
   "corpus_limitations": [
     "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
     "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
@@ -133,15 +133,15 @@
       "url": "https://www.unesco.org/en/articles/recommendation-ethics-artificial-intelligence",
       "authority": "UNESCO General Conference",
       "scope": "International recommendation to UNESCO Member States covering AI ethics across sectors, including education and research.",
-      "document_type": "standard",
+      "document_type": "recommendation",
       "jurisdiction": "Global",
       "institution": "general",
-      "published": "2021",
+      "published": "2022",
       "retrieved": "2026-11-04",
-      "sha256": "4a3989c4a857578189879f541fd158fca93de4c270e516419cbf3acffad0f5cd",
+      "sha256": "ae75e4258d73308c9f9baa17fcd1cb8a8cd4bb0d662d5bf76bcbc5291c73cee0",
       "content_status": "original_curated_summary_not_full_text",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.",
-      "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+      "verification": "Official overview and its publication metadata checked on 2026-11-04. Adoption in 2021 is distinct from publication in 2022; complete linked publication text was not independently inspected in this pass.",
       "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
     },
     "unesco-generative-ai-education.md": {
@@ -155,10 +155,10 @@
       "institution": "general",
       "published": "2023-09-07",
       "retrieved": "2026-11-04",
-      "sha256": "3c5e773179c774ae222e9c3eca9fab60f992ce0b5470dba25b68c960d7913527",
+      "sha256": "e1cab24bd789b8dc537cafe220c7fb9d6855973453b3de903a5ecc406b4e52fe",
       "content_status": "original_curated_summary_not_full_text",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.",
-      "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+      "verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
       "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
     }
   }

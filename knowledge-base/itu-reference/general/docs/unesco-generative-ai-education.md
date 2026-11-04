@@ -11,7 +11,7 @@ Institution: general
 Document type: guidance
 Published: 2023-09-07
 Retrieved: 2026-11-04
-Source locator: Sections 2–5; UNESCO overview, Towards a human-centered approach
+Source locator: Official UNESCO overview, human-centred approach and policy guidance
 
 ## Scope
 International policy and practice guidance for generative AI in education and research, including teachers, learners and researchers.

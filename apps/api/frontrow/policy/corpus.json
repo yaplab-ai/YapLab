@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-04.2",
+  "version": "2026-11-04.3",
   "description": "Source-linked general policy notes and explicitly selected UAEU institutional examples for university teaching and teaching-assistant simulations.",
   "limitations": [
     "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
@@ -132,7 +132,7 @@
       "published": "2023-09-07",
       "retrieved": "2026-11-04",
       "scope": "International policy and practice guidance for generative AI in education and research, including teachers, learners and researchers.",
-      "source_locator": "Sections 2–5; UNESCO overview, Towards a human-centered approach",
+      "source_locator": "Official UNESCO overview, human-centred approach and policy guidance",
       "topics": [
         "responsible_ai",
         "education",
@@ -149,7 +149,7 @@
         "International guidance is not by itself UAE legislation or university policy.",
         "The 2023 publication predates later model and policy developments; verify current local rules and institutional guidance."
       ],
-      "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+      "verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source."
     },
     {
@@ -158,11 +158,11 @@
       "authority": "UNESCO General Conference",
       "url": "https://www.unesco.org/en/articles/recommendation-ethics-artificial-intelligence",
       "jurisdiction": "Global",
-      "document_type": "standard",
-      "published": "2021",
+      "document_type": "recommendation",
+      "published": "2022",
       "retrieved": "2026-11-04",
       "scope": "International recommendation to UNESCO Member States covering AI ethics across sectors, including education and research.",
-      "source_locator": "UNESCO overview, principles and policy action areas; Recommendation sections III and IV",
+      "source_locator": "Official UNESCO overview, principles and policy areas; adopted November 2021; linked publication 2022",
       "topics": [
         "responsible_ai",
         "fairness",
@@ -178,7 +178,7 @@
         "A UNESCO recommendation is an international normative instrument, not a substitute for binding local law or university policy.",
         "The general principles need interpretation for the particular deployment and its users."
       ],
-      "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+      "verification": "Official overview and its publication metadata checked on 2026-11-04. Adoption in 2021 is distinct from publication in 2022; complete linked publication text was not independently inspected in this pass.",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source."
     },
     {

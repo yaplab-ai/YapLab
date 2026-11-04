@@ -15,13 +15,18 @@ export function createPolicyApi(baseUrl = API_URL, fetchImpl = globalThis.fetch)
     try { data = await response.json(); } catch { throw new Error('The policy backend returned an invalid response.'); }
     if (!response.ok) {
       const detail = typeof data?.detail === 'string' ? data.detail : `Request failed (${response.status}).`;
-      throw new Error(detail);
+      const error = new Error(detail);
+      error.status = response.status;
+      throw error;
     }
     if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('The policy backend returned an invalid response.');
     return data;
   }
   const post = (path, body) => request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const roleQuery = (role) => `?role=${encodeURIComponent(role)}`;
+  const requireStage = (stage) => {
+    if (!Number.isInteger(stage) || stage < 1) throw new Error('Refresh the exercise to get its current stage.');
+  };
   return {
     sources: (institution = 'general') => request(`/policy/sources?institution=${encodeURIComponent(institution)}`),
     search: (query, limit = 10, institution = 'general') => post('/policy/search', { query, limit, institution }),
@@ -29,8 +34,15 @@ export function createPolicyApi(baseUrl = API_URL, fetchImpl = globalThis.fetch)
     scenarios: () => request('/policy/scenarios'),
     startExercise: (scenarioId, role) => post(`/policy/exercises${roleQuery(role)}`, { scenario_id: scenarioId }),
     exercise: (id, role) => request(`/policy/exercises/${encodeURIComponent(id)}${roleQuery(role)}`),
-    advance: (id, role) => post(`/policy/exercises/${encodeURIComponent(id)}/advance${roleQuery(role)}`, {}),
-    decide: (id, role, decision, sourceIds = []) => post(`/policy/exercises/${encodeURIComponent(id)}/decision`, { role, decision, source_ids: sourceIds }),
+    advance: (id, role, expectedStage) => {
+      requireStage(expectedStage);
+      return post(`/policy/exercises/${encodeURIComponent(id)}/advance${roleQuery(role)}`, { expected_stage: expectedStage });
+    },
+    decide: (id, role, decision, sourceIds, expectedStage) => {
+      requireStage(expectedStage);
+      if (!Array.isArray(sourceIds) || !sourceIds.length) throw new Error('Select at least one released fact before recording a decision.');
+      return post(`/policy/exercises/${encodeURIComponent(id)}/decision`, { role, decision, source_ids: sourceIds, expected_stage: expectedStage });
+    },
     audit: (id, role) => request(`/policy/exercises/${encodeURIComponent(id)}/audit${roleQuery(role)}`),
   };
 }

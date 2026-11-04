@@ -103,7 +103,7 @@ chain-of-thought.
 ## 5. Evaluation, limitations and reproduction
 
 On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
-12 policy tests, six export tests, staged-scenario checks and 91 frontend tests passed. The frontend
+14 policy tests, six export tests, staged-scenario checks and 93 frontend tests passed. The frontend
 production build and offline API wheel/sdist build succeeded. An extracted-wheel
 API smoke check serves the scoped source collections and three scenarios.
 
@@ -127,3 +127,14 @@ live-provider evaluation. Final pagination has not been verified on this host. N
 repository update, deployment or application submission occurred during this work.
 Reproduction commands and the explicit model opt-in are in the
 [engineering runbook](ai-for-good.md#verification-and-local-use).
+
+
+The independent implementation review repaired stale-stage writes, missing fact
+references and inaccurate retrieval audit terms. Decisions and advances are now
+conditional on the displayed stage; human decisions require released evidence.
+Audit metadata distinguishes input words, alias expansion and topic anchors and
+tracks the sources actually selected. These repairs improve traceability; they
+do not validate policy advice. Exercise access expires after one hour, with lazy
+cleanup rather than a guarantee of physical erasure at the exact expiry time.
+The scenarios use fixed sequences and do not branch on decisions or demonstrate
+autonomous institutional coordination. See the [review record](ai-for-good-independent-review.md).

@@ -35,9 +35,31 @@ test('institution scopes the catalog, search, and review while defaulting to gen
   assert.equal(JSON.parse(calls[4][1].body).institution, 'uaeu');
 });
 
+
+test('scenario mutations carry the viewed stage and selected evidence', async () => {
+  const calls = [];
+  const api = createPolicyApi('https://api.example', async (...args) => { calls.push(args); return response({ ok: true }); });
+  await api.advance('exercise/1', 'teacher', 2);
+  await api.decide('exercise/1', 'privacy', 'Pause and review.', ['fact-1'], 3);
+  assert.equal(calls[0][0], 'https://api.example/policy/exercises/exercise%2F1/advance?role=teacher');
+  assert.deepEqual(JSON.parse(calls[0][1].body), { expected_stage: 2 });
+  assert.deepEqual(JSON.parse(calls[1][1].body), { role: 'privacy', decision: 'Pause and review.', source_ids: ['fact-1'], expected_stage: 3 });
+  assert.throws(() => api.advance('exercise/1', 'teacher'), /current stage/);
+  assert.throws(() => api.advance('exercise/1', 'teacher', 0), /current stage/);
+  assert.throws(() => api.decide('exercise/1', 'teacher', 'Pause', [], 1), /at least one released fact/);
+  assert.equal(calls.length, 2, 'invalid mutations must not be sent');
+});
+
+test('a stale-stage response remains an explicit conflict for refresh without retry', async () => {
+  let count = 0;
+  const api = createPolicyApi('https://api.example', async () => { count += 1; return response({ detail: 'Stage changed' }, false, 409); });
+  await assert.rejects(api.advance('exercise', 'teacher', 1), (error) => error.status === 409 && error.message === 'Stage changed');
+  assert.equal(count, 1);
+});
+
 test('surfaces backend and network errors without inventing results', async () => {
   const rejected = createPolicyApi('http://localhost:8000', async () => response({ detail: 'Stage is final' }, false, 409));
-  await assert.rejects(rejected.advance('id', 'teacher'), /Stage is final/);
+  await assert.rejects(rejected.advance('id', 'teacher', 1), /Stage is final/);
   const offline = createPolicyApi('http://localhost:8000', async () => { throw new Error('offline'); });
   await assert.rejects(offline.sources(), /Could not reach/);
   const malformed = createPolicyApi('http://localhost:8000', async () => response(null));

@@ -8,10 +8,10 @@ Authority: UNESCO General Conference
 URL: https://www.unesco.org/en/articles/recommendation-ethics-artificial-intelligence
 Jurisdiction: Global
 Institution: general
-Document type: standard
-Published: 2021
+Document type: recommendation
+Published: 2022
 Retrieved: 2026-11-04
-Source locator: UNESCO overview, principles and policy action areas; Recommendation sections III and IV
+Source locator: Official UNESCO overview, principles and policy areas; adopted November 2021; linked publication 2022
 
 ## Scope
 International recommendation to UNESCO Member States covering AI ethics across sectors, including education and research.

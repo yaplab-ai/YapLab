@@ -140,6 +140,49 @@ class PolicyTests(unittest.TestCase):
         self.assertIn('captions', result['audit']['query_expansions'])
         self.assertTrue(result['audit']['selected_requirements'])
 
+    def test_review_provenance_topic_choice_and_alias(self):
+        result = review(self.corpus, 'quasar xylophone', ['privacy'])
+        self.assertIn('by topic choice', result['considerations'][0]['observation'])
+        audit = result['audit']
+        self.assertEqual(audit['matched_terms'], [])
+        self.assertEqual(audit['expanded_matched_terms'], [])
+        self.assertTrue(audit['anchor_matched_terms'])
+        self.assertTrue(set(audit['anchor_matched_terms']) <= {'privacy', 'personal', 'data'})
+        record = audit['retrieval_records'][0]
+        self.assertEqual(record['source_id'], result['considerations'][0]['citations'][0]['id'])
+        self.assertEqual(record['matched_terms'], [])
+        self.assertTrue(record['retrieval_query_terms'])
+
+        alias = review(self.corpus, 'Captions failed', [])
+        self.assertIn('expanded from the input', alias['considerations'][0]['observation'])
+        self.assertEqual(alias['audit']['matched_terms'], [])
+        self.assertTrue(set(alias['audit']['expanded_matched_terms']) & {'accessibility', 'disability'})
+        self.assertNotIn('captions', alias['audit']['expanded_matched_terms'])
+        self.assertEqual(alias['audit']['anchor_matched_terms'], [])
+
+    def test_model_audit_uses_the_selected_source(self):
+        class SelectEngland(LLMClient):
+            async def complete(self, system, user, *, model, timeout):
+                choices = json.loads(user)['candidates']
+                self.assertion_order = [item['source']['id'] for item in choices]
+                item = next(item for item in choices if item['source']['id'] == 'england-generative-ai-education')
+                return json.dumps({'selections': [{'topic': item['topic'], 'source_id': item['source']['id'],
+                                                   'requirement_index': item['eligible_requirement_index']}]})
+        async def run():
+            fake = SelectEngland()
+            result = await agent_review(self.corpus, 'consent security retention privacy', ['privacy'], '', fake, 'test')
+            self.assertNotEqual(fake.assertion_order[0], 'england-generative-ai-education')
+            self.assertEqual(result['review_mode'], 'model_assisted')
+            audit = result['audit']
+            self.assertEqual(audit['source_ids'], ['england-generative-ai-education'])
+            self.assertEqual(audit['retrieval_records'][0]['source_id'], 'england-generative-ai-education')
+            self.assertEqual(audit['matched_terms'], ['privacy'])
+            self.assertNotIn('security', audit['matched_terms'])
+            self.assertNotIn('personal', audit['expanded_matched_terms'])
+            self.assertEqual(audit['selected_requirements'][0]['source_id'], 'england-generative-ai-education')
+            self.assertEqual(result['considerations'][0]['citations'][0]['id'], 'england-generative-ai-education')
+        asyncio.run(run())
+
     def test_paid_quotas(self):
         now = [0.0]
         limits = ModelCallLimits(monotonic=lambda: now[0])

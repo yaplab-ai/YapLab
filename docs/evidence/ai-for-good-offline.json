@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T17:54:22.815959+00:00",
+  "recorded_at": "2026-11-04T18:07:22.911266+00:00",
   "environment": "local TestClient, offline fake classroom, deterministic policy review",
   "limitations": [
     "Hand-authored smoke probes check software behavior, not retrieval accuracy on a representative dataset.",
@@ -254,7 +254,27 @@
           }
         }
       ],
-      "teacher_audit_event_count": 5
+      "teacher_audit_event_count": 5,
+      "teacher_decision_evidence": [
+        {
+          "stage": 1,
+          "fact_ids": [
+            "td-1a"
+          ]
+        },
+        {
+          "stage": 2,
+          "fact_ids": [
+            "td-1a"
+          ]
+        },
+        {
+          "stage": 3,
+          "fact_ids": [
+            "td-1a"
+          ]
+        }
+      ]
     },
     {
       "scenario_id": "caption-failure",
@@ -444,7 +464,27 @@
           }
         }
       ],
-      "teacher_audit_event_count": 5
+      "teacher_audit_event_count": 5,
+      "teacher_decision_evidence": [
+        {
+          "stage": 1,
+          "fact_ids": [
+            "cf-1a"
+          ]
+        },
+        {
+          "stage": 2,
+          "fact_ids": [
+            "cf-1a"
+          ]
+        },
+        {
+          "stage": 3,
+          "fact_ids": [
+            "cf-1a"
+          ]
+        }
+      ]
     },
     {
       "scenario_id": "feedback-as-grade",
@@ -641,10 +681,30 @@
           }
         }
       ],
-      "teacher_audit_event_count": 5
+      "teacher_audit_event_count": 5,
+      "teacher_decision_evidence": [
+        {
+          "stage": 1,
+          "fact_ids": [
+            "fg-1a"
+          ]
+        },
+        {
+          "stage": 2,
+          "fact_ids": [
+            "fg-1a"
+          ]
+        },
+        {
+          "stage": 3,
+          "fact_ids": [
+            "fg-1a"
+          ]
+        }
+      ]
     }
   ],
-  "corpus_version": "2026-11-04.2",
+  "corpus_version": "2026-11-04.3",
   "source_count": 8,
   "reference_collection_counts": {
     "general": 8,

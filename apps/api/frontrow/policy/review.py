@@ -59,6 +59,41 @@ def requirement_index(source: dict, topic: Topic) -> int | None:
     return max(range(len(requirements)), key=lambda i: (len(tokens(requirements[i]) & terms), -i))
 
 
+def retrieval_record(query: str, topic: Topic, source: dict) -> dict:
+    """Attribute this source's retrieval matches to disjoint, auditable origins.
+
+    Input words take precedence over alias expansions, which take precedence
+    over topic anchors, when a term has more than one possible origin.
+    """
+    original = tokens(query)
+    expansions = query_expansions(query)
+    expanded = {word for words in expansions.values() for word in words} - original
+    used_query = topic_query(query, topic)
+    retrieval_terms = tokens(used_query)
+    retrieval_terms.update(word for words in query_expansions(used_query).values() for word in words)
+    matched = set(source.get('matched_terms', []))
+    return {
+        'topic': topic,
+        'source_id': source['id'],
+        'matched_terms': sorted(matched & original),
+        'expanded_matched_terms': sorted(matched & expanded),
+        'anchor_matched_terms': sorted(matched - original - expanded),
+        'retrieval_query_terms': sorted(retrieval_terms),
+        'retrieval_mode': 'lexical' if matched else 'topic_only',
+    }
+
+
+def retrieval_audit(records: list[dict]) -> dict:
+    """Aggregate only records associated with citations actually displayed."""
+    return {
+        'source_ids': list(dict.fromkeys(record['source_id'] for record in records)),
+        **{key: sorted({term for record in records for term in record[key]})
+           for key in ('matched_terms', 'expanded_matched_terms', 'anchor_matched_terms')},
+        'topic_query_terms': {record['topic']: record['retrieval_query_terms'] for record in records},
+        'retrieval_records': records,
+    }
+
+
 def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
            institution: Institution = 'general') -> dict:
     entries = scoped_sources(corpus, institution)
@@ -71,8 +106,7 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
     ]
     considerations = []
     gaps = []
-    audit_sources = []
-    audit_terms = set()
+    audit_records = []
     audit_requirements = []
     for topic in selected:
         hits = search(corpus, topic_query(query, topic), limit=3, topic=topic, institution=institution)
@@ -86,8 +120,8 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
                 gaps.append(f'No source in this collection matched {_LABELS[topic].lower()} and the supplied wording; consult additional sources.')
                 continue
         source = hits[0]
-        audit_sources.append(source['id'])
-        audit_terms.update(source['matched_terms'])
+        record = retrieval_record(query, topic, source)
+        audit_records.append(record)
         chosen_index = requirement_index(source, topic)
         if chosen_index is not None:
             audit_requirements.append({'topic': topic, 'source_id': source['id'], 'requirement_index': chosen_index})
@@ -96,8 +130,10 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
                           'Review the linked source and its stated scope for relevant guidance.')
         considerations.append({
             'topic': topic,
-            'observation': (f"{_LABELS[topic]} was selected for investigation "
-                            + ('by topic choice.' if not source['matched_terms'] else 'using matching terms.')),
+            'observation': (f"{_LABELS[topic]} was selected for investigation " + (
+                'using matching input terms.' if record['matched_terms'] else
+                'using related terms expanded from the input.' if record['expanded_matched_terms'] else
+                'by topic choice.' if topic in topics else 'using topic cues.')),
             'recommendation': recommendation,
             'citations': [{k: v for k, v in source.items() if k not in {'score', 'matched_terms', 'query_expansions'}}],
         })
@@ -113,9 +149,8 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
         'limitations': list(dict.fromkeys(_LIMITATIONS + corpus.limitations + ([
             'UAEU materials are an institutional reference case; selecting them does not establish affiliation or applicability.'
         ] if institution == 'uaeu' else []))),
-        'audit': {'corpus_version': corpus.version, 'institution': institution, 'source_ids': list(dict.fromkeys(audit_sources)),
-                  'matched_terms': sorted(audit_terms), 'query_expansions': expansions, 'selected_topics': selected,
-                  'topic_query_terms': {topic: sorted(tokens(topic_query(query, topic))) for topic in selected},
+        'audit': {'corpus_version': corpus.version, 'institution': institution,
+                  **retrieval_audit(audit_records), 'query_expansions': expansions, 'selected_topics': selected,
                   'selected_requirements': audit_requirements,
                   'selection_mode': 'requested_topics' if topics else 'keyword_cues',
                   'retrieval': 'weighted_lexical', 'requirement_selection': 'topic_vocabulary_overlap', 'review_mode': 'deterministic'},

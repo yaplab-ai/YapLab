@@ -52,18 +52,29 @@ def check_disclosure_and_audit():
         access_ids = {f['id'] for s in accessibility['released_stages'] for f in s['facts']}
         assert 'td-1b' in teacher_ids and 'td-1b' not in access_ids
         assert 'td-1c' in access_ids and 'td-1c' not in teacher_ids
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-2a']}).status_code == 422
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-1c']}).status_code == 422
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-1b']}).status_code == 200
-        assert client.post(path + '/decision', json={'role': 'accessibility', 'decision': 'Ask privately', 'source_ids': ['td-1c']}).status_code == 200
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': ' '}).status_code == 422
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'x' * 501}).status_code == 422
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-2a'], 'expected_stage': 1}).status_code == 422
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-1c'], 'expected_stage': 1}).status_code == 422
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Pause sharing', 'source_ids': ['td-1b'], 'expected_stage': 1}).status_code == 200
+        assert client.post(path + '/decision', json={'role': 'accessibility', 'decision': 'Ask privately', 'source_ids': ['td-1c'], 'expected_stage': 1}).status_code == 200
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': ' ', 'source_ids': ['td-1b'], 'expected_stage': 1}).status_code == 422
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'x' * 501, 'source_ids': ['td-1b'], 'expected_stage': 1}).status_code == 422
+        for body in ({}, {'expected_stage': 0}, {'expected_stage': '1'},
+                     {'expected_stage': True}, {'expected_stage': 1, 'extra': 1}):
+            assert client.post(path + '/advance', json=body).status_code == 422
+        for body in (
+            {'role': 'teacher', 'decision': 'Act', 'source_ids': ['td-1b']},
+            {'role': 'teacher', 'decision': 'Act', 'expected_stage': 1},
+            {'role': 'teacher', 'decision': 'Act', 'source_ids': [], 'expected_stage': 1},
+            {'role': 'teacher', 'decision': 'Act', 'source_ids': ['td-1b'], 'expected_stage': True},
+            {'role': 'teacher', 'decision': 'Act', 'source_ids': ['td-1b'], 'expected_stage': 1, 'extra': 1},
+        ):
+            assert client.post(path + '/decision', json=body).status_code == 422
         assert client.get(path, params={'role': 'administrator'}).status_code == 422
-        assert client.post(path + '/decision', json={'role': 'administrator', 'decision': 'x'}).status_code == 422
-        assert client.post(path + '/advance').json()['current_stage'] == 2
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Check audience', 'source_ids': ['td-2a']}).status_code == 200
-        assert client.post(path + '/advance').json()['current_stage'] == 3
-        assert client.post(path + '/advance').status_code == 409
+        assert client.post(path + '/decision', json={'role': 'administrator', 'decision': 'x', 'source_ids': ['td-1b'], 'expected_stage': 1}).status_code == 422
+        assert client.post(path + '/advance', json={'expected_stage': 1}).json()['current_stage'] == 2
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Check audience', 'source_ids': ['td-2a'], 'expected_stage': 2}).status_code == 200
+        assert client.post(path + '/advance', json={'expected_stage': 2}).json()['current_stage'] == 3
+        assert client.post(path + '/advance', json={'expected_stage': 3}).status_code == 409
         audit_teacher = client.get(path + '/audit', params={'role': 'teacher'}).json()['events']
         audit_access = client.get(path + '/audit', params={'role': 'accessibility'}).json()['events']
         assert 'Ask privately' not in json.dumps(audit_teacher)
@@ -80,22 +91,32 @@ def check_ttl_capacity_actions_and_concurrency():
         first = client.post('/policy/exercises', json={'scenario_id': 'caption-failure'}).json()
         path = f"/policy/exercises/{first['exercise_id']}"
         assert client.post('/policy/exercises', json={'scenario_id': 'caption-failure'}).status_code == 429
-        assert client.post(path + '/advance').status_code == 200
-        assert client.post(path + '/advance').status_code == 429
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Act'}).status_code == 429
+        assert client.post(path + '/advance', json={'expected_stage': 1}).status_code == 200
+        assert client.post(path + '/advance', json={'expected_stage': 2}).status_code == 429
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Act', 'source_ids': ['cf-1a'], 'expected_stage': 2}).status_code == 429
         now[0] = 15.0
         assert client.get(path).status_code == 404
         assert client.get(path + '/audit').status_code == 404
-        assert client.post(path + '/advance').status_code == 404
-        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Act'}).status_code == 404
+        assert client.post(path + '/advance', json={'expected_stage': 2}).status_code == 404
+        assert client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Act', 'source_ids': ['cf-1a'], 'expected_stage': 2}).status_code == 404
         assert client.post('/policy/exercises', json={'scenario_id': 'caption-failure'}).status_code == 200
 
-    store = scenarios.ExerciseStore()
-    exercise_id = store.create('feedback-as-grade', 'teacher')['exercise_id']
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        views = list(pool.map(lambda _: store.advance(exercise_id, 'teacher'), range(2)))
-    assert sorted(view['current_stage'] for view in views) == [2, 3]
-    assert len(store.audit(exercise_id, 'teacher')['events']) == 2
+    with make_client() as client:
+        exercise_id = client.post('/policy/exercises', json={'scenario_id': 'feedback-as-grade'}).json()['exercise_id']
+        path = f'/policy/exercises/{exercise_id}'
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results = list(pool.map(lambda _: client.post(path + '/advance', json={'expected_stage': 1}), range(2)))
+        assert sorted(result.status_code for result in results) == [200, 409]
+        assert next(result for result in results if result.status_code == 200).json()['current_stage'] == 2
+        assert 'refresh' in next(result for result in results if result.status_code == 409).json()['detail'].lower()
+        stale = client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Stale',
+                                                       'source_ids': ['fg-1a'], 'expected_stage': 1})
+        assert stale.status_code == 409 and 'refresh' in stale.json()['detail'].lower()
+        assert [e['type'] for e in client.get(path + '/audit').json()['events']] == ['advance']
+        fresh = client.post(path + '/decision', json={'role': 'teacher', 'decision': 'Fresh',
+                                                       'source_ids': ['fg-1a'], 'expected_stage': 2})
+        assert fresh.status_code == 200 and fresh.json()['event']['stage'] == 2
+        assert [e['type'] for e in client.get(path + '/audit').json()['events']] == ['advance', 'decision']
 
 
 def check_admission():

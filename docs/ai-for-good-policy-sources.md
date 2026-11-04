@@ -52,3 +52,14 @@ strategy record (`uae-national-ai-strategy-2031`). Objectives on talent, enablin
 infrastructure and governance help frame project design. This is strategic
 context rather than legal authority, institutional approval or evidence that
 YapLab achieves national outcomes. Historical projections are not reused.
+
+
+## Independent review corrections
+
+UNESCO's official [recommendation overview](https://www.unesco.org/en/articles/recommendation-ethics-artificial-intelligence)
+distinguishes adoption in 2021 from the linked publication's 2022 date. The corpus
+now records that distinction and labels the instrument a recommendation. For
+both UNESCO entries, the reviewed material was the official overview rather
+than every section of the complete linked publication; unverified section
+locators have been removed. The UAE legislation full-text access limitation
+remains. These are recorded source-verification limits, not completed legal review.

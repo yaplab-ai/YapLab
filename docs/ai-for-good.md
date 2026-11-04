@@ -145,7 +145,7 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none \
 VITE_API_URL=http://127.0.0.1:8000 npm run dev -- --host 127.0.0.1
 ```
 
-Policy exercises are in memory and expire; restarting the API clears them.
+Policy exercises are in memory with an access TTL; expired entries are removed on a later exercise operation, and restarting the API clears them.
 Use synthetic lesson descriptions and incidents. Review the API contract and
 tests before enabling any provider-backed policy mode. Model-assisted operation
 can send submitted text to the configured provider and consume that account's
@@ -153,8 +153,8 @@ credits; no such call is part of offline verification.
 
 ## Observed verification
 
-The isolated worktree passed **90 existing backend checks**, **12 policy tests**,
-the staged-scenario verification script, **91 frontend tests**, and a frontend
+The isolated worktree passed **90 existing backend checks**, **14 policy tests**,
+the staged-scenario verification script, **93 frontend tests**, and a frontend
 production build. `uv build --offline` produced an sdist and wheel using cached
 build tools. An API smoke test imported an extracted wheel and served the scoped source collections and three scenarios; both JSON resources are packaged.
 
@@ -193,7 +193,7 @@ were used for this evidence.
   `?role=teacher|privacy|accessibility` selects a view. Decision `source_ids`
   refer to released **fact IDs**, while fact `policy_source_ids` refer to the
   corpus. The distinction prevents a citation to evidence the role has not seen.
-- Exercises expire after one hour; at most 200 are retained, with 100 actions
+- Exercise access expires after one hour; expired entries are removed lazily on the next exercise operation; at most 200 are retained, with 100 actions
   per exercise and a 500-character decision limit. Starts are capped at
   30/client/hour; other exercise requests at 240/client/hour. Roles are
   selectable views, not authenticated access controls. No real student data
@@ -244,3 +244,18 @@ The [report content draft](ai-for-good-report-draft.md) is updated for these
 results. Final DOCX authoring and pagination must be performed in a supported
 local thread with the Documents bundled runtime. This host's dependency loader
 does not provide that runtime; no unrendered document is labelled ready to submit.
+
+
+## Independent review findings
+
+The [independent review](ai-for-good-independent-review.md) records repaired
+stage-concurrency and retrieval-provenance defects and the source date correction.
+Advance and decision bodies require `expected_stage`; stale writes return 409
+without mutation. Decisions require at least one released fact ID. Refresh an
+exercise explicitly after a conflict; the UI does not retry a mutation.
+
+Review audit `matched_terms` now means direct input matches. Alias-derived and
+injected anchor matches are separate fields, with per-source retrieval records.
+Model-assisted audit metadata describes the sources selected by the model.
+The scenarios remain fixed sequences and selectable role views, and the offline
+walkthrough does not validate policy gaps, advice quality or institutional outcomes.

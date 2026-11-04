@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Query, Request, Response
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 
@@ -35,13 +35,21 @@ _init_lock = threading.Lock()
 
 
 class CreateExercise(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     scenario_id: str = Field(min_length=1, max_length=80)
 
 
+class AdvanceExercise(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    expected_stage: int = Field(strict=True, ge=1)
+
+
 class Decision(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     role: Role
     decision: str = Field(min_length=1, max_length=MAX_DECISION_LENGTH)
-    source_ids: list[str] = Field(default_factory=list, max_length=12)
+    source_ids: list[str] = Field(min_length=1, max_length=12)
+    expected_stage: int = Field(strict=True, ge=1)
 
     @field_validator("decision")
     @classmethod
@@ -125,9 +133,15 @@ class ExerciseStore:
         with self.lock:
             return self._view(exercise_id, self._get(exercise_id), role)
 
-    def advance(self, exercise_id: str, role: Role) -> dict:
+    @staticmethod
+    def _check_stage(exercise: dict, expected_stage: int) -> None:
+        if expected_stage != exercise["current_stage"]:
+            raise HTTPException(status_code=409, detail="Stage changed; refresh the exercise before retrying.")
+
+    def advance(self, exercise_id: str, role: Role, expected_stage: int) -> dict:
         with self.lock:
             exercise = self._get(exercise_id)
+            self._check_stage(exercise, expected_stage)
             if exercise["current_stage"] >= len(_BY_ID[exercise["scenario_id"]]["stages"]):
                 raise HTTPException(status_code=409, detail="Exercise is already at its final stage")
             if len(exercise["events"]) >= self.max_actions:
@@ -139,6 +153,7 @@ class ExerciseStore:
     def decide(self, exercise_id: str, decision: Decision) -> dict:
         with self.lock:
             exercise = self._get(exercise_id)
+            self._check_stage(exercise, decision.expected_stage)
             visible = self._view(exercise_id, exercise, decision.role)
             valid_ids = {fact["id"] for stage in visible["released_stages"] for fact in stage["facts"]}
             if not set(decision.source_ids).issubset(valid_ids):
@@ -214,10 +229,10 @@ def get_exercise(exercise_id: str, request: Request, response: Response, role: R
 
 
 @router.post("/exercises/{exercise_id}/advance")
-def advance_exercise(exercise_id: str, request: Request, response: Response, role: Role = Query(default="teacher")) -> dict:
+def advance_exercise(exercise_id: str, body: AdvanceExercise, request: Request, response: Response, role: Role = Query(default="teacher")) -> dict:
     _admit(request)
     response.headers["Cache-Control"] = "no-store"
-    return _store(request).advance(exercise_id, role)
+    return _store(request).advance(exercise_id, role, body.expected_stage)
 
 
 @router.post("/exercises/{exercise_id}/decision")

@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from frontrow.llm.base import LLMClient, llm_call_context
 from .evidence import Corpus, Institution, Topic, scoped_sources, search
-from .review import requirement_index, review, topic_query
+from .review import requirement_index, retrieval_audit, retrieval_record, review, topic_query
 
 
 class Selection(BaseModel):
@@ -42,12 +42,14 @@ async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: 
     selected = baseline['audit']['selected_topics']
     query = f'{text} {context}'.strip()
     candidates: dict[tuple[str, str], dict] = {}
+    candidate_hits: dict[tuple[str, str], dict] = {}
     for topic in selected:
         hits = search(corpus, topic_query(query, topic), limit=3, topic=topic, institution=institution)
         if not hits and topic in topics:
             hits = [source.model_dump() for source in scoped_sources(corpus, institution) if topic in source.topics][:2]
         for item in hits:
             if item['requirements']:
+                candidate_hits[(topic, item['id'])] = item
                 candidates[(topic, item['id'])] = {k: v for k, v in item.items()
                                                         if k not in {'score', 'matched_terms', 'query_expansions'}}
     if not candidates:
@@ -69,6 +71,7 @@ async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: 
             return baseline
         seen = set()
         considerations = []
+        selected_records = []
         for selection in answer.selections:
             key = (selection.topic, selection.source_id)
             if key not in candidates or selection.topic in seen:
@@ -77,6 +80,7 @@ async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: 
             if selection.requirement_index != requirement_index(source, selection.topic):
                 raise ValueError('unknown requirement')
             seen.add(selection.topic)
+            selected_records.append(retrieval_record(query, selection.topic, candidate_hits[key]))
             considerations.append({
                 'topic': selection.topic,
                 'observation': 'The model selected this retrieved source for human investigation.',
@@ -89,8 +93,7 @@ async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: 
         baseline['review_mode'] = 'model_assisted'
         baseline['summary'] = 'Retrieved source notes were selected for human investigation.'
         baseline['considerations'] = considerations
-        baseline['audit'].update({'review_mode': 'model_assisted',
-                                  'source_ids': list(dict.fromkeys(s.source_id for s in answer.selections)),
+        baseline['audit'].update({**retrieval_audit(selected_records), 'review_mode': 'model_assisted',
                                   'selected_requirements': [s.model_dump() for s in answer.selections]})
         baseline['limitations'].append('A model selected among retrieved notes; its selection can miss relevant sources or context.')
         return baseline

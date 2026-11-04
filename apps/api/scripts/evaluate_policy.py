@@ -104,11 +104,17 @@ def evaluate() -> dict:
                 case["stages"].append({"stage": stage, "role_observations": observations})
                 checked(client.post(f"/policy/exercises/{exercise_id}/decision", json={
                     "role": "teacher", "decision": "Pause the simulated activity and confirm the institutional process before continuing.",
+                    "source_ids": observations["teacher"]["visible_fact_ids"][:1], "expected_stage": stage,
                 }))
                 if stage < scenario["stage_count"]:
-                    checked(client.post(f"/policy/exercises/{exercise_id}/advance"))
+                    checked(client.post(f"/policy/exercises/{exercise_id}/advance", json={"expected_stage": stage}))
             audit = checked(client.get(f"/policy/exercises/{exercise_id}/audit"))
             case["teacher_audit_event_count"] = len(audit["events"])
+            decisions = [event for event in audit["events"] if event["type"] == "decision"]
+            assert [event["stage"] for event in decisions] == list(range(1, scenario["stage_count"] + 1))
+            assert all(event["source_ids"] for event in decisions)
+            case["teacher_decision_evidence"] = [{"stage": event["stage"], "fact_ids": event["source_ids"]}
+                                                   for event in decisions]
             result["scenario_walkthroughs"].append(case)
     result["all_retrieval_probes_passed"] = all(item["passed"] for item in result["retrieval_probes"])
     return result
