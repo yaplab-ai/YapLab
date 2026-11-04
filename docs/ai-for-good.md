@@ -24,8 +24,12 @@ The `FrontRow-backend` and `FrontRow-data` worktrees were not modified.
 This is a standard Git worktree. The app's managed-worktree attachment tool is
 unavailable on this host, so commands must use the explicit directory above.
 Local ignored dependency directories link to the original installed environment
-to avoid reinstalling dependencies; those links are not Git artifacts. For an
-independent environment, run `uv sync` in `apps/api` and `npm ci` in `frontend`.
+to avoid reinstalling dependencies; those links are not Git artifacts. Do not
+sync or upgrade packages through the shared virtual-environment links. For an
+independent Python environment, use a fresh path such as
+`UV_PROJECT_ENVIRONMENT=.venv-independent uv sync` in `apps/api` and use that
+environment's Python in the commands below. Provision frontend dependencies
+independently by replacing the local dependency-link directory with `npm ci`.
 
 Development preferences are recorded in [AGENTS.md](../AGENTS.md): GPT-6.1 Sol
 at `xhigh` for the lead, GPT-6.1 Terra at `xhigh` for delegated work. These
