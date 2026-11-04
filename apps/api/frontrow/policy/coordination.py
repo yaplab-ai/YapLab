@@ -21,7 +21,7 @@ from frontrow.llm.anthropic_client import AnthropicClient
 from .evidence import Corpus, Institution, search
 from .diagnostics import InvalidRoleResponse
 
-PROTOCOL_VERSION = '2'
+PROTOCOL_VERSION = '3'
 ROLES = ('teacher', 'privacy', 'accessibility')
 Mode = Literal['offline_test', 'model_assisted']
 
@@ -88,6 +88,14 @@ _MANDATES = {
 _TOPICS = {'teacher': 'education', 'privacy': 'privacy', 'accessibility': 'accessibility'}
 _ANCHORS = {'teacher': 'education teaching learning', 'privacy': 'privacy personal data',
             'accessibility': 'accessibility disability inclusion'}
+# Keep these records in the library/KB as context, but do not offer them as
+# operational support for these university incident actions.
+_CONTEXT_ONLY_SOURCES = {'uae-inclusive-education-schools', 'uae-national-ai-strategy-2031'}
+_TEACHER_CONTEXT = {
+    'transcript-disclosure': 'privacy personal data sharing retention',
+    'caption-failure': 'accessibility inclusion captions',
+    'feedback-as-grade': 'human oversight assessment feedback review',
+}
 _DEPENDENCIES = {
     ('caption-failure', 'resume_vendor_workshop'): ('verify_vendor_terms', 'confirm_accessible_option'),
 }
@@ -99,6 +107,7 @@ For each proposal choose one allowed action ID, one to three allowed fact IDs an
 Use each action ID at most once. Within each fact_ids/source_ids array use each ID at most once.
 questions contains zero to two unique allowed question IDs as strings, never question text or objects.
 Copy IDs exactly from allowed_ids. Do not copy labels, URLs or placeholders as IDs.
+Cite notes relevant to each action; use an empty proposals array if no available notes support it.
 Use empty arrays when you have no supported proposal or question; empty_response is a valid response.
 Do not output Markdown, comments, duplicate JSON keys, extra fields, free text, legal conclusions or private reasoning.
 A proposal is conditional, never an executed action. Local validation remains authoritative."""
@@ -170,10 +179,16 @@ def prepare_role_requests(corpus: Corpus, snapshot: dict, institution: Instituti
             raise ValueError('Invalid role fact set')
         available = {key: text for key, (text, min_stage) in _ACTIONS[state.scenario_id][role].items()
                      if min_stage <= state.stage}
-        query = _ANCHORS[role] + ' ' + ' '.join(f.text for f in facts)
-        hits = search(corpus, query, limit=3, topic=_TOPICS[role], institution=institution)
-        sources = [{key: hit[key] for key in ('id', 'title', 'url', 'authority', 'jurisdiction', 'document_type', 'scope', 'summary', 'limitations', 'institution')}
-                   for hit in hits]
+        anchor = _TEACHER_CONTEXT[state.scenario_id] if role == 'teacher' else _ANCHORS[role]
+        query = anchor + ' ' + ' '.join(f.text for f in facts) + ' ' + ' '.join(available.values())
+        hits = search(corpus, query, limit=len(corpus.entries), topic=_TOPICS[role], institution=institution)
+        hits = [hit for hit in hits if hit['id'] not in _CONTEXT_ONLY_SOURCES][:3]
+        sources = []
+        for hit in hits:
+            source = {key: hit[key] for key in ('id', 'title', 'url', 'authority', 'jurisdiction',
+                      'document_type', 'scope', 'summary', 'limitations', 'institution')}
+            source.update({key: hit[key] for key in ('source_locator', 'verification') if isinstance(hit.get(key), str)})
+            sources.append(source)
         payload = {'role': role, 'mandate': _MANDATES[role], 'scenario_id': state.scenario_id,
                    'stage': state.stage, 'institution': institution, 'corpus_version': corpus.version,
                    'protocol_version': PROTOCOL_VERSION, 'facts': [{'id': fact.id, 'text': fact.text} for fact in facts],
@@ -281,6 +296,82 @@ def _validate_response(raw: str, request: dict, scenario_id: str) -> tuple[list[
     return proposals, questions
 
 
+def _assess_response(raw: str, request: dict, scenario_id: str) -> tuple[list[dict], list[dict], str | None]:
+    """Retain independently valid items; reject malformed envelopes as a whole.
+
+    Only fixed issue categories leave this boundary. A duplicate retains the
+    first validated item and never combines the evidence from another item.
+    """
+    if not isinstance(raw, str):
+        raise InvalidRoleResponse('non_text_response')
+    if len(raw) > 10000:
+        raise InvalidRoleResponse('response_too_large')
+    try:
+        data = json.loads(raw, object_pairs_hook=_unique_object, parse_constant=_nonfinite,
+                          parse_int=_bounded_int, parse_float=_bounded_float)
+    except (json.JSONDecodeError, UnicodeError, RecursionError):
+        raise InvalidRoleResponse('json_syntax') from None
+    if not isinstance(data, dict):
+        raise InvalidRoleResponse('schema_types')
+    if set(data) - {'proposals', 'questions'}:
+        raise InvalidRoleResponse('schema_extra_fields')
+    if set(data) != {'proposals', 'questions'}:
+        raise InvalidRoleResponse('schema_missing_fields')
+    if not isinstance(data['proposals'], list) or not isinstance(data['questions'], list):
+        raise InvalidRoleResponse('schema_types')
+
+    first_issue = None
+    proposals = []
+    questions = []
+    action_ids = set()
+    question_ids = set()
+
+    def reject(category: str) -> None:
+        nonlocal first_issue
+        if first_issue is None:
+            first_issue = category
+
+    for item in data['proposals']:
+        try:
+            proposal = Proposal.model_validate(item)
+        except ValidationError as exc:
+            reject(_schema_issue(exc))
+            continue
+        if proposal.action_id not in request['action_ids']:
+            reject('unknown_action_id')
+        elif len(set(proposal.fact_ids)) != len(proposal.fact_ids):
+            reject('duplicate_fact_ids')
+        elif len(set(proposal.source_ids)) != len(proposal.source_ids):
+            reject('duplicate_source_ids')
+        elif not set(proposal.fact_ids) <= set(request['fact_ids']):
+            reject('unknown_fact_id')
+        elif not set(proposal.source_ids) <= set(request['source_ids']):
+            reject('unknown_source_id')
+        elif proposal.action_id in action_ids:
+            reject('duplicate_action_ids')
+        elif len(proposals) >= 2:
+            reject('schema_limits')
+        else:
+            action_ids.add(proposal.action_id)
+            text = _ACTIONS[scenario_id][request['role']][proposal.action_id][0]
+            proposals.append({'action_id': proposal.action_id, 'owner': request['role'], 'text': text,
+                              'fact_ids': list(proposal.fact_ids), 'source_ids': list(proposal.source_ids)})
+
+    for question in data['questions']:
+        if not isinstance(question, str):
+            reject('schema_types')
+        elif question not in request['question_ids']:
+            reject('unknown_question_id')
+        elif question in question_ids:
+            reject('duplicate_question_ids')
+        elif len(questions) >= 2:
+            reject('schema_limits')
+        else:
+            question_ids.add(question)
+            questions.append({'question_id': question, 'text': _QUESTIONS[request['role']][question]})
+    return proposals, questions, first_issue
+
+
 def _merge(scenario_id: str, roles: list[dict]) -> tuple[list[dict], list[str]]:
     selected = {p['action_id']: p for role in roles for p in role['proposals']}
     owners = {action: role for role, actions in _ACTIONS[scenario_id].items() for action in actions}
@@ -290,7 +381,9 @@ def _merge(scenario_id: str, roles: list[dict]) -> tuple[list[dict], list[str]]:
             conflict_ids.update(actions)
     unresolved = []
     for role in roles:
-        if role['status'] != 'completed':
+        if role['status'] == 'partial':
+            unresolved.append(f"{role['role']} role is partial; remaining items are shown and human review is needed.")
+        elif role['status'] != 'completed':
             unresolved.append(f"{role['role']} role unavailable; human review is needed.")
         elif not role['proposals']:
             unresolved.append(f"{role['role']} role proposed no action; human review is needed.")
@@ -359,13 +452,17 @@ async def coordinate(corpus: Corpus, snapshot: dict, llm: LLMClient, model: str,
             # Provider exceptions are not evidence that a completion was malformed.
             return {'role': role, 'status': 'unavailable', 'reason': 'provider_error', 'proposals': [], 'questions': []}
         try:
-            proposals, questions = _validate_response(raw, request, state.scenario_id)
+            proposals, questions, issue = _assess_response(raw, request, state.scenario_id)
         except InvalidRoleResponse as exc:
             return {'role': role, 'status': 'unavailable', 'reason': 'invalid_response',
                     'validation_issue': exc.category, 'proposals': [], 'questions': []}
         except Exception:
             # Unexpected validator defects must not be blamed on model output.
             return {'role': role, 'status': 'unavailable', 'reason': 'validation_error', 'proposals': [], 'questions': []}
+        if issue is not None:
+            return {'role': role, 'status': 'partial' if proposals or questions else 'unavailable',
+                    'reason': 'invalid_response', 'validation_issue': issue,
+                    'proposals': proposals, 'questions': questions}
         return {'role': role, 'status': 'completed', 'proposals': proposals, 'questions': questions}
 
     tasks = [asyncio.create_task(call(request)) for request in requests]

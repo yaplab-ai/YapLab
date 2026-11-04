@@ -133,6 +133,7 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .v
 .venv/bin/python verify_policy_coordination.py
 .venv/bin/python verify_policy_coordination_api.py
 .venv/bin/python verify_policy_validation.py
+.venv/bin/python verify_policy_resilience.py
 .venv/bin/python verify_policy_evaluation.py
 .venv/bin/python scripts/evaluate_coordination.py  # dry run, no network
 .venv/bin/python scripts/evaluate_policy.py
@@ -403,3 +404,14 @@ Current verification after simplification: 90 existing backend checks, 71 policy
 unit tests, standalone scenarios, 97 frontend tests, both builds and an
 extracted-wheel saved-partial replay check passed. Only the one separately
 approved protocol-2 run incurred provider requests in this increment.
+
+
+## Offline resilience and source-fit follow-up
+
+The [source review and next steps](ai-for-good-source-review-and-next-steps.md)
+identify actual weak citation pairs, distinguish primary-text support from
+unverified legal interpretation, and list remaining deliverables. Protocol 3
+keeps independently valid items in an explicit partial result and improves
+incident-source candidates without changing the one-action UI. Locator and
+verification metadata travel with new evidence. The previous live metrics are
+unchanged; no protocol-3 model evaluation has occurred.

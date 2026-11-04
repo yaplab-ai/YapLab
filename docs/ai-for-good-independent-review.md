@@ -127,3 +127,14 @@ offline partial-round reproduction returned the same result twice with only
 three fake calls, retained unavailable-role status and scope filtering, and
 rejected a stale stage without another call. No automatic retry or exactly-once
 billing guarantee is claimed. Fixed diagnostic categories remain developer-only.
+
+
+## Offline resilience/source-fit review
+
+Independent probes confirmed partial retention without unknown-source/future-fact
+leakage, no evidence merging on duplicate actions, and improved privacy-source
+availability. Both targeted suites passed (8 resilience and 11 validation tests).
+The review corrected an early hypothesis: PDPL was education-tagged and eligible;
+query/ranking/top-three truncation caused its omission. It also corrected partial
+copy from 'supported' to 'remaining' items, because ID checks do not establish
+citation support. Historical live records remain unchanged.

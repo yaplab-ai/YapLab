@@ -133,13 +133,15 @@ def summarize(result):
     roles = []
     for role in result['roles']:
         roles.append({'role': _allow(role['role'], ROLES),
-                      'status': _allow(role['status'], ('completed', 'unavailable')) or 'unavailable',
+                      'status': _allow(role['status'], ('completed', 'partial', 'unavailable')) or 'unavailable',
                       'reason': _allow(role.get('reason'), ROLE_REASONS),
                       'prompt_sha256': role['prompt_sha256'],
                       'prompt_attempted': role['prompt_attempted'] is True,
-                      'evidence': [{k: evidence[k] for k in ('id', 'title', 'url', 'authority',
+                      'evidence': [{**{k: evidence[k] for k in ('id', 'title', 'url', 'authority',
                                    'jurisdiction', 'document_type', 'scope', 'summary', 'limitations',
-                                   'institution', 'sha256')} for evidence in role['evidence']],
+                                   'institution', 'sha256')},
+                                   **{k: evidence[k] for k in ('source_locator', 'verification') if k in evidence}}
+                                   for evidence in role['evidence']],
                       'proposals': [{k: p[k] for k in ('action_id', 'fact_ids', 'source_ids')}
                                     for p in role['proposals']],
                       'question_ids': [q['question_id'] for q in role['questions']]})
@@ -189,6 +191,7 @@ def evaluation_progress(corpus, plan, approval_reference, client, records, usage
             'provider_success_events': sum(item['outcome'] == 'success' for item in usage),
             'provider_failure_events': sum(item['outcome'] in ('error', 'cancelled') for item in usage),
             'structurally_completed_roles': sum(role['status'] == 'completed' for role in roles),
+            'partially_completed_roles': sum(role['status'] == 'partial' for role in roles),
             'structurally_failed_roles': sum(role['status'] != 'completed' for role in roles),
             'usage': list(usage), 'usage_missing_calls': missing,
             'reported_usage_cost': {'known_cost_usd': float(cost),

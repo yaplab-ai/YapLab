@@ -258,6 +258,75 @@ class EvaluationTests(unittest.TestCase):
         self.assertEqual(progress['validation_issue_counts'], {'json_syntax': 1})
         self.assertEqual(progress['invalid_response_without_known_issue'], 1)
 
+    def test_optional_source_metadata_preserved_only_when_present(self):
+        corpus, states, _ = evaluation.prepare()
+        class Valid(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                return '{"proposals": [], "questions": []}'
+        from frontrow.policy.coordination import coordinate
+        result = asyncio.run(coordinate(corpus, states[0], Valid(), evaluation.MODEL, mode='model_assisted'))
+        evidence = result['roles'][0]['evidence'][0]
+        evidence['source_locator'] = 'Section 2'
+        evidence['verification'] = 'Public primary source checked'
+        evidence['sha256'] = digest({k: v for k, v in evidence.items() if k != 'sha256'})
+        expected_hash = evidence['sha256']
+        evidence['private_unknown_key'] = 'PRIVATE OUTPUT'
+        historical = result['roles'][1]['evidence'][0]
+        historical.pop('source_locator', None)
+        historical.pop('verification', None)
+        summarized = evaluation.summarize(result)
+        observed = summarized['roles'][0]['evidence'][0]
+        self.assertEqual(observed['source_locator'], 'Section 2')
+        self.assertEqual(observed['verification'], 'Public primary source checked')
+        self.assertEqual(observed['sha256'], expected_hash)
+        self.assertNotIn('private_unknown_key', observed)
+        self.assertNotIn('PRIVATE OUTPUT', json.dumps(summarized))
+        historical_result = summarized['roles'][1]['evidence'][0]
+        self.assertNotIn('source_locator', historical_result)
+        self.assertNotIn('verification', historical_result)
+
+    def test_partial_status_preserves_valid_items_but_fails_structural_check(self):
+        corpus, states, plan = evaluation.prepare()
+        class Valid(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                payload = json.loads(user)
+                return json.dumps({'proposals': [{'action_id': next(iter(payload['actions'])),
+                    'fact_ids': [payload['facts'][0]['id']], 'source_ids': [payload['sources'][0]['id']]}],
+                    'questions': [next(iter(payload['questions']))]})
+        from frontrow.policy.coordination import coordinate
+        client = Valid()
+        result = asyncio.run(coordinate(corpus, states[0], client, evaluation.MODEL, mode='model_assisted'))
+        result['roles'][0].update(status='partial', reason='invalid_response', validation_issue='unknown_action_id')
+        result['roles'][1].update(status='unknown private value', reason='invalid_response', validation_issue='PRIVATE OUTPUT')
+        summarized = evaluation.summarize(result)
+        partial = summarized['roles'][0]
+        self.assertEqual(partial['status'], 'partial')
+        self.assertEqual(partial['validation_issue'], 'unknown_action_id')
+        self.assertEqual(partial['proposals'], [{k: result['roles'][0]['proposals'][0][k]
+                                                 for k in ('action_id', 'fact_ids', 'source_ids')}])
+        self.assertEqual(partial['question_ids'], [result['roles'][0]['questions'][0]['question_id']])
+        self.assertEqual(summarized['roles'][1]['status'], 'unavailable')
+        self.assertNotIn('validation_issue', summarized['roles'][1])
+        self.assertNotIn('PRIVATE OUTPUT', json.dumps(summarized))
+        self.assertNotIn('unknown private value', json.dumps(summarized))
+        self.assertEqual(summarized['structural_validation'], 'fail')
+        usage = [{'input_tokens': 11, 'output_tokens': 12, 'outcome': 'success'} for _ in range(3)]
+        progress = evaluation.evaluation_progress(corpus, plan, 'approved', client, [summarized], usage, status='completed')
+        self.assertEqual(progress['partially_completed_roles'], 1)
+        self.assertEqual(progress['structurally_failed_roles'], 2)
+        self.assertEqual(progress['validation_issue_counts'], {'unknown_action_id': 1})
+        self.assertEqual(progress['structural_validation'], 'fail')
+        self.assertEqual(progress['reported_usage_cost']['known_cost_usd'], 0.00001062)
+        self.assertEqual(progress['human_semantic_quality'], 'unreviewed')
+
     def test_missing_usage_stops_future_snapshots(self):
         class Missing(OpenAIClient):
             provider_name = 'nebius'

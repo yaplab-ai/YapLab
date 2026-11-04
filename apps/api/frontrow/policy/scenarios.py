@@ -31,6 +31,7 @@ MAX_DECISION_LENGTH = 500
 MAX_COORDINATION_BYTES = 65536
 INSTITUTIONS = ("general", "uaeu")
 _EVIDENCE_FIELDS = ("id", "title", "url", "authority", "jurisdiction", "document_type", "scope", "summary", "limitations", "institution")
+_OPTIONAL_EVIDENCE_FIELDS = ("source_locator", "verification")
 _HEX_DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 
 
@@ -52,10 +53,14 @@ def _validate_provenance(result: dict, item: dict) -> None:
         raise ValueError("invalid evidence")
     evidence_ids = set()
     for source in evidence:
-        if not isinstance(source, dict) or set(source) != {*_EVIDENCE_FIELDS, "sha256"}:
+        if (not isinstance(source, dict) or not {*_EVIDENCE_FIELDS, "sha256"} <= set(source)
+                or set(source) - {*_EVIDENCE_FIELDS, *_OPTIONAL_EVIDENCE_FIELDS, "sha256"}):
             raise ValueError("invalid source fields")
         if any(not isinstance(source[key], str) or not 0 < len(source[key]) <= 4000
                for key in _EVIDENCE_FIELDS if key not in ("limitations", "institution")):
+            raise ValueError("invalid source metadata")
+        if any(not isinstance(source[key], str) or not 0 < len(source[key]) <= 4000
+               for key in _OPTIONAL_EVIDENCE_FIELDS if key in source):
             raise ValueError("invalid source metadata")
         if source["institution"] not in (None, "uaeu"):
             raise ValueError("invalid source institution")
@@ -65,7 +70,7 @@ def _validate_provenance(result: dict, item: dict) -> None:
         if source["id"] in evidence_ids:
             raise ValueError("duplicate source")
         evidence_ids.add(source["id"])
-        canonical = json.dumps({key: source[key] for key in _EVIDENCE_FIELDS}, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        canonical = json.dumps({key: value for key, value in source.items() if key != "sha256"}, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         if source["sha256"] != hashlib.sha256(canonical.encode("utf-8")).hexdigest():
             raise ValueError("source digest mismatch")
     for proposal in item.get("proposals", []):
@@ -277,7 +282,7 @@ class ExerciseStore:
                     if "validation_issue" in item:
                         issue = item["validation_issue"]
                         if (not isinstance(issue, str) or issue not in VALIDATION_ISSUES
-                                or item.get("status") != "unavailable" or item.get("reason") != "invalid_response"):
+                                or item.get("status") not in ("unavailable", "partial") or item.get("reason") != "invalid_response"):
                             raise ValueError("invalid validation issue")
                     proposals = item.get("proposals")
                     if not isinstance(proposals, list) or not isinstance(item.get("questions"), list):
@@ -341,7 +346,7 @@ class ExerciseStore:
                     assessment["prompt_sha256"] = item["prompt_sha256"]
                     assessment["prompt_attempted"] = item["prompt_attempted"]
                     assessment["evidence"] = [
-                        {key: source[key] for key in (*_EVIDENCE_FIELDS, "sha256")}
+                        {key: source[key] for key in (*_EVIDENCE_FIELDS, *_OPTIONAL_EVIDENCE_FIELDS, "sha256") if key in source}
                         for source in item["evidence"]
                     ]
                     assessment["proposals"] = [

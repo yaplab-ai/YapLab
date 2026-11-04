@@ -116,7 +116,7 @@ loads the saved stage/collection view, without another model call on replay.
 ## 5. Evaluation, limitations and reproduction
 
 The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 71 policy-related unit tests, standalone staged-scenario checks and 97
+checks, 81 policy-related unit tests, standalone staged-scenario checks and 97
 frontend tests. Frontend and offline API package builds succeeded; an
 extracted-wheel check verified saved partial-round reuse without extra calls.
 The [offline walkthrough](evidence/ai-for-good-offline.json) also records four
@@ -163,3 +163,11 @@ final submission destination and hosted KB import contract, and verify the
 five-page layout in the supported rendering environment. No repository push,
 deployment, hosted import or submission occurred. Reproduction commands are in
 the [engineering runbook](ai-for-good.md#verification-and-local-use).
+
+
+An offline source-fit review found contextual or weak citations in some accepted
+samples; structural acceptance did not establish policy support. Protocol 3 now
+preserves valid items as explicit partial results and improves incident-source
+candidates while retaining verification notes. It has not been live-tested. The
+[review and remaining requirements](ai-for-good-source-review-and-next-steps.md)
+identify institutional review and full-text verification still needed.

@@ -30,7 +30,7 @@ Use the current report draft, which now includes both approved live runs and
 the simplified facilitator. Keep offline verification separate from live
 structural acceptance:
 
-- Offline: 90 existing backend checks, 71 policy unit tests, standalone scenario
+- Offline: 90 existing backend checks, 81 policy unit tests, standalone scenario
   checks, 97 frontend tests, frontend/API builds and an extracted-wheel smoke.
 - Protocol 1: 14/27 role responses accepted; 1/9 fully accepted snapshots;
   $0.0023856 calculated from reported usage at recorded list prices.
@@ -43,3 +43,5 @@ with saved-round reuse and collapsed reference details. See the
 [current results and simplification](ai-for-good-v2-results-and-simplification.md).
 No additional live run is proposed as already authorised; both allowances were
 consumed. Preserve these distinctions while fitting the official template.
+
+The latest protocol-3 follow-up is offline only: partial item retention and improved source candidates. Do not convert the unchanged 24/27 protocol-2 structural result into a citation-quality score. Use the sample source review for current evidence limits and remaining steps.

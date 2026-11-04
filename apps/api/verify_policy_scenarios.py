@@ -298,7 +298,7 @@ def check_validation_issue_audit():
         assert store.get_coordination(exercise_id, snapshot['round_id'])['roles'][1]['validation_issue'] == category
 
     # Earlier and future protocol results without a category stay readable; no category is invented.
-    for version, reason in (('1', 'invalid_response'), ('unknown-future', 'invalid_response'), ('1', 'validation_error')):
+    for version, reason in (('1', 'invalid_response'), ('2', 'invalid_response'), ('unknown-future', 'invalid_response'), ('1', 'validation_error')):
         store, exercise_id, snapshot, result = prepare()
         result['protocol_version'] = version
         result['roles'][1].update(status='unavailable', reason=reason, proposals=[])
@@ -310,10 +310,12 @@ def check_validation_issue_audit():
     valid_issue = next(iter(VALIDATION_ISSUES))
     for status, reason, category in (
         ('unavailable', 'invalid_response', 'raw secret model output: example-token'),
+        ('partial', 'invalid_response', 'raw secret model output: example-token'),
         ('unavailable', 'invalid_response', None),
         ('unavailable', 'invalid_response', ['schema_mismatch']),
         ('completed', 'invalid_response', valid_issue),
         ('unavailable', 'provider_error', valid_issue),
+        ('partial', 'provider_error', valid_issue),
         ('unavailable', 'validation_error', valid_issue),
     ):
         store, exercise_id, snapshot, result = prepare()
@@ -321,6 +323,22 @@ def check_validation_issue_audit():
         assert_http(422, store.commit_coordination, exercise_id, snapshot['round_id'], result)
         assert store.audit(exercise_id, 'privacy')['events'] == []
         assert_http(404, store.get_coordination, exercise_id, snapshot['round_id'])
+
+    for category in VALIDATION_ISSUES:
+        store, exercise_id, snapshot, result = prepare()
+        result['protocol_version'] = '2'
+        result['roles'][1].update(status='partial', reason='invalid_response', validation_issue=category)
+        expected_proposal = result['roles'][1]['proposals'][0].copy()
+        saved = store.commit_coordination(exercise_id, snapshot['round_id'], result)
+        assessment = store.audit(exercise_id, 'privacy')['events'][0]['assessment']
+        assert assessment['status'] == 'partial' and assessment['validation_issue'] == category
+        assert assessment['proposals'] == [expected_proposal]
+        for other in ('teacher', 'accessibility'):
+            assert 'validation_issue' not in store.audit(exercise_id, other)['events'][0]['assessment']
+        replay = store.reserve_coordination(exercise_id, 1, 'general', reuse_completed=True)['completed_result']
+        assert replay == saved and replay['roles'][1]['proposals'] == [expected_proposal]
+        replay['roles'][1]['proposals'][0]['text'] = 'mutated outside store'
+        assert store.get_coordination(exercise_id, snapshot['round_id'])['roles'][1]['proposals'] == [expected_proposal]
 
 
 def check_coordination_reuse():
@@ -369,6 +387,55 @@ def check_coordination_reuse():
     assert_http(429, full.reserve_coordination, eid, 1, 'uaeu', True)
 
 
+def check_optional_evidence_metadata():
+    def prepare():
+        store = scenarios.ExerciseStore()
+        exercise_id = store.create('caption-failure', 'teacher')['exercise_id']
+        snapshot = store.reserve_coordination(exercise_id, 1, 'general')
+        result = result_for(snapshot)
+        return store, exercise_id, snapshot, result
+
+    def update_source(result, fields):
+        source = result['roles'][0]['evidence'][0]
+        source.update(fields)
+        content = {key: value for key, value in source.items() if key != 'sha256'}
+        canonical = json.dumps(content, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        source['sha256'] = hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+
+    # No optional fields, each independently, and both are compatible with v1/v2.
+    for version, fields in (
+        ('1', {}), ('2', {'source_locator': 'Section 3'}),
+        ('2', {'verification': 'Reviewed official source'}),
+        ('2', {'source_locator': 'Section 3', 'verification': 'Reviewed official source'}),
+    ):
+        store, exercise_id, snapshot, result = prepare()
+        result['protocol_version'] = version
+        update_source(result, fields)
+        expected = dict(result['roles'][0]['evidence'][0])
+        store.commit_coordination(exercise_id, snapshot['round_id'], result)
+        source = store.audit(exercise_id, 'teacher')['events'][0]['assessment']['evidence'][0]
+        assert source == expected
+        source['title'] = 'mutated by caller'
+        assert store.audit(exercise_id, 'teacher')['events'][0]['assessment']['evidence'][0] == expected
+        if fields:
+            first = next(iter(fields))
+            source[first] = 'changed'
+            assert store.get_coordination(exercise_id, snapshot['round_id'])['roles'][0]['evidence'][0][first] == fields[first]
+        assert 'Section 3' not in json.dumps(store.audit(exercise_id, 'accessibility'))
+
+    # Unsupported or malformed fields, and mismatched hashes, never enter storage.
+    for fields in ({'source_locator': None}, {'verification': ''}, {'verification': 'x' * 4001},
+                   {'raw_model_output': 'must not be accepted'}):
+        store, exercise_id, snapshot, result = prepare()
+        update_source(result, fields)
+        assert_http(422, store.commit_coordination, exercise_id, snapshot['round_id'], result)
+        assert store.audit(exercise_id, 'teacher')['events'] == []
+    store, exercise_id, snapshot, result = prepare()
+    update_source(result, {'verification': 'Reviewed official source'})
+    result['roles'][0]['evidence'][0]['verification'] = 'tampered'
+    assert_http(422, store.commit_coordination, exercise_id, snapshot['round_id'], result)
+
+
 if __name__ == '__main__':
     check_disclosure_and_audit()
     check_ttl_capacity_actions_and_concurrency()
@@ -376,4 +443,5 @@ if __name__ == '__main__':
     check_coordination()
     check_validation_issue_audit()
     check_coordination_reuse()
+    check_optional_evidence_metadata()
     print('Policy scenario checks passed')

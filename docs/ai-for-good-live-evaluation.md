@@ -136,3 +136,10 @@ The [actual results](ai-for-good-v2-results-and-simplification.md) and separate
 live evidence supersede the earlier proposed/not-run status. No additional paid
 test is authorised by that consumed allowance. New testing since that run has
 been offline.
+
+
+The current offline protocol is now 3. Its [dry plan](evidence/ai-for-good-coordination-plan-v3.json)
+prepares 27 requests and estimates $0.02560548
+at the recorded rates/token proxy, without any provider call. Partial roles
+remain structural failures in evaluation. A further run needs separate explicit
+authorization; source-fit and institutional review are also outstanding.

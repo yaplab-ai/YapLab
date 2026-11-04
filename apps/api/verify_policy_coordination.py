@@ -178,12 +178,14 @@ class CoordinationTests(unittest.TestCase):
             out['questions'] = ['hidden_question']
             return out
         async def run():
-            for change in (bad_action, other_role_fact, invented_source, excluded_source, bad_question):
+            for change, status in ((bad_action, 'unavailable'), (other_role_fact, 'unavailable'),
+                                   (invented_source, 'unavailable'), (excluded_source, 'unavailable'),
+                                   (bad_question, 'partial')):
                 result = await coordinate(self.corpus, snapshot(), Scripted({'teacher': change}), 'test')
                 teacher = next(role for role in result['roles'] if role['role'] == 'teacher')
-                self.assertEqual(teacher['status'], 'unavailable')
+                self.assertEqual(teacher['status'], status)
                 self.assertEqual(teacher['reason'], 'invalid_response')
-                self.assertEqual(teacher['proposals'], [])
+                self.assertEqual(len(teacher['proposals']), 1 if status == 'partial' else 0)
                 self.assertNotIn('do_something_unapproved', str(result))
         asyncio.run(run())
 

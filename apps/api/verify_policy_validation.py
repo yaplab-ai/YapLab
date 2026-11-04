@@ -165,7 +165,7 @@ class ValidationTests(unittest.TestCase):
 
     def test_unexpected_validator_defect_is_not_blame_for_model(self):
         async def check():
-            with patch.object(coordination, '_validate_response', side_effect=ValueError(PRIVATE)):
+            with patch.object(coordination, '_assess_response', side_effect=ValueError(PRIVATE)):
                 result = await coordinate(self.corpus, self.state, Raw(json.dumps(self.valid)), 'offline')
             self.assertTrue(all(r['reason'] == 'validation_error' for r in result['roles']))
             self.assertTrue(all('validation_issue' not in r for r in result['roles']))
@@ -201,8 +201,10 @@ class ValidationTests(unittest.TestCase):
             for role in item['roles']:
                 self.assertNotIn('validation_issue', role)
                 if role['status'] == 'completed':
+                    historical_request = dict(requests[role['role']])
+                    historical_request['source_ids'] = tuple(source['id'] for source in role['evidence'])
                     _validate_response(json.dumps({'proposals': role['proposals'], 'questions': role['question_ids']}),
-                                       requests[role['role']], item['scenario_id'])
+                                       historical_request, item['scenario_id'])
                     accepted += 1
                 else:
                     self.assertEqual(role['reason'], 'invalid_response')
