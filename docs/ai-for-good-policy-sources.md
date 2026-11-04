@@ -19,3 +19,36 @@ The [AI for Good Lab Hackathon UAE brief](https://aiforgood.itu.int/event/ai-for
 Citations should identify the source, jurisdiction, locator and caveat, and distinguish enforceable law from voluntary guidance and international examples. The `requirements` field records relevant considerations in original language; it does not claim that every item is a binding obligation. Avoid asserting that a generated lesson or product is legally compliant or accessible merely because it matches a corpus entry.
 
 Before consequential use, check the latest official Arabic legislation, amendments, implementing regulations, emirate and free-zone rules, and the university's own privacy, accessibility, assessment and AI policies. The UAE legislation pages provide English translations; use the authoritative text for legal interpretation. The source list is deliberately selective and does not cover every applicable law, university policy, discipline or learner need. Refresh the version and retrieval date after a substantive source review.
+
+
+## University-specific reference collection
+
+The `uaeu` collection adds three public institutional examples. General search
+and review exclude them. Selecting this collection does not establish that the
+user is affiliated with UAEU or that a policy applies to a particular deployment.
+
+| Record | Official source and locator | Boundary |
+| --- | --- | --- |
+| `uaeu-student-generative-ai` | [Student GenAI policy](https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf), pp. 2–4; effective 11 August 2025, review 1 September 2027 | UAEU student academic-credit work; not a universal university rule. Its detector provision must not be treated as proof of detector reliability. |
+| `uaeu-institutional-data-governance` | [Data governance policy](https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/data-governance-policy.pdf), pp. 2–6 | UAEU institutional data; research-only data is excluded. |
+| `uaeu-students-of-determination-services` | [Support services](https://www.uaeu.ac.ae/en/student-services/special-needs/services.shtml), Services section | Institutional service guidance, not legislation. |
+
+The [approved-policies index](https://www.uaeu.ac.ae/en/about/bylaws-policies-procedures.shtml)
+links the policy PDFs. UAEU’s [copyright notice](https://www.uaeu.ac.ae/en/website/copyright.shtml)
+requires permission for reproduction. The corpus and local export contain links,
+metadata and original paraphrases; they do not redistribute those PDFs. A wider
+full-text corpus needs a rights review first.
+
+The current legislation pages returned HTTP 403 in the second review. Their
+official indexed provisions were corroborated, but full current texts and
+amendments remain a verification task. In particular, the federal privacy law’s
+Article 2 exclusions prevent assuming that every university falls under that
+regime. No legal applicability determination is made here.
+
+## National strategy context
+
+The [UAE AI Office strategy page](https://ai.gov.ae/strategy/) supplies a distinct
+strategy record (`uae-national-ai-strategy-2031`). Objectives on talent, enabling
+infrastructure and governance help frame project design. This is strategic
+context rather than legal authority, institutional approval or evidence that
+YapLab achieves national outcomes. Historical projections are not reused.

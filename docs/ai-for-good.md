@@ -123,7 +123,7 @@ project-level evidence choices, not a national readiness score.
 ## Verification and local use
 
 All commands below run from the isolated worktree. No provider keys are needed for offline verification. Use the existing environment
-or install dependencies with `uv sync` when necessary. From the repository root:
+or provision a fresh environment as described above. From the repository root:
 
 ```bash
 cd apps/api
@@ -153,11 +153,10 @@ credits; no such call is part of offline verification.
 
 ## Observed verification
 
-The isolated worktree passed **90 existing backend checks**, **9 policy tests**,
-the staged-scenario verification script, **90 frontend tests**, and a frontend
+The isolated worktree passed **90 existing backend checks**, **12 policy tests**,
+the staged-scenario verification script, **91 frontend tests**, and a frontend
 production build. `uv build --offline` produced an sdist and wheel using cached
-build tools. An API smoke test imported an extracted wheel and served all seven
-sources and three scenarios; both JSON resources are packaged.
+build tools. An API smoke test imported an extracted wheel and served the scoped source collections and three scenarios; both JSON resources are packaged.
 
 The [recorded offline walkthrough](evidence/ai-for-good-offline.json) contains
 four hand-authored retrieval probes and three complete exercises, each with
@@ -173,10 +172,10 @@ were used for this evidence.
 
 ## Policy API and operating limits
 
-- `GET /policy/sources` serves versioned source notes; `POST /policy/search`
-  accepts `query` (1–500 characters) and `limit` (1–10).
+- `GET /policy/sources?institution=general|uaeu` serves scoped source notes; `POST /policy/search`
+  accepts `query` (1–500 characters), `limit` (1–10), and optional `institution`.
 - `POST /policy/review` accepts `text` (1–8,000 characters), optional `context`
-  (up to 1,000), and optional supported `topics`. Search uses weighted lexical
+  (up to 1,000), optional supported `topics`, and an explicit `institution` context. Search uses weighted lexical
   matching and a small, auditable alias list. Reviews select topic-relevant
   source considerations; the audit records query expansions and selected
   source/requirement IDs. Lexical absence is not evidence of a legal gap.
@@ -211,12 +210,37 @@ for the final five-page document. Suggested allocation:
 4. Staged exercise, expected vs observed software results, expert-review gaps.
 5. Readiness mapping, limitations, reproducibility, source/repository references.
 
-Before finalising, obtain a university-specific policy example and an educator or
-policy review of the synthetic cases; establish which ITU knowledge-base import
-format and credentials are available; decide whether to include live policy-model
+Before finalising, obtain an educator or policy review of the synthetic cases and verify the
+institutional applicability of the added UAEU examples; establish the final ITU
+submission destination and hosted knowledge-base import contract; decide whether to include live policy-model
 results; and confirm team details. Team invitations and organiser correspondence
 are separate from code implementation. Any final report must replace proposed
 results with recorded observations and retain unresolved limitations.
 
 Publication, deployment, sharing and submission require explicit user approval
 after the concrete artifacts are reviewed.
+
+
+## Current readiness handoff
+
+The corpus now has **11 records**: 8 general sources and 3 additional UAEU-only
+institutional examples. It covers laws, guidance, national strategy and university
+practice. General search/review excludes the institutional entries; selecting
+UAEU adds those examples without establishing affiliation or applicability.
+Source verification and reuse notes are returned with the references. Direct
+full-text re-verification of the two legislation pages remains incomplete after
+HTTP 403 responses; no legal conclusions depend on treating those pages as newly
+verified in full.
+
+The [submission and import findings](ai-for-good-submission-workflow.md) pin the
+inspected ITU-linked code, distinguish the Colab and simulation workflows, and
+list the exact missing organiser instructions. The [local KB package](../knowledge-base/README.md)
+contains separate scoped collections, manifests and notebook-compatible chunks.
+Both collections pass deterministic regeneration checks. No embeddings, hosted
+KB import, sandbox access, private-model reasoning trace or live policy-model
+evaluation is claimed.
+
+The [report content draft](ai-for-good-report-draft.md) is updated for these
+results. Final DOCX authoring and pagination must be performed in a supported
+local thread with the Documents bundled runtime. This host's dependency loader
+does not provide that runtime; no unrendered document is labelled ready to submit.

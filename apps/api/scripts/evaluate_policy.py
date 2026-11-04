@@ -57,6 +57,17 @@ def evaluate() -> dict:
         source_ids = {entry["id"] for entry in corpus["entries"]}
         result["corpus_version"] = corpus["version"]
         result["source_count"] = len(source_ids)
+        institutional = checked(client.get("/policy/sources", params={"institution": "uaeu"}))
+        result["reference_collection_counts"] = {"general": len(source_ids), "uaeu": len(institutional["entries"])}
+        scoped_query = "UAEU syllabus GenAI assessment"
+        scoped_hits = {}
+        for scope in ("general", "uaeu"):
+            found = checked(client.post("/policy/search", json={"query": scoped_query, "limit": 10, "institution": scope}))
+            scoped_hits[scope] = [item["id"] for item in found["results"]]
+        assert not any(item.startswith("uaeu-") for item in scoped_hits["general"])
+        assert "uaeu-student-generative-ai" in scoped_hits["uaeu"]
+        result["institution_scope_probe"] = {"query": scoped_query, "observed_source_ids": scoped_hits,
+                                             "excluded_from_general": True, "passed": True}
         for query, expected in PROBES:
             data = checked(client.post("/policy/search", json={"query": query, "limit": 3}))
             actual = [entry["id"] for entry in data["results"]]

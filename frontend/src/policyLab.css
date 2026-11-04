@@ -95,3 +95,10 @@
 .policy-references > p { color:var(--chalk-2); font-size:13px; margin:5px 0 15px; }
 .policy-audit summary { cursor:pointer; color:var(--chalk-2); }
 .policy-audit p { margin-top:8px; }
+
+.policy-scope { display:grid; grid-template-columns:auto minmax(220px, 340px); align-items:center; gap:8px 16px; margin-top:24px; }
+.policy-scope label { font-weight:600; font-size:14px; }
+.policy-scope select { background:var(--board-2); color:var(--chalk); border:1px solid var(--line-2); border-radius:var(--r-sm); padding:10px 12px; max-width:100%; }
+.policy-scope p { grid-column:1 / -1; color:var(--chalk-2); font-size:13px; max-width:690px; }
+.policy-institution-badge { color:var(--chalk); }
+@media (max-width:700px) { .policy-scope { grid-template-columns:1fr; } .policy-scope p { grid-column:auto; } }

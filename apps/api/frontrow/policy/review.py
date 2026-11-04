@@ -1,7 +1,7 @@
 """Deterministic retrieval-based prompts for human review, not compliance verdicts."""
 from __future__ import annotations
 
-from .evidence import Corpus, Topic, query_expansions, search, tokens
+from .evidence import Corpus, Institution, Topic, query_expansions, scoped_sources, search, tokens
 
 _LABELS = {
     'privacy': 'Privacy and personal data',
@@ -59,7 +59,9 @@ def requirement_index(source: dict, topic: Topic) -> int | None:
     return max(range(len(requirements)), key=lambda i: (len(tokens(requirements[i]) & terms), -i))
 
 
-def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '') -> dict:
+def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
+           institution: Institution = 'general') -> dict:
+    entries = scoped_sources(corpus, institution)
     query = f'{text} {context}'.strip()
     words = tokens(query)
     expansions = query_expansions(query)
@@ -73,12 +75,12 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '') ->
     audit_terms = set()
     audit_requirements = []
     for topic in selected:
-        hits = search(corpus, topic_query(query, topic), limit=3, topic=topic)
+        hits = search(corpus, topic_query(query, topic), limit=3, topic=topic, institution=institution)
         if not hits:
             # Explicitly selected topics can be explored even if no input word
             # occurs in the source; this is identified as a topic-only match.
             if topic in topics:
-                sources = [s for s in corpus.entries if topic in s.topics][:2]
+                sources = [s for s in entries if topic in s.topics][:2]
                 hits = [{**s.model_dump(), 'matched_terms': [], 'score': 0.0} for s in sources]
             if not hits:
                 gaps.append(f'No source in this collection matched {_LABELS[topic].lower()} and the supplied wording; consult additional sources.')
@@ -108,8 +110,10 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '') ->
                     else 'No source-backed consideration was identified from the supplied wording.'),
         'considerations': considerations,
         'gaps': gaps,
-        'limitations': list(dict.fromkeys(_LIMITATIONS + corpus.limitations)),
-        'audit': {'corpus_version': corpus.version, 'source_ids': list(dict.fromkeys(audit_sources)),
+        'limitations': list(dict.fromkeys(_LIMITATIONS + corpus.limitations + ([
+            'UAEU materials are an institutional reference case; selecting them does not establish affiliation or applicability.'
+        ] if institution == 'uaeu' else []))),
+        'audit': {'corpus_version': corpus.version, 'institution': institution, 'source_ids': list(dict.fromkeys(audit_sources)),
                   'matched_terms': sorted(audit_terms), 'query_expansions': expansions, 'selected_topics': selected,
                   'topic_query_terms': {topic: sorted(tokens(topic_query(query, topic))) for topic in selected},
                   'selected_requirements': audit_requirements,

@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T17:31:17.747997+00:00",
+  "recorded_at": "2026-11-04T17:54:22.815959+00:00",
   "environment": "local TestClient, offline fake classroom, deterministic policy review",
   "limitations": [
     "Hand-authored smoke probes check software behavior, not retrieval accuracy on a representative dataset.",
@@ -36,8 +36,8 @@
       ],
       "observed_source_ids": [
         "england-generative-ai-education",
-        "unesco-ai-ethics-recommendation",
-        "uae-ai-ethics-self-assessment"
+        "uae-national-ai-strategy-2031",
+        "unesco-ai-ethics-recommendation"
       ],
       "passed": true
     },
@@ -644,7 +644,31 @@
       "teacher_audit_event_count": 5
     }
   ],
-  "corpus_version": "2026-11-04",
-  "source_count": 7,
+  "corpus_version": "2026-11-04.2",
+  "source_count": 8,
+  "reference_collection_counts": {
+    "general": 8,
+    "uaeu": 11
+  },
+  "institution_scope_probe": {
+    "query": "UAEU syllabus GenAI assessment",
+    "observed_source_ids": {
+      "general": [
+        "england-generative-ai-education",
+        "uae-ai-ethics-self-assessment",
+        "unesco-generative-ai-education"
+      ],
+      "uaeu": [
+        "uaeu-student-generative-ai",
+        "uaeu-students-of-determination-services",
+        "england-generative-ai-education",
+        "uae-ai-ethics-self-assessment",
+        "unesco-generative-ai-education",
+        "uaeu-institutional-data-governance"
+      ]
+    },
+    "excluded_from_general": true,
+    "passed": true
+  },
   "all_retrieval_probes_passed": true
 }

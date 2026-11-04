@@ -15,8 +15,24 @@ test('sends structured review and role-scoped exercise requests', async () => {
   await api.review('Visible facts', ['privacy'], 'Classroom');
   await api.exercise('id/1', 'accessibility');
   assert.equal(calls[0][0], 'http://localhost:8000/policy/review');
-  assert.deepEqual(JSON.parse(calls[0][1].body), { text: 'Visible facts', topics: ['privacy'], context: 'Classroom' });
+  assert.deepEqual(JSON.parse(calls[0][1].body), { text: 'Visible facts', topics: ['privacy'], context: 'Classroom', institution: 'general' });
   assert.equal(calls[1][0], 'http://localhost:8000/policy/exercises/id%2F1?role=accessibility');
+});
+
+
+test('institution scopes the catalog, search, and review while defaulting to general', async () => {
+  const calls = [];
+  const api = createPolicyApi('https://api.example', async (...args) => { calls.push(args); return response({ ok: true }); });
+  await api.sources();
+  await api.sources('uaeu');
+  await api.search('captions');
+  await api.search('captions', 5, 'uaeu');
+  await api.review('A question', [], '', 'uaeu');
+  assert.match(calls[0][0], /institution=general$/);
+  assert.match(calls[1][0], /institution=uaeu$/);
+  assert.deepEqual(JSON.parse(calls[2][1].body), { query: 'captions', limit: 10, institution: 'general' });
+  assert.deepEqual(JSON.parse(calls[3][1].body), { query: 'captions', limit: 5, institution: 'uaeu' });
+  assert.equal(JSON.parse(calls[4][1].body).institution, 'uaeu');
 });
 
 test('surfaces backend and network errors without inventing results', async () => {
@@ -36,7 +52,7 @@ test('review keeps per-topic citations compact and deduplicates full references'
   const server = await createServer({ root: fileURLToPath(new URL('../../../', import.meta.url)), server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error' });
   try {
     const { ReviewResult } = await server.ssrLoadModule('/src/screens/PolicyLab.jsx');
-    const source = { id: 'england-source', title: 'Education guidance', url: 'https://example.org/guidance', authority: 'Education authority', jurisdiction: 'England', document_type: 'Guidance', scope: 'Applies within its stated scope.', limitations: ['Check local context.'] };
+    const source = { id: 'england-source', title: 'Education guidance', url: 'https://example.org/guidance', authority: 'Education authority', jurisdiction: 'England', document_type: 'Guidance', scope: 'Applies within its stated scope.', limitations: ['Check local context.'], institution: 'uaeu', reuse_note: 'Link to the source.', verification: 'Check current institutional policy.' };
     const html = renderToStaticMarkup(createElement(ReviewResult, { result: {
       review_mode: 'deterministic', summary: 'Review summary', considerations: [
         { topic: 'privacy', observation: 'First observation', recommendation: 'First step', citations: [source] },
@@ -49,6 +65,8 @@ test('review keeps per-topic citations compact and deduplicates full references'
     assert.equal((html.match(/Check local context\./g) || []).length, 1);
     assert.match(html, /Deterministic review/);
     assert.match(html, /<details class="policy-audit"><summary>Review details<\/summary>/);
-    assert.match(html, /England · Guidance/);
+    assert.match(html, /England · Guidance · UAEU example/);
+    assert.match(html, /Use and reuse:<\/strong> Link to the source/);
+    assert.match(html, /Verification:<\/strong> Check current institutional policy/);
   } finally { await server.close(); }
 });

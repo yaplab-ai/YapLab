@@ -1,4 +1,4 @@
-# YapLab Policy Lab — technical report content draft
+# YapLab Policy Lab technical report
 
 **AI for Good UAE · Education · 4 November 2026**
 
@@ -28,12 +28,24 @@ rehearsal already uses a session orchestrator, parallel listener agents,
 source-grounded questions, moderation, answer evaluation and reports. The new
 Policy Lab has three tools: source search, structured review and staged exercises.
 
-The knowledge base is a packaged seven-entry catalogue of primary-source
+The knowledge base is a packaged eleven-record catalogue of primary-source
 metadata and original paraphrases, including authority, URL, locator, dates,
 jurisdiction, document type and applicability cautions. Weighted lexical search
 uses a limited, disclosed alias list for terms such as captions and screen
 readers. This is a seed collection, not full-document ingestion, a distributed
 vector database or a complete account of applicable policy.
+
+General university context exposes eight sources; an explicit UAEU selection
+adds three institution-only examples on student GenAI, data governance and
+accommodation services. A source's presence does not prove legal applicability.
+The legislation pages could not be directly re-fetched in the latest review;
+their indexed provisions were corroborated and this limit is recorded.
+
+Separate local Markdown input collections, provenance manifests and compatible
+chunks are prepared for the inspected ITU-linked notebook. Its commit is pinned
+in the package. No embeddings were built and no ITU-hosted import occurred. The
+public reference code demonstrates local workflows; the hosted import contract
+and final submission destination remain unconfirmed.
 
 Review defaults to deterministic topic matching and source-consideration
 selection. An explicit opt-in mode reuses the configured LLM client to choose
@@ -45,9 +57,9 @@ legal applicability. No live policy-model evaluation has been performed.
 
 ## 3. Policy mapping and candidate domain gaps
 
-The source catalogue includes UAE personal-data legislation and disability
-education rights, UAE AI ethics guidance, a school-specific inclusion example,
-UNESCO education/ethics guidance and England education guidance. School and
+The source catalogue includes UAE personal-data and disability legislation, AI
+ethics guidance, national AI strategy, a school inclusion example, UNESCO and
+England guidance, and three explicitly scoped UAEU institutional examples. School and
 foreign examples are labelled as comparative material rather than assumed UAE
 university obligations. The [source register](ai-for-good-policy-sources.md)
 contains links and locators; each result retains its applicability cautions.
@@ -62,8 +74,9 @@ review, rather than established defects in national law:
 | Practice feedback mistaken for a grade | A score causes confusion; gradebook and usability facts emerge; communication and review are needed | How should formative AI feedback be distinguished from official assessment and challenged when unclear? |
 
 UNESCO and England sources provide examples for human review, privacy and
-pedagogical scrutiny. Whether a particular university already resolves these
-questions remains unknown until its policies and responsible staff are consulted.
+pedagogical scrutiny. The UAEU examples supply concrete institutional permissions and governance
+processes. They do not establish duties for another university or resolve the
+fictional incidents without their deployment facts and responsible reviewers.
 
 ## 4. Standards, supervision and audit
 
@@ -90,9 +103,9 @@ chain-of-thought.
 ## 5. Evaluation, limitations and reproduction
 
 On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
-9 policy tests, staged-scenario checks and 90 frontend tests passed. The frontend
+12 policy tests, six export tests, staged-scenario checks and 91 frontend tests passed. The frontend
 production build and offline API wheel/sdist build succeeded. An extracted-wheel
-API smoke check served seven source entries and three scenarios.
+API smoke check serves the scoped source collections and three scenarios.
 
 The [offline evidence file](evidence/ai-for-good-offline.json) records four
 hand-authored retrieval probes, all meeting their stated top-three or abstention
@@ -107,9 +120,10 @@ clears them. These controls are not production authentication, tamper-resistant
 audit storage or account-level cost control. Synthetic cases should be used:
 pattern-based checks cannot reliably detect identifying information.
 
-Before submission, add institution-specific evidence and expert review, broaden
-and benchmark the corpus, confirm ITU knowledge-base import requirements, and
-decide whether to run a bounded live-provider evaluation. No publication, shared
+Before submission, obtain expert review of institutional applicability and
+scenarios, broaden and benchmark the corpus, confirm the final submission
+destination and hosted KB import contract, and decide whether to run a bounded
+live-provider evaluation. Final pagination has not been verified on this host. No publication, shared
 repository update, deployment or application submission occurred during this work.
 Reproduction commands and the explicit model opt-in are in the
 [engineering runbook](ai-for-good.md#verification-and-local-use).

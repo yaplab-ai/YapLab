@@ -23,9 +23,9 @@ export function createPolicyApi(baseUrl = API_URL, fetchImpl = globalThis.fetch)
   const post = (path, body) => request(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const roleQuery = (role) => `?role=${encodeURIComponent(role)}`;
   return {
-    sources: () => request('/policy/sources'),
-    search: (query, limit = 10) => post('/policy/search', { query, limit }),
-    review: (text, topics = [], context = '') => post('/policy/review', { text, topics, context }),
+    sources: (institution = 'general') => request(`/policy/sources?institution=${encodeURIComponent(institution)}`),
+    search: (query, limit = 10, institution = 'general') => post('/policy/search', { query, limit, institution }),
+    review: (text, topics = [], context = '', institution = 'general') => post('/policy/review', { text, topics, context, institution }),
     scenarios: () => request('/policy/scenarios'),
     startExercise: (scenarioId, role) => post(`/policy/exercises${roleQuery(role)}`, { scenario_id: scenarioId }),
     exercise: (id, role) => request(`/policy/exercises/${encodeURIComponent(id)}${roleQuery(role)}`),

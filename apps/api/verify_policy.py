@@ -12,7 +12,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 from frontrow.llm.base import LLMClient
 from frontrow.policy.agent import agent_review
-from frontrow.policy.evidence import CorpusUnavailable, load_corpus, search
+from frontrow.policy.evidence import CorpusUnavailable, load_corpus, scoped_sources, search
 from frontrow.policy.review import review
 from frontrow.policy.router import ModelCallLimits
 from frontrow.limits import LimitExceeded
@@ -48,6 +48,78 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(result['considerations'], [])
         self.assertTrue(result['gaps'])
         self.assertTrue(search(self.corpus, 'personal data privacy'))
+
+    def test_institution_scope_search_review_and_fallback(self):
+        exemplar = self.corpus.entries[0]
+        uaeu = exemplar.model_copy(update={'id': 'uaeu-scope-fixture', 'title': 'Scopeuniqueword privacy personal data',
+            'institution': 'uaeu', 'reuse_note': 'Link to original', 'verification': 'Checked official source'})
+        other = exemplar.model_copy(update={'id': 'other-scope-fixture', 'title': 'Scopeuniqueword privacy personal data',
+            'institution': 'other'})
+        fixture = self.corpus.model_copy(update={'entries': [*self.corpus.entries, uaeu, other]})
+        self.assertEqual(search(fixture, 'scopeuniqueword'), [])
+        self.assertEqual([item['id'] for item in search(fixture, 'scopeuniqueword', institution='uaeu')], ['uaeu-scope-fixture'])
+        self.assertEqual(review(fixture, 'UAEU privacy personal data', ['privacy'])['audit']['institution'], 'general')
+        explicit = review(fixture, 'privacy personal data', ['privacy'], institution='uaeu')
+        self.assertEqual(explicit['audit']['institution'], 'uaeu')
+        self.assertTrue(any('does not establish affiliation or applicability' in item for item in explicit['limitations']))
+        self.assertNotIn('other-scope-fixture', [s.id for s in scoped_sources(fixture, 'uaeu')])
+        with self.assertRaises(ValueError):
+            search(fixture, 'privacy', institution='other')
+        # A zero-result fallback must never bypass scope.
+        isolated = self.corpus.model_copy(update={'entries': [uaeu]})
+        with patch('frontrow.policy.review.search', return_value=[]):
+            fallback = review(isolated, 'privacy', ['privacy'])
+            self.assertEqual(fallback['considerations'], [])
+            self.assertTrue(review(isolated, 'privacy', ['privacy'], institution='uaeu')['considerations'])
+
+    def test_model_and_api_institution_scope(self):
+        exemplar = self.corpus.entries[0]
+        uaeu = exemplar.model_copy(update={'id': 'uaeu-scope-fixture', 'title': 'Scopeuniqueword privacy personal data',
+            'institution': 'uaeu', 'reuse_note': 'Link to original', 'verification': 'Official source'})
+        fixture = self.corpus.model_copy(update={'entries': [*self.corpus.entries, uaeu]})
+        class Forged(LLMClient):
+            payload = None
+            async def complete(self, system, user, *, model, timeout):
+                self.payload = json.loads(user)
+                return json.dumps({'selections': [{'topic': 'privacy', 'source_id': 'uaeu-scope-fixture', 'requirement_index': 0}]})
+        async def run():
+            fake = Forged()
+            result = await agent_review(fixture, 'privacy personal data', ['privacy'], '', fake, 'test')
+            self.assertEqual(result['audit']['fallback_reason'], 'invalid_model_response')
+            self.assertEqual(result['audit']['institution'], 'general')
+            self.assertNotIn('uaeu-scope-fixture', [x['source']['id'] for x in fake.payload['candidates']])
+            self.assertNotIn('uaeu-scope-fixture', result['audit']['source_ids'])
+        asyncio.run(run())
+        with patch.dict('os.environ', {'FRONTROW_LLM': 'fake', 'FRONTROW_TTS': 'none',
+                                       'FRONTROW_STT': 'none', 'FRONTROW_POLICY_LLM': 'off'}):
+            with patch('frontrow.policy.router.load_corpus', return_value=fixture):
+                with TestClient(create_app()) as client:
+                    self.assertNotIn('uaeu-scope-fixture', [s['id'] for s in client.get('/policy/sources').json()['entries']])
+                    self.assertIn('uaeu-scope-fixture', [s['id'] for s in client.get('/policy/sources?institution=uaeu').json()['entries']])
+                    self.assertEqual(client.post('/policy/search', json={'query': 'scopeuniqueword'}).json()['results'], [])
+                    selected = client.post('/policy/search', json={'query': 'scopeuniqueword', 'institution': 'uaeu'}).json()
+                    self.assertEqual(selected['results'][0]['id'], 'uaeu-scope-fixture')
+                    self.assertEqual(selected['results'][0]['reuse_note'], 'Link to original')
+                    response = client.post('/policy/review', json={'text': 'privacy', 'institution': 'uaeu'})
+                    self.assertEqual(response.json()['audit']['institution'], 'uaeu')
+                    self.assertEqual(client.post('/policy/search', json={'query': 'privacy', 'institution': 'other'}).status_code, 422)
+                    self.assertEqual(client.get('/policy/sources?institution=other').status_code, 422)
+                    self.assertEqual(client.post('/policy/review', json={'text': 'privacy', 'institution': 'other'}).status_code, 422)
+
+    def test_real_corpus_uaeu_reference_scope(self):
+        with patch.dict('os.environ', {'FRONTROW_LLM': 'fake', 'FRONTROW_TTS': 'none',
+                                       'FRONTROW_STT': 'none', 'FRONTROW_POLICY_LLM': 'off'}):
+            with TestClient(create_app()) as client:
+                target = 'uaeu-student-generative-ai'
+                general = client.get('/policy/sources').json()
+                uaeu = client.get('/policy/sources?institution=uaeu').json()
+                self.assertNotIn(target, {source['id'] for source in general['entries']})
+                self.assertIn(target, {source['id'] for source in uaeu['entries']})
+                query = 'UAEU syllabus GenAI assessment'
+                general_hits = client.post('/policy/search', json={'query': query, 'limit': 10}).json()['results']
+                uaeu_hits = client.post('/policy/search', json={'query': query, 'institution': 'uaeu', 'limit': 10}).json()['results']
+                self.assertNotIn(target, {source['id'] for source in general_hits})
+                self.assertIn(target, {source['id'] for source in uaeu_hits})
 
     def test_natural_queries_and_topic_specific_review(self):
         privacy = search(self.corpus, 'How long should learner records be kept? Retention matters.', 3)
@@ -168,7 +240,7 @@ class PolicyTests(unittest.TestCase):
             with TestClient(create_app()) as client:
                 sources = client.get('/policy/sources')
                 self.assertEqual(sources.status_code, 200)
-                self.assertEqual(len(sources.json()['entries']), len(self.corpus.entries))
+                self.assertEqual(len(sources.json()['entries']), len(scoped_sources(self.corpus)))
                 found = client.post('/policy/search', json={'query': 'personal data', 'limit': 2})
                 self.assertEqual(found.status_code, 200)
                 self.assertLessEqual(len(found.json()['results']), 2)

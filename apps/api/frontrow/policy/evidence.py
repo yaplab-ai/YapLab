@@ -14,6 +14,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 Topic = Literal['privacy', 'accessibility', 'responsible_ai', 'education', 'human_oversight']
+Institution = Literal['general', 'uaeu']
 
 
 class Source(BaseModel):
@@ -32,6 +33,9 @@ class Source(BaseModel):
     summary: str = Field(min_length=1)
     requirements: list[str]
     limitations: list[str]
+    institution: str | None = None
+    reuse_note: str | None = None
+    verification: str | None = None
 
 
 class Corpus(BaseModel):
@@ -92,14 +96,24 @@ def _fields(source: Source) -> list[tuple[float, set[str]]]:
     ]
 
 
-def search(corpus: Corpus, query: str, limit: int = 5, topic: Topic | None = None) -> list[dict]:
+def scoped_sources(corpus: Corpus, institution: Institution = 'general') -> list[Source]:
+    """Filter before ranking or fallback; text never chooses a reference collection."""
+    if institution not in ('general', 'uaeu'):
+        raise ValueError('Unknown institution scope')
+    return [source for source in corpus.entries
+            if source.institution is None or (institution == 'uaeu' and source.institution == 'uaeu')]
+
+
+def search(corpus: Corpus, query: str, limit: int = 5, topic: Topic | None = None,
+           institution: Institution = 'general') -> list[dict]:
     """Rank matching words with field weights and IDF; return no zero-match hits."""
+    entries = scoped_sources(corpus, institution)
     original_terms = tokens(query)
     expansions = query_expansions(query)
     query_terms = original_terms | {term for terms in expansions.values() for term in terms}
     if not query_terms:
         return []
-    indexed = [(source, _fields(source)) for source in corpus.entries]
+    indexed = [(source, _fields(source)) for source in entries]
     frequency = {term: sum(any(term in words for _, words in fields) for _, fields in indexed)
                  for term in query_terms}
     results = []

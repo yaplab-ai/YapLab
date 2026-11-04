@@ -15,7 +15,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 from frontrow.llm.base import LLMClient
 from .agent import agent_review
-from .evidence import CorpusUnavailable, Topic, load_corpus, search
+from .evidence import CorpusUnavailable, Institution, Topic, load_corpus, scoped_sources, search
 from .review import review
 
 ShortText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
@@ -27,6 +27,7 @@ class SearchRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
     query: ShortText
     limit: int = Field(default=5, ge=1, le=10, strict=True)
+    institution: Institution = 'general'
 
 
 class ReviewRequest(BaseModel):
@@ -34,6 +35,7 @@ class ReviewRequest(BaseModel):
     text: ReviewText
     topics: list[Topic] = Field(default_factory=list, max_length=5)
     context: ContextText = ''
+    institution: Institution = 'general'
 
 
 # These catches are intentionally narrow; absence of a match is not a privacy
@@ -95,19 +97,19 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini') -
                                 headers={'Retry-After': str(exc.retry_after)}) from exc
 
     @router.get('/sources')
-    async def sources(request: Request, response: Response):
+    async def sources(request: Request, response: Response, institution: Institution = 'general'):
         admit(request)
         corpus = _corpus()
         response.headers['Cache-Control'] = 'no-store'
-        return {'version': corpus.version, 'limitations': corpus.limitations,
-                'entries': [entry.model_dump() for entry in corpus.entries]}
+        return {'version': corpus.version, 'institution': institution, 'limitations': corpus.limitations,
+                'entries': [entry.model_dump() for entry in scoped_sources(corpus, institution)]}
 
     @router.post('/search')
     async def search_sources(body: SearchRequest, request: Request, response: Response):
         admit(request)
         _check_input(body.query)
         response.headers['Cache-Control'] = 'no-store'
-        return {'query': body.query, 'results': search(_corpus(), body.query, body.limit)}
+        return {'query': body.query, 'institution': body.institution, 'results': search(_corpus(), body.query, body.limit, institution=body.institution)}
 
     @router.post('/review')
     async def review_text(body: ReviewRequest, request: Request, response: Response):
@@ -129,9 +131,9 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini') -
                 except LimitExceeded as exc:
                     raise HTTPException(429, 'Model review limit reached; please try again later.',
                                         headers={'Retry-After': str(exc.retry_after)}) from exc
-                return await agent_review(corpus, body.text, body.topics, body.context, llm, model)
+                return await agent_review(corpus, body.text, body.topics, body.context, llm, model, institution=body.institution)
             finally:
                 model_slots.release()
-        return review(corpus, body.text, body.topics, body.context)
+        return review(corpus, body.text, body.topics, body.context, institution=body.institution)
 
     return router

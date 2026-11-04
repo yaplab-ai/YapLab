@@ -11,7 +11,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from frontrow.llm.base import LLMClient, llm_call_context
-from .evidence import Corpus, Topic, search
+from .evidence import Corpus, Institution, Topic, scoped_sources, search
 from .review import requirement_index, review, topic_query
 
 
@@ -36,15 +36,16 @@ or additional fields. If no selection is appropriate return {"selections":[]}.""
 
 
 async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: str,
-                       client: LLMClient, model: str, timeout: float = 8.0) -> dict:
-    baseline = review(corpus, text, topics, context)
+                       client: LLMClient, model: str, timeout: float = 8.0,
+                       institution: Institution = 'general') -> dict:
+    baseline = review(corpus, text, topics, context, institution=institution)
     selected = baseline['audit']['selected_topics']
     query = f'{text} {context}'.strip()
     candidates: dict[tuple[str, str], dict] = {}
     for topic in selected:
-        hits = search(corpus, topic_query(query, topic), limit=3, topic=topic)
+        hits = search(corpus, topic_query(query, topic), limit=3, topic=topic, institution=institution)
         if not hits and topic in topics:
-            hits = [source.model_dump() for source in corpus.entries if topic in source.topics][:2]
+            hits = [source.model_dump() for source in scoped_sources(corpus, institution) if topic in source.topics][:2]
         for item in hits:
             if item['requirements']:
                 candidates[(topic, item['id'])] = {k: v for k, v in item.items()
@@ -52,7 +53,7 @@ async def agent_review(corpus: Corpus, text: str, topics: list[Topic], context: 
     if not candidates:
         baseline['audit']['fallback_reason'] = 'no_retrieved_candidates'
         return baseline
-    payload = {'text': text, 'context': context, 'candidates': [
+    payload = {'text': text, 'context': context, 'institution': institution, 'candidates': [
         {'topic': topic, 'source': source, 'eligible_requirement_index': requirement_index(source, topic)}
         for (topic, _), source in candidates.items()
     ]}
