@@ -126,3 +126,13 @@ Checkpoints now atomically replace the reserved result after file fsync, then
 sync the directory. Pre-replacement failures preserve the prior checkpoint;
 post-replacement directory-sync failure leaves durability uncertain and stops.
 See the [offline verification record](ai-for-good-validation-diagnostics.md#verification-and-command-status).
+
+
+## Protocol-2 allowance consumed
+
+The user subsequently approved the 27-call protocol-2 experiment. It completed
+with 24 accepted and three rejected responses, no retries or provider switch.
+The [actual results](ai-for-good-v2-results-and-simplification.md) and separate
+live evidence supersede the earlier proposed/not-run status. No additional paid
+test is authorised by that consumed allowance. New testing since that run has
+been offline.

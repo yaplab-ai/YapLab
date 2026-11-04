@@ -74,3 +74,9 @@ The subsequent [offline diagnostic follow-up](ai-for-good-validation-diagnostics
 implements fixed categories and a clearer protocol-2 prompt contract. The original
 live evidence remains unchanged; no rejected raw completion was recovered or
 assigned a new cause, and no further provider call was made.
+
+
+The subsequent [approved protocol-2 run](ai-for-good-v2-results-and-simplification.md)
+returned 24/27 structurally accepted role responses and 6/9 fully accepted
+snapshots. This protocol-1 record is unchanged; the comparison is not a general
+accuracy claim or semantic evaluation.

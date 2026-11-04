@@ -4,7 +4,8 @@ This increment is entirely offline. It preserves the original protocol-1
 [live evidence](evidence/ai-for-good-coordination-live-2026-11-04.json), its
 14 accepted/13 rejected responses, and the [protocol-1 plan](evidence/ai-for-good-coordination-plan.json).
 No additional provider request, charge, credential operation or provider switch
-was performed. Protocol 2 has no live adherence or semantic-quality result yet.
+was performed. Protocol 2 was later tested in one separately approved live run: see the
+[results and simplification](ai-for-good-v2-results-and-simplification.md). Semantic quality remains unreviewed.
 
 ## Findings supported by inspection and reproduction
 
@@ -90,7 +91,7 @@ the run. Checkpoint
 write failures stop further calls and produce only a sanitized local recovery
 record. Historical evidence is never rewritten by the default dry run.
 
-## Proposed next experiment — not authorised or run
+## Protocol-2 experiment — subsequently approved and run
 
 Run the same 27 scenario/stage/role requests on Nebius's
 `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, changing only the protocol-2 prompt
@@ -133,3 +134,5 @@ Argument-validation errors also use argparse status `2`, with a usage message.
 A completed structural pass still says nothing about legal/educational quality.
 The frontend retains its existing non-failing HMR port and large-chunk warnings;
 the API sdist retains its existing missing-standalone-README warning.
+
+The proposed run above was subsequently authorised and completed once. It yielded 24/27 structural acceptance; the [result record](ai-for-good-v2-results-and-simplification.md) preserves the remaining failures. That approval is consumed and does not authorise another paid run.

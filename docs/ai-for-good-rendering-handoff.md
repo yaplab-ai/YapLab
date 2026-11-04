@@ -26,24 +26,20 @@ workspace dependency loader reports local-thread-only support, so this step has
 not been bypassed with a system runtime.
 
 
-The current content includes the subsequent three-role coordination increment.
-Describe its offline software checks separately from the approved live run:
-27 responses, 14 structurally accepted, 13 rejected, semantic quality unreviewed. The final verification record is 90 existing backend
-checks, 46 policy-related unit tests, standalone scenario checks, 97 frontend
-tests and successful frontend/API package builds. The dry-run evaluation plan
-prepares 27 calls and is not live evidence. Preserve those distinctions when
-condensing the content to fit the template.
+Use the current report draft, which now includes both approved live runs and
+the simplified facilitator. Keep offline verification separate from live
+structural acceptance:
 
-Use the [live-results record](ai-for-good-live-results.md) for the later evaluation: provider access worked, structural reliability did not meet the all-role criterion, and the reported-usage list-price calculation is not a verified invoice.
+- Offline: 90 existing backend checks, 71 policy unit tests, standalone scenario
+  checks, 97 frontend tests, frontend/API builds and an extracted-wheel smoke.
+- Protocol 1: 14/27 role responses accepted; 1/9 fully accepted snapshots;
+  $0.0023856 calculated from reported usage at recorded list prices.
+- Protocol 2: 24/27 accepted; 6/9 fully accepted snapshots; $0.0032268 on the same
+  list-price basis. Three response-contract failures remain.
 
-
-The latest offline follow-up adds protocol-2 diagnostics and clearer prompt/schema
-instructions. Keep it separate from protocol 1's observed 14/27 live acceptance;
-no live improvement has been measured. See the diagnostic follow-up for the next
-experiment, which is proposed and not authorised or run.
-
-
-The final offline verification count is now 90 existing backend checks, 69
-policy-related unit tests, standalone scenario checks and 97 frontend tests,
-with successful frontend/API builds and an extracted-wheel smoke. Do not combine
-these offline successes with the unchanged protocol-1 live acceptance counts.
+Neither price calculation is a verified invoice; neither structural result is
+semantic, legal or educational validation. The facilitator now has one action
+with saved-round reuse and collapsed reference details. See the
+[current results and simplification](ai-for-good-v2-results-and-simplification.md).
+No additional live run is proposed as already authorised; both allowances were
+consumed. Preserve these distinctions while fitting the official template.

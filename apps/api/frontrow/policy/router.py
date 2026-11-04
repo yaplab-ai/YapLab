@@ -170,12 +170,15 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
                                   request: Request, response: Response):
         admit(request)
         response.headers['Cache-Control'] = 'no-store'
-        if coordination_llm is None:
-            raise HTTPException(503, 'Coordination model calls are not enabled.')
         store = _store(request)
-        snapshot = store.reserve_coordination(exercise_id, body.expected_stage, body.institution)
+        snapshot = store.reserve_coordination(exercise_id, body.expected_stage, body.institution,
+                                              reuse_completed=True)
+        if 'completed_result' in snapshot:
+            return snapshot['completed_result']
         round_id = snapshot['round_id']
         try:
+            if coordination_llm is None:
+                raise HTTPException(503, 'No saved proposals exist and new model calls are not enabled.')
             address = client_ip(request.client.host if request.client else None,
                                 request.headers.get('x-forwarded-for'))
             try:

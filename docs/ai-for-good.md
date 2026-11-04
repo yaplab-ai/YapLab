@@ -314,10 +314,10 @@ Changing a provider or enabling this flag is not part of offline verification.
   only the requesting role's assessment and evidence, with shared run metadata.
   Exercise/round IDs are capabilities, not authentication.
 - One completed round per stage and reference collection is retained, including
-  partial or unavailable results. Reload it through the audit rather than
-  generating again. A deliberate new exercise is needed to repeat a failed round;
-  shared call limits still apply. Refresh and role/scope changes preserve round
-  discovery. A browser page reload still loses the in-memory active exercise ID.
+  partial or unavailable results. The single View role proposals action returns
+  the saved result for the same stage/collection without another model call. A
+  deliberate new exercise is needed to rerun failed roles; call limits still
+  apply. A browser page reload still loses the in-memory active exercise ID.
 
 The [live evaluation plan](ai-for-good-live-evaluation.md) prepares 27 calls from
 three scenarios, three stages and three roles. Its default dry run is network
@@ -374,7 +374,7 @@ unchanged. The live authorization was for one run; it is now consumed.
 The [protocol-2 diagnostic review](ai-for-good-validation-diagnostics.md) records
 confirmed parser/classification gaps, fixed privacy-safe categories, explicit
 role-scoped prompt contracts and offline regressions. It preserves the negative
-protocol-1 live evidence. Protocol 2 has not been live-tested. Its separate
+protocol-1 live evidence. Protocol 2 was subsequently live-tested once after separate approval; see the later result below. Its separate
 [dry-run plan](evidence/ai-for-good-coordination-plan-v2.json) estimates $0.02414136
 for 27 bounded calls using the recorded rates and a generous token proxy.
 No additional provider call is authorised or made by this offline increment.
@@ -384,5 +384,22 @@ Final protocol-2 verification passed 90 existing backend checks, 69 policy unit
 tests, standalone scenario checks, 97 frontend tests, frontend/API builds and an
 extracted-wheel diagnostic smoke. The recorded protocol-2 dry plan matches the
 final preparation code exactly. Historical protocol-1 planning/live artifacts
-remain unchanged. All protocol-2 evidence is offline; no adherence improvement
-has been measured.
+remain unchanged. That verification pass was offline; the subsequently approved live run is
+recorded separately below.
+
+
+## Protocol-2 live run and facilitator simplification
+
+The [approved run and simplification](ai-for-good-v2-results-and-simplification.md)
+record 24/27 structurally accepted responses and 6/9 all-role snapshots, with a
+$0.0032268 list-price calculation from reported usage (invoice unverified).
+The facilitator uses a single action with atomic saved-round reuse; replay does
+not make model calls. Developer diagnostics are retained without adding user
+steps. No further paid run or provider switch was made. The previous 14/27 result
+and both prepared plans remain historical evidence.
+
+
+Current verification after simplification: 90 existing backend checks, 71 policy
+unit tests, standalone scenarios, 97 frontend tests, both builds and an
+extracted-wheel saved-partial replay check passed. Only the one separately
+approved protocol-2 run incurred provider requests in this increment.

@@ -109,63 +109,57 @@ the corpus/protocol versions, provider/model, supplied source notes and hashes,
 prompt hashes, call-attempt status and validated proposals. Facilitators can see
 all role assessments; role audits return only their own. Auditability records
 concise decisions and evidence without private model chain-of-thought. These
-software paths have offline checks and one bounded live coordination run. Only
-14 of 27 role responses passed structural validation; semantic quality is unreviewed.
+software paths have offline checks and two bounded live coordination runs;
+semantic quality is unreviewed. The facilitator has one action that generates or
+loads the saved stage/collection view, without another model call on replay.
 
 ## 5. Evaluation, limitations and reproduction
 
-On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
-14 policy tests, six export tests, eleven coordination tests, eight coordination
-HTTP tests, nineteen evaluation-harness tests, eleven adversarial diagnostic
-tests, staged-scenario checks and 97 frontend tests passed. The frontend
-production build and offline API wheel/sdist build succeeded. An extracted-wheel
-API smoke check serves the scoped source collections and three scenarios.
+The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
+checks, 71 policy-related unit tests, standalone staged-scenario checks and 97
+frontend tests. Frontend and offline API package builds succeeded; an
+extracted-wheel check verified saved partial-round reuse without extra calls.
+The [offline walkthrough](evidence/ai-for-good-offline.json) also records four
+hand-authored retrieval probes and 27 deterministic role/stage reviews. These
+are software checks, not a representative retrieval or educational benchmark.
 
-The [offline evidence file](evidence/ai-for-good-offline.json) records four
-hand-authored retrieval probes, all meeting their stated top-three or abstention
-conditions. Three scenarios were traversed through all three stages and role
-views: 27 deterministic reviews returned only corpus citation IDs. These checks
-validate specific software behavior and packaging, not general retrieval
-accuracy, legal reasoning quality, educator benefit or real-model behavior.
+Two separately approved Nebius runs used the same Nano model and synthetic
+scenario/policy scope, each capped at 27 requests and 400 output tokens, with
+no retries, fallback or provider switch:
 
-Input lengths, request admission, model-call slots, exercise capacity, action
-counts and retention are bounded. State and quotas are process-local; restarting
-clears them. These controls are not production authentication, tamper-resistant
-audit storage or account-level cost control. Synthetic cases should be used:
-pattern-based checks cannot reliably detect identifying information.
+| Observed measure | Protocol 1 | Protocol 2 |
+| --- | --- | --- |
+| Provider responses | 27 | 27 |
+| Role responses passing schema/ID checks | 14 / 27 | 24 / 27 |
+| Snapshots passing for all three roles | 1 / 9 | 6 / 9 |
+| Reported input / output tokens | 26,604 / 3,289 | 40,132 / 3,412 |
+| List-price calculation from reported usage | $0.0023856 | $0.0032268 |
 
-Before submission, obtain expert review of institutional applicability and
-scenarios, broaden and benchmark the corpus, confirm the final submission
-destination and hosted KB import contract, and repair the live run's structural
-reliability gap before any further approved provider comparison. Final pagination has not been verified on this host. No publication, shared
-repository update, deployment or application submission occurred during this work.
-Reproduction commands and the explicit model opt-in are in the
-[engineering runbook](ai-for-good.md#verification-and-local-use).
+Neither cost was verified against an invoice. Protocol 2 added clearer
+role-scoped schema/uniqueness instructions and fixed diagnostic categories. Its
+three remaining failures were duplicate actions, a schema limit and a source ID
+outside the supplied list. Raw completions were not retained; no specific cause
+was assigned retrospectively to protocol 1's thirteen rejections. All responses
+reported normal completion, below the output cap. The observed structural count
+increased, but these small non-randomised runs do not establish causation,
+policy correctness or educator benefit. See [recorded results](ai-for-good-v2-results-and-simplification.md).
 
+The UI uses one facilitator action, ordinary errors and manual retry. Saved
+results, including partial ones, are returned without fresh model calls. Source
+and model details remain available in collapsed sections; diagnosis adds no user
+step. Citation checks, stage/role boundaries and honest live/offline labels remain.
+The original rehearsal, voice and report behavior is preserved by regression tests.
 
-The independent implementation review repaired stale-stage writes, missing fact
-references and inaccurate retrieval audit terms. Decisions and advances are now
-conditional on the displayed stage; human decisions require released evidence.
-Audit metadata distinguishes input words, alias expansion and topic anchors and
-tracks the sources actually selected. These repairs improve traceability; they
-do not validate policy advice. Exercise access expires after one hour, with lazy
-cleanup rather than a guarantee of physical erasure at the exact expiry time.
-The scenarios use fixed sequences and do not branch on decisions. The three-role
-protocol has offline checks for independent contexts, invalid citations, conflicts,
-dependencies, quota sharing, cancellation and stale commits. One approved Nebius
-run made 27 requests with no retries or fallback. All returned provider responses;
-14 passed schema/allowed-ID checks and 13 were rejected, leaving only one of nine
-snapshots fully validated. Reported usage was 26,604 input and 3,289 output tokens,
-corresponding to $0.0023856 at published list rates; the invoice was not verified.
-The current coarse rejection label does not identify the precise failure cause.
-This establishes provider access and a structural reliability gap, not policy
-correctness or effectiveness. The original Anthropic configuration remains unchanged.
-See the [review record](ai-for-good-independent-review.md) and
-[live results](ai-for-good-live-results.md).
+Exercises and quotas are process-local. Access expires after an hour with lazy
+cleanup; roles and random IDs are simulation views/capabilities rather than
+authentication. Cases have fixed sequences and do not branch on decisions. A
+cancelled call or process restart can permit another billed attempt, so saved
+replay is not exactly-once billing or account-level spending control. Use
+synthetic data; pattern checks cannot guarantee removal of identifying details.
 
-
-An offline follow-up adds protocol-2 validation categories, strict JSON parsing,
-separate provider/internal failure labels and explicit role-scoped schema/ID
-instructions. It also improves interrupted-evaluation records. These software
-checks do not improve or replace the recorded 14/27 live result: protocol 2 has
-not received a live evaluation. See the [diagnostic follow-up](ai-for-good-validation-diagnostics.md).
+Before submission, obtain educator/institutional review, broaden and benchmark
+the source corpus, resolve the remaining response-contract failures, confirm the
+final submission destination and hosted KB import contract, and verify the
+five-page layout in the supported rendering environment. No repository push,
+deployment, hosted import or submission occurred. Reproduction commands are in
+the [engineering runbook](ai-for-good.md#verification-and-local-use).

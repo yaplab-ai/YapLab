@@ -215,18 +215,24 @@ class ExerciseStore:
             exercise["events"].append(event)
             return {"event": dict(event)}
 
-    def reserve_coordination(self, exercise_id: str, expected_stage: int, institution: str) -> dict:
-        """Reserve one action and return a detached, released-facts-only snapshot."""
+    def reserve_coordination(self, exercise_id: str, expected_stage: int, institution: str,
+                             reuse_completed: bool = False) -> dict:
+        """Return a detached saved result or reserve a released-facts-only snapshot."""
         with self.lock:
             exercise = self._get(exercise_id)
             self._check_stage(exercise, expected_stage)
             if institution not in INSTITUTIONS:
                 raise HTTPException(status_code=422, detail="Unknown institution")
+            completed = next((event for event in exercise["events"]
+                              if event["type"] == "coordination" and event["stage"] == expected_stage
+                              and event["institution"] == institution), None)
+            if completed is not None:
+                if reuse_completed:
+                    result = exercise["coordination_results"][completed["round_id"]]
+                    return {"completed_result": json.loads(json.dumps(result))}
+                raise HTTPException(status_code=409, detail="A coordination round already exists for this stage and institution")
             if exercise["coordination_pending"] is not None:
                 raise HTTPException(status_code=409, detail="A coordination round is already in progress")
-            if any(event["type"] == "coordination" and event["stage"] == expected_stage
-                   and event["institution"] == institution for event in exercise["events"]):
-                raise HTTPException(status_code=409, detail="A coordination round already exists for this stage and institution")
             self._check_action_capacity(exercise)
             role_views = {}
             for role in ROLES:

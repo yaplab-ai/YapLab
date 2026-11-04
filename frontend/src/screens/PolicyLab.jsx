@@ -52,43 +52,22 @@ export function CoordinationResult({ result }) {
   return <section className="policy-coordination-result" aria-label="Facilitator coordination result" aria-live="polite">
     <div className="policy-result-head"><div><p className="eyebrow">Facilitator view · stage {result.stage}</p><h3>Proposals and handoffs</h3></div><span className="policy-tag">{result.review_mode === 'model_assisted' ? 'Model-assisted' : result.review_mode === 'offline_test' ? 'Offline test' : humanLabel(result.review_mode) || 'Mode unavailable'}</span></div>
     <p>Reference collection: {result.institution === 'uaeu' ? 'UAEU example + general references' : 'General university context'}. These are proposals for human review.</p>
-    {(result.model || result.corpus_version || result.protocol_version) && <p className="policy-fact-hint">{[result.model && [result.model.provider, result.model.model].filter(Boolean).join(' / '), result.corpus_version && `Corpus ${result.corpus_version}`, result.protocol_version && `Protocol ${result.protocol_version}`].filter(Boolean).join(' · ')}</p>}
+    {(result.model || result.corpus_version || result.protocol_version) && <details className="policy-audit"><summary>Model and reference details</summary><p>{[result.model && [result.model.provider, result.model.model].filter(Boolean).join(' / '), result.corpus_version && `Corpus ${result.corpus_version}`, result.protocol_version && `Protocol ${result.protocol_version}`].filter(Boolean).join(' · ')}</p></details>}
     <div className="policy-coordination-roles">{(result.roles || []).map((item) => <article className="policy-coordination-role" key={item.role}><h4>{roleName(item.role)} <span className="policy-topic">{humanLabel(item.status)}</span></h4>
       {item.reason && <p>Reason: {humanLabel(item.reason)}</p>}
-      {!!item.proposals?.length && <><h5>Proposals</h5><ul>{item.proposals.map((proposal) => <li key={proposal.action_id}>{proposal.text}<span className="policy-evidence">Facts: {(proposal.fact_ids || []).join(', ')} · Sources: {(proposal.source_ids || []).join(', ')}</span></li>)}</ul></>}
+      {!!item.proposals?.length && <><h5>Proposals</h5><ul>{item.proposals.map((proposal) => <li key={proposal.action_id}>{proposal.text}</li>)}</ul></>}
       {!!item.questions?.length && <><h5>Questions</h5><ul>{item.questions.map((question, index) => <li key={question.question_id || index}>{question.text}</li>)}</ul></>}
-      {!!item.evidence?.filter((source) => (item.proposals || []).some((proposal) => (proposal.source_ids || []).includes(source.id))).length && <><h5>Cited sources</h5><ul>{item.evidence.filter((source) => (item.proposals || []).some((proposal) => (proposal.source_ids || []).includes(source.id))).map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} <span aria-label="opens in a new tab">↗</span></a><span className="policy-evidence">{[source.authority, source.jurisdiction, source.document_type].filter(Boolean).join(' · ')}{source.scope && ` · Scope: ${source.scope}`}</span></li>)}</ul></>}
-      {item.prompt_sha256 && <details className="policy-audit"><summary>Prompt digest</summary><p>{item.prompt_sha256}</p></details>}
+      {(item.proposals?.length > 0 || item.evidence?.length > 0 || item.prompt_sha256) && <details className="policy-audit"><summary>Sources and details</summary>
+        {(item.proposals || []).map((proposal) => <p key={proposal.action_id}>Facts: {(proposal.fact_ids || []).join(', ')} · Sources: {(proposal.source_ids || []).join(', ')}</p>)}
+        <ul>{(item.evidence || []).filter((source) => (item.proposals || []).some((proposal) => (proposal.source_ids || []).includes(source.id))).map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} <span aria-label="opens in a new tab">↗</span></a><span className="policy-evidence">{[source.authority, source.jurisdiction, source.document_type].filter(Boolean).join(' · ')}{source.scope && ` · Scope: ${source.scope}`}</span></li>)}</ul>
+        {item.prompt_sha256 && <p>Prompt digest: {item.prompt_sha256}</p>}
+      </details>}
       {item.status === 'completed' && !item.proposals?.length && <p>No action proposed.</p>}
     </article>)}</div>
     <div className="policy-coordination-plan"><h4>Conditional plan</h4>{result.plan?.length ? <ol>{result.plan.map((item) => <li key={item.action_id}><strong>{item.text}</strong><p>Owner: {roleName(item.owner)} · {humanLabel(item.status)}</p>{!!item.depends_on?.length && <p>Depends on: {item.depends_on.map((id) => actions.get(id) || humanLabel(id)).join('; ')}</p>}{!!item.handoffs?.length && <p>Handoffs: {item.handoffs.map((handoff) => `${roleName(handoff.owner)} — ${actions.get(handoff.action_id) || humanLabel(handoff.action_id)}`).join('; ')}</p>}</li>)}</ol> : <p>No plan was proposed.</p>}</div>
     {!!result.unresolved?.length && <div className="policy-notes"><h4>Unresolved</h4><ul>{result.unresolved.map((item, index) => <li key={index}>{item}</li>)}</ul></div>}
-    {!!result.limitations?.length && <div className="policy-notes"><h4>Limits</h4><ul>{result.limitations.map((item, index) => <li key={index}>{item}</li>)}</ul></div>}
+    {!!result.limitations?.length && <details className="policy-audit"><summary>Review limits</summary><ul>{result.limitations.map((item, index) => <li key={index}>{item}</li>)}</ul></details>}
   </section>;
-}
-
-// Audit contains role-scoped assessments and a shared round identifier; it never
-// exposes another role's facts. Remember IDs independently of the selected role.
-export const coordinationKey = (exerciseId, stage, institution) => JSON.stringify([exerciseId, stage, institution]);
-export function rememberCoordinationRounds(previous, exerciseId, events) {
-  const next = { ...previous };
-  for (const event of events || []) {
-    if (event.type === 'coordination' && typeof event.round_id === 'string' && event.round_id &&
-        Number.isInteger(event.stage) && event.stage > 0 && ['general', 'uaeu'].includes(event.institution)) {
-      next[coordinationKey(exerciseId, event.stage, event.institution)] = event.round_id;
-    }
-  }
-  return next;
-}
-
-// The coordination service returns 429 only before any role calls begin.
-export const coordinationOutcomeUnknown = (error) => error?.status !== 429;
-
-export function CoordinationActions({ roundId, lookup, uncertain, busy, enabled, onGenerate, onReload, onCheck }) {
-  if (roundId) return <div className="policy-actions"><button className="btn btn-ghost" disabled={busy} onClick={onReload}>Reload saved facilitator view</button></div>;
-  if (lookup === 'checking') return <p className="policy-fact-hint" role="status">Checking for an existing round…</p>;
-  if (lookup === 'failed' || uncertain) return <div><p className="policy-fact-hint">{uncertain ? 'The last request outcome is unknown. Check for a saved round; if none appears, wait and check again or start a new exercise.' : 'Could not check for an existing round.'}</p><button className="btn btn-ghost" disabled={busy} onClick={onCheck}>Check for saved round</button></div>;
-  return <div className="policy-actions"><button className="btn btn-ghost" disabled={busy || !enabled} onClick={onGenerate}>Generate facilitator view</button><button className="link" disabled={busy} onClick={onCheck}>Check for saved round</button></div>;
 }
 
 export default function PolicyLab({ onBack }) {
@@ -110,9 +89,6 @@ export default function PolicyLab({ onBack }) {
   const [coordinationStatus, setCoordinationStatus] = useState(null);
   const [coordinationInstitution, setCoordinationInstitution] = useState('general');
   const [coordination, setCoordination] = useState(null);
-  const [roundIds, setRoundIds] = useState({});
-  const [uncertainRounds, setUncertainRounds] = useState({});
-  const [roundLookup, setRoundLookup] = useState('checking');
   const [decision, setDecision] = useState('');
   const [audit, setAudit] = useState(null);
   const [decisionSaved, setDecisionSaved] = useState(false);
@@ -120,6 +96,7 @@ export default function PolicyLab({ onBack }) {
   const [error, setError] = useState('');
   const epoch = useRef(0);
   const scopeEpoch = useRef(0);
+  const coordinationEpoch = useRef(0);
 
   useEffect(() => {
     let active = true;
@@ -141,17 +118,6 @@ export default function PolicyLab({ onBack }) {
     return () => { active = false; };
   }, [institution]);
 
-  useEffect(() => {
-    if (!exercise) return undefined;
-    let active = true;
-    const exerciseId = exercise.exercise_id;
-    setRoundLookup('checking');
-    policyApi.audit(exerciseId, role).then((data) => {
-      if (active) { setRoundIds((previous) => rememberCoordinationRounds(previous, exerciseId, data.events)); setRoundLookup('ready'); }
-    }).catch(() => { if (active) setRoundLookup('failed'); });
-    return () => { active = false; };
-  }, [exercise?.exercise_id, exercise?.current_stage, role]);
-
   async function run(key, fn, success, isCurrent = () => true) {
     setBusy(key); setError('');
     try { const data = await fn(); if (isCurrent()) success(data); } catch (err) { if (isCurrent()) setError(err.message); } finally { setBusy(''); }
@@ -162,38 +128,16 @@ export default function PolicyLab({ onBack }) {
     setInstitution(next);
   }
   function invalidateScenario() {
-    epoch.current += 1; setSelectedFacts([]); setScenarioReview(null); setCoordination(null); setDecision(''); setAudit(null); setDecisionSaved(false);
+    epoch.current += 1; coordinationEpoch.current += 1; setSelectedFacts([]); setScenarioReview(null); setCoordination(null); setDecision(''); setAudit(null); setDecisionSaved(false);
   }
   function changeRole(next) {
     invalidateScenario(); setRole(next); setError('');
     if (exercise) { setExercise(null); run('exercise', () => policyApi.exercise(exercise.exercise_id, next), setExercise); }
   }
-  const roundKey = exercise ? coordinationKey(exercise.exercise_id, exercise.current_stage, coordinationInstitution) : '';
-  const savedRoundId = roundIds[roundKey];
-  async function generateCoordination() {
-    const exerciseId = exercise.exercise_id;
-    const stage = exercise.current_stage;
-    const key = coordinationKey(exerciseId, stage, coordinationInstitution);
-    setBusy('coordinate'); setError(''); setCoordination(null);
-    try {
-      const result = await policyApi.coordinate(exerciseId, stage, coordinationInstitution);
-      if (result.round_id) setRoundIds((previous) => ({ ...previous, [key]: result.round_id }));
-      else setUncertainRounds((previous) => ({ ...previous, [key]: true }));
-      setCoordination(result);
-    } catch (err) {
-      if (coordinationOutcomeUnknown(err)) setUncertainRounds((previous) => ({ ...previous, [key]: true }));
-      setError(err.message);
-    } finally { setBusy(''); }
-  }
-  async function checkSavedRounds() {
-    const exerciseId = exercise.exercise_id;
-    setRoundLookup('checking'); setBusy('round-check'); setError('');
-    try {
-      const data = await policyApi.audit(exerciseId, role);
-      setRoundIds((previous) => rememberCoordinationRounds(previous, exerciseId, data.events));
-      setRoundLookup('ready');
-    } catch (err) { setRoundLookup('failed'); setError(err.message); }
-    finally { setBusy(''); }
+  function viewCoordination() {
+    const current = coordinationEpoch.current;
+    setCoordination(null);
+    run('coordinate', () => policyApi.coordinate(exercise.exercise_id, exercise.current_stage, coordinationInstitution), setCoordination, () => current === coordinationEpoch.current);
   }
   const facts = exercise?.released_stages.flatMap((stage) => stage.facts) || [];
   const selectedText = facts.filter((fact) => selectedFacts.includes(fact.id)).map((fact) => fact.text).join('\n');
@@ -230,20 +174,19 @@ export default function PolicyLab({ onBack }) {
         <div className="policy-panel-heading"><div><p className="eyebrow">Staged exercise</p><h2>Practice with a changing picture.</h2><p>Choose a role, reveal one stage at a time, and record your judgment. Only facts visible to that role are sent for review. Scenario reviews use the general reference collection.</p></div></div>
         <div className="policy-alert policy-alert-subtle">{scenarios.disclaimer} Exercises and decisions are temporary and stored in server memory.</div>
         <div className="policy-role"><label htmlFor="policy-role">View as</label><select id="policy-role" value={role} disabled={!!busy} onChange={(e) => changeRole(e.target.value)}>{ROLES.map(([id, label]) => <option value={id} key={id}>{label}</option>)}</select></div>
-        {!exercise ? <div className="policy-scenarios">{(scenarios.scenarios || []).map((scenario) => <article key={scenario.id}><div><p className="policy-topic">{scenario.stage_count} stages</p><h3>{scenario.title}</h3><p>{scenario.summary}</p></div><button className="btn btn-ghost" disabled={!!busy} onClick={() => { invalidateScenario(); setRoundIds({}); setUncertainRounds({}); run('exercise', () => policyApi.startExercise(scenario.id, role), setExercise); }}>{busy === 'exercise' ? 'Starting…' : 'Start scenario'} <Icon name="arrow" size={16} /></button></article>)}</div> : <>
+        {!exercise ? <div className="policy-scenarios">{(scenarios.scenarios || []).map((scenario) => <article key={scenario.id}><div><p className="policy-topic">{scenario.stage_count} stages</p><h3>{scenario.title}</h3><p>{scenario.summary}</p></div><button className="btn btn-ghost" disabled={!!busy} onClick={() => { invalidateScenario(); run('exercise', () => policyApi.startExercise(scenario.id, role), setExercise); }}>{busy === 'exercise' ? 'Starting…' : 'Start scenario'} <Icon name="arrow" size={16} /></button></article>)}</div> : <>
           <div className="policy-stage-head"><div><p className="eyebrow">Stage {exercise.current_stage} of {exercise.stage_count}</p><h3>{scenarios.scenarios.find((s) => s.id === exercise.scenario_id)?.title || 'Scenario'}</h3></div><div className="policy-stage-controls"><button className="link" disabled={!!busy} onClick={() => run('refresh', () => policyApi.exercise(exercise.exercise_id, role), (data) => { invalidateScenario(); setExercise(data); })}>{busy === 'refresh' ? 'Refreshing…' : 'Refresh exercise'}</button><button className="link" disabled={!!busy} onClick={() => { invalidateScenario(); setExercise(null); }}>Choose another scenario</button></div></div>
           <p className="policy-fact-hint">Select released facts to review or cite in your decision.</p>
           {exercise.released_stages.map((stage) => <div className="policy-stage" key={stage.stage}><h4><span>{String(stage.stage).padStart(2, '0')}</span> {stage.title}</h4>{stage.facts.map((fact) => <label className="policy-fact" key={fact.id}><input type="checkbox" checked={selectedFacts.includes(fact.id)} onChange={() => { epoch.current += 1; setScenarioReview(null); toggle(selectedFacts, setSelectedFacts, fact.id); }} /><span>{fact.text}</span></label>)}</div>)}
           <div className="policy-actions"><button className="btn btn-ghost" disabled={!!busy || !selectedFacts.length} onClick={() => { const current = epoch.current; setScenarioReview(null); run('scenario-review', () => policyApi.review(selectedText, [], '', 'general'), (data) => { if (current === epoch.current) setScenarioReview(data); }); }}>{busy === 'scenario-review' ? 'Reviewing…' : 'Review selected facts'}</button><button className="btn btn-primary" disabled={!!busy || exercise.current_stage >= exercise.stage_count} onClick={() => { const stage = exercise.current_stage; run('advance', () => policyApi.advance(exercise.exercise_id, role, stage), (data) => { invalidateScenario(); setExercise(data); }); }}>{busy === 'advance' ? 'Revealing…' : exercise.current_stage >= exercise.stage_count ? 'Final stage reached' : 'Reveal next stage'} <Icon name="arrow" size={16} /></button></div>
           <ReviewResult result={scenarioReview} />
-          <section className="policy-coordination" aria-labelledby="policy-coordination-heading"><p className="eyebrow">Facilitator view</p><h3 id="policy-coordination-heading">Coordinate the roles</h3><p>This view combines all released teacher, privacy and accessibility role views at the current stage. Use synthetic information only. The proposals need human review.</p>
-            {!coordinationStatus ? <p className="policy-fact-hint" role="status">Checking coordination availability…</p> : <>
-              {!coordinationStatus.enabled ? <p className="policy-fact-hint">{coordinationStatus.unavailable ? 'Coordination availability could not be checked.' : 'Coordination is not enabled on this server.'} Saved rounds can still be reloaded.</p> : <p className="policy-fact-hint">{coordinationStatus.review_mode === 'model_assisted' ? 'Model-assisted coordination sends the released synthetic role facts to the configured model provider.' : coordinationStatus.review_mode === 'offline_test' ? 'Offline test coordination uses the configured offline test mode.' : 'Coordination mode is unavailable; check the server configuration.'}</p>}
-              <div className="policy-role"><label htmlFor="coordination-institution">Reference collection</label><select id="coordination-institution" value={coordinationInstitution} disabled={!!busy} onChange={(event) => { setCoordinationInstitution(event.target.value); setCoordination(null); }}><option value="general">General university context</option><option value="uaeu">UAEU example + general references</option></select></div>
-              <p className="policy-fact-hint">UAEU references are examples; selection does not establish affiliation or applicability. One round is available per stage and collection. A partial or failed round remains reviewable; start a new exercise or move to a new stage for another attempt.</p>
-              <CoordinationActions roundId={savedRoundId} lookup={roundLookup} uncertain={!!uncertainRounds[roundKey]} busy={!!busy} enabled={coordinationStatus.enabled && ['model_assisted', 'offline_test'].includes(coordinationStatus.review_mode)} onGenerate={generateCoordination} onReload={() => run('coordination-round', () => policyApi.coordinationRound(exercise.exercise_id, savedRoundId), setCoordination)} onCheck={checkSavedRounds} />
+          <section className="policy-coordination" aria-labelledby="policy-coordination-heading"><p className="eyebrow">Facilitator view</p><h3 id="policy-coordination-heading">Coordinate the roles</h3><p>This view combines the released teacher, privacy and accessibility perspectives for human review.</p>
+            <p className="policy-fact-hint">New proposals use the configured model with released synthetic facts; saved views are reused.</p>
+            {coordinationStatus && !coordinationStatus.enabled && !coordinationStatus.unavailable && <p className="policy-fact-hint">New generation is off; saved proposals can still be opened.</p>}
+              <div className="policy-role"><label htmlFor="coordination-institution">Reference collection</label><select id="coordination-institution" value={coordinationInstitution} disabled={!!busy} onChange={(event) => { coordinationEpoch.current += 1; setCoordinationInstitution(event.target.value); setCoordination(null); }}><option value="general">General university context</option><option value="uaeu">UAEU example + general references</option></select></div>
+              <p className="policy-fact-hint">UAEU references are examples; selection does not establish affiliation or applicability.</p>
+              <div className="policy-actions"><button className="btn btn-ghost" disabled={!!busy} onClick={viewCoordination}>{busy === 'coordinate' ? 'Loading proposals…' : 'View role proposals'}</button></div>
               <CoordinationResult result={coordination} />
-            </>}
           </section>
           <form className="policy-form policy-decision" onSubmit={(event) => { event.preventDefault(); if (!selectedFacts.length) return; const stage = exercise.current_stage; run('decision', () => policyApi.decide(exercise.exercise_id, role, decision, selectedFacts, stage), () => { setDecision(''); setAudit(null); setDecisionSaved(true); }); }}><label htmlFor="policy-decision">Record your decision</label><textarea id="policy-decision" rows={3} maxLength={500} value={decision} onChange={(e) => setDecision(e.target.value)} required placeholder="What would you do next, and why?" /><p className="policy-fact-hint">Select at least one released fact above. Selected facts are attached as references to your decision.</p><button className="btn btn-ghost" disabled={!!busy || !selectedFacts.length}>{busy === 'decision' ? 'Recording…' : 'Record decision'}</button>{decisionSaved && <p role="status">Decision recorded.</p>}</form>
           <div className="policy-audit-block"><button className="link" disabled={!!busy} onClick={() => run('audit', () => policyApi.audit(exercise.exercise_id, role), setAudit)}>View role activity</button>{audit && <div aria-live="polite"><h4>Role activity</h4>{audit.events?.length ? audit.events.map((event, i) => <p key={i}><strong>{event.type === 'decision' ? 'Decision' : event.type}</strong> · Stage {event.stage}{event.decision && ` — ${event.decision}`}{event.source_ids?.length ? ` (facts: ${event.source_ids.join(', ')})` : ''}</p>) : <p>No activity recorded yet.</p>}</div>}</div>

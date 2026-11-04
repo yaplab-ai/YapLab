@@ -51,7 +51,7 @@ class CoordinationAPITests(unittest.TestCase):
             self.assertEqual(client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 2}).status_code, 409)
             self.assertEqual(fake.requests, [])
 
-    def test_round_retrieval_role_audit_and_duplicate(self):
+    def test_round_retrieval_role_audit_and_idempotent_replay(self):
         fake = Scripted()
         with TestClient(app_for(fake)) as client:
             exercise = create(client)
@@ -74,8 +74,60 @@ class CoordinationAPITests(unittest.TestCase):
                                  f['id'] for _, mine in fake.requests if mine['role'] == role for f in mine['facts']}}
                 self.assertFalse(any(x in json.dumps(event) for x in other_ids))
             duplicate = client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1})
-            self.assertEqual(duplicate.status_code, 409)
+            self.assertEqual(duplicate.status_code, 200)
+            self.assertEqual(duplicate.json(), result)
             self.assertEqual(len(fake.requests), 3)
+
+    def test_saved_partial_replays_without_paid_admission_even_when_generation_off(self):
+        fake = Scripted({'privacy': RuntimeError('provider unavailable')})
+        app = app_for(fake)
+        calls = []
+        original = ModelCallLimits.reserve
+        def counted(budget, address, count=1):
+            calls.append(count)
+            return original(budget, address, count)
+        with patch.object(ModelCallLimits, 'reserve', counted), TestClient(app) as client:
+            exercise = create(client)
+            result = client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1}).json()
+            self.assertEqual(next(r for r in result['roles'] if r['role'] == 'privacy')['status'], 'unavailable')
+            for _ in range(3):
+                response = client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1})
+                self.assertEqual(response.json(), result)
+            self.assertEqual(calls, [3])
+            self.assertEqual(len(fake.requests), 3)
+            disabled = app_for()
+            disabled.state.policy_exercise_store = app.state.policy_exercise_store
+            with TestClient(disabled) as reader:
+                response = reader.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1})
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.json(), result)
+                self.assertEqual(response.headers['cache-control'], 'no-store')
+            self.assertEqual(calls, [3])
+
+    def test_pending_conflict_then_explicit_retry_reuses_saved_round(self):
+        async def check():
+            class Signalled(Scripted):
+                def __init__(self):
+                    super().__init__(delay=.02)
+                    self.started = asyncio.Event()
+                async def complete(self, *args, **kwargs):
+                    self.started.set()
+                    return await super().complete(*args, **kwargs)
+            fake = Signalled()
+            app = app_for(fake)
+            async with AsyncClient(transport=ASGITransport(app), base_url='http://test') as client:
+                exercise = (await client.post('/policy/exercises', json={'scenario_id': 'caption-failure'})).json()['exercise_id']
+                task = asyncio.create_task(client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1}))
+                await asyncio.wait_for(fake.started.wait(), 1)
+                pending = await client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1})
+                self.assertEqual(pending.status_code, 409)
+                first = await task
+                self.assertEqual(first.status_code, 200)
+                retry = await client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1})
+                self.assertEqual(retry.status_code, 200)
+                self.assertEqual(retry.json(), first.json())
+                self.assertEqual(len(fake.requests), 3)
+        asyncio.run(check())
 
     def test_atomic_three_call_limits_and_rollback(self):
         budget = ModelCallLimits()

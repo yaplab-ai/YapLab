@@ -117,3 +117,13 @@ CLI status after a stopped run. Both were repaired with synced atomic checkpoint
 replacement and distinct exit codes. The independent targeted recheck passed
 write/fsync/replace failure handling and CLI outcome cases; no remaining blocker
 was found in that review scope. No live retest was performed.
+
+
+## Proportionate facilitator recovery
+
+After the approved protocol-2 test, the facilitator recovery locks were removed
+in favour of a single action and server-side saved-round reuse. An independent
+offline partial-round reproduction returned the same result twice with only
+three fake calls, retained unavailable-role status and scope filtering, and
+rejected a stale stage without another call. No automatic retry or exactly-once
+billing guarantee is claimed. Fixed diagnostic categories remain developer-only.

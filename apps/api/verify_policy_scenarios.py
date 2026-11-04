@@ -323,10 +323,57 @@ def check_validation_issue_audit():
         assert_http(404, store.get_coordination, exercise_id, snapshot['round_id'])
 
 
+def check_coordination_reuse():
+    store = scenarios.ExerciseStore(max_actions=4)
+    exercise_id = store.create('caption-failure', 'teacher')['exercise_id']
+    snapshot = store.reserve_coordination(exercise_id, 1, 'general', reuse_completed=True)
+    assert 'round_id' in snapshot and 'completed_result' not in snapshot
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'general', True)
+    result = result_for(snapshot)
+    result['roles'][1].update(status='unavailable', reason='provider_error', proposals=[])
+    saved = store.commit_coordination(exercise_id, snapshot['round_id'], result)
+    original_events = store.audit(exercise_id, 'teacher')['events']
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'general')
+    reused = store.reserve_coordination(exercise_id, 1, 'general', reuse_completed=True)
+    assert set(reused) == {'completed_result'} and reused['completed_result'] == saved
+    assert reused['completed_result']['roles'][1]['status'] == 'unavailable'
+    reused['completed_result']['roles'][1]['reason'] = 'modified'
+    assert store.reserve_coordination(exercise_id, 1, 'general', True)['completed_result']['roles'][1]['reason'] == 'provider_error'
+    assert store.audit(exercise_id, 'teacher')['events'] == original_events
+
+    # An unrelated pending scope does not block access to an already completed result.
+    other = store.reserve_coordination(exercise_id, 1, 'uaeu', reuse_completed=True)
+    assert 'round_id' in other and other['round_id'] != snapshot['round_id']
+    assert store.reserve_coordination(exercise_id, 1, 'general', True)['completed_result'] == saved
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'uaeu', True)
+    assert store.release_coordination(exercise_id, other['round_id'])
+
+    # Stage validation precedes lookup, and a new stage starts a distinct round.
+    store.advance(exercise_id, 'teacher', 1)
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'general', True)
+    next_stage = store.reserve_coordination(exercise_id, 2, 'general', True)
+    assert next_stage['stage'] == 2 and next_stage['round_id'] != snapshot['round_id']
+    assert store.release_coordination(exercise_id, next_stage['round_id'])
+
+    # Cached retrieval consumes no action capacity and remains detached under concurrent reads.
+    full = scenarios.ExerciseStore(max_actions=1)
+    eid = full.create('caption-failure', 'teacher')['exercise_id']
+    first = full.reserve_coordination(eid, 1, 'general')
+    full.commit_coordination(eid, first['round_id'], result_for(first))
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        copies = list(pool.map(lambda _: full.reserve_coordination(eid, 1, 'general', True), range(8)))
+    assert all(item['completed_result']['round_id'] == first['round_id'] for item in copies)
+    copies[0]['completed_result']['model']['model'] = 'changed'
+    assert copies[1]['completed_result']['model']['model'] == 'test-model'
+    assert full.get_coordination(eid, first['round_id'])['model']['model'] == 'test-model'
+    assert_http(429, full.reserve_coordination, eid, 1, 'uaeu', True)
+
+
 if __name__ == '__main__':
     check_disclosure_and_audit()
     check_ttl_capacity_actions_and_concurrency()
     check_admission()
     check_coordination()
     check_validation_issue_audit()
+    check_coordination_reuse()
     print('Policy scenario checks passed')
