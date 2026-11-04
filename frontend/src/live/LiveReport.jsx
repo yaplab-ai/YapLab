@@ -76,7 +76,7 @@ function TeachingMoves({ data }) {
 }
 
 /** Render the backend's recorded measurements and optional teaching-move analysis. */
-export default function LiveReport({ report, onExit }) {
+export default function LiveReport({ report, onExit, hackathonDemo = false }) {
   if (!report) return <main className="report wrap mode-teaching">
     <div className="report-head"><div><p className="eyebrow">Session report</p><h1>Your report is not ready yet.</h1></div></div>
     <button type="button" className="btn btn-ghost" onClick={onExit}>Back to setup</button>
@@ -102,6 +102,8 @@ export default function LiveReport({ report, onExit }) {
         <div><p className="eyebrow">Session report</p><h1>Your teaching session</h1><p className="muted">Delivery measurements and the room’s recorded responses.</p></div>
         <button type="button" className="btn btn-ghost" onClick={onExit}>Back to setup</button>
       </div>
+
+      {hackathonDemo && <p className="muted" role="note">Offline demo: timing comes from typed input and room responses are scripted. These figures do not measure speaking ability or learning.</p>}
 
       <section className="report-sec" aria-labelledby="live-delivery-heading">
         <h2 id="live-delivery-heading">Delivery</h2>

@@ -231,6 +231,20 @@ def create_app(
     limits: DemoLimits | None = None,
 ) -> FastAPI:
     """Build the app. Every dependency is injectable for tests."""
+    coordination_mode = os.environ.get("FRONTROW_POLICY_COORDINATION", "off").strip().lower()
+    if coordination_mode not in {"off", "configured", "demo"}:
+        raise RuntimeError("FRONTROW_POLICY_COORDINATION must be off, configured, or demo")
+    if coordination_mode == "demo":
+        # Enforce the entire demo process as offline before constructing any
+        # provider. Avoid silently ignoring explicitly configured providers.
+        llm_kind = os.environ.get("FRONTROW_LLM", "fake").strip() or "fake"
+        policy_kind = os.environ.get("FRONTROW_POLICY_LLM", "off").strip().lower()
+        tts_kind = os.environ.get("FRONTROW_TTS", "none").strip() or "none"
+        stt_kind = os.environ.get("FRONTROW_STT", "none").strip() or "none"
+        if (llm_kind != "fake" or policy_kind != "off" or tts_kind != "none" or stt_kind != "none"
+                or llm_factory is not None or tts is not None or stt_tokens is not None):
+            raise RuntimeError("Policy demo requires FRONTROW_LLM=fake, FRONTROW_POLICY_LLM=off, "
+                               "FRONTROW_TTS=none, FRONTROW_STT=none, and no provider overrides")
     base_config = config or Config.from_env()
     make_llm = llm_factory or llm_from_env()
     validation_llm = make_llm()  # fail fast; retain ownership for shutdown
@@ -418,11 +432,12 @@ def create_app(
     policy_llm_mode = os.environ.get("FRONTROW_POLICY_LLM", "off").strip().lower()
     if policy_llm_mode not in {"off", "configured"}:
         raise RuntimeError("FRONTROW_POLICY_LLM must be off or configured")
-    coordination_mode = os.environ.get("FRONTROW_POLICY_COORDINATION", "off").strip().lower()
-    if coordination_mode not in {"off", "configured"}:
-        raise RuntimeError("FRONTROW_POLICY_COORDINATION must be off or configured")
     coordination_llm = None
-    if coordination_mode == "configured":
+    if coordination_mode == "demo":
+        from .policy.demo import PolicyDemoLLM
+
+        coordination_llm = PolicyDemoLLM()
+    elif coordination_mode == "configured":
         # The validation client still owns/cleans up its primary. Never pass its
         # automatic fake fallback to a workflow labelled model-assisted.
         primary = validation_llm.primary if isinstance(validation_llm, FallbackLLM) else validation_llm
@@ -433,6 +448,8 @@ def create_app(
         llm=validation_llm if policy_llm_mode == "configured" else None,
         model=base_config.llm_model_fast or base_config.llm_model,
         coordination_llm=coordination_llm,
+        coordination_mode="offline_test" if coordination_mode == "demo" else "model_assisted",
+        coordination_model="scripted-demo" if coordination_mode == "demo" else None,
     ))
     app.include_router(policy_scenarios_router)
     app.state.sessions = sessions

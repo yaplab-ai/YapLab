@@ -101,8 +101,10 @@ class ModelCallLimits:
 
 def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
                   coordination_llm: LLMClient | None = None,
+                  coordination_model: str | None = None,
                   coordination_mode: Mode = 'model_assisted') -> APIRouter:
     router = APIRouter(prefix='/policy', tags=['policy'])
+    role_model = coordination_model or model
     # Separate from paid practice-session quotas, per FastAPI app instance.
     admission = DemoLimits(sessions_per_ip_per_hour=120, max_sessions_per_day=10000)
     model_admission = ModelCallLimits()
@@ -163,7 +165,7 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
         response.headers['Cache-Control'] = 'no-store'
         return {'enabled': coordination_llm is not None,
                 'review_mode': coordination_mode if coordination_llm is not None else 'offline_test',
-                **({'model': model} if coordination_llm is not None else {})}
+                **({'model': role_model} if coordination_llm is not None else {})}
 
     @router.post('/exercises/{exercise_id}/coordinate')
     async def coordinate_exercise(exercise_id: str, body: CoordinationRequest,
@@ -184,13 +186,14 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
             try:
                 # Reserve all three calls atomically, shared with /review. Failed
                 # or cancelled calls are not refunded: they may already be billed.
-                model_admission.reserve(address, count=3)
+                if coordination_mode != 'offline_test':
+                    model_admission.reserve(address, count=3)
             except LimitExceeded as exc:
                 raise HTTPException(429, 'Policy model call limit reached; please try again later.',
                                     headers={'Retry-After': str(exc.retry_after)}) from exc
             result = await coordinate(_corpus(),
                 {key: snapshot[key] for key in ('scenario_id', 'stage', 'role_views')},
-                coordination_llm, model, institution=body.institution,
+                coordination_llm, role_model, institution=body.institution,
                 mode=coordination_mode, shared_semaphore=model_slots)
             return store.commit_coordination(exercise_id, round_id, result)
         finally:

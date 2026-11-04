@@ -120,7 +120,16 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
                 gaps.append(f'No source in this collection matched {_LABELS[topic].lower()} and the supplied wording; consult additional sources.')
                 continue
         source = hits[0]
+        selection = 'top_ranked'
+        # When the user explicitly names WCAG, prioritize a retrieved source
+        # that actually mentions it over disability-topic anchor matches.
+        if topic == 'accessibility' and 'wcag' in tokens(query):
+            direct = next((hit for hit in hits if 'wcag' in hit['matched_terms']), None)
+            if direct is not None:
+                source = direct
+                selection = 'explicit_wcag_match'
         record = retrieval_record(query, topic, source)
+        record['source_selection'] = selection
         audit_records.append(record)
         chosen_index = requirement_index(source, topic)
         if chosen_index is not None:

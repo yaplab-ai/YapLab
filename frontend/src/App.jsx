@@ -23,10 +23,21 @@ function Logo() {
   );
 }
 
+export function ModeIndicator({ hackathonDemo, view, headerLive }) {
+  const text = hackathonDemo ? 'Offline demo' : view === 'policy' ? 'Policy sandbox' : headerLive ? 'Backend live' : 'Simulated agents';
+  const title = hackathonDemo ? 'Offline demo configuration.' : view === 'policy' ? 'Policy Lab uses the configured policy API.' : headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.';
+  return <span className={`mode-chip ${hackathonDemo || view === 'policy' ? '' : headerLive ? 'live' : 'demo'}`} title={title}><i />{text}</span>;
+}
+
+export function makeSessionConfig(mode, variant, roster, hackathonDemo) {
+  return defaultConfig(mode, variant, roster, hackathonDemo ? { camera: false, voices: false } : {});
+}
+
 export default function App() {
+  const hackathonDemo = import.meta.env?.VITE_HACKATHON_DEMO === '1';
   const [view, setView] = useState('home');
   const [roster, setRoster] = useState(PERSONAS);
-  const [config, setConfig] = useState(() => defaultConfig('teaching'));
+  const [config, setConfig] = useState(() => makeSessionConfig('teaching', undefined, PERSONAS, hackathonDemo));
   const [result, setResult] = useState(null);
   const headerLive = view === 'report' && result ? result.kind === 'live' : !isDemo && config.mode === 'teaching';
 
@@ -36,7 +47,7 @@ export default function App() {
   };
 
   const openSetup = (mode, variant) => {
-    setConfig(defaultConfig(mode || config.mode, variant, roster));
+    setConfig(makeSessionConfig(mode || config.mode, variant, roster, hackathonDemo));
     go('setup');
   };
 
@@ -78,20 +89,19 @@ export default function App() {
                 </button>
               ))}
             </nav>
-            <span className={`mode-chip ${view === 'policy' ? '' : headerLive ? 'live' : 'demo'}`} title={view === 'policy' ? 'Policy Lab uses the configured policy API.' : headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.'}>
-              <i />{view === 'policy' ? 'Policy sandbox' : headerLive ? 'Backend live' : 'Simulated agents'}
-            </span>
+            <ModeIndicator hackathonDemo={hackathonDemo} view={view} headerLive={headerLive} />
           </div>
         </header>
       )}
 
-      {view === 'home' && <Home onStart={openSetup} onSample={sampleReport} onPolicy={() => go('policy')} roster={roster} />}
+      {view === 'home' && <Home onStart={openSetup} onSample={sampleReport} onPolicy={() => go('policy')} roster={roster} hackathonDemo={hackathonDemo} />}
       {view === 'policy' && <PolicyLab onBack={() => go('home')} />}
       {view === 'setup' && config.mode === 'interview' && (
         <InterviewComingSoon onBack={() => go('home')} />
       )}
       {view === 'setup' && config.mode !== 'interview' && (
         <Setup
+          hackathonDemo={hackathonDemo}
           config={config}
           setConfig={setConfig}
           roster={roster}
@@ -102,13 +112,14 @@ export default function App() {
       )}
       {view === 'session' && (
         <Session
+          hackathonDemo={hackathonDemo}
           config={config}
           onExit={() => go('setup')}
           onEnd={(r) => { setResult(r); go('report'); }}
         />
       )}
       {view === 'report' && result && (result.kind === 'live' ? (
-        <LiveReport report={result.report} onExit={() => { setConfig(result.config); go('setup'); }} />
+        <LiveReport hackathonDemo={hackathonDemo} report={result.report} onExit={() => { setConfig(result.config); go('setup'); }} />
       ) : (
         <Report
           result={result}

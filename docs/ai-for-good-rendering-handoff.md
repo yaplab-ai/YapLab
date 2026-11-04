@@ -19,8 +19,8 @@ university teachers and TAs and does not screen for disability.
 
 Use the Documents skill in a supported local thread, retain the reference, distill
 its styles/slots and preserve its page geometry. Render every page and inspect
-the PNGs. The final report must be at most five pages. Describe only the recorded
-27-request live run and its structural failures; do not claim hosted import or
+the PNGs. The final report must be at most five pages. Describe both recorded
+27-request live runs and their structural failures; do not claim hosted import or
 legal/educational validation. The current host's
 workspace dependency loader reports local-thread-only support, so this step has
 not been bypassed with a system runtime.
@@ -30,8 +30,8 @@ Use the current report draft, which now includes both approved live runs and
 the simplified facilitator. Keep offline verification separate from live
 structural acceptance:
 
-- Offline: 90 existing backend checks, 87 policy unit tests, standalone scenario
-  checks, 97 frontend tests, frontend/API builds and an extracted-wheel smoke.
+- Offline: 90 existing backend checks, 93 policy unit tests, standalone scenario
+  checks, 98 frontend tests, frontend/API builds and an extracted-wheel smoke.
 - Protocol 1: 14/27 role responses accepted; 1/9 fully accepted snapshots;
   $0.0023856 calculated from reported usage at recorded list prices.
 - Protocol 2: 24/27 accepted; 6/9 fully accepted snapshots; $0.0032268 on the same

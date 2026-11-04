@@ -123,9 +123,12 @@ loads the saved stage/collection view, without another model call on replay.
 ## 5. Evaluation, limitations and reproduction
 
 The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 87 policy-related unit tests, standalone staged-scenario checks and 97
+checks, 93 policy-related unit tests, standalone staged-scenario checks and 98
 frontend tests. Frontend and offline API package builds succeeded; an
-extracted-wheel check verified saved partial-round reuse without extra calls.
+earlier extracted-wheel check verified saved partial-round reuse without extra calls.
+A [local browser walkthrough](ai-for-good-demo.md) connects typed classroom input,
+Q&A and report to a separate staged policy exercise, scripted role proposals and
+human decisions/audit. This explicit offline demo does not call model providers.
 The [offline walkthrough](evidence/ai-for-good-offline.json) also records four
 hand-authored retrieval probes and 27 deterministic role/stage reviews. These
 are software checks, not a representative retrieval or educational benchmark.

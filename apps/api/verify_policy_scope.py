@@ -29,6 +29,24 @@ class ScopeTests(unittest.TestCase):
         found = search(self.corpus, 'WCAG 2.1 AA public-service sites digital accessibility', 3)
         self.assertEqual(found[0]['id'], source.id)
 
+    def test_natural_wcag_review_prioritizes_scoped_source(self):
+        text = ('Our university rehearsal website needs captions and keyboard access. '
+                'Does citing WCAG establish that our private university is compliant?')
+        with patch.dict('os.environ', {'FRONTROW_LLM': 'fake', 'FRONTROW_TTS': 'none',
+                'FRONTROW_STT': 'none', 'FRONTROW_POLICY_LLM': 'off', 'FRONTROW_POLICY_COORDINATION': 'off'}):
+            with TestClient(create_app()) as client:
+                response = client.post('/policy/review', json={'text': text})
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        accessibility = next(item for item in result['considerations'] if item['topic'] == 'accessibility')
+        self.assertEqual(accessibility['citations'][0]['id'], 'uae-digital-accessibility-policy')
+        self.assertIn('private university is not established', accessibility['citations'][0]['scope'])
+        self.assertIn('before asserting applicability', accessibility['recommendation'])
+        self.assertIn('wcag', result['audit']['matched_terms'])
+        self.assertEqual(result['audit']['retrieval_records'][0]['source_selection'], 'explicit_wcag_match')
+        self.assertTrue(any('not a compliance assessment' in item for item in result['limitations']))
+        self.assertEqual(result['review_mode'], 'deterministic')
+
     def test_ethics_principles_are_distinct_voluntary_guidance(self):
         source = self.sources['uae-ai-ethics-principles-guidelines']
         self.assertEqual(source.document_type, 'guidance')

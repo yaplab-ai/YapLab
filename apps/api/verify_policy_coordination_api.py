@@ -20,10 +20,18 @@ from frontrow.policy.scenarios import router as scenario_router
 from verify_policy_coordination import Scripted
 
 
-def app_for(fake=None, review=None):
+def app_for(fake=None, review=None, *, paid=False):
+    if paid and fake is not None:
+        class MockDirectProvider(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self, scripted):
+                self.scripted = scripted
+            async def complete(self, *args, **kwargs):
+                return await self.scripted.complete(*args, **kwargs)
+        fake = MockDirectProvider(fake)
     app = FastAPI()
     app.include_router(create_router(llm=review, coordination_llm=fake,
-        coordination_mode='offline_test', model='scripted'))
+        coordination_mode='model_assisted' if paid else 'offline_test', model='scripted'))
     app.include_router(scenario_router)
     return app
 
@@ -80,7 +88,7 @@ class CoordinationAPITests(unittest.TestCase):
 
     def test_saved_partial_replays_without_paid_admission_even_when_generation_off(self):
         fake = Scripted({'privacy': RuntimeError('provider unavailable')})
-        app = app_for(fake)
+        app = app_for(fake, paid=True)
         calls = []
         original = ModelCallLimits.reserve
         def counted(budget, address, count=1):
@@ -149,7 +157,7 @@ class CoordinationAPITests(unittest.TestCase):
 
     def test_three_attempt_budget_shared_across_exercises(self):
         fake = Scripted()
-        app = app_for(fake)
+        app = app_for(fake, paid=True)
         with TestClient(app) as client:
             for _ in range(2):
                 exercise = create(client)
@@ -160,6 +168,14 @@ class CoordinationAPITests(unittest.TestCase):
             self.assertIn('retry-after', response.headers)
             self.assertEqual(len(fake.requests), 6)
             self.assertIsNone(app.state.policy_exercise_store.exercises[exercise]['coordination_pending'])
+
+    def test_offline_rounds_do_not_consume_paid_budget(self):
+        fake = Scripted()
+        with patch.object(ModelCallLimits, 'reserve', side_effect=AssertionError('paid admission')), TestClient(app_for(fake)) as client:
+            for _ in range(3):
+                exercise = create(client)
+                self.assertEqual(client.post(f'/policy/exercises/{exercise}/coordinate', json={'expected_stage': 1}).status_code, 200)
+            self.assertEqual(len(fake.requests), 9)
 
     def test_stale_round_is_discarded_and_releases_reservation(self):
         async def run():
@@ -229,7 +245,7 @@ class CoordinationAPITests(unittest.TestCase):
                     finally:
                         self.active -= 1
             fake = Both(delay=.02)
-            app = app_for(fake, review=fake)
+            app = app_for(fake, review=fake, paid=True)
             async with AsyncClient(transport=ASGITransport(app), base_url='http://test') as client:
                 exercise = (await client.post('/policy/exercises', json={'scenario_id': 'caption-failure'})).json()['exercise_id']
                 replies = await asyncio.gather(

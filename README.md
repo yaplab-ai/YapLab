@@ -27,6 +27,11 @@ backend configured. Review mode and source applicability are shown with the
 results. The seed knowledge base is selective; the prototype does not certify
 legal compliance or measure educational outcomes.
 
+For the complete local walkthrough, run `python3 scripts/run-hackathon-demo.py`
+with installed dependencies and follow the [six-minute demo guide](docs/ai-for-good-demo.md).
+It uses a fake classroom and explicitly scripted policy proposals, with no model
+or speech-provider calls.
+
 See the [engineering plan, requirements mapping and local setup](docs/ai-for-good.md)
 and [policy source notes](docs/ai-for-good-policy-sources.md). The existing
 classroom measurements below predate this extension.

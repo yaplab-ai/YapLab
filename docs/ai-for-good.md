@@ -83,7 +83,7 @@ engineering plan, not a submission.
 | Knowledge base | Small versioned source catalogue and retrieval over curated summaries | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
 | Policy reasoning | Retrieved evidence and scoped review; explicit review mode | Expert-labelled cases; bounded live-provider evaluation if enabled |
 | Staged errors | Synthetic role-specific releases and recorded human decisions | Facilitated multi-person exercise and verified domain-gap conclusions |
-| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Live run: 14/27 structurally accepted; repair reliability and obtain expert assessment. Functional roles do not establish official institutional mandates |
+| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Latest recorded live run: 24/27 structurally accepted; current protocol changes are offline only and still need expert assessment. Functional roles do not establish official institutional mandates |
 | Audit | Structured evidence/decision records | Retention policy, authorised audit access and tamper-resistant export for deployment |
 | Standards mapping | Conceptual mapping below | Reviewer assessment; no certification claimed |
 
@@ -132,6 +132,7 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .v
 .venv/bin/python verify_policy_scenarios.py
 .venv/bin/python verify_policy_coordination.py
 .venv/bin/python verify_policy_coordination_api.py
+.venv/bin/python verify_policy_demo.py
 .venv/bin/python verify_policy_validation.py
 .venv/bin/python verify_policy_resilience.py
 .venv/bin/python verify_policy_scope.py
@@ -140,17 +141,19 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .v
 .venv/bin/python scripts/evaluate_policy.py
 ```
 
-From `frontend`, run `npm run test:live` and `npm run build`. To try the prototype,
-start the API with fake classroom and disabled speech providers, then start Vite
-with `VITE_API_URL=http://127.0.0.1:8000`. Open **Policy Lab** from Home.
+From `frontend`, run `npm run test:live` and `npm run build`.
+For the complete offline demo, run this from the repository root:
 
 ```bash
-# Terminal 1, from apps/api
-FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none \
-  .venv/bin/python -m uvicorn frontrow.server:app --host 127.0.0.1 --port 8000
-# Terminal 2, from frontend
-VITE_API_URL=http://127.0.0.1:8000 npm run dev -- --host 127.0.0.1
+python3 scripts/run-hackathon-demo.py
 ```
+
+The [demo guide](ai-for-good-demo.md) covers classroom → report → separate policy
+exercise → coordination → human decision/audit. The launcher explicitly sets
+fake classroom/no speech providers, deterministic review and
+`FRONTROW_POLICY_COORDINATION=demo`. The latter is scripted, not live-model evidence.
+Default coordination remains off. Dependencies must already be installed;
+the launcher does not install anything or load provider credentials.
 
 Policy exercises are in memory with an access TTL; expired entries are removed on a later exercise operation, and restarting the API clears them.
 Use synthetic lesson descriptions and incidents. Review the API contract and
@@ -429,3 +432,18 @@ scoped, and ordinary staff rehearsal is not automatically UAEU student work.
 Statutory full-text, transfer and real institutional applicability remain
 unverified. All work in this update was offline testing/public-source reading;
 there were no paid model calls, uploads or external submissions.
+
+## Complete local demonstration (4 November 2026)
+
+Use the [six-minute demo guide](ai-for-good-demo.md) and one-command local
+launcher. A browser walkthrough verified typed classroom input, Q&A and report,
+then separate source search/review, a three-stage caption exercise, scripted role
+proposals, dependency handoffs and human decision/audit. An explicit WCAG query
+now prioritizes a matching retrieved reference rather than a broad topic anchor.
+
+Current offline checks: **90 existing backend checks, 93 policy-related unit
+tests, standalone scenario checks and 98 frontend tests**; frontend and offline
+API package builds pass. These supersede older software counts above, not the
+immutable live results. See [local demo evidence](evidence/ai-for-good-demo-2026-11-04.json).
+Default coordination stays off; `demo` requires fake LLM/no speech providers and
+labels results offline. No new paid calls, external upload or hosted import.

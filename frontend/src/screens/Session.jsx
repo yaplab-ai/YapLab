@@ -70,7 +70,7 @@ function Slide({ config, deck, page }) {
   );
 }
 
-export default function Session({ config: initialConfig, onExit, onEnd, onAgentEvent }) {
+export default function Session({ config: initialConfig, onExit, onEnd, onAgentEvent, hackathonDemo = false }) {
   const liveMode = Boolean(API_URL) && initialConfig.mode === 'teaching';
   const config = useMemo(() => liveMode ? makeLiveConfig(initialConfig) : initialConfig, [initialConfig, liveMode]);
   const { deck, steps } = useMemo(() => buildScript(config), [config]);
@@ -222,7 +222,7 @@ export default function Session({ config: initialConfig, onExit, onEnd, onAgentE
       <header className="s-bar">
         <button className="s-exit" onClick={onExit} aria-label="Leave the room"><Icon name="prev" size={18} /></button>
         <div className="s-title">
-          <span className="s-kicker"><span className="mode-pill"><Icon name={mode.icon} size={12} /> {mode.name}</span></span>
+          <span className="s-kicker"><span className="mode-pill"><Icon name={mode.icon} size={12} /> {mode.name}</span>{hackathonDemo && <span>· Offline demo</span>}</span>
           <strong>{sessionTitle(config)}</strong>
         </div>
         <div className={`s-clock tnum ${remaining !== null && remaining <= 30 ? 'urgent' : ''}`}>

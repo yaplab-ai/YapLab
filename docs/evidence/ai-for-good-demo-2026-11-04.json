@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-04",
+  "branch": "codex/yaplab-ai-for-good",
+  "evidence_type": "offline_browser_walkthrough_and_regression_checks",
+  "not_live_model_evaluation": true,
+  "external_uploads": 0,
+  "configuration": {
+    "classroom": "FakeLLM",
+    "policy_review": "deterministic",
+    "coordination": "scripted-demo",
+    "review_mode": "offline_test",
+    "tts": "none",
+    "stt": "none",
+    "bind": "127.0.0.1",
+    "api_port": 8875,
+    "ui_port": 5189
+  },
+  "browser_walkthrough": [
+    {
+      "step": "classroom",
+      "observed": "Typed synthetic 73-word lesson; advanced demo slide; opened Q&A; answered one queued question using typed input."
+    },
+    {
+      "step": "report",
+      "observed": "Backend session report appeared with one asked/answered question. Typed pace and fake room responses are not speaking/learning measurements."
+    },
+    {
+      "step": "source_search",
+      "observed": "WCAG digital accessibility query surfaced scoped TDRA reference."
+    },
+    {
+      "step": "review_recheck",
+      "input": "Our university rehearsal website needs captions and keyboard access. Does citing WCAG establish that our private university is compliant?",
+      "observed": "After narrow source-priority fix, deterministic review cited TDRA and recommended checking Article 3 entity/service relationship. Private-university limits visible."
+    },
+    {
+      "step": "role_views",
+      "observed": "Caption stage 1 teacher and privacy views showed different released facts; no future-stage facts displayed."
+    },
+    {
+      "step": "coordination",
+      "observed": "Caption stages 1, 2 and 3 returned scripted offline results. Stage 2 teacher vendor proposal depended on privacy terms and accessibility confirmation; human confirmation remained required."
+    },
+    {
+      "step": "human_decision",
+      "observed": "Stage-2 decision linked cf-2b; final recheck stage-3 human fallback plan linked cf-3a in role activity."
+    }
+  ],
+  "checks": {
+    "existing_backend": {
+      "passed": 90,
+      "failed": 0
+    },
+    "policy_unit_tests": {
+      "passed": 93,
+      "failed": 0
+    },
+    "staged_scenario_script": "passed",
+    "frontend_tests": {
+      "passed": 98,
+      "failed": 0
+    },
+    "frontend_build": "passed; existing large-chunk warning",
+    "api_package_build": "passed offline; new demo module included in wheel",
+    "launcher_occupied_port": "refused existing 8765 process without changing it",
+    "launcher_shutdown": "own processes stopped; 8875 and 5189 successfully rebound"
+  },
+  "commands": {
+    "api_cwd": "apps/api",
+    "api": "FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_POLICY_COORDINATION=off FRONTROW_TTS=none FRONTROW_STT=none .venv/bin/python verify.py",
+    "policy": ".venv/bin/python -m unittest verify_policy_scope verify_policy verify_policy_export verify_policy_coordination verify_policy_coordination_api verify_policy_evaluation verify_policy_validation verify_policy_resilience verify_policy_demo",
+    "scenario": ".venv/bin/python verify_policy_scenarios.py",
+    "frontend_cwd": "frontend",
+    "frontend": [
+      "npm run test:live",
+      "npm run build"
+    ],
+    "api_build": "uv build --offline --out-dir /tmp/yaplab-demo-dist"
+  },
+  "screenshot": {
+    "path": "docs/evidence/ai-for-good-demo-handoffs-2026-11-04.jpg",
+    "sha256": "b278cfa24cfd4389b9462337f1a6ce20d576da1a4a02e1e98b7b914a09d40ec7"
+  },
+  "limits": [
+    "No automatic classroom-to-policy analysis; separate human-selected exercise.",
+    "Scripted third-stage action choices reuse earlier catalog items; final fallback plan is human-recorded.",
+    "No hosted import, fine-tuning, ITU sandbox integration, publishing or submission.",
+    "No new provider evaluation; historical protocol-2 structural results remain separate.",
+    "Frontend demo flag is presentation-only; launcher pairs it with explicit offline backend. Existing Google Fonts may generate browser network requests; no zero-network claim."
+  ],
+  "preservation": "Original checkout remains on codex/remove-public-demo-links with no tracked edits; .env, DS_Store files and AGENTS.md match prior isolation backups.",
+  "external_model_or_speech_calls": 0
+}

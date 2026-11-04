@@ -53,7 +53,8 @@ function HeroRoom({ roster }) {
   );
 }
 
-const CTA = { teaching: 'Start teaching', pitch: 'Start pitching', interview: 'Upcoming soon' };
+const CTA = { teaching: 'Start teaching', pitch: 'Open scripted preview', interview: 'Coming soon' };
+const modeStatus = (id) => id === 'pitch' ? ' · Scripted preview' : id === 'interview' ? ' · Coming soon' : '';
 
 function ModeCard({ m, roster, onStart, onSample }) {
   const audience = [...new Set(m.variants.flatMap((v) => v.agents))].map((id) => personaById(id, roster)).filter(Boolean);
@@ -63,11 +64,11 @@ function ModeCard({ m, roster, onStart, onSample }) {
       <header className="mc-head">
         <span className="mc-icon"><Icon name={m.icon} size={22} /></span>
         <div>
-          <h3>{m.name}</h3>
+          <h3>{m.name}{modeStatus(m.id)}</h3>
           <p className="mc-tag">{m.tagline}</p>
         </div>
       </header>
-      <p className="mc-blurb">{m.blurb}</p>
+      <p className="mc-blurb">{m.id === 'pitch' ? 'Explore a scripted pitch rehearsal and simulated report.' : m.id === 'interview' ? 'Interview rehearsal is planned and not yet available.' : 'Practice explaining a lesson to a simulated classroom and review the session.'}</p>
       <div className="mc-audience">
         <div className="stack">{audience.slice(0, 6).map((p, i) => <Avatar key={p.id} p={p} size={32} delay={i} />)}</div>
         <span className="muted">{audience.some(isPanel) ? audience.filter(isPanel).map((p) => p.trait).slice(0, 3).join(', ') : audience.map((p) => p.name).slice(0, 5).join(', ')}</span>
@@ -76,23 +77,23 @@ function ModeCard({ m, roster, onStart, onSample }) {
         {m.variants.map((v) => (
           <button key={v.id} className="variant" onClick={() => onStart(m.id, v.id)}>
             <span className="v-top"><strong>{v.name}</strong><span className={`stakes stakes-${Math.min(3, Math.floor(v.seriousness / 25))}`}>{seriousnessLabel(v.seriousness)}</span></span>
-            <span className="v-blurb">{v.blurb}</span>
+            <span className="v-blurb">{m.id === 'interview' ? 'Coming soon' : m.id === 'teaching' && v.id === 'study' ? 'A smaller classroom for practice.' : v.blurb}</span>
           </button>
         ))}
       </div>
       <div className="mc-scored">
-        <span className="k">Scored on</span>
+        <span className="k">Practice focus</span>
         <span>{cl.items.map((it) => it.label).join(' · ')}</span>
       </div>
       <footer className="mc-foot">
         <button className="btn btn-mode" onClick={() => onStart(m.id)}>{CTA[m.id]} <Icon name="arrow" size={16} /></button>
-        <button className="link" onClick={() => onSample(m.id)}>Sample report</button>
+        <button className="link" onClick={() => onSample(m.id)}>{m.id === 'interview' ? 'Coming soon' : 'Simulated sample report'}</button>
       </footer>
     </article>
   );
 }
 
-export default function Home({ onStart, onSample, onPolicy, roster }) {
+export default function Home({ onStart, onSample, onPolicy, roster, hackathonDemo = false }) {
   return (
     <main className="home">
       <section className="hero wrap">
@@ -100,14 +101,15 @@ export default function Home({ onStart, onSample, onPolicy, roster }) {
           <p className="eyebrow">Your first audience, before the real one</p>
           <h1>Rehearse in front of a room that <em>talks back.</em></h1>
           <p className="lede">
-            YapLab puts you in front of AI agents with voices and personalities. Teach a class, pitch investors,
-            or face a hiring panel. They react to what you actually say, and tell you what landed.
+            Rehearse a lesson with a simulated classroom and review the session. Pitch is a scripted preview;
+            interview practice is coming soon.
           </p>
+          {hackathonDemo && <div aria-label="AI for Good demo"><p className="eyebrow">AI for Good · Offline demo</p><p>Rehearse a lesson or explore the policy sandbox.</p><div className="hero-cta"><button className="btn btn-primary" onClick={() => onStart('teaching')}>Start teaching <Icon name="arrow" size={16} /></button><button className="btn btn-ghost" onClick={onPolicy}>Open Policy Lab <Icon name="arrow" size={16} /></button></div></div>}
           <div className="hero-modes">
             {MODES.map((m) => (
               <button key={m.id} className={`hero-mode mode-${m.id}`} onClick={() => onStart(m.id)}>
                 <Icon name={m.icon} size={18} />
-                <span><strong>{m.name}</strong><span>{m.tagline}</span></span>
+                <span><strong>{m.name}{modeStatus(m.id)}</strong><span>{m.tagline}</span></span>
                 <Icon name="arrow" size={16} />
               </button>
             ))}
@@ -119,7 +121,7 @@ export default function Home({ onStart, onSample, onPolicy, roster }) {
       <section className="wrap section" id="modes">
         <div className="section-head">
           <h2>Three ways to practice</h2>
-          <p>Teaching and Pitch are ready to explore, with Interview coming soon. Pick an available variant to jump straight into setup.</p>
+          <p>Practice teaching, explore the scripted Pitch preview, or see the planned Interview mode.</p>
         </div>
         <div className="mode-grid">
           {MODES.map((m) => <ModeCard key={m.id} m={m} roster={roster} onStart={onStart} onSample={onSample} />)}
@@ -134,17 +136,17 @@ export default function Home({ onStart, onSample, onPolicy, roster }) {
           <li>
             <span className="step-n">1</span>
             <h3>Set up the room</h3>
-            <p>Pick a mode, choose who is in the room, and set how serious it is. Upload slides, describe your startup, or paste the job description.</p>
+            <p>Choose a teaching setup and use the sample deck or upload slides.</p>
           </li>
           <li>
             <span className="step-n">2</span>
             <h3>Speak out loud</h3>
-            <p>Agents raise hands, interrupt, get confused, take notes and nod when your answer lands. Call on them, or let the panel drive.</p>
+            <p>Speak when speech is configured, or type to the room. Simulated students can raise questions as you teach.</p>
           </li>
           <li>
             <span className="step-n">3</span>
             <h3>See what landed</h3>
-            <p>A report built for the mode: what each student understood, whether each judge would invest, or how each interviewer would vote.</p>
+            <p>Review recorded delivery measurements and responses. Sample reports are simulated.</p>
           </li>
         </ol>
       </section>
@@ -152,9 +154,9 @@ export default function Home({ onStart, onSample, onPolicy, roster }) {
       <section className="wrap section">
         <div className="section-head">
           <h2>Meet the room</h2>
-          <p>Every agent has its own personality and instructions. Mix them, or write your own in setup.</p>
+          <p>Meet the example personas. The configured teaching backend uses its own fixed classroom roster.</p>
         </div>
-        {[['Classroom', (p) => p.role === 'student'], ['Pitch judges', (p) => p.role === 'judge'], ['Interview panel', (p) => p.role === 'interviewer']].map(([label, f]) => (
+        {[['Classroom', (p) => p.role === 'student'], ['Pitch preview', (p) => p.role === 'judge'], ['Interview · coming soon', (p) => p.role === 'interviewer']].map(([label, f]) => (
           <div key={label} className="persona-group">
             <h3 className="pg-label">{label}</h3>
             <div className="persona-row">
@@ -184,12 +186,12 @@ export default function Home({ onStart, onSample, onPolicy, roster }) {
         </div>
         <div className="listen-grid">
           {[
-            ['wave', 'Pace and pauses', 'Words per minute on every slide or answer, against a 130–160 target.'],
-            ['type', 'Filler words', '"Um", "like" and "basically", counted and timestamped.'],
-            ['check', 'Structure', 'Feynman checks for teaching, the six pitch beats, STAR for interviews.'],
-            ['users', 'Audience reaction', 'Each agent tracks what it understood, believed or doubted.'],
-            ['clock', 'Timing', 'Countdown for pitch slots, answer length for interviews.'],
-            ['cam', 'Gestures and posture', 'Camera-based analysis of eye contact and stance.', 'Beta'],
+            ['wave', 'Pace and pauses', 'The teaching report can show overall pace and recorded pauses.'],
+            ['type', 'Filler words', 'The teaching report can show a count of detected filler words.'],
+            ['check', 'Teaching moves', 'Optional feedback can describe teaching moves in the recorded transcript.'],
+            ['users', 'Audience reaction', 'The simulated room can record questions and responses.'],
+            ['clock', 'Timing', 'The session report includes teaching duration.'],
+            ['cam', 'Gestures and posture', 'Camera is a self-view; gesture and posture analysis is planned.', 'Planned'],
           ].map(([ic, h, p, tag]) => (
             <div key={h} className="listen-item">
               <Icon name={ic} size={20} />

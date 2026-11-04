@@ -174,7 +174,7 @@ function SlidesDrop({ config, set, label }) {
   );
 }
 
-export default function Setup({ config, setConfig, roster, setRoster, onStart, onBack }) {
+export default function Setup({ config, setConfig, roster, setRoster, onStart, onBack, hackathonDemo = false }) {
   const [adding, setAdding] = useState(false);
   const set = (patch) => setConfig((c) => ({ ...c, ...patch }));
   const mode = modeById(config.mode);
@@ -295,7 +295,7 @@ export default function Setup({ config, setConfig, roster, setRoster, onStart, o
             <h2 className="panel-h">In the room</h2>
             <p className="muted">No scores or tips while you present. Your full report opens when you end the session.</p>
             <Toggle id="camera" checked={config.camera} onChange={(v) => set({ camera: v })} label="Self-view camera" sub="Only you see it." />
-            <Toggle id="voices" checked={config.voices} onChange={(v) => set({ voices: v })} label="Agent voices" sub="Each agent speaks with its own voice" />
+            <Toggle id="voices" checked={config.voices} onChange={(v) => set({ voices: v })} label={hackathonDemo ? "Agent audio" : "Agent voices"} sub={hackathonDemo ? "Off by default; browser speech may be used." : "Each agent speaks with its own voice"} />
           </section>
         </div>
 
@@ -327,7 +327,7 @@ export default function Setup({ config, setConfig, roster, setRoster, onStart, o
             <button className="btn btn-primary btn-lg btn-block" disabled={!selected.length} onClick={onStart}>
               <Icon name="mic" /> {mode.id === 'pitch' ? 'Step on stage' : mode.id === 'interview' ? 'Join the interview' : 'Enter the classroom'}
             </button>
-            <p className="fine">Your browser will ask for microphone and camera access.</p>
+            <p className="fine">{hackathonDemo ? "Use the demo deck and typed input; microphone and camera are optional." : "Your browser will ask for microphone and camera access."}</p>
           </div>
         </aside>
       </div>
