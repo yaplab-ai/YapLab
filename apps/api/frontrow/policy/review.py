@@ -13,7 +13,7 @@ _LABELS = {
 # Cues identify a topic for further investigation; they do not diagnose a problem.
 _CUES = {
     'privacy': {'privacy', 'personal', 'student', 'pupil', 'data', 'consent', 'recording'},
-    'accessibility': {'accessibility', 'accessible', 'disability', 'disabled', 'inclusive', 'inclusion', 'caption', 'captions'},
+    'accessibility': {'accessibility', 'accessible', 'disability', 'disabled', 'inclusive', 'inclusion', 'caption', 'captions', 'wcag'},
     'responsible_ai': {'artificial', 'algorithm', 'generative', 'model', 'chatbot', 'bias'},
     'education': {'education', 'educational', 'teaching', 'teacher', 'classroom', 'school', 'learning'},
     'human_oversight': {'human', 'oversight', 'supervision', 'supervised', 'review', 'teacher'},
@@ -30,7 +30,7 @@ _LIMITATIONS = [
 # applicability. Curated vocabulary is auditable and deliberately small.
 _TOPIC_TERMS = {
     'privacy': {'privacy', 'personal', 'data', 'identifiable', 'information', 'processing', 'consent', 'security', 'retention', 'transfer'},
-    'accessibility': {'accessibility', 'accessible', 'disability', 'disabilities', 'access', 'inclusive', 'inclusion', 'caption', 'captions', 'support'},
+    'accessibility': {'accessibility', 'accessible', 'disability', 'disabilities', 'access', 'inclusive', 'inclusion', 'caption', 'captions', 'support', 'wcag', 'digital', 'website', 'websites', 'tdra'},
     'responsible_ai': {'artificial', 'intelligence', 'ai', 'bias', 'fairness', 'ethics', 'accountability', 'risks', 'generated'},
     'education': {'education', 'educational', 'teaching', 'teacher', 'learning', 'learner', 'classroom', 'assessment'},
     'human_oversight': {'human', 'oversight', 'review', 'educator', 'teacher', 'check', 'supervision', 'accuracy'},

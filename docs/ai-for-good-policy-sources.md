@@ -1,6 +1,6 @@
 # AI for Good: policy source notes
 
-The [AI for Good Lab Hackathon UAE brief](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485) asks teams to map a use-case knowledge base to country policies and global best practices. The accompanying [seed corpus](../apps/api/frontrow/policy/corpus.json) supports English-language guidance for general university teachers and teaching assistants. It contains curated source metadata and short original paraphrases, not the complete underlying documents. Sources were reviewed on **2026-11-04**.
+The [AI for Good Lab Hackathon UAE brief](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485) asks teams to map a use-case knowledge base to country policies and global best practices. The accompanying [seed corpus](../apps/api/frontrow/policy/corpus.json) supports English-language guidance for general university teachers and teaching assistants. It contains curated source metadata and short original paraphrases, not the complete underlying documents. Sources were reviewed on **2026-11-04**; the latest corpus is **2026-11-04.4** (13 records).
 
 ## How to interpret the sources
 
@@ -13,6 +13,8 @@ The [AI for Good Lab Hackathon UAE brief](https://aiforgood.itu.int/event/ai-for
 | `unesco-generative-ai-education` | [UNESCO: Guidance for Generative AI in Education and Research](https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research), official overview | Global human-centred guidance, including privacy, pedagogical design and critical review of generated outputs. |
 | `unesco-ai-ethics-recommendation` | [UNESCO: Recommendation on the Ethics of Artificial Intelligence](https://www.unesco.org/en/articles/recommendation-ethics-artificial-intelligence), principles and policy action areas | International recommendation on human rights, fairness, transparency and oversight, including education. |
 | `england-generative-ai-education` | [England Department for Education: Generative AI in Education](https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education), opportunities, responsible use and assessment sections | Cross-country example for educator review and privacy. It is aimed principally at schools and colleges and does not establish UAE legal requirements. |
+| `uae-digital-accessibility-policy` | [TDRA policy PDF](https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf), Article 3 p.7 and Annex 1 section 1 p.13 | Government/connected-party scope and broader best-efforts language; WCAG 2.1 AA for public-service sites in that context, not automatically all private universities. |
+| `uae-ai-ethics-principles-guidelines` | [AI Ethics Principles and Guidelines](https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf), sections 1.1–1.2 (PDF pp.3–4; printed pp.5–6), December 2022 | Non-binding and significant/critical-decision scoped. Ordinary rehearsal is a voluntary design reference, separate from the self-assessment tool. |
 
 ## Use and maintenance
 
@@ -29,7 +31,7 @@ user is affiliated with UAEU or that a policy applies to a particular deployment
 
 | Record | Official source and locator | Boundary |
 | --- | --- | --- |
-| `uaeu-student-generative-ai` | [Student GenAI policy](https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf), pp. 2–4; effective 11 August 2025, review 1 September 2027 | UAEU student academic-credit work; not a universal university rule. Its detector provision must not be treated as proof of detector reliability. |
+| `uaeu-student-generative-ai` | [Student GenAI policy](https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf), pp. 2–4; effective 11 August 2025, review 1 September 2027 | UAEU student academic-credit work; not a universal university rule or generic staff-rehearsal policy. Its detector provision must not be treated as proof of detector reliability. |
 | `uaeu-institutional-data-governance` | [Data governance policy](https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/data-governance-policy.pdf), pp. 2–6 | UAEU institutional data; research-only data is excluded. |
 | `uaeu-students-of-determination-services` | [Support services](https://www.uaeu.ac.ae/en/student-services/special-needs/services.shtml), Services section | Institutional service guidance, not legislation. |
 
@@ -65,3 +67,5 @@ locators have been removed. The UAE legislation full-text access limitation
 remains. These are recorded source-verification limits, not completed legal review.
 
 The later [sample-proposal source review](ai-for-good-source-review-and-next-steps.md) records concrete action/citation mismatches and the exact primary pages inspected. National strategy and school inclusion remain library/context records but are excluded from operational university-incident candidate pools; their presence is not evidence for a specific incident response.
+
+The [verified PDF scope note](ai-for-good-verified-pdf-scopes.md) records methods, page numbering and source limitations. Accessible policy/guidance PDFs do not resolve statutory PDPL, transfer or actual institutional applicability questions.

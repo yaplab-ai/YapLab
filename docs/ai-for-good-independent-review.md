@@ -138,3 +138,13 @@ The review corrected an early hypothesis: PDPL was education-tagged and eligible
 query/ranking/top-three truncation caused its omission. It also corrected partial
 copy from 'supported' to 'remaining' items, because ID checks do not establish
 citation support. Historical live records remain unchanged.
+
+
+## Independent PDF-scope check
+
+Read-only review of corpus .4 agreed with TDRA Article 3/Annex 1, AI ethics
+sections 1.1–1.2 and UAEU page 2. It found no substantive scope blocker: no blanket
+private-university accessibility obligation, no binding AI ethics claim, and no
+general staff applicability from the student policy. Existing PDPL statutory and
+transfer uncertainty remains. A minor rehearsal-guidance wording correction was
+applied before final bundle generation.

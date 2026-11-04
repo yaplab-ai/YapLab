@@ -26,6 +26,7 @@ The tool encourages assessment of ethical issues throughout an AI system's lifec
 ## Limitations
 - The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.
 - General AI ethics guidance does not replace applicable law or university-specific policies.
+- The underlying Principles and Guidelines are non-binding and section 1.2 targets significant or critical decisions; ordinary rehearsal uses them as voluntary design guidance, not a compliance obligation.
 
 ## Source rights and reuse
 Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.

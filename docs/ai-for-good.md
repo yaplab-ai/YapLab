@@ -134,6 +134,7 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .v
 .venv/bin/python verify_policy_coordination_api.py
 .venv/bin/python verify_policy_validation.py
 .venv/bin/python verify_policy_resilience.py
+.venv/bin/python verify_policy_scope.py
 .venv/bin/python verify_policy_evaluation.py
 .venv/bin/python scripts/evaluate_coordination.py  # dry run, no network
 .venv/bin/python scripts/evaluate_policy.py
@@ -229,7 +230,7 @@ after the concrete artifacts are reviewed.
 
 ## Current readiness handoff
 
-The corpus now has **11 records**: 8 general sources and 3 additional UAEU-only
+The corpus now has **13 records**: 10 general sources and 3 additional UAEU-only
 institutional examples. It covers laws, guidance, national strategy and university
 practice. General search/review excludes the institutional entries; selecting
 UAEU adds those examples without establishing affiliation or applicability.
@@ -415,3 +416,16 @@ keeps independently valid items in an explicit partial result and improves
 incident-source candidates without changing the one-action UI. Locator and
 verification metadata travel with new evidence. The previous live metrics are
 unchanged; no protocol-3 model evaluation has occurred.
+
+
+## Verified PDF scope update
+
+The [scope correction note](ai-for-good-verified-pdf-scopes.md) adds two official
+policy/guidance references and tightens UAEU's student scope. Corpus .4 contains
+10 general and 3 institutional records. Regenerated bundles contain 29 and 38
+chunks respectively and pass deterministic checks. TDRA is not a blanket
+private-university obligation, AI ethics is non-binding/significant-decision
+scoped, and ordinary staff rehearsal is not automatically UAEU student work.
+Statutory full-text, transfer and real institutional applicability remain
+unverified. All work in this update was offline testing/public-source reading;
+there were no paid model calls, uploads or external submissions.

@@ -4,13 +4,14 @@
   "status": "local_notebook_input_prepared",
   "hosted_import_verified": false,
   "embedding_index_built": false,
-  "corpus_version": "2026-11-04.3",
+  "corpus_version": "2026-11-04.4",
   "corpus_limitations": [
     "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
     "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
     "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
     "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
-    "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected."
+    "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+    "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
   ],
   "content_status": "original_curated_summaries_not_full_text",
   "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.",
@@ -42,6 +43,23 @@
       "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
       "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
     },
+    "uae-ai-ethics-principles-guidelines.md": {
+      "id": "uae-ai-ethics-principles-guidelines",
+      "title": "AI Ethics: Principles and Guidelines",
+      "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+      "authority": "UAE AI and Blockchain Council / UAE AI Office",
+      "scope": "Non-binding guidance whose section 1.2 addresses AI systems making or informing significant decisions, including critical decisions. For ordinary teaching rehearsal, the guidelines are a voluntary design reference unless the actual use meets that decision scope.",
+      "document_type": "guidance",
+      "jurisdiction": "UAE — non-binding guidance",
+      "institution": "general",
+      "published": "2022-12",
+      "retrieved": "2026-11-04",
+      "sha256": "1606b8cd864973a5d0e8445f66f382214ab39ad5a50629dd64271f3d6c3fe807",
+      "content_status": "original_curated_summary_not_full_text",
+      "reuse_note": "Section 1.5 states CC BY 4.0: attribute the UAE AI and Blockchain Council and imply no endorsement. This record is an original paraphrase.",
+      "verification": "Sections 1.1, 1.2 and 1.5 checked in the official web-extracted PDF on 2026-11-04. Direct local download returned 403; no statutory text was verified.",
+      "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
+    },
     "uae-ai-ethics-self-assessment.md": {
       "id": "uae-ai-ethics-self-assessment",
       "title": "AI Ethics Self-Assessment Tool",
@@ -53,10 +71,27 @@
       "institution": "general",
       "published": "unknown",
       "retrieved": "2026-11-04",
-      "sha256": "c113317ab78335fc4e2be0eeedc5a2fec1551c162b4ebe0faf196685d2f77236",
+      "sha256": "d2ba5c905d554cb9a9417e108b9549ded8c4ba45a089e3fb4365ece1e83ccf17",
       "content_status": "original_curated_summary_not_full_text",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.",
       "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+      "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
+    },
+    "uae-digital-accessibility-policy.md": {
+      "id": "uae-digital-accessibility-policy",
+      "title": "National Policy for Digital Accessibility",
+      "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+      "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+      "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+      "document_type": "government_policy",
+      "jurisdiction": "UAE — Article 3 entity/service scope",
+      "institution": "general",
+      "published": "2024-03",
+      "retrieved": "2026-11-04",
+      "sha256": "7aaa5a5034cb8314a764d07343f7b1b48651c40cc9cd0ef4c0c36180087b5096",
+      "content_status": "original_curated_summary_not_full_text",
+      "reuse_note": "Publisher rights remain separate. Only metadata, links and original paraphrases are packaged.",
+      "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
       "rights_caveat": "These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse."
     },
     "uae-inclusive-education-schools.md": {
@@ -104,7 +139,7 @@
       "institution": "general",
       "published": "2021",
       "retrieved": "2026-11-04",
-      "sha256": "1da55bc1778b37bb2faf9dc6ad1f3c95847b68f506b276403fda67145f5f53eb",
+      "sha256": "b4a2a3f851281dda862d442581d701d097aa6b1d95c74bc56634d9b04ae09c29",
       "content_status": "original_curated_summary_not_full_text",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.",
       "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",

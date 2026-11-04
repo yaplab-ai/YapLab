@@ -11,10 +11,10 @@ Institution: uaeu
 Document type: institutional_policy
 Published: unknown
 Retrieved: 2026-11-04
-Source locator: Pages 2–4, Articles 1–7; effective 2025-08-11; next review 2027-09-01
+Source locator: PDF page 2: Overview and Scope; pages 2–4: Articles 1–7. Effective 2025-08-11; next review 2027-09-01.
 
 ## Scope
-UAEU students and work submitted for academic credit, including work outside campus. An institutional example, not a nationwide university rule.
+UAEU students and student work submitted for academic credit; university-related work on or off campus. Not a nationwide university policy or a generic staff-rehearsal policy.
 
 ## Summary
 The policy connects student GenAI use to course permissions, academic integrity, privacy and acknowledgment.
@@ -24,7 +24,7 @@ The policy connects student GenAI use to course permissions, academic integrity,
 - Check generated content, protect confidential information and acknowledge permitted GenAI use according to the institutional policy.
 
 ## Limitations
-- Applies to UAEU; another university needs its own policy and responsible reviewers.
+- Applies to UAEU students and their covered work; other universities and ordinary staff rehearsal need their own applicable policies.
 - Page 5 prescribes AI-detection tools. That institutional provision does not establish detector reliability or justify automated misconduct findings.
 
 ## Source rights and reuse

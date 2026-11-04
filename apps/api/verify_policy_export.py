@@ -88,6 +88,36 @@ class PolicyExportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             build_bundle(self.corpus, institution='unknown')
 
+    def test_document_and_chunk_scope_boundaries(self):
+        cases = {
+            'uae-digital-accessibility-policy': (
+                'federal entities', 'private university is not established'),
+            'uae-ai-ethics-principles-guidelines': (
+                'Non-binding guidance', 'significant decisions', 'voluntary design reference'),
+            'uaeu-student-generative-ai': (
+                'student work submitted for academic credit', 'generic staff-rehearsal policy'),
+        }
+        sources = {source.id: source for source in self.corpus.entries}
+        for institution in ('general', 'uaeu'):
+            files = build_bundle(self.corpus, institution=institution)
+            manifest = json.loads(files['manifest.json'])
+            chunks = [json.loads(line) for line in files['chunks.jsonl'].splitlines()]
+            for source_id, phrases in cases.items():
+                name = source_id + '.md'
+                if institution == 'general' and source_id.startswith('uaeu-'):
+                    self.assertNotIn(name, manifest['sources'])
+                    self.assertFalse(any(chunk['source'] == name for chunk in chunks))
+                    continue
+                with self.subTest(institution=institution, source=source_id):
+                    source = sources[source_id]
+                    self.assertEqual(manifest['sources'][name]['scope'], source.scope)
+                    document = files['docs/' + name].decode('utf-8')
+                    self.assertIn(source.scope, document)
+                    relevant = [chunk['text'] for chunk in chunks if chunk['source'] == name]
+                    for phrase in phrases:
+                        self.assertIn(phrase, document)
+                        self.assertTrue(any(phrase in chunk for chunk in relevant), phrase)
+
     def test_rejects_unsafe_ids_empty_corpus_and_duplicates(self):
         source = self.corpus.entries[0]
         for bad in ('../outside', 'UPPER', 'foo.md', 'a/b', 'a--b'):

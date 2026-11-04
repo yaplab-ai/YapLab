@@ -29,14 +29,14 @@ source-grounded questions, moderation, answer evaluation and reports. The new
 Policy Lab has source search, structured review, staged exercises and an optional
 three-role coordination path.
 
-The knowledge base is a packaged eleven-record catalogue of primary-source
+The knowledge base is a packaged thirteen-record catalogue of primary-source
 metadata and original paraphrases, including authority, URL, locator, dates,
 jurisdiction, document type and applicability cautions. Weighted lexical search
 uses a limited, disclosed alias list for terms such as captions and screen
 readers. This is a seed collection, not full-document ingestion, a distributed
 vector database or a complete account of applicable policy.
 
-General university context exposes eight sources; an explicit UAEU selection
+General university context exposes ten sources; an explicit UAEU selection
 adds three institution-only examples on student GenAI, data governance and
 accommodation services. A source's presence does not prove legal applicability.
 The legislation pages could not be directly re-fetched in the latest review;
@@ -65,6 +65,13 @@ England guidance, and three explicitly scoped UAEU institutional examples. Schoo
 foreign examples are labelled as comparative material rather than assumed UAE
 university obligations. The [source register](ai-for-good-policy-sources.md)
 contains links and locators; each result retains its applicability cautions.
+
+The corpus also includes TDRA's March 2024 digital-accessibility policy and
+December 2022 AI ethics guidelines. The former has defined government/connected-party
+scope; its WCAG 2.1 AA clause is not a blanket private-university requirement.
+The latter is non-binding and targets significant/critical decisions; rehearsal
+uses it as voluntary guidance. UAEU's student policy does not automatically
+govern staff rehearsal. Verified PDF sections do not resolve PDPL or transfer law.
 
 The scenarios expose three **candidate operational gaps** for institutional
 review, rather than established defects in national law:
@@ -116,7 +123,7 @@ loads the saved stage/collection view, without another model call on replay.
 ## 5. Evaluation, limitations and reproduction
 
 The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 81 policy-related unit tests, standalone staged-scenario checks and 97
+checks, 87 policy-related unit tests, standalone staged-scenario checks and 97
 frontend tests. Frontend and offline API package builds succeeded; an
 extracted-wheel check verified saved partial-round reuse without extra calls.
 The [offline walkthrough](evidence/ai-for-good-offline.json) also records four

@@ -26,6 +26,7 @@ The federal law regulates personal-data processing and sets processing controls,
 ## Limitations
 - Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.
 - Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.
+- Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified.
 
 ## Source rights and reuse
 Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source.

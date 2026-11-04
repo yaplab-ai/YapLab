@@ -1,12 +1,13 @@
 {
-  "version": "2026-11-04.3",
+  "version": "2026-11-04.4",
   "description": "Source-linked general policy notes and explicitly selected UAEU institutional examples for university teaching and teaching-assistant simulations.",
   "limitations": [
     "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
     "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
     "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
     "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
-    "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected."
+    "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+    "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
   ],
   "entries": [
     {
@@ -33,7 +34,8 @@
       ],
       "limitations": [
         "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
-        "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+        "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+        "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
       ],
       "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source."
@@ -90,7 +92,8 @@
       ],
       "limitations": [
         "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
-        "General AI ethics guidance does not replace applicable law or university-specific policies."
+        "General AI ethics guidance does not replace applicable law or university-specific policies.",
+        "The underlying Principles and Guidelines are non-binding and section 1.2 targets significant or critical decisions; ordinary rehearsal uses them as voluntary design guidance, not a compliance obligation."
       ],
       "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
       "reuse_note": "Source rights remain with the publisher. This record contains links and concise original paraphrases, not the complete source."
@@ -221,8 +224,8 @@
       "published": "unknown",
       "retrieved": "2026-11-04",
       "institution": "uaeu",
-      "scope": "UAEU students and work submitted for academic credit, including work outside campus. An institutional example, not a nationwide university rule.",
-      "source_locator": "Pages 2–4, Articles 1–7; effective 2025-08-11; next review 2027-09-01",
+      "scope": "UAEU students and student work submitted for academic credit; university-related work on or off campus. Not a nationwide university policy or a generic staff-rehearsal policy.",
+      "source_locator": "PDF page 2: Overview and Scope; pages 2–4: Articles 1–7. Effective 2025-08-11; next review 2027-09-01.",
       "topics": [
         "education",
         "responsible_ai",
@@ -236,10 +239,10 @@
         "Check generated content, protect confidential information and acknowledge permitted GenAI use according to the institutional policy."
       ],
       "limitations": [
-        "Applies to UAEU; another university needs its own policy and responsible reviewers.",
+        "Applies to UAEU students and their covered work; other universities and ordinary staff rehearsal need their own applicable policies.",
         "Page 5 prescribes AI-detection tools. That institutional provision does not establish detector reliability or justify automated misconduct findings."
       ],
-      "verification": "Full official five-page PDF reviewed on 2026-11-04. Publication date is not stated; effective and review dates are recorded in the locator.",
+      "verification": "Official PDF page 2 Scope and related provisions checked on 2026-11-04; student/academic-credit scope confirmed. Publication date is not stated; effective and review dates are separate.",
       "reuse_note": "UAEU website copyright restricts reproduction without permission. This record uses a link and original paraphrases; do not mirror the PDF or page without a rights review."
     },
     {
@@ -329,6 +332,65 @@
       ],
       "reuse_note": "Linked official strategy with original concise paraphrases. Source rights remain with the publisher; no full source text is redistributed.",
       "verification": "Official strategy page reviewed on 2026-11-04; publication date is not stated on the reviewed page."
+    },
+    {
+      "id": "uae-digital-accessibility-policy",
+      "title": "National Policy for Digital Accessibility",
+      "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+      "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+      "jurisdiction": "UAE — Article 3 entity/service scope",
+      "document_type": "government_policy",
+      "published": "2024-03",
+      "retrieved": "2026-11-04",
+      "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+      "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+      "topics": [
+        "accessibility",
+        "education",
+        "inclusion",
+        "human_oversight"
+      ],
+      "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+      "requirements": [
+        "Check the entity, digital service and regulatory/contracting relationship against Article 3 before asserting applicability.",
+        "For covered public-service sites, examine Annex 1 section 1; elsewhere treat it as a design reference pending applicable-policy review."
+      ],
+      "limitations": [
+        "Do not assert blanket applicability to all private universities or all classroom activities.",
+        "A citation or automated review does not establish WCAG conformance or legal compliance."
+      ],
+      "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+      "reuse_note": "Publisher rights remain separate. Only metadata, links and original paraphrases are packaged."
+    },
+    {
+      "id": "uae-ai-ethics-principles-guidelines",
+      "title": "AI Ethics: Principles and Guidelines",
+      "authority": "UAE AI and Blockchain Council / UAE AI Office",
+      "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+      "jurisdiction": "UAE — non-binding guidance",
+      "document_type": "guidance",
+      "published": "2022-12",
+      "retrieved": "2026-11-04",
+      "scope": "Non-binding guidance whose section 1.2 addresses AI systems making or informing significant decisions, including critical decisions. For ordinary teaching rehearsal, the guidelines are a voluntary design reference unless the actual use meets that decision scope.",
+      "source_locator": "Section 1.1: PDF page 3 (printed page 5); section 1.2: PDF page 4 (printed page 6); section 1.5: PDF page 5. Cover dated December 2022.",
+      "topics": [
+        "responsible_ai",
+        "human_oversight",
+        "privacy",
+        "fairness",
+        "education"
+      ],
+      "summary": "Ethical principles for decision-affecting AI, explicitly non-mandatory; distinct from the beta self-assessment tool.",
+      "requirements": [
+        "Distinguish ordinary rehearsal from AI that informs significant or critical decisions.",
+        "Use the principles voluntarily for rehearsal design; revisit scope if outputs affect consequential assessment or decisions."
+      ],
+      "limitations": [
+        "Do not label these guidelines binding law, a certification or a general obligation for every rehearsal tool.",
+        "Applicability to a particular deployment requires its actual purpose and effects."
+      ],
+      "verification": "Sections 1.1, 1.2 and 1.5 checked in the official web-extracted PDF on 2026-11-04. Direct local download returned 403; no statutory text was verified.",
+      "reuse_note": "Section 1.5 states CC BY 4.0: attribute the UAE AI and Blockchain Council and imply no endorsement. This record is an original paraphrase."
     }
   ]
 }

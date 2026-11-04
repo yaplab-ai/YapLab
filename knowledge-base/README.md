@@ -6,8 +6,8 @@ original paraphrases and applicability cautions, without mirrored source PDFs.
 
 | Collection | Source records | Use |
 | --- | --- | --- |
-| `itu-reference/general` | 8 | General references; institutional examples excluded |
-| `itu-reference/uaeu` | 11 | General references plus 3 UAEU-only examples, explicitly selected |
+| `itu-reference/general` | 10 | General references; institutional examples excluded |
+| `itu-reference/uaeu` | 13 | General references plus 3 UAEU-only examples, explicitly selected |
 
 Each collection has a flat `docs` folder, `manifest.json` and `chunks.jsonl`.
 Only the chosen collection's `docs` files belong in the notebook's ingestion
@@ -15,6 +15,14 @@ folder. Manifests and chunks stay outside it. The manifest maps notebook source
 filenames to source IDs, URLs, file SHA-256 hashes, scope and reuse notes. Do not
 mix the two collections or assume the reference notebook enforces YapLab's
 institution filter.
+
+The general collection includes the TDRA digital accessibility policy and the UAE
+AI Ethics Principles and Guidelines. The former has entity and service scope;
+its application to a particular private university is not established. The
+latter is non-binding guidance for significant-decision AI and a voluntary
+design reference for ordinary teaching rehearsal. The UAEU student GenAI
+policy concerns covered student work, not ordinary staff rehearsal. Consult the
+source notes and primary documents for their full scope and limitations.
 
 The exporter pins upstream commit `84010da9e9c443afcceeccb86d1700a662223395` and
 retains its MIT notice for the adapted normalizer/chunker. Source publications

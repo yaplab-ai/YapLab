@@ -86,3 +86,10 @@ Keep code/source attributions and the TalkMoves licence boundary when packaging.
 The operational questions exposed by the scenarios are candidate institutional
 gaps, not established defects in UAE law. Real teacher learning, accessibility
 outcomes, legal compliance and production readiness remain unmeasured.
+
+
+The subsequent [three-PDF scope check](ai-for-good-verified-pdf-scopes.md) adds
+TDRA digital-accessibility and AI ethics principles as scoped references and
+tightens UAEU's student boundary. This narrows source uncertainty for those
+specified policy pages; the statutory/current-text and actual-institution tasks
+in priorities 2–3 remain open. No previous live outcome is recast as compliant.
