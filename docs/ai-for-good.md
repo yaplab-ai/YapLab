@@ -83,7 +83,7 @@ engineering plan, not a submission.
 | Knowledge base | Small versioned source catalogue and retrieval over curated summaries | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
 | Policy reasoning | Retrieved evidence and scoped review; explicit review mode | Expert-labelled cases; bounded live-provider evaluation if enabled |
 | Staged errors | Synthetic role-specific releases and recorded human decisions | Facilitated multi-person exercise and verified domain-gap conclusions |
-| Coordination | One exercise timeline and distinct role views | Independent institutional-agent assessments and an explicit inter-agent protocol if included in final claims |
+| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Approved live-provider run and expert assessment; functional teaching/privacy/accessibility roles do not establish official institutional mandates |
 | Audit | Structured evidence/decision records | Retention policy, authorised audit access and tamper-resistant export for deployment |
 | Standards mapping | Conceptual mapping below | Reviewer assessment; no certification claimed |
 
@@ -130,6 +130,10 @@ cd apps/api
 FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .venv/bin/python verify.py
 .venv/bin/python verify_policy.py
 .venv/bin/python verify_policy_scenarios.py
+.venv/bin/python verify_policy_coordination.py
+.venv/bin/python verify_policy_coordination_api.py
+.venv/bin/python verify_policy_evaluation.py
+.venv/bin/python scripts/evaluate_coordination.py  # dry run, no network
 .venv/bin/python scripts/evaluate_policy.py
 ```
 
@@ -154,7 +158,7 @@ credits; no such call is part of offline verification.
 ## Observed verification
 
 The isolated worktree passed **90 existing backend checks**, **14 policy tests**,
-the staged-scenario verification script, **93 frontend tests**, and a frontend
+the staged-scenario verification script, **97 frontend tests**, and a frontend
 production build. `uv build --offline` produced an sdist and wheel using cached
 build tools. An API smoke test imported an extracted wheel and served the scoped source collections and three scenarios; both JSON resources are packaged.
 
@@ -184,7 +188,7 @@ were used for this evidence.
   indexes. Invalid citations, abstention, timeout and provider errors fall back
   visibly to deterministic review. It does not produce free-form legal advice.
 - General policy requests are capped at 120/client/hour and 10,000/UTC day.
-  Model-assisted requests also have two concurrent slots, 8/client/hour,
+  Model calls share two concurrent slots, 8/client/hour,
   20/client/rolling day and 100/UTC day total. Busy or exhausted requests return
   HTTP 429 and Retry-After. These are process-local bounds, not account-level
   spending controls; restart or multiple workers change their effective scope.
@@ -259,3 +263,88 @@ injected anchor matches are separate fields, with per-source retrieval records.
 Model-assisted audit metadata describes the sources selected by the model.
 The scenarios remain fixed sequences and selectable role views, and the offline
 walkthrough does not validate policy gaps, advice quality or institutional outcomes.
+
+
+## Three-role coordination increment
+
+The [official assessment criteria](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485)
+were rechecked on 4 November. Knowledge-base quality, policy response relevance,
+domain-gap/global comparisons, auditability and standards mappings remain the
+evaluation areas. The earlier selectable views alone did not implement the
+independent assessments described by the multi-agent option. The new coordination
+path provides three independent role calls followed by an explicit protocol:
+
+1. Reserve the viewed stage and capture only released facts for each role.
+2. Prepare separate teacher, privacy and accessibility prompts with distinct
+   mandates, scoped policy notes and stage-available action/question catalogs.
+3. Run up to three direct model calls, at most two concurrently, with eight-second
+   per-call and twenty-second round deadlines. Each call permits 400 output tokens
+   and disables SDK retries. Schema and ID checks reject unsupported output.
+4. Merge validated proposals into owners, dependencies and handoffs. Conflicts,
+   unavailable roles and missing prerequisites remain unresolved. All proposals
+   await human confirmation; the application executes no action.
+5. Commit only if the stage is still current. Store source-note snapshots and
+   SHA-256 fingerprints, corpus/protocol versions, configured provider/model,
+   prompt fingerprints and whether each call began. These identify inputs, not
+   legal correctness or a private reasoning trace.
+
+These are functional exercise roles, not authorised government or university
+representatives. Independent means separate model requests and role contexts;
+the roles can use the same model. The merging protocol is deterministic rather
+than an autonomous negotiation. Current evidence uses scripted clients and a
+mocked SDK transport only. No real provider assessment has been recorded.
+
+`FRONTROW_POLICY_COORDINATION=off` remains the default, separate from
+`FRONTROW_POLICY_LLM`. Setting it to `configured` uses only the configured direct
+OpenAI-compatible primary, without the classroom's fake fallback. Anthropic and
+fake clients fail closed for this path: the current Anthropic adapter has a
+different output cap. The original checkout's environment selects Anthropic
+with its default Haiku model; no environment file was copied into this worktree.
+Changing a provider or enabling this flag is not part of offline verification.
+
+- `GET /policy/coordination/status` reports availability and mode.
+- `POST /policy/exercises/{id}/coordinate` accepts only `expected_stage` and
+  `institution`. It reserves three model-call slots atomically, shared with
+  policy review. Failed, stale or cancelled work is not refunded because requests
+  may have been billed. The UI never automatically retries.
+- `GET /policy/exercises/{id}/coordination/{round_id}` is explicitly a facilitator
+  view combining released role assessments. The existing role audit contains
+  only the requesting role's assessment and evidence, with shared run metadata.
+  Exercise/round IDs are capabilities, not authentication.
+- One completed round per stage and reference collection is retained, including
+  partial or unavailable results. Reload it through the audit rather than
+  generating again. A deliberate new exercise is needed to repeat a failed round;
+  shared call limits still apply. Refresh and role/scope changes preserve round
+  discovery. A browser page reload still loses the in-memory active exercise ID.
+
+The [live evaluation plan](ai-for-good-live-evaluation.md) prepares 27 calls from
+three scenarios, three stages and three roles. Its default dry run is network
+free. Explicit approval for provider calls and charges is required before its
+separate live command. Nebius is a proposed alternative using an already present
+credential, not an automatic change to the Anthropic classroom configuration.
+The plan discloses pricing, prompt data and unresolved account retention terms.
+Provider availability, semantic quality and expert applicability remain untested.
+
+
+## Coordination verification record
+
+The final local pass retained all **90 existing backend checks** and passed
+**46 policy-related unit tests**: 14 policy, 6 export, 11 coordination, 8
+coordination HTTP/lifecycle and 7 evaluation-harness tests. The standalone staged
+scenario checks also passed. The frontend passed **97 tests** and its production
+build. An offline API sdist/wheel build and an extracted-wheel smoke check passed,
+including coordination/store provenance and the default-disabled endpoint.
+All provider behavior in these checks was scripted or mocked; no provider calls
+or charges were made. Existing frontend large-chunk and package README warnings
+remain build limitations, not test failures.
+
+The saved [dry-run plan](evidence/ai-for-good-coordination-plan.json) prepares
+27 requests totaling 117,151
+system-plus-user UTF-8 bytes. Its deliberately generous token proxy is
+261,950 input tokens, with at most
+10,800 requested output tokens. The resulting list-price
+planning estimate is **$0.018309 USD**, below the
+proposed $0.10 envelope. The proxy is not tokenizer output or an enforced input
+cap; provider billing and account terms still need approval. The plan's
+`structural_validation=not_run` correctly means it prepared requests without
+running any live assessment; the separate offline tests verify the protocol.

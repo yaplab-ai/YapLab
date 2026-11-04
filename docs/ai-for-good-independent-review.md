@@ -30,8 +30,10 @@ specific software behaviors, not general advice quality or security certificatio
 The official brief invites one or more agent roles; autonomous institutional
 coordination is not an unconditional requirement for every submission. YapLab
 must nevertheless avoid representing selectable views as independent agents.
-The current policy model mode selects retrieved references; it does not conduct
-an autonomous institutional assessment or generate a validated gap analysis.
+At that review baseline, the policy model mode selected retrieved references;
+it did not conduct an independent role assessment or generate validated gaps.
+The subsequent coordination increment below adds independent role requests,
+with live-provider and semantic validation still outstanding.
 
 ## Source and operating limits
 
@@ -60,3 +62,29 @@ Final submission destination, hosted KB schema/access and acceptance of the
 summary corpus still require organiser instructions. No hosted import, model
 fine-tuning, legal compliance, validated policy gap or educational benefit is
 claimed. The final report also awaits supported DOCX rendering and pagination.
+
+
+## Coordination review, 4 November 2026
+
+A further independent read-only review reproduced three issues in the new
+coordination increment. Both were repaired before the local handoff:
+
+| Finding | Repair | Focused evidence |
+| --- | --- | --- |
+| Role changes or exercise refresh hid a saved round, while a duplicate round was forbidden | Track round references by exercise/stage/collection and recover them from the role audit; uncertain outcomes require an explicit saved-round check | Frontend regression checks round-key isolation, audit recovery, reload-only and uncertain states |
+| A definite pre-call 429 was treated as an uncertain outcome and permanently blocked retry | Permit a deliberate retry after 429; retain uncertain-outcome recovery for transport/5xx/409/422/404 | Independent recheck confirmed one HTTP attempt, no automatic retry, and the appropriate button states |
+| Bare source IDs could not identify the notes/configuration used after an update | Pin corpus/protocol versions, provider/model, each role's supplied source notes and canonical hashes, prompt hash and attempt status | Changed notes/corpus change the corresponding fingerprints; the store validates note hashes and returns only the queried role's evidence |
+
+The reviewer also reproduced successful atomic three-call quota rollback,
+cancellation cleanup followed by a retry, and role-specific audit filtering.
+Separate HTTP checks cover shared review/coordination concurrency and quotas,
+stale commits, disabled mode, strict request bodies, saved-round retrieval and
+the direct adapter's token/retry/fallback boundary. Provider responses in these
+checks are offline doubles or mocked SDK responses, not live-model evidence.
+
+One completed round per stage/collection, including an unavailable result, is an
+intentional cost and audit boundary. A deliberate new exercise is needed for
+another attempt. This does not prove that the model's proposals were sensible,
+that cited material applies, or that functional roles have official mandates.
+
+The independent reviewer reran the original provenance and recovery reproductions after the repairs and found no remaining blocker in that requested scope.

@@ -1,4 +1,4 @@
-"""Public offline evidence endpoints. Inputs are never persisted here."""
+"""Evidence endpoints and explicitly enabled synthetic coordination rounds."""
 from __future__ import annotations
 
 import asyncio
@@ -15,6 +15,8 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 from frontrow.llm.base import LLMClient
 from .agent import agent_review
+from .coordination import coordinate, Mode
+from .scenarios import _store
 from .evidence import CorpusUnavailable, Institution, Topic, load_corpus, scoped_sources, search
 from .review import review
 
@@ -57,6 +59,12 @@ def _corpus():
 
 
 
+class CoordinationRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    expected_stage: int = Field(ge=1, le=3, strict=True)
+    institution: Institution = 'general'
+
+
 class ModelCallLimits:
     """Process-local paid-call cap: 8/IP/hour, 20/IP/rolling day, 100/day total."""
 
@@ -66,7 +74,9 @@ class ModelCallLimits:
                                   monotonic=monotonic)
         self._daily: dict[str, deque[float]] = {}
 
-    def reserve(self, address: str) -> None:
+    def reserve(self, address: str, count: int = 1) -> None:
+        if type(count) is not int or not 1 <= count <= 3:
+            raise ValueError('Reserve between one and three model calls')
         now = self._monotonic()
         for ip, entries in list(self._daily.items()):
             while entries and entries[0] + 86400 <= now:
@@ -74,13 +84,24 @@ class ModelCallLimits:
             if not entries:
                 del self._daily[ip]
         entries = self._daily.get(address)
-        if entries and len(entries) >= 20:
+        if entries and len(entries) + count > 20:
             raise LimitExceeded('Model review daily limit reached.', math.ceil(entries[0] + 86400 - now))
-        self._hourly.reserve_session(address).commit()
-        self._daily.setdefault(address, deque()).append(now)
+        reservations = []
+        try:
+            for _ in range(count):
+                reservations.append(self._hourly.reserve_session(address))
+        except LimitExceeded:
+            for reservation in reservations:
+                reservation.rollback()
+            raise
+        for reservation in reservations:
+            reservation.commit()
+        self._daily.setdefault(address, deque()).extend([now] * count)
 
 
-def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini') -> APIRouter:
+def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
+                  coordination_llm: LLMClient | None = None,
+                  coordination_mode: Mode = 'model_assisted') -> APIRouter:
     router = APIRouter(prefix='/policy', tags=['policy'])
     # Separate from paid practice-session quotas, per FastAPI app instance.
     admission = DemoLimits(sessions_per_ip_per_hour=120, max_sessions_per_day=10000)
@@ -135,5 +156,48 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini') -
             finally:
                 model_slots.release()
         return review(corpus, body.text, body.topics, body.context, institution=body.institution)
+
+    @router.get('/coordination/status')
+    async def coordination_status(request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        return {'enabled': coordination_llm is not None,
+                'review_mode': coordination_mode if coordination_llm is not None else 'offline_test',
+                **({'model': model} if coordination_llm is not None else {})}
+
+    @router.post('/exercises/{exercise_id}/coordinate')
+    async def coordinate_exercise(exercise_id: str, body: CoordinationRequest,
+                                  request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        if coordination_llm is None:
+            raise HTTPException(503, 'Coordination model calls are not enabled.')
+        store = _store(request)
+        snapshot = store.reserve_coordination(exercise_id, body.expected_stage, body.institution)
+        round_id = snapshot['round_id']
+        try:
+            address = client_ip(request.client.host if request.client else None,
+                                request.headers.get('x-forwarded-for'))
+            try:
+                # Reserve all three calls atomically, shared with /review. Failed
+                # or cancelled calls are not refunded: they may already be billed.
+                model_admission.reserve(address, count=3)
+            except LimitExceeded as exc:
+                raise HTTPException(429, 'Policy model call limit reached; please try again later.',
+                                    headers={'Retry-After': str(exc.retry_after)}) from exc
+            result = await coordinate(_corpus(),
+                {key: snapshot[key] for key in ('scenario_id', 'stage', 'role_views')},
+                coordination_llm, model, institution=body.institution,
+                mode=coordination_mode, shared_semaphore=model_slots)
+            return store.commit_coordination(exercise_id, round_id, result)
+        finally:
+            store.release_coordination(exercise_id, round_id)
+
+    @router.get('/exercises/{exercise_id}/coordination/{round_id}')
+    async def get_coordination(exercise_id: str, round_id: str, request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        # This is an explicit facilitator view. IDs are capabilities, not login.
+        return _store(request).get_coordination(exercise_id, round_id)
 
     return router

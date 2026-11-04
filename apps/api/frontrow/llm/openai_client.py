@@ -127,7 +127,12 @@ class OpenAIClient(LLMClient):
         outcome = "error"
         error_type = None
         try:
-            response = await self._client.chat.completions.create(**request)
+            client = self._client
+            if current_llm_call().role.startswith("policy_coordination_"):
+                # One protocol call means one HTTP attempt, including providers
+                # whose SDK default normally retries. Keep classroom behavior.
+                client = client.with_options(max_retries=0)
+            response = await client.chat.completions.create(**request)
             # Record billing before downstream content parsing/schema validation.
             usage = _usage_dict(getattr(response, "usage", None))
             choice = response.choices[0]

@@ -7,6 +7,8 @@ student information. No transcripts or automated role judgments are stored.
 from __future__ import annotations
 
 import json
+import hashlib
+import re
 import secrets
 import threading
 import time
@@ -25,6 +27,50 @@ EXERCISE_TTL_SECONDS = 3600
 MAX_EXERCISES = 200
 MAX_ACTIONS = 100
 MAX_DECISION_LENGTH = 500
+MAX_COORDINATION_BYTES = 65536
+INSTITUTIONS = ("general", "uaeu")
+_EVIDENCE_FIELDS = ("id", "title", "url", "authority", "jurisdiction", "document_type", "scope", "summary", "limitations", "institution")
+_HEX_DIGEST = re.compile(r"[0-9a-f]{64}\Z")
+
+
+def _validate_provenance(result: dict, item: dict) -> None:
+    """Require bounded, structured references; never treat model prose as provenance."""
+    for key in ("protocol_version", "corpus_version"):
+        if not isinstance(result.get(key), str) or not 0 < len(result[key]) <= 128:
+            raise ValueError("invalid version")
+    model = result.get("model")
+    if not isinstance(model, dict) or set(model) != {"provider", "model"}:
+        raise ValueError("invalid model metadata")
+    if any(not isinstance(model.get(key), str) or not 0 < len(model[key]) <= 128 for key in ("provider", "model")):
+        raise ValueError("invalid model metadata")
+    digest = item.get("prompt_sha256")
+    if not isinstance(digest, str) or not _HEX_DIGEST.fullmatch(digest) or type(item.get("prompt_attempted")) is not bool:
+        raise ValueError("invalid prompt provenance")
+    evidence = item.get("evidence")
+    if not isinstance(evidence, list) or len(evidence) > 3:
+        raise ValueError("invalid evidence")
+    evidence_ids = set()
+    for source in evidence:
+        if not isinstance(source, dict) or set(source) != {*_EVIDENCE_FIELDS, "sha256"}:
+            raise ValueError("invalid source fields")
+        if any(not isinstance(source[key], str) or not 0 < len(source[key]) <= 4000
+               for key in _EVIDENCE_FIELDS if key not in ("limitations", "institution")):
+            raise ValueError("invalid source metadata")
+        if source["institution"] not in (None, "uaeu"):
+            raise ValueError("invalid source institution")
+        limits = source["limitations"]
+        if not isinstance(limits, list) or len(limits) > 12 or any(not isinstance(value, str) or len(value) > 4000 for value in limits):
+            raise ValueError("invalid source limitations")
+        if source["id"] in evidence_ids:
+            raise ValueError("duplicate source")
+        evidence_ids.add(source["id"])
+        canonical = json.dumps({key: source[key] for key in _EVIDENCE_FIELDS}, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        if source["sha256"] != hashlib.sha256(canonical.encode("utf-8")).hexdigest():
+            raise ValueError("source digest mismatch")
+    for proposal in item.get("proposals", []):
+        source_ids = proposal.get("source_ids") if isinstance(proposal, dict) else None
+        if not isinstance(source_ids, list) or any(not isinstance(source_id, str) or source_id not in evidence_ids for source_id in source_ids):
+            raise ValueError("proposal source not in role evidence")
 
 # The source file contains invented case facts, never submitted transcripts.
 _SCENARIOS = json.loads(Path(__file__).with_name("scenarios.json").read_text(encoding="utf-8"))
@@ -125,7 +171,8 @@ class ExerciseStore:
             while exercise_id in self.exercises:
                 exercise_id = secrets.token_urlsafe(24)
             exercise = {"scenario_id": scenario_id, "current_stage": 1,
-                        "expires_at": self.clock() + self.ttl, "events": []}
+                        "expires_at": self.clock() + self.ttl, "events": [],
+                        "coordination_pending": None, "coordination_results": {}}
             self.exercises[exercise_id] = exercise
             return self._view(exercise_id, exercise, role)
 
@@ -138,14 +185,17 @@ class ExerciseStore:
         if expected_stage != exercise["current_stage"]:
             raise HTTPException(status_code=409, detail="Stage changed; refresh the exercise before retrying.")
 
+    def _check_action_capacity(self, exercise: dict) -> None:
+        if len(exercise["events"]) + int(exercise["coordination_pending"] is not None) >= self.max_actions:
+            raise HTTPException(status_code=429, detail="Exercise action limit reached")
+
     def advance(self, exercise_id: str, role: Role, expected_stage: int) -> dict:
         with self.lock:
             exercise = self._get(exercise_id)
             self._check_stage(exercise, expected_stage)
             if exercise["current_stage"] >= len(_BY_ID[exercise["scenario_id"]]["stages"]):
                 raise HTTPException(status_code=409, detail="Exercise is already at its final stage")
-            if len(exercise["events"]) >= self.max_actions:
-                raise HTTPException(status_code=429, detail="Exercise action limit reached")
+            self._check_action_capacity(exercise)
             exercise["current_stage"] += 1
             exercise["events"].append({"type": "advance", "stage": exercise["current_stage"], "at": _now_iso()})
             return self._view(exercise_id, exercise, role)
@@ -158,18 +208,137 @@ class ExerciseStore:
             valid_ids = {fact["id"] for stage in visible["released_stages"] for fact in stage["facts"]}
             if not set(decision.source_ids).issubset(valid_ids):
                 raise HTTPException(status_code=422, detail="source_ids must refer to released facts visible to this role")
-            if len(exercise["events"]) >= self.max_actions:
-                raise HTTPException(status_code=429, detail="Exercise action limit reached")
+            self._check_action_capacity(exercise)
             event = {"type": "decision", "review_mode": "human_decision", "stage": exercise["current_stage"], "role": decision.role,
                      "decision": decision.decision, "source_ids": list(decision.source_ids), "at": _now_iso()}
             exercise["events"].append(event)
             return {"event": dict(event)}
 
+    def reserve_coordination(self, exercise_id: str, expected_stage: int, institution: str) -> dict:
+        """Reserve one action and return a detached, released-facts-only snapshot."""
+        with self.lock:
+            exercise = self._get(exercise_id)
+            self._check_stage(exercise, expected_stage)
+            if institution not in INSTITUTIONS:
+                raise HTTPException(status_code=422, detail="Unknown institution")
+            if exercise["coordination_pending"] is not None:
+                raise HTTPException(status_code=409, detail="A coordination round is already in progress")
+            if any(event["type"] == "coordination" and event["stage"] == expected_stage
+                   and event["institution"] == institution for event in exercise["events"]):
+                raise HTTPException(status_code=409, detail="A coordination round already exists for this stage and institution")
+            self._check_action_capacity(exercise)
+            role_views = {}
+            for role in ROLES:
+                view = self._view(exercise_id, exercise, role)
+                role_views[role] = [fact for stage in view["released_stages"] for fact in stage["facts"]]
+            round_id = secrets.token_urlsafe(24)
+            exercise["coordination_pending"] = {
+                "round_id": round_id, "stage": expected_stage, "institution": institution,
+                "fact_ids": {role: {fact["id"] for fact in facts} for role, facts in role_views.items()},
+            }
+            return {"round_id": round_id, "exercise_id": exercise_id, "scenario_id": exercise["scenario_id"],
+                    "stage": expected_stage, "institution": institution, "role_views": role_views}
+
+    def commit_coordination(self, exercise_id: str, round_id: str, result: dict) -> dict:
+        """Commit a bounded result only while the reserved stage remains current."""
+        with self.lock:
+            exercise = self._get(exercise_id)
+            pending = exercise["coordination_pending"]
+            if pending is None or pending["round_id"] != round_id:
+                raise HTTPException(status_code=404, detail="Coordination reservation not found")
+            if pending["stage"] != exercise["current_stage"]:
+                exercise["coordination_pending"] = None
+                raise HTTPException(status_code=409, detail="Stage changed; refresh the exercise before retrying.")
+            try:
+                encoded = json.dumps(result, ensure_ascii=False, allow_nan=False)
+                if len(encoded.encode("utf-8")) > MAX_COORDINATION_BYTES:
+                    raise ValueError("result too large")
+                safe = json.loads(encoded)
+                if not isinstance(safe, dict) or safe.get("scenario_id") != exercise["scenario_id"] or type(safe.get("stage")) is not int or safe.get("stage") != pending["stage"] or safe.get("institution") != pending["institution"]:
+                    raise ValueError("result does not match reservation")
+                if safe.get("review_mode") not in ("offline_test", "model_assisted"):
+                    raise ValueError("invalid mode")
+                roles = safe.get("roles")
+                if not isinstance(roles, list) or len(roles) != len(ROLES):
+                    raise ValueError("invalid roles")
+                seen = set()
+                for item in roles:
+                    if not isinstance(item, dict) or item.get("role") not in ROLES or item["role"] in seen:
+                        raise ValueError("invalid role")
+                    role = item["role"]
+                    seen.add(role)
+                    proposals = item.get("proposals")
+                    if not isinstance(proposals, list) or not isinstance(item.get("questions"), list):
+                        raise ValueError("invalid assessment")
+                    for proposal in proposals:
+                        if not isinstance(proposal, dict) or not isinstance(proposal.get("fact_ids"), list):
+                            raise ValueError("invalid proposal")
+                        if not all(isinstance(fact_id, str) and fact_id in pending["fact_ids"][role]
+                                   for fact_id in proposal["fact_ids"]):
+                            raise ValueError("fact not visible to role")
+                    _validate_provenance(safe, item)
+                safe["round_id"] = round_id
+            except (TypeError, ValueError, OverflowError):
+                exercise["coordination_pending"] = None
+                raise HTTPException(status_code=422, detail="Invalid coordination result") from None
+            exercise["coordination_results"][round_id] = safe
+            exercise["coordination_pending"] = None
+            exercise["events"].append({"type": "coordination", "round_id": round_id,
+                                       "stage": pending["stage"], "institution": pending["institution"],
+                                       "review_mode": safe["review_mode"], "protocol_version": safe["protocol_version"],
+                                       "corpus_version": safe["corpus_version"], "model": dict(safe["model"]), "at": _now_iso()})
+            return json.loads(json.dumps(safe))
+
+    def release_coordination(self, exercise_id: str, round_id: str) -> bool:
+        """Release only the matching pending round; safe to call after commit or failure."""
+        with self.lock:
+            self._expire()
+            exercise = self.exercises.get(exercise_id)
+            if exercise is None:
+                return False
+            pending = exercise["coordination_pending"]
+            if pending is not None and pending["round_id"] == round_id:
+                exercise["coordination_pending"] = None
+                return True
+            return False
+
+    def get_coordination(self, exercise_id: str, round_id: str) -> dict:
+        """Return the complete facilitator view, detached from the store."""
+        with self.lock:
+            exercise = self._get(exercise_id)
+            result = exercise["coordination_results"].get(round_id)
+            if result is None:
+                raise HTTPException(status_code=404, detail="Coordination round not found")
+            return json.loads(json.dumps(result))
+
     def audit(self, exercise_id: str, role: Role) -> dict:
         with self.lock:
             exercise = self._get(exercise_id)
-            # Return copies; only the requesting role's submitted text is disclosed.
-            events = [dict(e) for e in exercise["events"] if e["type"] == "advance" or e["role"] == role]
+            events = []
+            for event in exercise["events"]:
+                if event["type"] == "advance" or (event["type"] == "decision" and event["role"] == role):
+                    events.append(dict(event))
+                elif event["type"] == "coordination":
+                    result = exercise["coordination_results"][event["round_id"]]
+                    item = next(item for item in result["roles"] if item["role"] == role)
+                    assessment = {key: item[key] for key in ("role", "status", "proposals", "questions") if key in item}
+                    if item.get("reason") in ("insufficient_evidence", "timeout", "invalid_response", "provider_error", "overall_timeout"):
+                        assessment["reason"] = item["reason"]
+                    assessment["prompt_sha256"] = item["prompt_sha256"]
+                    assessment["prompt_attempted"] = item["prompt_attempted"]
+                    assessment["evidence"] = [
+                        {key: source[key] for key in (*_EVIDENCE_FIELDS, "sha256")}
+                        for source in item["evidence"]
+                    ]
+                    assessment["proposals"] = [
+                        {key: proposal[key] for key in ("action_id", "owner", "text", "fact_ids", "source_ids") if key in proposal}
+                        for proposal in item["proposals"]
+                    ]
+                    assessment["questions"] = [
+                        {key: question[key] for key in ("question_id", "text") if key in question}
+                        for question in item["questions"] if isinstance(question, dict)
+                    ]
+                    events.append(json.loads(json.dumps({**event, "assessment": assessment})))
             return {"exercise_id": exercise_id, "events": events}
 
 

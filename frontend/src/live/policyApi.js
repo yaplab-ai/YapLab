@@ -32,6 +32,12 @@ export function createPolicyApi(baseUrl = API_URL, fetchImpl = globalThis.fetch)
     search: (query, limit = 10, institution = 'general') => post('/policy/search', { query, limit, institution }),
     review: (text, topics = [], context = '', institution = 'general') => post('/policy/review', { text, topics, context, institution }),
     scenarios: () => request('/policy/scenarios'),
+    coordinationStatus: () => request('/policy/coordination/status'),
+    coordinate: (id, expectedStage, institution = 'general') => {
+      requireStage(expectedStage);
+      return post(`/policy/exercises/${encodeURIComponent(id)}/coordinate`, { expected_stage: expectedStage, institution });
+    },
+    coordinationRound: (id, roundId) => request(`/policy/exercises/${encodeURIComponent(id)}/coordination/${encodeURIComponent(roundId)}`),
     startExercise: (scenarioId, role) => post(`/policy/exercises${roleQuery(role)}`, { scenario_id: scenarioId }),
     exercise: (id, role) => request(`/policy/exercises/${encodeURIComponent(id)}${roleQuery(role)}`),
     advance: (id, role, expectedStage) => {

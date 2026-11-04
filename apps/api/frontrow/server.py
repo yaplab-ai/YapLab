@@ -418,9 +418,21 @@ def create_app(
     policy_llm_mode = os.environ.get("FRONTROW_POLICY_LLM", "off").strip().lower()
     if policy_llm_mode not in {"off", "configured"}:
         raise RuntimeError("FRONTROW_POLICY_LLM must be off or configured")
+    coordination_mode = os.environ.get("FRONTROW_POLICY_COORDINATION", "off").strip().lower()
+    if coordination_mode not in {"off", "configured"}:
+        raise RuntimeError("FRONTROW_POLICY_COORDINATION must be off or configured")
+    coordination_llm = None
+    if coordination_mode == "configured":
+        # The validation client still owns/cleans up its primary. Never pass its
+        # automatic fake fallback to a workflow labelled model-assisted.
+        primary = validation_llm.primary if isinstance(validation_llm, FallbackLLM) else validation_llm
+        if not isinstance(primary, OpenAIClient):
+            raise RuntimeError("Policy coordination requires a direct OpenAI-compatible provider; Anthropic/fake are unsupported")
+        coordination_llm = primary
     app.include_router(create_policy_router(
         llm=validation_llm if policy_llm_mode == "configured" else None,
         model=base_config.llm_model_fast or base_config.llm_model,
+        coordination_llm=coordination_llm,
     ))
     app.include_router(policy_scenarios_router)
     app.state.sessions = sessions

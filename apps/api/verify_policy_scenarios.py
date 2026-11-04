@@ -3,9 +3,10 @@
 Run from apps/api: .venv/bin/python verify_policy_scenarios.py
 """
 from concurrent.futures import ThreadPoolExecutor
+import hashlib
 import json
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.testclient import TestClient
 
 from frontrow.policy import scenarios
@@ -135,8 +136,149 @@ def check_admission():
         assert client.get(f'/policy/exercises/{exercise_id}').headers['cache-control'] == 'no-store'
 
 
+def assert_http(code, fn, *args):
+    try:
+        fn(*args)
+    except HTTPException as exc:
+        assert exc.status_code == code, (exc.status_code, exc.detail)
+    else:
+        raise AssertionError(f'Expected HTTP {code}')
+
+
+def role_evidence(role):
+    source = {'id': f'{role}-source', 'title': f'{role} source', 'url': 'https://example.org',
+              'authority': 'Example', 'jurisdiction': 'Example', 'document_type': 'guidance',
+              'scope': 'Example scope', 'summary': 'Example summary', 'limitations': [], 'institution': None}
+    canonical = json.dumps(source, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+    return {**source, 'sha256': hashlib.sha256(canonical.encode('utf-8')).hexdigest()}
+
+
+def result_for(snapshot):
+    return {
+        'scenario_id': snapshot['scenario_id'], 'stage': snapshot['stage'],
+        'institution': snapshot['institution'], 'review_mode': 'offline_test',
+        'protocol_version': '1', 'corpus_version': 'test',
+        'model': {'provider': 'offline_test', 'model': 'test-model'},
+        'roles': [
+            {'role': role, 'status': 'completed', 'evidence': [role_evidence(role)],
+             'prompt_sha256': str(index + 1) * 64, 'prompt_attempted': True,
+             'proposals': [{'action_id': f'{role}-act', 'owner': role, 'text': f'{role} proposal',
+                            'fact_ids': [snapshot['role_views'][role][-1]['id']], 'source_ids': [f'{role}-source']}],
+             'questions': []}
+            for index, role in enumerate(scenarios.ROLES)
+        ],
+        'plan': [], 'unresolved': [], 'limitations': [],
+    }
+
+
+def check_coordination():
+    store = scenarios.ExerciseStore(max_actions=5)
+    exercise_id = store.create('transcript-disclosure', 'teacher')['exercise_id']
+    snapshot = store.reserve_coordination(exercise_id, 1, 'general')
+    assert set(snapshot['role_views']) == set(scenarios.ROLES)
+    assert {fact['id'] for fact in snapshot['role_views']['teacher']} == {'td-1a', 'td-1b'}
+    assert {fact['id'] for fact in snapshot['role_views']['accessibility']} == {'td-1a', 'td-1c'}
+    scenario = scenarios._BY_ID['transcript-disclosure']
+    encoded = json.dumps(snapshot)
+    for stage in scenario['stages'][1:]:
+        assert stage['title'] not in encoded
+        for fact in stage['facts']:
+            assert fact['id'] not in encoded and fact['text'] not in encoded
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'general')
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'uaeu')
+    result = result_for(snapshot)
+    result['roles'][1].update(status='unavailable', reason='provider_error', proposals=[])
+    # A detached snapshot and caller-owned result do not mutate stored state.
+    snapshot['role_views']['teacher'][0]['text'] = 'modified outside store'
+    committed = store.commit_coordination(exercise_id, snapshot['round_id'], result)
+    result['roles'][0]['proposals'][0]['text'] = 'modified outside store'
+    assert 'modified outside store' not in json.dumps(store.get_coordination(exercise_id, snapshot['round_id']))
+    committed['roles'][0]['proposals'][0]['text'] = 'modified response'
+    assert 'modified response' not in json.dumps(store.get_coordination(exercise_id, snapshot['round_id']))
+    teacher = store.audit(exercise_id, 'teacher')['events'][0]
+    accessibility = store.audit(exercise_id, 'accessibility')['events'][0]
+    assert teacher['assessment']['role'] == 'teacher' and accessibility['assessment']['role'] == 'accessibility'
+    assert store.audit(exercise_id, 'privacy')['events'][0]['assessment']['reason'] == 'provider_error'
+    assert 'td-1c' not in json.dumps(teacher)
+    assert 'td-1b' not in json.dumps(accessibility)
+    assert 'accessibility proposal' not in json.dumps(teacher) and 'teacher proposal' not in json.dumps(accessibility)
+    assert 'plan' not in teacher
+    assert teacher['protocol_version'] == '1' and teacher['corpus_version'] == 'test'
+    assert teacher['model'] == {'provider': 'offline_test', 'model': 'test-model'}
+    assert teacher['assessment']['evidence'] == [role_evidence('teacher')]
+    assert teacher['assessment']['prompt_sha256'] == '1' * 64
+    assert teacher['assessment']['prompt_attempted'] is True
+    assert 'accessibility-source' not in json.dumps(teacher)
+    assert '3' * 64 not in json.dumps(teacher)
+    assert 'teacher-source' not in json.dumps(accessibility)
+    assert '1' * 64 not in json.dumps(accessibility)
+    teacher['model']['model'] = 'changed'
+    teacher['assessment']['evidence'][0]['title'] = 'changed'
+    assert store.audit(exercise_id, 'teacher')['events'][0]['model']['model'] == 'test-model'
+    assert store.audit(exercise_id, 'teacher')['events'][0]['assessment']['evidence'][0]['title'] == 'teacher source'
+    assert_http(409, store.reserve_coordination, exercise_id, 1, 'general')
+    other = store.reserve_coordination(exercise_id, 1, 'uaeu')
+    assert not store.release_coordination(exercise_id, 'wrong-round')
+    assert store.release_coordination(exercise_id, other['round_id'])
+    assert not store.release_coordination(exercise_id, other['round_id'])
+    retried = store.reserve_coordination(exercise_id, 1, 'uaeu')
+    invalid = result_for(retried)
+    invalid['roles'][0]['proposals'][0]['fact_ids'] = ['td-1c']
+    assert_http(422, store.commit_coordination, exercise_id, retried['round_id'], invalid)
+    assert not store.release_coordination(exercise_id, retried['round_id'])
+    forged = store.reserve_coordination(exercise_id, 1, 'uaeu')
+    bad_provenance = result_for(forged)
+    bad_provenance['roles'][0]['evidence'][0]['title'] = 'forged source'
+    assert_http(422, store.commit_coordination, exercise_id, forged['round_id'], bad_provenance)
+    forged = store.reserve_coordination(exercise_id, 1, 'uaeu')
+    bad_provenance = result_for(forged)
+    bad_provenance['roles'][0]['proposals'][0]['source_ids'] = ['accessibility-source']
+    assert_http(422, store.commit_coordination, exercise_id, forged['round_id'], bad_provenance)
+    pending = store.reserve_coordination(exercise_id, 1, 'uaeu')
+    stale_result = result_for(pending)
+    store.advance(exercise_id, 'teacher', 1)
+    before = store.audit(exercise_id, 'teacher')
+    assert_http(409, store.commit_coordination, exercise_id, pending['round_id'], stale_result)
+    assert store.audit(exercise_id, 'teacher') == before
+    assert_http(404, store.get_coordination, exercise_id, pending['round_id'])
+    assert not store.release_coordination(exercise_id, pending['round_id'])
+
+    # One pending reservation takes an action slot; cancellation frees it.
+    limited = scenarios.ExerciseStore(max_actions=1)
+    eid = limited.create('caption-failure', 'teacher')['exercise_id']
+    reserved = limited.reserve_coordination(eid, 1, 'general')
+    assert_http(429, limited.advance, eid, 'teacher', 1)
+    decision = scenarios.Decision(role='teacher', decision='Act', source_ids=['cf-1a'], expected_stage=1)
+    assert_http(429, limited.decide, eid, decision)
+    assert limited.release_coordination(eid, reserved['round_id'])
+    limited.advance(eid, 'teacher', 1)
+    assert_http(429, limited.reserve_coordination, eid, 2, 'general')
+
+    # Concurrent calls reserve only once, even across institutions.
+    race = scenarios.ExerciseStore()
+    eid = race.create('caption-failure', 'teacher')['exercise_id']
+    def reserve(_):
+        try:
+            return race.reserve_coordination(eid, 1, 'general')
+        except HTTPException as exc:
+            return exc.status_code
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(reserve, range(2)))
+    assert sum(isinstance(item, dict) for item in results) == 1 and results.count(409) == 1
+
+    clock = [0.0]
+    expiring = scenarios.ExerciseStore(ttl=5, clock=lambda: clock[0])
+    eid = expiring.create('caption-failure', 'teacher')['exercise_id']
+    pending = expiring.reserve_coordination(eid, 1, 'general')
+    clock[0] = 5.0
+    assert_http(404, expiring.commit_coordination, eid, pending['round_id'], result_for(pending))
+    assert not expiring.release_coordination(eid, pending['round_id'])
+    assert_http(404, expiring.get_coordination, eid, pending['round_id'])
+
+
 if __name__ == '__main__':
     check_disclosure_and_audit()
     check_ttl_capacity_actions_and_concurrency()
     check_admission()
+    check_coordination()
     print('Policy scenario checks passed')

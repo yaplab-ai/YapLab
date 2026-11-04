@@ -103,3 +103,21 @@
 .policy-institution-badge { color:var(--chalk); }
 @media (max-width:700px) { .policy-scope { grid-template-columns:1fr; } .policy-scope p { grid-column:auto; } }
 .policy-stage-controls { display:flex; flex-wrap:wrap; gap:10px 20px; }
+
+.policy-coordination { border-top:1px solid var(--line-2); margin-top:36px; padding-top:26px; }
+.policy-coordination > h3 { font-size:20px; margin:6px 0 10px; }
+.policy-coordination > p:not(.eyebrow) { color:var(--chalk-2); }
+.policy-coordination-result { margin-top:24px; padding:24px; border:1px solid var(--line-2); border-radius:var(--r-md); background:var(--board-2); }
+.policy-coordination-result > p,.policy-coordination-role p,.policy-coordination-plan p { color:var(--chalk-2); }
+.policy-coordination-roles { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:18px; margin-top:22px; }
+.policy-coordination-role { border-top:1px solid var(--line-2); padding-top:14px; }
+.policy-coordination-role h4 { display:flex; gap:8px; align-items:baseline; flex-wrap:wrap; }
+.policy-coordination-role h5 { margin:14px 0 4px; font-size:13px; }
+.policy-coordination-role ul,.policy-coordination-plan ol { padding-left:20px; color:var(--chalk-2); }
+.policy-coordination-role li,.policy-coordination-plan li { margin:8px 0; }
+.policy-evidence { display:block; color:var(--chalk-3); font:11px/1.5 var(--f-mono); margin-top:5px; overflow-wrap:anywhere; }
+.policy-coordination-plan { margin-top:26px; border-top:1px solid var(--line-2); padding-top:18px; }
+.policy-coordination-plan li { margin:14px 0; }
+.policy-coordination-plan strong { color:var(--chalk); font-weight:600; }
+.policy-coordination-plan p { margin-top:4px; font-size:13px; }
+@media (max-width:700px) { .policy-coordination-result { padding:18px; } }

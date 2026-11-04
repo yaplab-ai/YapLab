@@ -26,7 +26,8 @@ existing classroom and work offline for repeatable software verification.
 The existing React/Vite frontend connects to a FastAPI backend. Classroom
 rehearsal already uses a session orchestrator, parallel listener agents,
 source-grounded questions, moderation, answer evaluation and reports. The new
-Policy Lab has three tools: source search, structured review and staged exercises.
+Policy Lab has source search, structured review, staged exercises and an optional
+three-role coordination path.
 
 The knowledge base is a packaged eleven-record catalogue of primary-source
 metadata and original paraphrases, including authority, URL, locator, dates,
@@ -93,17 +94,28 @@ institutional adoption and educational value remain unevaluated.
 
 An exercise has one shared stage counter and teacher, privacy and accessibility
 views. Future facts are withheld; each view receives only its released facts.
-Users can record a decision citing fact IDs. Audit views show common stage
-advances and that role's decisions. Roles are selectable simulation views, not
-authenticated institutional agents. Independent institutional-agent coordination
-has not been implemented. Auditability uses decision summaries, source IDs,
-retrieval metadata, review modes and fallback reasons, without private model
-chain-of-thought.
+Users can record a decision citing fact IDs. Optional coordination makes three
+separate model requests, each receiving only its role's facts, mandate, policy
+notes and stage-available action IDs. A deterministic coordinator validates IDs
+and assigns owners, handoffs and dependencies; conflicts or missing input require
+human review. This supports functional teaching/privacy/accessibility roles, not
+authenticated institutional representatives or autonomous negotiation.
+
+Coordination uses direct OpenAI-compatible clients with a 400-token output cap,
+no retries or fake fallback, bounded concurrency and deadlines. It is disabled
+by default. A stage change during inference prevents commit. A saved round pins
+the corpus/protocol versions, provider/model, supplied source notes and hashes,
+prompt hashes, call-attempt status and validated proposals. Facilitators can see
+all role assessments; role audits return only their own. Auditability records
+concise decisions and evidence without private model chain-of-thought. These
+software paths have been tested offline; real model response quality is unknown.
 
 ## 5. Evaluation, limitations and reproduction
 
 On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
-14 policy tests, six export tests, staged-scenario checks and 93 frontend tests passed. The frontend
+14 policy tests, six export tests, eleven coordination tests, eight coordination
+HTTP tests, seven evaluation-harness tests, staged-scenario checks and 97
+frontend tests passed. The frontend
 production build and offline API wheel/sdist build succeeded. An extracted-wheel
 API smoke check serves the scoped source collections and three scenarios.
 
@@ -136,5 +148,12 @@ Audit metadata distinguishes input words, alias expansion and topic anchors and
 tracks the sources actually selected. These repairs improve traceability; they
 do not validate policy advice. Exercise access expires after one hour, with lazy
 cleanup rather than a guarantee of physical erasure at the exact expiry time.
-The scenarios use fixed sequences and do not branch on decisions or demonstrate
-autonomous institutional coordination. See the [review record](ai-for-good-independent-review.md).
+The scenarios use fixed sequences and do not branch on decisions. The three-role
+protocol has offline checks for independent contexts, invalid citations, conflicts,
+dependencies, quota sharing, cancellation and stale commits. A 27-call live
+evaluation is prepared with synthetic facts and public policy paraphrases; it has
+not run and requires approval for charges and provider data handling. The original
+application selects Anthropic; the bounded evaluation explicitly proposes Nebius
+as an alternative. Neither provider availability nor semantic quality is established.
+See the [review record](ai-for-good-independent-review.md) and
+[live evaluation plan](ai-for-good-live-evaluation.md).
