@@ -55,8 +55,9 @@ replace provider account controls.
 An educator and an institutional policy reviewer should assess the scenarios and
 their actual applicability, compare expected responses with a labelled rubric,
 and assess whether the global examples address the same problem. Any live-model
-evaluation needs approved provider access and a bounded budget. Neither such
-evaluation nor a real user study has been performed.
+evaluation needs approved provider access and a bounded budget. At this review
+baseline neither such evaluation nor a real user study had been performed. The
+subsequent approved coordination run below does not replace expert/user review.
 
 Final submission destination, hosted KB schema/access and acceptance of the
 summary corpus still require organiser instructions. No hosted import, model
@@ -88,3 +89,13 @@ another attempt. This does not prove that the model's proposals were sensible,
 that cited material applies, or that functional roles have official mandates.
 
 The independent reviewer reran the original provenance and recovery reproductions after the repairs and found no remaining blocker in that requested scope.
+
+
+## Subsequent approved live run
+
+After the independent offline review, the user authorised one bounded Nebius
+evaluation. [Actual results](ai-for-good-live-results.md) show 14/27 structurally
+accepted responses and 13 rejections. The earlier offline checks remain valid
+software evidence; they did not predict model adherence. Exact rejection
+diagnosis and semantic/expert review remain outstanding. No further provider
+calls were made to retry or replace those failures.

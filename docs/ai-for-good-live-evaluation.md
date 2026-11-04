@@ -36,7 +36,10 @@ The account's zero-data-retention setting is unknown; the harness neither checks
 
 ## Local configuration observed
 
-The original local configuration was observed with `FRONTROW_LLM=anthropic` and no model override; the application default resolves to `claude-haiku-5-5`. Only the presence of Anthropic and Nebius credentials was checked, not their values. The isolated worktree had no `.env` and policy model calls were off. The current coordination adapter does not support Anthropic because its adapter requests up to 1,024 output tokens; the separately gated Nebius evaluation is an explicit alternative using an existing credential, not an automatic application provider change. Remote account access and model availability have not been verified.
+The original local configuration was observed with `FRONTROW_LLM=anthropic` and no model override; the application default resolves to `claude-haiku-5-5`. Preflight checked only credential presence without displaying values. For the
+approved run, a local wrapper read only the existing Nebius key into the child
+process environment; it was neither printed nor saved. The isolated worktree had no `.env` and policy model calls were off. The current coordination adapter does not support Anthropic because its adapter requests up to 1,024 output tokens; the separately gated Nebius evaluation is an explicit alternative using an existing credential, not an automatic application provider change. The subsequent bounded run established access to the exact model alias; billing
+identity and retention settings remain unverified. See the live result record below.
 
 
 ## Concrete approval scope and billing uncertainty
@@ -44,7 +47,8 @@ The original local configuration was observed with `FRONTROW_LLM=anthropic` and 
 The proposed target is Nebius Token Factory's public OpenAI-compatible
 `https://api.tokenfactory.nebius.com/v1/chat/completions` endpoint, model
 `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`. This exact API ID and this account's access
-have not been checked against an authenticated catalog. A failure must be recorded;
+were not checked against an authenticated catalog before the run; all 27
+subsequent inference requests returned responses from this configured alias. A failure must be recorded;
 the harness must not silently substitute another model/provider or create an
 endpoint. The original app's Anthropic configuration remains unchanged.
 
@@ -75,9 +79,11 @@ Billing would use the Nebius organisation/account associated with the existing
 `NEBIUS_API_KEY` found in the original checkout. **The account/organisation name,
 project, billing owner, balance, applicable contract and ZDR status are unknown.**
 Key presence does not identify or authorise a billing account. No authenticated
-billing lookup, balance check or service call was made, and no new credential,
+billing lookup or balance check was made; only the 27 approved inference requests
+were later sent, and no new credential,
 subscription or infrastructure was created. Confirm the intended billing account
-before approving use of that credential.
+before any broader use of that credential. The user explicitly accepted the
+unknown account identity for the one bounded run recorded below.
 
 Approval can be limited to this model/provider, the previewed synthetic/public
 policy/project-prompt content, one evaluation, at most 27 attempted calls and
@@ -92,5 +98,11 @@ but input tokenization and billing remain provider-controlled; calls already
 accepted may be billed after cancellation and usage may be missing. A strict
 dollar ceiling requires a confirmed provider-side control or separately agreed
 treatment of that uncertainty. No such account setting has been changed. The
-live run remains pending explicit approval of charges, content disclosure and
-the intended billing account; it has not been denied or attempted.
+user subsequently approved those conditions for one run. That run completed and
+consumed all 27 permitted attempts; no further call is authorised by that run's
+allowance. See [actual results](ai-for-good-live-results.md).
+
+
+The [live evidence and interpretation](ai-for-good-live-results.md) record the completed run, its structural failures and reported-usage cost. Future comparisons must preserve those negative findings and report new scope/pricing before switching providers.
+
+The approved runner additionally saved progress after each snapshot and would stop future snapshots on provider failure/timeout, missing usage, an exceeded output cap or reported list-price usage reaching $0.10. None of those stop conditions occurred. These safeguards do not provide a provider-enforced dollar cap.

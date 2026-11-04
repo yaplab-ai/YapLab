@@ -54,7 +54,8 @@ among retrieved source IDs and curated requirement indexes. Schema and citation
 validation prevent the display of a model-invented source. Invalid output,
 abstention, timeout or provider error yields a visibly labelled deterministic
 fallback. This constrains output provenance; it does not prove relevance or
-legal applicability. No live policy-model evaluation has been performed.
+legal applicability. The separate coordination path has one bounded live-model
+evaluation, described below; the free-text review selector was not live-tested.
 
 ## 3. Policy mapping and candidate domain gaps
 
@@ -108,7 +109,8 @@ the corpus/protocol versions, provider/model, supplied source notes and hashes,
 prompt hashes, call-attempt status and validated proposals. Facilitators can see
 all role assessments; role audits return only their own. Auditability records
 concise decisions and evidence without private model chain-of-thought. These
-software paths have been tested offline; real model response quality is unknown.
+software paths have offline checks and one bounded live coordination run. Only
+14 of 27 role responses passed structural validation; semantic quality is unreviewed.
 
 ## 5. Evaluation, limitations and reproduction
 
@@ -134,8 +136,8 @@ pattern-based checks cannot reliably detect identifying information.
 
 Before submission, obtain expert review of institutional applicability and
 scenarios, broaden and benchmark the corpus, confirm the final submission
-destination and hosted KB import contract, and decide whether to run a bounded
-live-provider evaluation. Final pagination has not been verified on this host. No publication, shared
+destination and hosted KB import contract, and repair the live run's structural
+reliability gap before any further approved provider comparison. Final pagination has not been verified on this host. No publication, shared
 repository update, deployment or application submission occurred during this work.
 Reproduction commands and the explicit model opt-in are in the
 [engineering runbook](ai-for-good.md#verification-and-local-use).
@@ -150,10 +152,13 @@ do not validate policy advice. Exercise access expires after one hour, with lazy
 cleanup rather than a guarantee of physical erasure at the exact expiry time.
 The scenarios use fixed sequences and do not branch on decisions. The three-role
 protocol has offline checks for independent contexts, invalid citations, conflicts,
-dependencies, quota sharing, cancellation and stale commits. A 27-call live
-evaluation is prepared with synthetic facts and public policy paraphrases; it has
-not run and requires approval for charges and provider data handling. The original
-application selects Anthropic; the bounded evaluation explicitly proposes Nebius
-as an alternative. Neither provider availability nor semantic quality is established.
+dependencies, quota sharing, cancellation and stale commits. One approved Nebius
+run made 27 requests with no retries or fallback. All returned provider responses;
+14 passed schema/allowed-ID checks and 13 were rejected, leaving only one of nine
+snapshots fully validated. Reported usage was 26,604 input and 3,289 output tokens,
+corresponding to $0.0023856 at published list rates; the invoice was not verified.
+The current coarse rejection label does not identify the precise failure cause.
+This establishes provider access and a structural reliability gap, not policy
+correctness or effectiveness. The original Anthropic configuration remains unchanged.
 See the [review record](ai-for-good-independent-review.md) and
-[live evaluation plan](ai-for-good-live-evaluation.md).
+[live results](ai-for-good-live-results.md).

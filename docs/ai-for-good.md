@@ -83,7 +83,7 @@ engineering plan, not a submission.
 | Knowledge base | Small versioned source catalogue and retrieval over curated summaries | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
 | Policy reasoning | Retrieved evidence and scoped review; explicit review mode | Expert-labelled cases; bounded live-provider evaluation if enabled |
 | Staged errors | Synthetic role-specific releases and recorded human decisions | Facilitated multi-person exercise and verified domain-gap conclusions |
-| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Approved live-provider run and expert assessment; functional teaching/privacy/accessibility roles do not establish official institutional mandates |
+| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Live run: 14/27 structurally accepted; repair reliability and obtain expert assessment. Functional roles do not establish official institutional mandates |
 | Audit | Structured evidence/decision records | Retention policy, authorised audit access and tamper-resistant export for deployment |
 | Standards mapping | Conceptual mapping below | Reviewer assessment; no certification claimed |
 
@@ -241,8 +241,8 @@ inspected ITU-linked code, distinguish the Colab and simulation workflows, and
 list the exact missing organiser instructions. The [local KB package](../knowledge-base/README.md)
 contains separate scoped collections, manifests and notebook-compatible chunks.
 Both collections pass deterministic regeneration checks. No embeddings, hosted
-KB import, sandbox access, private-model reasoning trace or live policy-model
-evaluation is claimed.
+KB import, sandbox access or private-model reasoning trace is claimed. The later
+approved live coordination evaluation is recorded separately below.
 
 The [report content draft](ai-for-good-report-draft.md) is updated for these
 results. Final DOCX authoring and pagination must be performed in a supported
@@ -292,7 +292,8 @@ These are functional exercise roles, not authorised government or university
 representatives. Independent means separate model requests and role contexts;
 the roles can use the same model. The merging protocol is deterministic rather
 than an autonomous negotiation. Current evidence uses scripted clients and a
-mocked SDK transport only. No real provider assessment has been recorded.
+mocked SDK transport in the offline suite. A subsequent approved live run is
+recorded below; it exposed structural failures and does not establish semantic quality.
 
 `FRONTROW_POLICY_COORDINATION=off` remains the default, separate from
 `FRONTROW_POLICY_LLM`. Setting it to `configured` uses only the configured direct
@@ -323,7 +324,8 @@ free. Explicit approval for provider calls and charges is required before its
 separate live command. Nebius is a proposed alternative using an already present
 credential, not an automatic change to the Anthropic classroom configuration.
 The plan discloses pricing, prompt data and unresolved account retention terms.
-Provider availability, semantic quality and expert applicability remain untested.
+The subsequent live run established access to the selected alias but exposed
+structural failures. Semantic quality and expert applicability remain unreviewed.
 
 
 ## Coordination verification record
@@ -348,3 +350,19 @@ proposed $0.10 envelope. The proxy is not tokenizer output or an enforced input
 cap; provider billing and account terms still need approval. The plan's
 `structural_validation=not_run` correctly means it prepared requests without
 running any live assessment; the separate offline tests verify the protocol.
+
+
+## Approved live evaluation follow-up
+
+The [recorded live run](ai-for-good-live-results.md) consumed the approved
+27-request allowance on 4 November: 27 provider responses, 14 accepted by strict
+schema/ID checks, 13 rejected, and 1/9 snapshots with all roles accepted. The
+output cap was 400 tokens per call, SDK retries were zero and no fallback or
+provider switch was used. Reported usage gives $0.0023856 at the recorded list
+rates; no invoice, balance or billing-owner verification was performed.
+Prompt/evidence hashes and accepted IDs passed an offline recheck. Exact
+rejection categories were not saved, so follow-up should improve safe validation
+telemetry and output constraints locally before further paid evaluation. No
+learning gain, legal correctness, hosted import or deployment is established.
+The original app configuration and default-disabled coordination flag remain
+unchanged. The live authorization was for one run; it is now consumed.
