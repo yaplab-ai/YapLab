@@ -10,7 +10,7 @@ from frontrow.llm.base import LLMClient
 from frontrow.llm.fake import FakeLLM
 from frontrow.llm.fallback import FallbackLLM
 from frontrow.llm.openai_client import OpenAIClient
-from frontrow.policy.coordination import coordinate, prepare_role_requests
+from frontrow.policy.coordination import PROTOCOL_VERSION, coordinate, prepare_role_requests
 from frontrow.policy.evidence import load_corpus
 from frontrow.policy.scenarios import ExerciseStore
 
@@ -113,7 +113,7 @@ class CoordinationTests(unittest.TestCase):
             prepared = {item['role']: item for item in prepare_role_requests(self.corpus, state)}
             client = Scripted({'privacy': RuntimeError('provider-failed')})
             result = await coordinate(self.corpus, state, client, 'offline-model', mode='offline_test')
-            self.assertEqual(result['protocol_version'], '1')
+            self.assertEqual(result['protocol_version'], PROTOCOL_VERSION)
             self.assertEqual(result['corpus_version'], self.corpus.version)
             self.assertEqual(result['model'], {'provider': 'offline_test', 'model': 'offline-model'})
             actual = {payload['role']: (system, payload) for system, payload in client.requests}
@@ -121,7 +121,7 @@ class CoordinationTests(unittest.TestCase):
                 request = prepared[role['role']]
                 system, sent = actual[role['role']]
                 self.assertEqual(sent['corpus_version'], self.corpus.version)
-                self.assertEqual(sent['protocol_version'], '1')
+                self.assertEqual(sent['protocol_version'], PROTOCOL_VERSION)
                 self.assertTrue(role['prompt_attempted'])
                 self.assertEqual(role['prompt_sha256'], digest({'system': system, 'user': request['user']}))
                 self.assertEqual(len(role['evidence']), len(sent['sources']))

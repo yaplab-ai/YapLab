@@ -68,3 +68,9 @@ infrastructure or credentials were created or changed. Further paid calls or a
 Claude/OpenAI comparison need a concrete scope/cost report and any required
 authorization; none was attempted. Hosted KB import, submission destination,
 expert review and final report rendering remain separate dependencies.
+
+
+The subsequent [offline diagnostic follow-up](ai-for-good-validation-diagnostics.md)
+implements fixed categories and a clearer protocol-2 prompt contract. The original
+live evidence remains unchanged; no rejected raw completion was recovered or
+assigned a new cause, and no further provider call was made.

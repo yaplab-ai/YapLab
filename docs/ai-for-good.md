@@ -132,6 +132,7 @@ FRONTROW_LLM=fake FRONTROW_POLICY_LLM=off FRONTROW_TTS=none FRONTROW_STT=none .v
 .venv/bin/python verify_policy_scenarios.py
 .venv/bin/python verify_policy_coordination.py
 .venv/bin/python verify_policy_coordination_api.py
+.venv/bin/python verify_policy_validation.py
 .venv/bin/python verify_policy_evaluation.py
 .venv/bin/python scripts/evaluate_coordination.py  # dry run, no network
 .venv/bin/python scripts/evaluate_policy.py
@@ -366,3 +367,22 @@ telemetry and output constraints locally before further paid evaluation. No
 learning gain, legal correctness, hosted import or deployment is established.
 The original app configuration and default-disabled coordination flag remain
 unchanged. The live authorization was for one run; it is now consumed.
+
+
+## Offline validation diagnostics follow-up
+
+The [protocol-2 diagnostic review](ai-for-good-validation-diagnostics.md) records
+confirmed parser/classification gaps, fixed privacy-safe categories, explicit
+role-scoped prompt contracts and offline regressions. It preserves the negative
+protocol-1 live evidence. Protocol 2 has not been live-tested. Its separate
+[dry-run plan](evidence/ai-for-good-coordination-plan-v2.json) estimates $0.02414136
+for 27 bounded calls using the recorded rates and a generous token proxy.
+No additional provider call is authorised or made by this offline increment.
+
+
+Final protocol-2 verification passed 90 existing backend checks, 69 policy unit
+tests, standalone scenario checks, 97 frontend tests, frontend/API builds and an
+extracted-wheel diagnostic smoke. The recorded protocol-2 dry plan matches the
+final preparation code exactly. Historical protocol-1 planning/live artifacts
+remain unchanged. All protocol-2 evidence is offline; no adherence improvement
+has been measured.

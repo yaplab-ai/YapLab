@@ -1,0 +1,1453 @@
+{
+  "mode": "dry_run",
+  "network_calls_made": 0,
+  "institution": "general",
+  "protocol_version": "2",
+  "corpus_version": "2026-11-04.3",
+  "scenario_count": 3,
+  "stages_per_scenario": 3,
+  "roles_per_snapshot": 3,
+  "planned_provider_calls": 27,
+  "calls": [
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 6207,
+      "prompt_sha256": "15f1fce65cdb622003d655b4f78116c7bea47fedbbded722ac8fa288d9cec145",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 6192,
+      "prompt_sha256": "16e23a8475c052ea09bd5b74d92db116cfa5d7f4e4323814c3bde5d571700315",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 4899,
+      "prompt_sha256": "47849f6f7eda42489ce06290865fee86906c63460c2ad548af512de57697d59b",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 6384,
+      "prompt_sha256": "295364c2d69b1971604a965401aa1e8740a99d5bb87d36c6bda0a6f6755d28f6",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 6717,
+      "prompt_sha256": "f044e560503adcd866bbdb1372659c6b59caff2ed38fa050682fb5625e0005c0",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 5232,
+      "prompt_sha256": "d6e62f07e4281b0b773766e6273ea586f20d0959777dabd626fdea6c85e1ed7a",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 6729,
+      "prompt_sha256": "c151a8e8cbf57be97cef3c74c6fc411192dacfb04552eb8f64fe1813beb98b02",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 7113,
+      "prompt_sha256": "02b8c9baffda501be598f836df8408ee6e80edca10617eacc83dec32e524b1d3",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 5577,
+      "prompt_sha256": "ce3d01491d0566ae7ce5ae2648a2fbdeef4a1f6d80b60c5bb4cb0ee00aaed60a",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 5928,
+      "prompt_sha256": "d5c43f1821f78ba30c2daf9b508d29136abfebcd71af5988c88bda6f742eb015",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 6201,
+      "prompt_sha256": "92a239141887184813ca824ed7c77c3d3ab2c86d72eff147d0d1511da99364ae",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 4925,
+      "prompt_sha256": "f34f17697d9fbb20aef2188eb0bbdb73783e619a6955320cd485c88b7dae04be",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 6804,
+      "prompt_sha256": "5fc3bbefdbfb214320bf2c9dcc84c944b8317c56d32944d50e2289cb5ce50f5b",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 6527,
+      "prompt_sha256": "4cde60b14edda52085969ab82d2320f1a77ea21e6a031167e7bc51fd67c02f9d",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 5462,
+      "prompt_sha256": "f3b2c47bc9f3c8f1bcb39ac6f1e33d9f901317feea6baeaf634dba441a90fc39",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 7365,
+      "prompt_sha256": "48e8a15c7810a572346243c9e93bc4bc3d431afc4d00d600992054dda1309b91",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 6865,
+      "prompt_sha256": "84854c4179ada4387728ba7b24022a013403873d106529d8e65a6cb63814d775",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 5877,
+      "prompt_sha256": "c887240c182f14042a321c4417bcf22d99a92ec4da47788309f3ad175be79e8f",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 6205,
+      "prompt_sha256": "6d85a26b5468608fe51e2e02558f94c94f02527b8e5dc3e2e6acffeb1f5a9763",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 6026,
+      "prompt_sha256": "49d1e9acb5fca8c7b346d95452b7bf752cf57056d12789e3a9ee383afbb80277",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 4913,
+      "prompt_sha256": "374b6b6f5e68892775c0e9fd3de3a623dc80963508751163d44f77cebc9038e9",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 6369,
+      "prompt_sha256": "9532ecc4b85401f1da4b3934484464ec2311d7d325449919783ba4a742610110",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 6496,
+      "prompt_sha256": "c677b1bdd3ce383f6ecf76132b3e89e66b99b8830106b2aa688d5fd5143c3baf",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 5278,
+      "prompt_sha256": "e3813d983f5d7e2897d97f7d3489f3c856e5ce02b3611b36a8bcb7b280ee14bd",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        },
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 6935,
+      "prompt_sha256": "b3820f0b046e96e4d343b8d396c62922ee96bf9656e8ed97021ce62953f74f01",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-national-ai-strategy-2031",
+          "title": "UAE National Strategy for Artificial Intelligence 2031",
+          "url": "https://ai.gov.ae/strategy/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "strategy",
+          "scope": "National strategic direction, including talent, research, infrastructure and AI governance. It does not itself approve a university tool or determine a legal duty.",
+          "summary": "The strategy connects AI skills development, enabling infrastructure and responsible governance with national AI adoption.",
+          "limitations": [
+            "A national strategy is distinct from binding law, an institutional assessment policy or approval to process student information.",
+            "The site includes historical initiatives and projections; no forecast or claim of current implementation is adopted here."
+          ],
+          "institution": null,
+          "sha256": "5cda139c25a85d155c13d9c3b4f5d8f8d8c0f714af4ec8566a4e69e6fd104e6d"
+        },
+        {
+          "id": "unesco-generative-ai-education",
+          "title": "Guidance for Generative AI in Education and Research",
+          "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+          "authority": "UNESCO",
+          "jurisdiction": "Global",
+          "document_type": "guidance",
+          "scope": "International policy and practice guidance for generative AI in education and research, including teachers, learners and researchers.",
+          "summary": "UNESCO advocates a human-centred approach to GenAI that protects privacy and human agency, evaluates risks and aligns pedagogical use with educational needs.",
+          "limitations": [
+            "International guidance is not by itself UAE legislation or university policy.",
+            "The 2023 publication predates later model and policy developments; verify current local rules and institutional guidance."
+          ],
+          "institution": null,
+          "sha256": "f1a0800e89bdb7d41145913cc0b54043769aa68b48cad965fc9f5186b1d5921d"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 6908,
+      "prompt_sha256": "ef3c130a304ad788fb33a0649c1edbbc3eb3ed54917e5799944b7fad7ee6fbca",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies."
+          ],
+          "institution": null,
+          "sha256": "800ec4d084002223c558909faa813827402d927a3013cf0228ae4d6f0b57771d"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "sha256": "8a344b1e40d828da5e454724c57c2bd0da12b06d728cf33f7a8c88ee5fd3cfa6"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments."
+          ],
+          "institution": null,
+          "sha256": "66b810170fccf65b0e8396c12da9e6058a6cc682bd79bd10e5aa1a7011705fbe"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 5620,
+      "prompt_sha256": "e90531e9bd53ce1d84ed7e5459b5e68d5ae68fcbe5f0d148bb6ebc44def6c307",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-inclusive-education-schools",
+          "title": "Inclusive Education",
+          "url": "https://moe.gov.ae/en/Pages/DeterminationInclusiveEducation.aspx",
+          "authority": "UAE Ministry of Education",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Ministry overview of inclusive education and its 2020 policy for government and private schools following the Ministry curriculum.",
+          "summary": "The Ministry describes removing learning barriers, tailored support and assistive technology as parts of inclusive education in the school context.",
+          "limitations": [
+            "The cited 2020 policy is school-specific and should not be represented as a university obligation; consult higher-education and institution-specific rules.",
+            "The overview is a summary and does not establish that an individual tool or lesson is accessible."
+          ],
+          "institution": null,
+          "sha256": "a8a52a50e93076653444cbcf997fd04f8e1cbb3ab1b5a774fcc32de643cd4018"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "sha256": "42caefb2272d68e5bc0522965982fbf62153e0189ff32d3a81c0e64c7f16613c"
+        }
+      ]
+    }
+  ],
+  "prompt_utf8_bytes_total": 165754,
+  "planning_input_tokens_proxy": 359156,
+  "max_output_tokens_per_request": 400,
+  "max_total_output_tokens": 10800,
+  "pricing": {
+    "provider": "nebius",
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "currency": "USD",
+    "input_per_million": 0.06,
+    "output_per_million": 0.24,
+    "as_of": "2026-11-04",
+    "estimated_envelope_usd": 0.02414136,
+    "planned_budget_usd": 0.1,
+    "note": "Input proxy is 2 tokens per prompt UTF-8 byte plus 1024 per call; not a tokenizer count, enforced input cap, or billing guarantee. Pricing and protocol overhead may change."
+  },
+  "structural_validation": "not_run",
+  "validation_issue_counts": {},
+  "human_semantic_quality": "unreviewed"
+}

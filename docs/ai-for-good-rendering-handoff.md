@@ -35,3 +35,15 @@ prepares 27 calls and is not live evidence. Preserve those distinctions when
 condensing the content to fit the template.
 
 Use the [live-results record](ai-for-good-live-results.md) for the later evaluation: provider access worked, structural reliability did not meet the all-role criterion, and the reported-usage list-price calculation is not a verified invoice.
+
+
+The latest offline follow-up adds protocol-2 diagnostics and clearer prompt/schema
+instructions. Keep it separate from protocol 1's observed 14/27 live acceptance;
+no live improvement has been measured. See the diagnostic follow-up for the next
+experiment, which is proposed and not authorised or run.
+
+
+The final offline verification count is now 90 existing backend checks, 69
+policy-related unit tests, standalone scenario checks and 97 frontend tests,
+with successful frontend/API builds and an extracted-wheel smoke. Do not combine
+these offline successes with the unchanged protocol-1 live acceptance counts.

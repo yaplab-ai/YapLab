@@ -106,3 +106,23 @@ allowance. See [actual results](ai-for-good-live-results.md).
 The [live evidence and interpretation](ai-for-good-live-results.md) record the completed run, its structural failures and reported-usage cost. Future comparisons must preserve those negative findings and report new scope/pricing before switching providers.
 
 The approved runner additionally saved progress after each snapshot and would stop future snapshots on provider failure/timeout, missing usage, an exceeded output cap or reported list-price usage reaching $0.10. None of those stop conditions occurred. These safeguards do not provide a provider-enforced dollar cap.
+
+
+## Protocol-2 offline follow-up
+
+The current code prepares protocol 2 and exposes fixed validation categories,
+per-snapshot checkpoints and honest interrupted-run metrics. Its separate
+[dry plan](evidence/ai-for-good-coordination-plan-v2.json) estimates $0.02414136;
+the original protocol-1 plan and live result remain historical evidence. Read the
+[diagnostic and experiment scope](ai-for-good-validation-diagnostics.md) before
+requesting a separate live authorization. The previous 27-call allowance is
+consumed, and no further provider request was made during this follow-up.
+
+
+Current CLI exit codes distinguish outcomes: `0` for a dry run or completed
+structural pass, `2` for completed structural failure, and `1` for stopped or
+checkpoint-failed execution. Invalid CLI arguments also use argparse status `2`.
+Checkpoints now atomically replace the reserved result after file fsync, then
+sync the directory. Pre-replacement failures preserve the prior checkpoint;
+post-replacement directory-sync failure leaves durability uncertain and stops.
+See the [offline verification record](ai-for-good-validation-diagnostics.md#verification-and-command-status).

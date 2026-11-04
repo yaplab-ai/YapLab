@@ -10,6 +10,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.testclient import TestClient
 
 from frontrow.policy import scenarios
+from frontrow.policy.diagnostics import VALIDATION_ISSUES
 
 
 def make_client(store=None):
@@ -276,9 +277,56 @@ def check_coordination():
     assert_http(404, expiring.get_coordination, eid, pending['round_id'])
 
 
+def check_validation_issue_audit():
+    def prepare():
+        store = scenarios.ExerciseStore()
+        exercise_id = store.create('transcript-disclosure', 'teacher')['exercise_id']
+        snapshot = store.reserve_coordination(exercise_id, 1, 'general')
+        result = result_for(snapshot)
+        return store, exercise_id, snapshot, result
+
+    assert VALIDATION_ISSUES
+    for category in VALIDATION_ISSUES:
+        store, exercise_id, snapshot, result = prepare()
+        result['roles'][1].update(status='unavailable', reason='invalid_response',
+                                  validation_issue=category, proposals=[])
+        store.commit_coordination(exercise_id, snapshot['round_id'], result)
+        privacy = store.audit(exercise_id, 'privacy')['events'][0]['assessment']
+        assert privacy['validation_issue'] == category
+        for other in ('teacher', 'accessibility'):
+            assert 'validation_issue' not in store.audit(exercise_id, other)['events'][0]['assessment']
+        assert store.get_coordination(exercise_id, snapshot['round_id'])['roles'][1]['validation_issue'] == category
+
+    # Earlier and future protocol results without a category stay readable; no category is invented.
+    for version, reason in (('1', 'invalid_response'), ('unknown-future', 'invalid_response'), ('1', 'validation_error')):
+        store, exercise_id, snapshot, result = prepare()
+        result['protocol_version'] = version
+        result['roles'][1].update(status='unavailable', reason=reason, proposals=[])
+        store.commit_coordination(exercise_id, snapshot['round_id'], result)
+        assessment = store.audit(exercise_id, 'privacy')['events'][0]['assessment']
+        assert assessment['reason'] == reason and 'validation_issue' not in assessment
+
+    # Unknown values, raw snippets, and inconsistent status/reason combinations are never persisted.
+    valid_issue = next(iter(VALIDATION_ISSUES))
+    for status, reason, category in (
+        ('unavailable', 'invalid_response', 'raw secret model output: example-token'),
+        ('unavailable', 'invalid_response', None),
+        ('unavailable', 'invalid_response', ['schema_mismatch']),
+        ('completed', 'invalid_response', valid_issue),
+        ('unavailable', 'provider_error', valid_issue),
+        ('unavailable', 'validation_error', valid_issue),
+    ):
+        store, exercise_id, snapshot, result = prepare()
+        result['roles'][1].update(status=status, reason=reason, validation_issue=category, proposals=[])
+        assert_http(422, store.commit_coordination, exercise_id, snapshot['round_id'], result)
+        assert store.audit(exercise_id, 'privacy')['events'] == []
+        assert_http(404, store.get_coordination, exercise_id, snapshot['round_id'])
+
+
 if __name__ == '__main__':
     check_disclosure_and_audit()
     check_ttl_capacity_actions_and_concurrency()
     check_admission()
     check_coordination()
+    check_validation_issue_audit()
     print('Policy scenario checks passed')

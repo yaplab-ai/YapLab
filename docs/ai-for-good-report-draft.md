@@ -116,8 +116,8 @@ software paths have offline checks and one bounded live coordination run. Only
 
 On the isolated `codex/yaplab-ai-for-good` worktree, 90 existing backend checks,
 14 policy tests, six export tests, eleven coordination tests, eight coordination
-HTTP tests, seven evaluation-harness tests, staged-scenario checks and 97
-frontend tests passed. The frontend
+HTTP tests, nineteen evaluation-harness tests, eleven adversarial diagnostic
+tests, staged-scenario checks and 97 frontend tests passed. The frontend
 production build and offline API wheel/sdist build succeeded. An extracted-wheel
 API smoke check serves the scoped source collections and three scenarios.
 
@@ -162,3 +162,10 @@ This establishes provider access and a structural reliability gap, not policy
 correctness or effectiveness. The original Anthropic configuration remains unchanged.
 See the [review record](ai-for-good-independent-review.md) and
 [live results](ai-for-good-live-results.md).
+
+
+An offline follow-up adds protocol-2 validation categories, strict JSON parsing,
+separate provider/internal failure labels and explicit role-scoped schema/ID
+instructions. It also improves interrupted-evaluation records. These software
+checks do not improve or replace the recorded 14/27 live result: protocol 2 has
+not received a live evaluation. See the [diagnostic follow-up](ai-for-good-validation-diagnostics.md).

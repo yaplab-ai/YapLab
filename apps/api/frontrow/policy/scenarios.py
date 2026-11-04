@@ -20,6 +20,7 @@ from fastapi import APIRouter, HTTPException, Query, Request, Response
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
+from .diagnostics import VALIDATION_ISSUES
 
 Role = Literal["teacher", "privacy", "accessibility"]
 ROLES = ("teacher", "privacy", "accessibility")
@@ -267,6 +268,11 @@ class ExerciseStore:
                         raise ValueError("invalid role")
                     role = item["role"]
                     seen.add(role)
+                    if "validation_issue" in item:
+                        issue = item["validation_issue"]
+                        if (not isinstance(issue, str) or issue not in VALIDATION_ISSUES
+                                or item.get("status") != "unavailable" or item.get("reason") != "invalid_response"):
+                            raise ValueError("invalid validation issue")
                     proposals = item.get("proposals")
                     if not isinstance(proposals, list) or not isinstance(item.get("questions"), list):
                         raise ValueError("invalid assessment")
@@ -322,8 +328,10 @@ class ExerciseStore:
                     result = exercise["coordination_results"][event["round_id"]]
                     item = next(item for item in result["roles"] if item["role"] == role)
                     assessment = {key: item[key] for key in ("role", "status", "proposals", "questions") if key in item}
-                    if item.get("reason") in ("insufficient_evidence", "timeout", "invalid_response", "provider_error", "overall_timeout"):
+                    if item.get("reason") in ("insufficient_evidence", "timeout", "invalid_response", "validation_error", "provider_error", "overall_timeout"):
                         assessment["reason"] = item["reason"]
+                    if "validation_issue" in item:
+                        assessment["validation_issue"] = item["validation_issue"]
                     assessment["prompt_sha256"] = item["prompt_sha256"]
                     assessment["prompt_attempted"] = item["prompt_attempted"]
                     assessment["evidence"] = [

@@ -89,6 +89,85 @@ class EvaluationTests(unittest.TestCase):
                 self.invoke(['--execute-live', '--provider', 'nebius', '--approval-reference', 'approved', '--output', str(target)])
         self.assertEqual(target.read_text(), 'preserve')
 
+    def test_atomic_checkpoint_preserves_prior_json_on_precommit_failure(self):
+        dest = self.base / 'result.json'
+        evaluation.reserve_output(dest)
+        evaluation.atomic_checkpoint(dest, {'version': 1})
+        old = dest.read_bytes()
+        original_fdopen = evaluation.os.fdopen
+        class FailedWriter:
+            def __init__(self, fd, *args, **kwargs): self.stream = original_fdopen(fd, *args, **kwargs)
+            def __enter__(self): return self
+            def __exit__(self, *args): self.stream.close()
+            def write(self, value): raise OSError('injected write failure')
+        injections = [patch.object(evaluation.json, 'dump', side_effect=OSError('dump failed')),
+                      patch.object(evaluation.os, 'fdopen', side_effect=FailedWriter),
+                      patch.object(evaluation.os, 'fsync', side_effect=OSError('fsync failed')),
+                      patch.object(evaluation.os, 'replace', side_effect=OSError('replace failed'))]
+        for failure in injections:
+            with self.subTest(failure=failure), failure, self.assertRaises(OSError):
+                evaluation.atomic_checkpoint(dest, {'version': 2})
+            self.assertEqual(dest.read_bytes(), old)
+            self.assertEqual(json.loads(dest.read_text()), {'version': 1})
+            self.assertEqual(list(self.base.iterdir()), [dest])
+        evaluation.atomic_checkpoint(dest, {'version': 2})
+        self.assertEqual(json.loads(dest.read_text()), {'version': 2})
+
+    def test_directory_sync_failure_reports_uncertain_durability(self):
+        dest = self.base / 'result.json'
+        evaluation.reserve_output(dest)
+        evaluation.atomic_checkpoint(dest, {'version': 1})
+        actual_fsync = evaluation.os.fsync
+        count = 0
+        def fail_directory(fd):
+            nonlocal count
+            count += 1
+            if count == 2:
+                raise OSError('directory sync failed')
+            return actual_fsync(fd)
+        with patch.object(evaluation.os, 'fsync', side_effect=fail_directory), self.assertRaises(OSError):
+            evaluation.atomic_checkpoint(dest, {'version': 2})
+        # Replacement happened, but it is not safe to claim directory durability.
+        self.assertEqual(json.loads(dest.read_text()), {'version': 2})
+        self.assertEqual(list(self.base.iterdir()), [dest])
+
+    def test_reservation_rejects_existing_file_and_symlink_paths(self):
+        existing = self.base / 'existing'
+        existing.write_text('preserve')
+        with self.assertRaises(FileExistsError):
+            evaluation.reserve_output(existing)
+        link = self.base / 'alias'
+        link.symlink_to(existing)
+        with self.assertRaises(ValueError):
+            evaluation.reserve_output(link)
+        parent_link = self.base / 'linked-dir'
+        parent_link.symlink_to(self.base, target_is_directory=True)
+        with self.assertRaises(ValueError):
+            evaluation.reserve_output(parent_link / 'new')
+        self.assertEqual(existing.read_text(), 'preserve')
+        self.assertFalse((self.base / 'new').exists())
+
+    def test_live_exit_status_distinguishes_stopped_and_structural_failure(self):
+        for index, (status, validation, expected) in enumerate((('completed', 'pass', 0),
+                                      ('completed', 'fail', 2), ('stopped', 'not_complete', 1))):
+            async def stub(corpus, states, plan, approval, *, checkpoint):
+                result = {'run_status': status, 'structural_validation': validation}
+                checkpoint(result)
+                return result
+            output = self.base / f'{index}.json'
+            stream = io.StringIO()
+            with self.subTest(status=status, validation=validation), \
+                 patch.dict(evaluation.os.environ, {'NEBIUS_API_KEY': 'test-only'}), \
+                 patch.object(evaluation.importlib.util, 'find_spec', return_value=object()), \
+                 patch.object(evaluation, 'run_live', side_effect=stub), \
+                 patch.object(sys, 'argv', ['evaluate_coordination.py', '--execute-live', '--provider', 'nebius',
+                                           '--approval-reference', 'approved', '--output', str(output)]), \
+                 redirect_stdout(stream):
+                self.assertEqual(evaluation.main(), expected)
+            self.assertIn('run_status=' + status, stream.getvalue())
+            self.assertIn('structural_validation=' + validation, stream.getvalue())
+            self.assertEqual(json.loads(output.read_text())['run_status'], status)
+
     def test_call_cap_and_model_guard_before_provider(self):
         async def check():
             client = object.__new__(evaluation.LimitedNebius)
@@ -135,16 +214,198 @@ class EvaluationTests(unittest.TestCase):
         corpus, states, plan = evaluation.prepare()
         with patch.object(evaluation, 'LimitedNebius', Invalid):
             result = asyncio.run(evaluation.run_live(corpus, states[:1], plan, 'approval-id'))
-        self.assertEqual(result['structural_validation'], 'fail')
+        self.assertEqual(result['structural_validation'], 'not_complete')
+        self.assertEqual(result['snapshots'][0]['structural_validation'], 'fail')
         self.assertTrue(all(r['reason'] == 'invalid_response' for r in result['snapshots'][0]['roles']))
+        self.assertEqual(result['validation_issue_counts'], {'unknown_action_id': 3})
         self.assertEqual(result['human_semantic_quality'], 'unreviewed')
 
     def test_usage_fields_are_bounded_and_allowlisted(self):
         item = evaluation.bounded_usage({'kind': 'request', 'role': 'leak-secret', 'outcome': 'leak-secret',
             'usage': {'prompt_tokens': True, 'completion_tokens': 1_000_000_001}, 'secret': 'private'})
-        self.assertEqual(item, {'role': None, 'outcome': 'unknown', 'input_tokens': None, 'output_tokens': None})
+        self.assertEqual(item, {'scenario_id': None, 'stage': None, 'role': None, 'outcome': 'unknown',
+                                'finish_reason': None, 'error_type': None, 'latency_ms': None,
+                                'input_tokens': None, 'output_tokens': None})
         self.assertIsNone(evaluation.bounded_usage({'kind': 'fallback'}))
         self.assertIsNone(evaluation.bounded_usage({'kind': 'request', 'usage': 'bad'})['input_tokens'])
+        known = evaluation.bounded_usage({'kind': 'request', 'role': 'policy_coordination_teacher',
+            'finish_reason': 'length', 'error_type': 'APITimeoutError', 'latency_seconds': 1.2345},
+            scenario_id='caption-failure', stage=2)
+        self.assertEqual((known['finish_reason'], known['error_type'], known['latency_ms']), ('length', 'APITimeoutError', 1234.5))
+        self.assertEqual((known['scenario_id'], known['stage']), ('caption-failure', 2))
+        self.assertIsNone(evaluation.bounded_usage({'kind': 'request', 'latency_seconds': 10**500})['latency_ms'])
+
+    def test_unknown_validation_categories_are_dropped(self):
+        corpus, states, _ = evaluation.prepare()
+        class Invalid(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                return '{"proposals": [], "questions": []}'
+        from frontrow.policy.coordination import coordinate
+        result = asyncio.run(coordinate(corpus, states[0], Invalid(), evaluation.MODEL, mode='model_assisted'))
+        result['roles'][0].update(status='unavailable', reason='invalid_response', validation_issue='PRIVATE OUTPUT')
+        result['roles'][1].update(status='unavailable', reason='invalid_response', validation_issue='json_syntax')
+        result['roles'][2].update(status='unavailable', reason='provider_error', validation_issue='json_syntax')
+        sanitized = evaluation.summarize(result)
+        self.assertNotIn('validation_issue', sanitized['roles'][0])
+        self.assertEqual(sanitized['roles'][1]['validation_issue'], 'json_syntax')
+        self.assertNotIn('validation_issue', sanitized['roles'][2])
+        self.assertNotIn('PRIVATE OUTPUT', json.dumps(sanitized))
+        progress = evaluation.evaluation_progress(corpus, {'pricing': {}}, 'ok', Invalid(), [sanitized], [], status='stopped')
+        self.assertEqual(progress['validation_issue_counts'], {'json_syntax': 1})
+        self.assertEqual(progress['invalid_response_without_known_issue'], 1)
+
+    def test_missing_usage_stops_future_snapshots(self):
+        class Missing(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage=None, outcome='success')
+                return '{"proposals": [], "questions": []}'
+        corpus, states, plan = evaluation.prepare()
+        with patch.object(evaluation, 'LimitedNebius', Missing), patch.object(llm_logger, 'info'):
+            result = asyncio.run(evaluation.run_live(corpus, states, plan, 'approved'))
+        self.assertEqual(result['run_status'], 'stopped')
+        self.assertEqual(result['stop_reason'], 'usage_missing')
+        self.assertEqual(result['completed_snapshots'], 1)
+        self.assertEqual(result['provider_call_attempts'], 3)
+        self.assertEqual(result['usage_missing_calls'], 3)
+        self.assertIsNone(result['reported_usage_cost']['complete_cost_usd'])
+
+    def test_reported_output_over_limit_stops_next_snapshot(self):
+        class OverLimit(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage={'prompt_tokens': 10, 'completion_tokens': 401}, outcome='success')
+                return '{"proposals": [], "questions": []}'
+        corpus, states, plan = evaluation.prepare()
+        with patch.object(evaluation, 'LimitedNebius', OverLimit), patch.object(llm_logger, 'info'):
+            result = asyncio.run(evaluation.run_live(corpus, states, plan, 'approved'))
+        self.assertEqual(result['stop_reason'], 'reported_output_limit_exceeded')
+        self.assertEqual(result['provider_call_attempts'], 3)
+        self.assertEqual(result['completed_snapshots'], 1)
+        self.assertIsNone(result['reported_usage_cost']['complete_cost_usd'])
+
+    def test_reported_cost_at_budget_stops_next_snapshot(self):
+        class AtBudget(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage={'prompt_tokens': 500000, 'completion_tokens': 0}, outcome='success')
+                return '{"proposals": [], "questions": []}'
+        corpus, states, plan = evaluation.prepare()
+        plan['pricing']['planned_budget_usd'] = 0.09
+        with patch.object(evaluation, 'LimitedNebius', AtBudget), patch.object(llm_logger, 'info'):
+            result = asyncio.run(evaluation.run_live(corpus, states, plan, 'approved'))
+        self.assertEqual(result['stop_reason'], 'reported_cost_budget_reached')
+        self.assertEqual(result['provider_call_attempts'], 3)
+        self.assertEqual(result['reported_usage_cost']['known_cost_usd'], 0.09)
+        self.assertFalse(result['reported_usage_cost']['invoice_verified'])
+
+    def test_reported_usage_cost_uses_plan_prices_and_partial_usage(self):
+        _, _, plan = evaluation.prepare()
+        plan['pricing']['input_per_million'] = 0.12
+        plan['pricing']['output_per_million'] = 0.48
+        records = [{'input_tokens': 1000000, 'output_tokens': None},
+                   {'input_tokens': None, 'output_tokens': 500000}]
+        self.assertEqual(str(evaluation.known_usage_cost(records, plan)), '0.36')
+
+    def test_provider_failure_stops_and_redacts_exception(self):
+        class Failed(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage=None, outcome='error', error_type='SensitiveException')
+                raise RuntimeError('private response text')
+        corpus, states, plan = evaluation.prepare()
+        with patch.object(evaluation, 'LimitedNebius', Failed), patch.object(llm_logger, 'info'):
+            result = asyncio.run(evaluation.run_live(corpus, states, plan, 'approved'))
+        self.assertEqual(result['stop_reason'], 'provider_or_internal_failure')
+        self.assertEqual(result['provider_call_attempts'], 3)
+        self.assertEqual(result['provider_failure_events'], 3)
+        self.assertNotIn('private response text', json.dumps(result))
+        self.assertNotIn('SensitiveException', json.dumps(result))
+
+    def test_checkpoint_failure_stops_and_retains_usage_in_recovery_output(self):
+        class Good(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage={'prompt_tokens': 10, 'completion_tokens': 20}, outcome='success')
+                return '{"proposals": [], "questions": []}'
+        corpus, states, plan = evaluation.prepare()
+        checkpoints = []
+        def checkpoint(value):
+            checkpoints.append(value)
+            if value['completed_snapshots']:
+                raise OSError('private exception')
+        stderr = io.StringIO()
+        with patch.object(evaluation, 'LimitedNebius', Good), patch.object(llm_logger, 'info'), redirect_stderr(stderr):
+            with self.assertRaises(evaluation.CheckpointFailure):
+                asyncio.run(evaluation.run_live(corpus, states, plan, 'approved', checkpoint=checkpoint))
+        self.assertEqual(checkpoints[-1]['provider_call_attempts'], 3)
+        self.assertEqual(checkpoints[-1]['usage_missing_calls'], 0)
+        recovery = json.loads(stderr.getvalue().splitlines()[-1])
+        self.assertEqual(recovery['stop_reason'], 'checkpoint_failed')
+        self.assertEqual(len(recovery['usage']), 3)
+        self.assertEqual(recovery['usage'][0]['input_tokens'], 10)
+        self.assertNotIn('private exception', stderr.getvalue())
+
+    def test_atomic_checkpoint_failure_stops_run_preserves_prior_file_and_usage(self):
+        class Good(OpenAIClient):
+            provider_name = 'nebius'
+            def __init__(self): self.attempts = 0
+            async def aclose(self): pass
+            async def complete(self, system, user, *, model, timeout):
+                self.attempts += 1
+                emit_llm_event('request', provider='nebius', model=model, latency_seconds=0,
+                               usage={'prompt_tokens': 10, 'completion_tokens': 20}, outcome='success')
+                return '{"proposals": [], "questions": []}'
+        corpus, states, plan = evaluation.prepare()
+        dest = self.base / 'run.json'
+        evaluation.reserve_output(dest)
+        actual_replace = evaluation.os.replace
+        count = 0
+        def replace_before_failure(src, dst):
+            nonlocal count
+            count += 1
+            if count == 3:
+                raise OSError('injected failure')
+            return actual_replace(src, dst)
+        stderr = io.StringIO()
+        with patch.object(evaluation, 'LimitedNebius', Good), patch.object(llm_logger, 'info'), \
+             patch.object(evaluation.os, 'replace', side_effect=replace_before_failure), redirect_stderr(stderr):
+            with self.assertRaises(evaluation.CheckpointFailure):
+                asyncio.run(evaluation.run_live(corpus, states, plan, 'approved',
+                            checkpoint=lambda value: evaluation.atomic_checkpoint(dest, value)))
+        previous = json.loads(dest.read_text())
+        self.assertEqual(previous['run_status'], 'in_progress')
+        self.assertIsNotNone(previous['in_flight_snapshot'])
+        self.assertEqual(previous['provider_call_attempts'], 0)
+        recovery = json.loads(stderr.getvalue().splitlines()[-1])
+        self.assertEqual(recovery['provider_call_attempts'], 3)
+        self.assertEqual(recovery['stop_reason'], 'checkpoint_failed')
+        self.assertEqual(len(recovery['usage']), 3)
+        self.assertEqual(list(self.base.iterdir()), [dest])
 
     def test_mock_run_preserves_provenance_and_validates_responses(self):
         class Stub(OpenAIClient):
@@ -163,7 +424,12 @@ class EvaluationTests(unittest.TestCase):
             result = asyncio.run(evaluation.run_live(corpus, states, plan, 'approval-id'))
         self.assertEqual(result['provider_call_attempts'], 27)
         self.assertEqual(result['usage_missing_calls'], 0)
+        self.assertEqual(result['run_status'], 'completed')
+        self.assertEqual((result['completed_snapshots'], result['structurally_completed_roles']), (9, 27))
+        self.assertEqual(result['reported_usage_cost']['known_cost_usd'], 0.00009558)
+        self.assertFalse(result['reported_usage_cost']['invoice_verified'])
         self.assertEqual(len(result['usage']), 27)
+        self.assertTrue(all(u['scenario_id'] in evaluation.SCENARIOS and u['stage'] in (1, 2, 3) for u in result['usage']))
         self.assertEqual(result['structural_validation'], 'pass')
         self.assertEqual(result['human_semantic_quality'], 'unreviewed')
         self.assertEqual(result['model'], {'provider': 'nebius', 'model': evaluation.MODEL})

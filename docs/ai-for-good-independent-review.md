@@ -99,3 +99,21 @@ accepted responses and 13 rejections. The earlier offline checks remain valid
 software evidence; they did not predict model adherence. Exact rejection
 diagnosis and semantic/expert review remain outstanding. No further provider
 calls were made to retry or replace those failures.
+
+
+## Offline diagnostics review after the live run
+
+Independent offline reproductions confirmed missing uniqueness instructions,
+duplicate-key last-value behavior, and provider exceptions being mislabelled as
+response failures. The targeted recheck passed for strict duplicate/non-finite
+handling, bounded numeric parsing, secret-like payload rejection, separate
+provider errors and role/future-fact isolation in protocol-2 schema enums.
+The reviewer confirmed the saved run's 27 success events and did not infer the
+thirteen specific rejection causes. See the [diagnostic record](ai-for-good-validation-diagnostics.md).
+
+
+The reviewer also reproduced in-place checkpoint loss risk and a false-success
+CLI status after a stopped run. Both were repaired with synced atomic checkpoint
+replacement and distinct exit codes. The independent targeted recheck passed
+write/fsync/replace failure handling and CLI outcome cases; no remaining blocker
+was found in that review scope. No live retest was performed.
