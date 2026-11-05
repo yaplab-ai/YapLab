@@ -1,6 +1,6 @@
 {
   "label_status": "team-authored, not expert-validated",
-  "frozen_at_utc": "2026-11-05T07:49:38Z",
+  "frozen_at_utc": "2026-11-05T07:52:49Z",
   "labeling_basis": "Source titles, scopes and locators; written before inspecting retrieval rankings. Expected IDs identify relevant sources, not exclusive relevance.",
   "metric_definition": "Recall@3 is mean per-query fraction of expected IDs in top 3; MRR is mean reciprocal rank of the first expected ID in top 3. Abstention is measured separately.",
   "queries": [
@@ -395,11 +395,10 @@
       "institution": "general",
       "expected_source_ids": [
         "australia-teqsa-genai-assessment",
-        "uk-qaa-genai-assessment",
-        "uk-russell-group-genai-principles"
+        "uk-qaa-genai-assessment"
       ],
       "should_abstain": false
     }
   ],
-  "supersedes": "Historical initial labels committed as 82e7a61; revised before inspecting any retrieval rankings to include forthcoming global source scopes."
+  "supersedes": "Historical initial labels 82e7a61 and expanded labels f970e64; revised before inspecting retrieval rankings solely to remove the Russell Group source unavailable due to blocked primary sources."
 }
