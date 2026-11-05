@@ -1,0 +1,30 @@
+U.S. Department of Justice, Fact Sheet: New Rule on Accessibility of Web Content and Mobile Apps, guidance (not regulatory text)
+https://www.ada.gov/resources/2024-03-08-web-rule/
+
+Requirement: State and local governments’ web content usually needs to meet WCAG 2.1, Level AA.
+The rule applies to web content that a state or local government provides or makes available. This includes when a state or local government has an arrangement with someone else who
+provides or makes available web content for them.
+Example: If a county web page lists the addresses and hours of operation for all county
+parks, that web page must meet WCAG 2.1, Level AA even if a local web design
+company made the web page and updates it for the county.
+What is web content?
+“Web content” is defined as the information and experiences available on the web, like text, images,
+sound, videos, and documents. You can find more information about how the Department defines “web
+content” in the rule in the section of the appendix called “Section 35.104 Definitions.”
+
+How Long State and Local Governments Have to Comply with the Rule
+State and local governments must make sure that their web content and mobile apps meet WCAG 2.1,
+Level AA within three or four years of when the rule was published on April 24, 2024, depending on their population.
+You can find more information about why the Department is requiring compliance with this timeline in
+the IFR.
+This table shows how much time a state or local government has to comply with this rule.
+| State and local government size
+| Compliance date
+| 0 to 49,999 persons
+| April 26, 2028
+| Special district governments
+| April 26, 2028
+| 50,000 or more persons
+| April 26, 2027
+After this time, state and local governments must continue to make sure their web content and mobile
+apps meet WCAG 2.1, Level AA.

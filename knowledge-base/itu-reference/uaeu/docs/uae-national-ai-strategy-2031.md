@@ -1,7 +1,7 @@
 # UAE National Strategy for Artificial Intelligence 2031
 
-Original curated summary; not the source full text.
-These are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.
+Original curated summary with any selected source text labelled below.
+Curated summaries and selected attributed source text have separate rights. Consult each source, locator and recorded reuse terms before reuse.
 
 Source ID: uae-national-ai-strategy-2031
 Authority: UAE Artificial Intelligence Office

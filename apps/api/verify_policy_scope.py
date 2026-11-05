@@ -82,9 +82,11 @@ class ScopeTests(unittest.TestCase):
                 'FRONTROW_STT': 'none', 'FRONTROW_POLICY_LLM': 'off', 'FRONTROW_POLICY_COORDINATION': 'off'}):
             with TestClient(create_app()) as client:
                 general = client.get('/policy/sources').json()
-                self.assertEqual(general['version'], '2026-11-04.4')
-                self.assertEqual(len(general['entries']), 10)
-                self.assertEqual(len(client.get('/policy/sources?institution=uaeu').json()['entries']), 13)
+                self.assertEqual(general['version'], self.corpus.version)
+                self.assertEqual({entry['id'] for entry in general['entries']},
+                                 {entry.id for entry in self.corpus.entries if entry.institution is None})
+                self.assertEqual({entry['id'] for entry in client.get('/policy/sources?institution=uaeu').json()['entries']},
+                                 {entry.id for entry in self.corpus.entries})
                 response = client.post('/policy/review', json={'text': 'WCAG 2.1 AA accessibility on a private university website', 'topics': ['accessibility']})
                 self.assertEqual(response.status_code, 200)
                 result = response.json()

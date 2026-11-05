@@ -1,6 +1,8 @@
 """Deterministic retrieval-based prompts for human review, not compliance verdicts."""
 from __future__ import annotations
 
+import re
+
 from .evidence import Corpus, Institution, Topic, query_expansions, scoped_sources, search, tokens
 
 _LABELS = {
@@ -48,7 +50,8 @@ def topic_query(query: str, topic: Topic) -> str:
     words = tokens(query)
     for terms in query_expansions(query).values():
         words.update(terms)
-    return _TOPIC_ANCHORS[topic] + ' ' + ' '.join(sorted(words & _TOPIC_TERMS[topic]))
+    version = ' WCAG 2.1' if topic == 'accessibility' and re.search(r'\bwcag\s*2\.1\b', query, re.IGNORECASE) else ''
+    return _TOPIC_ANCHORS[topic] + ' ' + ' '.join(sorted(words & _TOPIC_TERMS[topic])) + version
 
 
 def requirement_index(source: dict, topic: Topic) -> int | None:
@@ -79,7 +82,7 @@ def retrieval_record(query: str, topic: Topic, source: dict) -> dict:
         'expanded_matched_terms': sorted(matched & expanded),
         'anchor_matched_terms': sorted(matched - original - expanded),
         'retrieval_query_terms': sorted(retrieval_terms),
-        'retrieval_mode': 'lexical' if matched else 'topic_only',
+        'retrieval_mode': source.get('retrieval_mode', 'lexical' if matched else 'topic_only'),
     }
 
 
@@ -109,7 +112,9 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
     audit_records = []
     audit_requirements = []
     for topic in selected:
-        hits = search(corpus, topic_query(query, topic), limit=3, topic=topic, institution=institution)
+        is_wcag = topic == 'accessibility' and 'wcag' in tokens(query)
+        hits = search(corpus, topic_query(query, topic), limit=len(entries) if is_wcag else 3,
+                      topic=topic, institution=institution)
         if not hits:
             # Explicitly selected topics can be explored even if no input word
             # occurs in the source; this is identified as a topic-only match.
@@ -124,7 +129,14 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
         # When the user explicitly names WCAG, prioritize a retrieved source
         # that actually mentions it over disability-topic anchor matches.
         if topic == 'accessibility' and 'wcag' in tokens(query):
-            direct = next((hit for hit in hits if 'wcag' in hit['matched_terms']), None)
+            direct = None
+            # A UAE university applicability question benefits from the scoped
+            # national policy; preserve an explicit WCAG 2.2 request instead.
+            if 'university' in tokens(query) and not re.search(r'\bwcag\s*2\.2\b', query, re.IGNORECASE):
+                direct = next((hit for hit in hits if hit['id'] == 'uae-digital-accessibility-policy'
+                               and 'wcag' in hit['matched_terms']), None)
+            if direct is None:
+                direct = next((hit for hit in hits if 'wcag' in hit['matched_terms']), None)
             if direct is not None:
                 source = direct
                 selection = 'explicit_wcag_match'
@@ -144,7 +156,7 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
                 'using related terms expanded from the input.' if record['expanded_matched_terms'] else
                 'by topic choice.' if topic in topics else 'using topic cues.')),
             'recommendation': recommendation,
-            'citations': [{k: v for k, v in source.items() if k not in {'score', 'matched_terms', 'query_expansions'}}],
+            'citations': [{k: v for k, v in source.items() if k not in {'score', 'matched_terms', 'query_expansions', 'retrieval_mode'}}],
         })
     if not selected:
         gaps.append('No supported topic was identified from the supplied wording. Select a topic or add non-personal context.')
@@ -162,5 +174,5 @@ def review(corpus: Corpus, text: str, topics: list[Topic], context: str = '',
                   **retrieval_audit(audit_records), 'query_expansions': expansions, 'selected_topics': selected,
                   'selected_requirements': audit_requirements,
                   'selection_mode': 'requested_topics' if topics else 'keyword_cues',
-                  'retrieval': 'weighted_lexical', 'requirement_selection': 'topic_vocabulary_overlap', 'review_mode': 'deterministic'},
+                  'retrieval': ('hybrid' if any(r['retrieval_mode'] == 'hybrid' for r in audit_records) else 'weighted_lexical'), 'requirement_selection': 'topic_vocabulary_overlap', 'review_mode': 'deterministic'},
     }

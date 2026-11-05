@@ -44,7 +44,11 @@ class PolicyExportTests(unittest.TestCase):
                                                    if s.institution in (None, 'general')})
         for name, source in manifest['sources'].items():
             self.assertEqual(source['sha256'], hashlib.sha256(first[Path('docs') / name]).hexdigest())
-            self.assertEqual(source['content_status'], 'original_curated_summary_not_full_text')
+            entry = next(item for item in self.corpus.entries if item.id == source['id'])
+            self.assertEqual(source['content_status'], entry.text_status or 'original_curated_summary_not_full_text')
+            if entry.text_path:
+                self.assertEqual(source['text_sha256'], entry.text_sha256)
+                self.assertIn('## Selected source text', first[Path('docs') / name].decode())
         records = [json.loads(line) for line in first[Path('chunks.jsonl')].splitlines()]
         self.assertTrue(records)
         self.assertEqual({r['source'] for r in records}, set(manifest['sources']))
@@ -127,6 +131,14 @@ class PolicyExportTests(unittest.TestCase):
             build_bundle(self.corpus.model_copy(update={'entries': []}))
         with self.assertRaises(ValueError):
             build_bundle(self.corpus.model_copy(update={'entries': [source, source]}))
+
+    def test_rejects_source_text_path_and_hash_tampering(self):
+        source = next(item for item in self.corpus.entries if item.text_path)
+        for updates in ({'text_path': '../outside.txt'}, {'text_sha256': '0' * 64},
+                        {'text_rights': None}):
+            with self.subTest(updates=updates), self.assertRaises(ValueError):
+                build_bundle(self.corpus.model_copy(update={
+                    'entries': [source.model_copy(update=updates)]}))
 
     def test_existing_nonempty_and_symlinks_rejected(self):
         output = self.base / 'existing'

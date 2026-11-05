@@ -1,8 +1,8 @@
 {
-  "version": "2026-11-04.4",
-  "description": "Source-linked general policy notes and explicitly selected UAEU institutional examples for university teaching and teaching-assistant simulations.",
+  "version": "2026-11-05.5",
+  "description": "Source-linked policy notes, selected rights-reviewed source text and explicitly selected UAEU institutional examples for university teaching and teaching-assistant simulations.",
   "limitations": [
-    "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
+    "This selective corpus contains curated notes and selected source text, not complete legal or policy ingestion, legal advice, or a compliance certification.",
     "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
     "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
     "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
@@ -389,8 +389,411 @@
         "Do not label these guidelines binding law, a certification or a general obligation for every rehearsal tool.",
         "Applicability to a particular deployment requires its actual purpose and effects."
       ],
-      "verification": "Sections 1.1, 1.2 and 1.5 checked in the official web-extracted PDF on 2026-11-04. Direct local download returned 403; no statutory text was verified.",
-      "reuse_note": "Section 1.5 states CC BY 4.0: attribute the UAE AI and Blockchain Council and imply no endorsement. This record is an original paraphrase."
+      "verification": "Sections 1.1, 1.2, 1.5 and selected principles checked in official PDF downloaded 2026-11-05; source PDF SHA-256 7733629e553ee21080a8b08215d6a9ef42e8c741f7cc302af86995519d380c54. No statutory text verified.",
+      "reuse_note": "Section 1.5 states CC BY 4.0: attribute the UAE AI and Blockchain Council and imply no endorsement. This record is an original paraphrase.",
+      "text_path": "source_texts/uae-ai-ethics-principles-guidelines.txt",
+      "text_sha256": "4b608eaa6e5b927e50ad2453a1107c966b7fa940a8f5c6b5cd54e2c5fce81c86",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Sections 1.1, 1.2, 1.5 and principles/guidelines 3.1–3.3, 3.6 and 3.8; printed pages 5, 6, 8, 17–28, 34–37 and 40–42 (PDF pages 3–5, 9–15, 18–19, 21–22). Selected page extraction also includes adjacent content.",
+      "text_rights": "CC BY 4.0, section 1.5; attribution to UAE AI and Blockchain Council; no endorsement implied. Poppler extraction preserves source page/line structure; selected pages and minor formatting changes indicated.",
+      "text_status": "relevant_sections"
+    },
+    {
+      "id": "uae-ai-charter-2024",
+      "title": "UAE Charter for the Development and Use of Artificial Intelligence",
+      "authority": "UAE Artificial Intelligence, Digital Economy and Remote Work Applications Office",
+      "url": "https://ai.gov.ae/wp-content/uploads/2024/07/UAEAI-Methaq-EN2-3.pdf",
+      "jurisdiction": "UAE",
+      "document_type": "guidance",
+      "published": "2024-07",
+      "scope": "National guiding framework for development and use of AI; not an education-specific legal instrument.",
+      "source_locator": "PDF pages 3–5, general principles, especially 3–7 and 11–12",
+      "topics": [
+        "responsible_ai",
+        "human_oversight",
+        "privacy",
+        "accessibility"
+      ],
+      "summary": "The charter describes principles including safety, algorithmic bias, privacy, transparency, human oversight and inclusive AI awareness.",
+      "requirements": [
+        "Use the charter as national policy context when considering human oversight, privacy and inclusive access."
+      ],
+      "limitations": [
+        "Guiding principles are not proof of a binding university-specific obligation, legal compliance or educational results."
+      ],
+      "verification": "Official AI Office PDF and 30 July 2024 launch announcement inspected on 2026-11-05; later amendment or replacement not established.",
+      "retrieved": "2026-11-05",
+      "reuse_note": "Publisher reuse terms not verified; only a short locator excerpt is retained with attribution.",
+      "text_path": "source_texts/uae-ai-charter-2024.txt",
+      "text_sha256": "215b714940a7d232e668fd45a5c821c7e37e5d2179a78a7bc2781544c8ae66e1",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "PDF pages 3–5, general principles, especially 3–7 and 11–12",
+      "text_rights": "Short attributed locator excerpt; publisher broader reuse permission not verified.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "uae-caa-outcomes-framework",
+      "title": "Outcomes-Based Evaluation Framework University Guide",
+      "authority": "Commission for Academic Accreditation, Ministry of Higher Education and Scientific Research",
+      "url": "https://caa.ae/Pages/Guidelines/Outcomes-based-Evaluation-framework-University-Guide.aspx",
+      "jurisdiction": "UAE",
+      "document_type": "guidance",
+      "published": "2025-12-29 (page updated)",
+      "scope": "Higher education institutional evaluation and accreditation guidance, including learning outcomes; not a classroom AI or assessment tool standard.",
+      "source_locator": "University Guide overview and Data Submission Guidelines",
+      "topics": [
+        "education",
+        "human_oversight"
+      ],
+      "summary": "CAA describes an outcomes-based quality assurance framework for universities and data used for licensure and accreditation renewal.",
+      "requirements": [
+        "Consider the institutional evaluation context and the university’s own assessment, records and support policies."
+      ],
+      "limitations": [
+        "Overview does not establish requirements for AI-generated assessments, student records or support.",
+        "The former 2019 standards page was inaccessible; the relationship and detailed current provisions were not verified."
+      ],
+      "verification": "CAA public overview and licensure page checked 2026-11-05. This record does not assert that a particular institution is subject to the framework.",
+      "retrieved": "2026-11-05",
+      "reuse_note": "Publisher reuse terms not verified; only a short locator excerpt is retained with attribution.",
+      "text_path": "source_texts/uae-caa-outcomes-framework.txt",
+      "text_sha256": "2500fe92ca24a77da9714453fa3f567dad62374b57f22c5233bbd2c2b1eb7bdd",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "University Guide overview and Data Submission Guidelines",
+      "text_rights": "Short attributed locator excerpt; publisher broader reuse permission not verified.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "uae-cybersecurity-strategy-2019",
+      "title": "National Cybersecurity Strategy 2019",
+      "authority": "UAE Government official portal",
+      "url": "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/strategies-plans-and-visions-untill-2021/national-cybersecurity-strategy-2019",
+      "jurisdiction": "UAE",
+      "document_type": "strategy",
+      "published": "2019",
+      "scope": "National cybersecurity ecosystem strategy; historic strategy overview rather than a specific university security rule.",
+      "source_locator": "Official portal overview",
+      "topics": [
+        "privacy",
+        "responsible_ai"
+      ],
+      "summary": "The official overview describes a cybersecurity strategy with five pillars and 60 initiatives.",
+      "requirements": [
+        "Treat cybersecurity and incident handling as design context, and consult current applicable institutional security procedures."
+      ],
+      "limitations": [
+        "The current successor, implementation status and individual university obligations were not verified."
+      ],
+      "verification": "Official portal search-indexed overview checked 2026-11-05; full page returned no readable text.",
+      "retrieved": "2026-11-05",
+      "reuse_note": "Publisher reuse terms not verified; only a short locator excerpt is retained with attribution.",
+      "text_path": "source_texts/uae-cybersecurity-strategy-2019.txt",
+      "text_sha256": "f174cedf7cd59093221a18f89cfd510d520b62dfd381a531e394c0ad893c2387",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Official portal overview",
+      "text_rights": "Short attributed locator excerpt; publisher broader reuse permission not verified.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "uae-digital-government-strategy-2025",
+      "title": "UAE Digital Government Strategy 2025",
+      "authority": "UAE Government official portal",
+      "url": "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/government-services-and-digital-transformation/uae-national-digital-government-strategy",
+      "jurisdiction": "UAE",
+      "document_type": "strategy",
+      "published": "2025 strategy horizon",
+      "scope": "Government digital transformation strategy; contextual government-service policy, not automatically binding on all universities.",
+      "source_locator": "Official portal, dimensions",
+      "topics": [
+        "accessibility",
+        "responsible_ai"
+      ],
+      "summary": "The digital government strategy describes inclusive, user-driven and digitally enabled government transformation.",
+      "requirements": [
+        "Consider inclusion and digital service design as strategic context."
+      ],
+      "limitations": [
+        "This 2025-horizon strategy is not proof of current implementation or university-specific obligations; successor status unverified."
+      ],
+      "verification": "Official portal search-indexed overview checked 2026-11-05; full page returned no readable text.",
+      "retrieved": "2026-11-05",
+      "reuse_note": "Publisher reuse terms not verified; only a short locator excerpt is retained with attribution.",
+      "text_path": "source_texts/uae-digital-government-strategy-2025.txt",
+      "text_sha256": "16f51b3eeaa153f38e8f9cace73209f560643b04aebc98f2b4e3bc4060851349",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Official portal, dimensions",
+      "text_rights": "Short attributed locator excerpt; publisher broader reuse permission not verified.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "uae-adek-school-ethics",
+      "title": "ADEK School Professional Code of Ethics Policy",
+      "authority": "Abu Dhabi Department of Education and Knowledge",
+      "url": "https://www.adek.gov.ae/-/media/Project/TAMM/ADEK/Policies/School-Policies/Governance-and-Operations/ADEK_S_Professional-Code-of-Ethics-Policy_EN.pdf",
+      "jurisdiction": "Abu Dhabi, UAE",
+      "document_type": "government_policy",
+      "published": "2024-09 (version 1.1)",
+      "scope": "Abu Dhabi school educator professional conduct; school-level comparison only.",
+      "source_locator": "Section 3.5, professional conduct, PDF page 5",
+      "topics": [
+        "education",
+        "responsible_ai"
+      ],
+      "summary": "The school code includes engaging students in evaluating digital information and responsible, ethical AI use.",
+      "requirements": [
+        "Compare school-level AI literacy language with the higher-education materials reviewed, keeping the sector distinction explicit."
+      ],
+      "limitations": [
+        "School policy does not automatically govern universities or establish university assessment rules."
+      ],
+      "verification": "Official ADEK PDF indexed text reviewed 2026-11-05; current amendments and applicability to any particular school not verified.",
+      "retrieved": "2026-11-05",
+      "reuse_note": "Publisher reuse terms not verified; only a short locator excerpt is retained with attribution.",
+      "text_path": "source_texts/uae-adek-school-ethics.txt",
+      "text_sha256": "abfa555ec8abb532c8b651d48ad4c773d15d5eeb0de0ef42d2cf41c4a2471286",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Section 3.5, professional conduct, PDF page 5",
+      "text_rights": "Short attributed locator excerpt; publisher broader reuse permission not verified.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "eu-ai-act-education",
+      "title": "Regulation (EU) 2024/1689: education and AI literacy",
+      "authority": "European Union; European Commission AI Act Service Desk",
+      "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
+      "jurisdiction": "EU",
+      "document_type": "law",
+      "published": "2024",
+      "retrieved": "2026-11-05",
+      "scope": "EU AI law covering specified AI system providers and deployers; education and training at all levels are in Annex III, with role, territorial and high-risk classification conditions.",
+      "source_locator": "Annex III 3(b); Articles 4, 6(3), 113 as amended",
+      "topics": [
+        "education",
+        "assessment",
+        "responsible_ai",
+        "human_oversight"
+      ],
+      "summary": "The Act lists AI systems intended to evaluate learning outcomes among education high-risk use cases, subject to Article 6 classification conditions. Article 4 requires providers and deployers to support development of AI literacy.",
+      "requirements": [
+        "Check intended purpose and Article 6(3) before characterising an education system as high risk.",
+        "Consider context, staff knowledge and the affected people in measures supporting AI literacy."
+      ],
+      "limitations": [
+        "EU law is a comparative example, not a UAE obligation; not all educational AI or formative feedback is automatically high risk.",
+        "The Commission states that Annex III high-risk rules apply from 2 December 2027. Article 4 applied from 2 February 2025 and was amended in 2026.",
+        "The authoritative consolidated EUR-Lex page was blocked by an anti-bot screen; review the legally authoritative text and any subsequent changes before legal use."
+      ],
+      "verification": "Annex III 3(b) and amended Article 4 reviewed on official Commission service desk; application dates verified on Commission AI Act page, 2026-11-05. EUR-Lex identifies a 27 July 2026 consolidated version but direct text blocked.",
+      "reuse_note": "Official legislation; source passage is an attributed locator excerpt from the European Commission service desk; see https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4 and https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai.",
+      "text_path": "source_texts/eu-ai-act-education.txt",
+      "text_sha256": "05e92e478e906ae882c4524729ea202e743792b8184ae17b191b949c352b83b4",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Annex III 3(b); Articles 4, 6(3), 113 as amended",
+      "text_rights": "Official legislation; source passage is an attributed locator excerpt from the European Commission service desk; see https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4 and https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "us-ada-title-ii-web",
+      "title": "ADA Title II web and mobile accessibility rule",
+      "authority": "United States Department of Justice; Electronic Code of Federal Regulations",
+      "url": "https://www.ecfr.gov/current/title-28/chapter-I/part-35/subpart-H/section-35.200",
+      "jurisdiction": "United States",
+      "document_type": "regulation",
+      "published": "2024",
+      "retrieved": "2026-11-05",
+      "scope": "State and local public entities, including public universities, and their web content and mobile apps, subject to exceptions and applicable undue burdens and fundamental alteration provisions.",
+      "source_locator": "28 CFR 35.200(a)–(b), 35.201; DOJ 2026 interim final rule",
+      "topics": [
+        "accessibility",
+        "education",
+        "inclusion"
+      ],
+      "summary": "The 2024 rule adopts WCAG 2.1 Level AA for covered state and local government web content and mobile applications; the 2026 interim final rule extended deadlines.",
+      "requirements": [
+        "Determine the public entity and population calculation; review exceptions and obligations for contracted content."
+      ],
+      "limitations": [
+        "The technical standard is WCAG 2.1 AA, not WCAG 2.2; US law is not automatically applicable to UAE institutions.",
+        "The interim final rule extended compliance dates to 26 April 2027 for entities with populations of 50,000 or more and 26 April 2028 for smaller entities and special district governments; public universities use the population of the relevant state or local government.",
+        "Other disability access duties can apply before those dates."
+      ],
+      "verification": "Current eCFR section and DOJ fact sheet reviewed 2026-11-05; https://www.ada.gov/resources/2024-03-08-web-rule/ and https://www.ada.gov/resources/web-rule-first-steps/.",
+      "reuse_note": "United States Department of Justice public-domain government guidance. The excerpts reproduce full cited fact-sheet sections, not regulatory text. https://www.ada.gov/resources/2024-03-08-web-rule/.",
+      "text_path": "source_texts/us-ada-title-ii-web.txt",
+      "text_sha256": "d37a963d4b9e894e0d159aa73610ba5126291b575a8e5ac4945236ecc996a89d",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "DOJ fact sheet: Requirement—web content; How Long State and Local Governments Have to Comply",
+      "text_rights": "United States Department of Justice public-domain government guidance. The excerpts reproduce full cited fact-sheet sections, not regulatory text. https://www.ada.gov/resources/2024-03-08-web-rule/.",
+      "text_status": "relevant_sections"
+    },
+    {
+      "id": "us-ferpa-education-records",
+      "title": "Family Educational Rights and Privacy Act regulations",
+      "authority": "United States Department of Education",
+      "url": "https://studentprivacy.ed.gov/ferpa",
+      "jurisdiction": "United States",
+      "document_type": "regulation",
+      "published": "1974 (Act); regulations amended subsequently",
+      "retrieved": "2026-11-05",
+      "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+      "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+      "topics": [
+        "privacy",
+        "data_protection",
+        "education",
+        "human_oversight"
+      ],
+      "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+      "requirements": [
+        "Determine whether records directly relate to a student and are maintained by the institution or its agent, subject to exclusions.",
+        "Assess access, consent, exception and vendor conditions for each disclosure."
+      ],
+      "limitations": [
+        "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+        "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+      ],
+      "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+      "reuse_note": "United States federal regulation; public-domain federal government text, source U.S. Department of Education https://studentprivacy.ed.gov/ferpa.",
+      "text_path": "source_texts/us-ferpa-education-records.txt",
+      "text_sha256": "1b8f9b8070948541f8e9d35cd60a86d8cca2f6fbf3b11909957c68781026648f",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "34 CFR 99.3 definitions of Education records and Eligible student; 34 CFR 99.30",
+      "text_rights": "United States federal regulation; public-domain federal government text, source U.S. Department of Education https://studentprivacy.ed.gov/ferpa.",
+      "text_status": "relevant_sections"
+    },
+    {
+      "id": "wcag-22-captions",
+      "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+      "authority": "World Wide Web Consortium (W3C)",
+      "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+      "jurisdiction": "International",
+      "document_type": "technical standard",
+      "published": "2024",
+      "retrieved": "2026-11-05",
+      "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+      "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+      "topics": [
+        "accessibility",
+        "education",
+        "inclusion"
+      ],
+      "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+      "requirements": [
+        "Assess whether the material is synchronized media and provide captions appropriate to the applicable success criterion."
+      ],
+      "limitations": [
+        "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+        "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+      ],
+      "verification": "W3C Recommendation text reviewed 2026-11-05.",
+      "reuse_note": "W3C copyright and document-use rules apply; brief attributed locator excerpt retained.",
+      "text_path": "source_texts/wcag-22-captions.txt",
+      "text_sha256": "7371b86efeb5fd8bbcc0bedcf5d6ae71ed284037105f72333ef0eba8b2b7f23c",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+      "text_rights": "W3C copyright and document-use rules apply; brief attributed locator excerpt retained.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "australia-teqsa-genai-assessment",
+      "title": "Assessment reform for the age of artificial intelligence",
+      "authority": "Tertiary Education Quality and Standards Agency (TEQSA)",
+      "url": "https://www.teqsa.gov.au/guides-resources/resources/corporate-publications/assessment-reform-age-artificial-intelligence",
+      "jurisdiction": "Australia",
+      "document_type": "guidance",
+      "published": "2023",
+      "retrieved": "2026-11-05",
+      "scope": "Expert-developed, non-prescriptive guidance for Australian higher education on assessment in a generative-AI context.",
+      "source_locator": "Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6",
+      "topics": [
+        "education",
+        "assessment",
+        "responsible_ai",
+        "human_oversight"
+      ],
+      "summary": "TEQSA’s expert paper offers guiding principles and propositions for assessment design that both assure learning and prepare students to engage ethically with generative AI.",
+      "requirements": [
+        "Review assessment design and assurance of learning alongside students’ ability to use AI responsibly."
+      ],
+      "limitations": [
+        "The paper describes directions for the sector, not a mandatory formula or a UAE policy.",
+        "Related TEQSA resources appeared in 2025 and 2026; this entry is the 2023 paper."
+      ],
+      "verification": "TEQSA publication page and PDF pp. 2–6 reviewed 2026-11-05; https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf.",
+      "reuse_note": "TEQSA website materials are CC BY 3.0 Australia except where otherwise noted; attribution to TEQSA and named authors, https://www.teqsa.gov.au/copyright. Brief attributed excerpt.",
+      "text_path": "source_texts/australia-teqsa-genai-assessment.txt",
+      "text_sha256": "119172f72df4528a8eb92369473d97501d6427494ef71c9b3b58633dbcfa1d7f",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6",
+      "text_rights": "TEQSA website materials are CC BY 3.0 Australia except where otherwise noted; attribution to TEQSA and named authors, https://www.teqsa.gov.au/copyright. Brief attributed excerpt.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "uk-qaa-genai-assessment",
+      "title": "Maintaining quality and standards in the ChatGPT era",
+      "authority": "Quality Assurance Agency for Higher Education (QAA)",
+      "url": "https://www.qaa.ac.uk/news-events/news/qaa-publishes-additional-advice-on-generative-artificial-intelligence-tools",
+      "jurisdiction": "United Kingdom",
+      "document_type": "guidance",
+      "published": "2023",
+      "retrieved": "2026-11-05",
+      "scope": "QAA guidance for UK higher-education providers on generative AI, academic standards and assessment.",
+      "source_locator": "8 May 2023 QAA announcement, assessment and quality-assurance paragraphs",
+      "topics": [
+        "education",
+        "assessment",
+        "responsible_ai"
+      ],
+      "summary": "QAA describes a four-step process for providers to identify assessments that need adjustment and implement internal quality assurance, while considering benefits and standards.",
+      "requirements": [
+        "Review assessments and internal quality-assurance processes in light of institutional context."
+      ],
+      "limitations": [
+        "QAA sector advice is non-binding guidance, not UAE law and not a measured educational outcome.",
+        "This entry relies on the public announcement summarising the advice; the full guidance PDF was not separately verified."
+      ],
+      "verification": "QAA primary announcement reviewed 2026-11-05.",
+      "reuse_note": "QAA copyright; reuse terms for the underlying guidance unclear, so only a brief locator excerpt is retained.",
+      "text_path": "source_texts/uk-qaa-genai-assessment.txt",
+      "text_sha256": "a5116cce6d98b5865d489b44faa8ee70265d82a43c49b84c689a84da002a0485",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "8 May 2023 QAA announcement, assessment and quality-assurance paragraphs",
+      "text_rights": "QAA copyright; reuse terms for the underlying guidance unclear, so only a brief locator excerpt is retained.",
+      "text_status": "locator_excerpt"
+    },
+    {
+      "id": "oecd-ai-principles",
+      "title": "OECD Recommendation on Artificial Intelligence",
+      "authority": "Organisation for Economic Co-operation and Development",
+      "url": "https://legalinstruments.oecd.org/en/instruments/oecd-legal-0449",
+      "jurisdiction": "International",
+      "document_type": "recommendation",
+      "published": "2019",
+      "retrieved": "2026-11-05",
+      "scope": "Intergovernmental recommendation for trustworthy AI; general cross-sector principles, not a higher-education-specific regulation.",
+      "source_locator": "OECD/LEGAL/0449, principles 1.3 transparency and explainability, 1.4 robustness and safety, 1.5 accountability",
+      "topics": [
+        "responsible_ai",
+        "human_oversight",
+        "education",
+        "privacy"
+      ],
+      "summary": "The OECD principles address transparency, robustness, safety, accountability and traceability across the AI lifecycle, with responsibilities related to actors’ roles and context.",
+      "requirements": [
+        "Document source and process provenance and support meaningful explanation and human oversight proportionate to context."
+      ],
+      "limitations": [
+        "The OECD recommendation is not a UAE education regulation or proof that a product meets its principles.",
+        "The 2019 recommendation was updated in 2024; verify later changes before citing its current legal instrument text."
+      ],
+      "verification": "OECD principles topic page reviewed 2026-11-05; https://www.oecd.org/en/topics/ai-principles.html. OECD legal instrument landing page did not expose full text in the browser.",
+      "reuse_note": "OECD publication rights; reuse conditions not established, so only a brief attributed locator excerpt is retained.",
+      "text_path": "source_texts/oecd-ai-principles.txt",
+      "text_sha256": "798ecc7023713dbe32c78956ea715eefee64aca88b6852be57f0387aaaca7126",
+      "text_retrieved": "2026-11-05",
+      "text_locator": "OECD/LEGAL/0449, principles 1.3 transparency and explainability, 1.4 robustness and safety, 1.5 accountability",
+      "text_rights": "OECD publication rights; reuse conditions not established, so only a brief attributed locator excerpt is retained.",
+      "text_status": "locator_excerpt"
     }
   ]
 }

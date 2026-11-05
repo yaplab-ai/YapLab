@@ -2,9 +2,12 @@
 
 The scoped notebook inputs remain in `knowledge-base/itu-reference/general` and
 `knowledge-base/itu-reference/uaeu`. They contain original source summaries,
-metadata and notebook-style chunks, not complete laws or university policies.
-General has 10 documents / 29 chunks; UAEU adds three institutional examples for
-13 documents / 38 chunks. Both bundles still pass the exporter’s exact check.
+metadata, display summaries and verified text assets, with notebook-style chunks.
+Frozen corpus `2026-11-05.5` has 25 records. General has 22 documents / 126 chunks;
+UAEU adds three institutional examples for 25 documents / 135 chunks. Both bundles
+pass the exporter’s exact check. Thirteen assets supply original text: three
+contain relevant sections (UAE AI ethics, FERPA and DOJ web guidance), while ten
+contain short attributed locator excerpts. This is not a full national corpus.
 
 From `apps/api`, inspect actual prepared chunks without a model or network:
 
@@ -39,7 +42,7 @@ another system imports it.
 Separate real local vector indexes now exist at
 [`knowledge-base/local-vector/general`](../knowledge-base/local-vector/general/)
 and [`knowledge-base/local-vector/uaeu`](../knowledge-base/local-vector/uaeu/).
-The general index contains **29 vectors**, and UAEU **38**, each with **384
+The general index contains **126 vectors**, and UAEU **135**, each with **384
 normalized float32 dimensions** in FAISS `IndexFlatIP`. This follows the pinned
 reference notebook's cell-9 embedding/index approach, using JSON metadata instead
 of pickle. The notebook was not run in Google Drive; no ITU-hosted import occurred.
@@ -129,6 +132,37 @@ building/searching. Hash checks detect drift relative to recorded provenance;
 they do not authenticate arbitrarily supplied index files. Only load local
 trusted outputs. The [submission workflow](ai-for-good-submission-workflow.md)
 records the remaining hosted-format/access questions.
+
+
+## National-document coverage and rights
+
+| Brief category | Status | Included material and precise limit |
+| --- | --- | --- |
+| Law | Partial | UAE PDPL/disability source notes and indexed locators; full current statutory text/amendments not verified. Selected FERPA text is a foreign comparison, not national coverage. |
+| AI, digital and cyber strategies | Partial | AI strategy/charter, digital-government strategy to 2025, 2019 cybersecurity reference and licensed ethics sections. Strategy periods/current replacement require care; guidance is not a university mandate. |
+| Data protection | Partial | Scoped PDPL notes, ethics privacy sections, UAEU governance example and FERPA comparison; cross-border/application questions remain unresolved. |
+| Institutional mandates | Partial | CAA public higher-education evaluation overview and UAEU-only examples. Detailed former 2019 standards and actual university incident/assessment/support procedures are unverified. |
+| IP regime | Missing verified national text | Official copyright-law endpoints were inaccessible. No lecture-recording permission or statutory exception is inferred. |
+| Multilateral commitments | Partial | UNESCO recommendations/guidance and OECD principles provide comparison. They do not prove UAE treaty ratification or adoption of every instrument. |
+| Energy/infrastructure | Partial | Digital/cyber strategy context and local inference setup; no dedicated national energy-policy text, energy measurement or infrastructure readiness score. |
+
+Each text asset has a source URL, locator, retrieval date, content hash and rights
+basis. UAE ethics sections are CC BY 4.0; the selected U.S. government material
+is public-domain source text. Unclear publisher rights lead to locator excerpts,
+not inferred permission to mirror whole PDFs. Source rights and separate TalkMoves
+restrictions remain distinct from the MIT code licence. The app's source cards
+continue to display original paraphrases and cautions.
+
+The optional hybrid path now supplies the application's source search, not just
+an inspection CLI; its result explicitly reports `hybrid` or `lexical`. It uses
+existing institutional filters and a lexical overlap gate. Missing dependencies,
+invalid local artifacts or absent opt-in configuration fall back to lexical.
+[Setup, benchmark and limitations](ai-for-good-retrieval.md) include the frozen
+40-query labels: recall@3 0.9722 lexical / 1.0000 hybrid, MRR 0.9514 / 0.9444;
+both correctly abstained on three of four unrelated queries. These team-authored
+labels are not expert validation or an educational benchmark. The optional
+worker requires the repository scripts and external model/index setup; a wheel
+without those files retains lexical fallback.
 
 ## Source scope and proposal review
 

@@ -1,0 +1,822 @@
+{
+  "status": "team-authored, not expert-validated",
+  "generated_at_utc": "2026-11-05T08:03:18.182847+00:00",
+  "labels_sha256": "8cd6e4658da73687197cabde366595ae562e960bbe19dfb960ca2bf6794c031b",
+  "label_freeze_utc": "2026-11-05T07:52:49Z",
+  "corpus_sha256": "26d10c0cb22e35621b987cf11c2f3fc9a58a500eb8ebde212529a26ff40f5a0c",
+  "corpus_version": "2026-11-05.5",
+  "source_commit": "e3a385989839a69548213fecca13f245867b8086",
+  "working_tree_note": "Retrieval files have uncommitted changes; component hashes identify the executed files.",
+  "retrieval_code_sha256": {
+    "frontrow/policy/evidence.py": "2cb7ab4150be1a5afab90aef84cd2c6f8f8f0d0189faa135476dea13bba954f1",
+    "frontrow/policy/vector_runtime.py": "780de2501fa80c3c7052429f4a00b25b7cbef935d8e2e34f41a30b85f8ad7512",
+    "scripts/policy_vector_worker.py": "49b96645a396024b3b93a52be17063e87d1bb1aa25d8ec3f321ab166a67d7e6f",
+    "scripts/vector_policy_kb.py": "c8c6d7bffa632447034fced42b72a89f9423cf0e24d4f9d72e7c26c79c01b3f4",
+    "scripts/benchmark_policy_retrieval.py": "4dcb77cd798154291214f58c3c8c3093b4b518a6bdef9c8ef002cd1042777e33"
+  },
+  "index_sha256": {
+    "general": {
+      "config.json": "14bf2ace637fb3ae582e064e35d456c46e1a020357d49feb21210387ecc89dea",
+      "metadata.json": "3ed3fe80de598874de890350f400922122119eaacc392958f5c1da2ed92c924f",
+      "faiss.index": "58cf62b307a24d5d2fcb98da3b54ea8833f685d884302e2a879ab69435b598af"
+    },
+    "uaeu": {
+      "config.json": "2683f716f46c25f9ea9bf6342cfbbf3a42ef387c4c9e029e1706702cb09a7566",
+      "metadata.json": "0e8729c542230ce892f8c5ea8d6c0fff78b638fd15e3dca1b960728662daf14f",
+      "faiss.index": "a65128e702caf975e2b31ae962ff97194885bdc44d67c458b3b13b76f46ce5d7"
+    }
+  },
+  "metric_definition": "Recall@3 is mean per-query fraction of expected IDs in top 3; MRR is mean reciprocal rank of the first expected ID in top 3. Abstention is measured separately.",
+  "scope": "Local offline retrieval comparison; source relevance labels are incomplete, and scores do not establish legal applicability or educational outcomes.",
+  "retrieval": "Lexical uses weighted source metadata; hybrid uses reciprocal rank fusion of lexical ranks and verified local MiniLM/FAISS chunk-derived source ranks, with a lexical overlap gate.",
+  "lexical": {
+    "relevant_queries": 36,
+    "recall_at_3": 0.9722222222222222,
+    "mrr": 0.9513888888888888,
+    "mrr_at_3": 0.9444444444444444,
+    "abstain_queries": 4,
+    "correct_abstentions": 3,
+    "abstention_accuracy": 0.75
+  },
+  "hybrid": {
+    "relevant_queries": 36,
+    "recall_at_3": 1.0,
+    "mrr": 0.9444444444444444,
+    "mrr_at_3": 0.9444444444444444,
+    "abstain_queries": 4,
+    "correct_abstentions": 3,
+    "abstention_accuracy": 0.75
+  },
+  "queries": [
+    {
+      "query_id": "q01",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uae-personal-data-protection",
+        "us-ferpa-education-records",
+        "uae-caa-outcomes-framework"
+      ],
+      "hybrid_top3": [
+        "uae-personal-data-protection",
+        "us-ferpa-education-records",
+        "uae-caa-outcomes-framework"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-personal-data-protection"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q02",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uaeu-institutional-data-governance",
+        "us-ferpa-education-records",
+        "uaeu-student-generative-ai"
+      ],
+      "hybrid_top3": [
+        "uaeu-institutional-data-governance",
+        "us-ferpa-education-records",
+        "uaeu-student-generative-ai"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q03",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "england-generative-ai-education",
+        "unesco-generative-ai-education",
+        "australia-teqsa-genai-assessment"
+      ],
+      "hybrid_top3": [
+        "england-generative-ai-education",
+        "unesco-generative-ai-education",
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "lexical_first_relevant_rank": 2,
+      "hybrid_first_relevant_rank": 2,
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q04",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uaeu-institutional-data-governance",
+        "uaeu-student-generative-ai",
+        "unesco-generative-ai-education"
+      ],
+      "hybrid_top3": [
+        "uaeu-institutional-data-governance",
+        "uae-personal-data-protection",
+        "uaeu-student-generative-ai"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q05",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uaeu-student-generative-ai",
+        "uaeu-institutional-data-governance",
+        "england-generative-ai-education"
+      ],
+      "hybrid_top3": [
+        "uaeu-student-generative-ai",
+        "uaeu-students-of-determination-services",
+        "us-ferpa-education-records"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q06",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "england-generative-ai-education",
+        "unesco-generative-ai-education",
+        "australia-teqsa-genai-assessment"
+      ],
+      "hybrid_top3": [
+        "england-generative-ai-education",
+        "unesco-generative-ai-education",
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "england-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q07",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uae-ai-ethics-self-assessment",
+        "england-generative-ai-education",
+        "australia-teqsa-genai-assessment"
+      ],
+      "hybrid_top3": [
+        "uae-ai-ethics-self-assessment",
+        "uae-ai-charter-2024",
+        "england-generative-ai-education"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q08",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uae-personal-data-protection",
+        "us-ferpa-education-records",
+        "uae-persons-with-disabilities-education"
+      ],
+      "hybrid_top3": [
+        "uae-personal-data-protection",
+        "uae-persons-with-disabilities-education",
+        "uae-digital-government-strategy-2025"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-personal-data-protection"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q09",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "unesco-ai-ethics-recommendation",
+        "oecd-ai-principles",
+        "uae-ai-ethics-self-assessment"
+      ],
+      "hybrid_top3": [
+        "unesco-ai-ethics-recommendation",
+        "oecd-ai-principles",
+        "uae-ai-ethics-self-assessment"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "unesco-ai-ethics-recommendation"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q10",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uaeu-institutional-data-governance",
+        "uae-personal-data-protection",
+        "uae-ai-ethics-self-assessment"
+      ],
+      "hybrid_top3": [
+        "uaeu-institutional-data-governance",
+        "uae-personal-data-protection",
+        "uae-cybersecurity-strategy-2019"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q11",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-persons-with-disabilities-education",
+        "uae-personal-data-protection",
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "hybrid_top3": [
+        "uae-persons-with-disabilities-education",
+        "us-ferpa-education-records",
+        "uae-inclusive-education-schools"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-persons-with-disabilities-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q12",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-digital-accessibility-policy",
+        "us-ada-title-ii-web",
+        "uae-digital-government-strategy-2025"
+      ],
+      "hybrid_top3": [
+        "uae-digital-accessibility-policy",
+        "us-ada-title-ii-web",
+        "uae-digital-government-strategy-2025"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-digital-accessibility-policy"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q13",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uaeu-students-of-determination-services",
+        "uae-personal-data-protection",
+        "wcag-22-captions"
+      ],
+      "hybrid_top3": [
+        "uaeu-students-of-determination-services",
+        "uaeu-institutional-data-governance",
+        "uae-inclusive-education-schools"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q14",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-inclusive-education-schools",
+        "uae-digital-accessibility-policy",
+        "uae-ai-charter-2024"
+      ],
+      "hybrid_top3": [
+        "uae-inclusive-education-schools",
+        "uae-digital-accessibility-policy",
+        "uae-persons-with-disabilities-education"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-inclusive-education-schools"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q15",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uaeu-students-of-determination-services",
+        "uae-inclusive-education-schools",
+        "uaeu-institutional-data-governance"
+      ],
+      "hybrid_top3": [
+        "uaeu-students-of-determination-services",
+        "uaeu-student-generative-ai",
+        "uae-inclusive-education-schools"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q16",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-digital-accessibility-policy",
+        "us-ada-title-ii-web",
+        "uae-digital-government-strategy-2025"
+      ],
+      "hybrid_top3": [
+        "uae-digital-accessibility-policy",
+        "uae-digital-government-strategy-2025",
+        "us-ada-title-ii-web"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-digital-accessibility-policy"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q17",
+      "scenario": "captions",
+      "lexical_top3": [
+        "unesco-generative-ai-education",
+        "england-generative-ai-education",
+        "unesco-ai-ethics-recommendation"
+      ],
+      "hybrid_top3": [
+        "unesco-generative-ai-education",
+        "england-generative-ai-education",
+        "unesco-ai-ethics-recommendation"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q18",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-persons-with-disabilities-education",
+        "uae-personal-data-protection",
+        "us-ada-title-ii-web"
+      ],
+      "hybrid_top3": [
+        "uae-persons-with-disabilities-education",
+        "us-ada-title-ii-web",
+        "us-ferpa-education-records"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-persons-with-disabilities-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q19",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uae-inclusive-education-schools",
+        "uae-adek-school-ethics",
+        "uae-ai-charter-2024"
+      ],
+      "hybrid_top3": [
+        "uae-inclusive-education-schools",
+        "uae-adek-school-ethics",
+        "uae-ai-charter-2024"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-inclusive-education-schools"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q20",
+      "scenario": "captions",
+      "lexical_top3": [
+        "uaeu-students-of-determination-services",
+        "uaeu-institutional-data-governance",
+        "uaeu-student-generative-ai"
+      ],
+      "hybrid_top3": [
+        "uaeu-students-of-determination-services",
+        "uae-inclusive-education-schools",
+        "uaeu-institutional-data-governance"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q21",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-ai-ethics-principles-guidelines",
+        "uae-ai-charter-2024",
+        "uae-national-ai-strategy-2031"
+      ],
+      "hybrid_top3": [
+        "uae-ai-charter-2024",
+        "uae-ai-ethics-principles-guidelines",
+        "uae-national-ai-strategy-2031"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 2,
+      "expected_source_ids": [
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q22",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-national-ai-strategy-2031",
+        "unesco-ai-ethics-recommendation",
+        "uae-ai-charter-2024"
+      ],
+      "hybrid_top3": [
+        "uae-national-ai-strategy-2031",
+        "uae-ai-charter-2024",
+        "uae-digital-government-strategy-2025"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-national-ai-strategy-2031"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q23",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "unesco-generative-ai-education",
+        "england-generative-ai-education",
+        "wcag-22-captions"
+      ],
+      "hybrid_top3": [
+        "unesco-generative-ai-education",
+        "england-generative-ai-education",
+        "australia-teqsa-genai-assessment"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q24",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uaeu-student-generative-ai",
+        "uae-ai-charter-2024",
+        "unesco-ai-ethics-recommendation"
+      ],
+      "hybrid_top3": [
+        "uaeu-student-generative-ai",
+        "uae-ai-charter-2024",
+        "uae-national-ai-strategy-2031"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q25",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-ai-ethics-self-assessment",
+        "uae-national-ai-strategy-2031",
+        "oecd-ai-principles"
+      ],
+      "hybrid_top3": [
+        "uae-ai-ethics-self-assessment",
+        "uae-national-ai-strategy-2031",
+        "uae-ai-charter-2024"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q26",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-ai-ethics-principles-guidelines",
+        "australia-teqsa-genai-assessment",
+        "uae-ai-charter-2024"
+      ],
+      "hybrid_top3": [
+        "uae-ai-ethics-principles-guidelines",
+        "uae-ai-charter-2024",
+        "uae-national-ai-strategy-2031"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q27",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "unesco-ai-ethics-recommendation",
+        "oecd-ai-principles",
+        "uae-national-ai-strategy-2031"
+      ],
+      "hybrid_top3": [
+        "unesco-ai-ethics-recommendation",
+        "oecd-ai-principles",
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "unesco-ai-ethics-recommendation"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q28",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-adek-school-ethics",
+        "england-generative-ai-education",
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "hybrid_top3": [
+        "england-generative-ai-education",
+        "uk-qaa-genai-assessment",
+        "uae-adek-school-ethics"
+      ],
+      "lexical_first_relevant_rank": 2,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "england-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q29",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uaeu-student-generative-ai",
+        "uaeu-institutional-data-governance",
+        "england-generative-ai-education"
+      ],
+      "hybrid_top3": [
+        "uaeu-student-generative-ai",
+        "england-generative-ai-education",
+        "unesco-generative-ai-education"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q30",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-national-ai-strategy-2031",
+        "uae-ai-charter-2024",
+        "uae-digital-government-strategy-2025"
+      ],
+      "hybrid_top3": [
+        "uae-national-ai-strategy-2031",
+        "uae-ai-charter-2024",
+        "oecd-ai-principles"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-national-ai-strategy-2031"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q31",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "uae-ai-ethics-self-assessment",
+        "uae-ai-charter-2024",
+        "uae-national-ai-strategy-2031"
+      ],
+      "hybrid_top3": [
+        "uae-ai-ethics-self-assessment",
+        "uae-ai-charter-2024",
+        "uae-national-ai-strategy-2031"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q32",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "unesco-generative-ai-education",
+        "unesco-ai-ethics-recommendation",
+        "australia-teqsa-genai-assessment"
+      ],
+      "hybrid_top3": [
+        "unesco-ai-ethics-recommendation",
+        "unesco-generative-ai-education",
+        "uae-national-ai-strategy-2031"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 2,
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q33",
+      "scenario": "out_of_scope",
+      "lexical_top3": [],
+      "hybrid_top3": [],
+      "lexical_first_relevant_rank": null,
+      "hybrid_first_relevant_rank": null,
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "query_id": "q34",
+      "scenario": "out_of_scope",
+      "lexical_top3": [],
+      "hybrid_top3": [],
+      "lexical_first_relevant_rank": null,
+      "hybrid_first_relevant_rank": null,
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "query_id": "q35",
+      "scenario": "out_of_scope",
+      "lexical_top3": [],
+      "hybrid_top3": [],
+      "lexical_first_relevant_rank": null,
+      "hybrid_first_relevant_rank": null,
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "query_id": "q36",
+      "scenario": "out_of_scope",
+      "lexical_top3": [
+        "uae-digital-accessibility-policy",
+        "us-ada-title-ii-web"
+      ],
+      "hybrid_top3": [
+        "us-ada-title-ii-web",
+        "uae-digital-accessibility-policy",
+        "england-generative-ai-education"
+      ],
+      "lexical_first_relevant_rank": null,
+      "hybrid_first_relevant_rank": null,
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "query_id": "q37",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "oecd-ai-principles",
+        "unesco-ai-ethics-recommendation",
+        "eu-ai-act-education"
+      ],
+      "hybrid_top3": [
+        "eu-ai-act-education",
+        "oecd-ai-principles",
+        "unesco-ai-ethics-recommendation"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "eu-ai-act-education",
+        "oecd-ai-principles"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q38",
+      "scenario": "captions",
+      "lexical_top3": [
+        "us-ada-title-ii-web",
+        "wcag-22-captions",
+        "uae-digital-accessibility-policy"
+      ],
+      "hybrid_top3": [
+        "us-ada-title-ii-web",
+        "wcag-22-captions",
+        "uae-digital-accessibility-policy"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "us-ada-title-ii-web",
+        "wcag-22-captions"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q39",
+      "scenario": "transcript",
+      "lexical_top3": [
+        "uae-personal-data-protection",
+        "uae-persons-with-disabilities-education",
+        "unesco-generative-ai-education"
+      ],
+      "hybrid_top3": [
+        "uae-personal-data-protection",
+        "us-ferpa-education-records",
+        "uae-persons-with-disabilities-education"
+      ],
+      "lexical_first_relevant_rank": 4,
+      "hybrid_first_relevant_rank": 2,
+      "expected_source_ids": [
+        "us-ferpa-education-records"
+      ],
+      "should_abstain": false
+    },
+    {
+      "query_id": "q40",
+      "scenario": "feedback",
+      "lexical_top3": [
+        "australia-teqsa-genai-assessment",
+        "england-generative-ai-education",
+        "uk-qaa-genai-assessment"
+      ],
+      "hybrid_top3": [
+        "australia-teqsa-genai-assessment",
+        "england-generative-ai-education",
+        "uk-qaa-genai-assessment"
+      ],
+      "lexical_first_relevant_rank": 1,
+      "hybrid_first_relevant_rank": 1,
+      "expected_source_ids": [
+        "australia-teqsa-genai-assessment",
+        "uk-qaa-genai-assessment"
+      ],
+      "should_abstain": false
+    }
+  ]
+}

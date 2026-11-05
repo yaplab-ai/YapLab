@@ -27,9 +27,12 @@ def digest(value):
                                      separators=(',', ':')).encode('utf-8')).hexdigest()
 
 
-class NoEnvironment:
-    def get(self, *args, **kwargs):
-        raise AssertionError('default dry-run read the environment')
+class LocalVectorOnlyEnvironment:
+    def get(self, key, default=None):
+        if key in {'FRONTROW_POLICY_VECTOR_PYTHON', 'FRONTROW_POLICY_VECTOR_MODEL',
+                   'FRONTROW_POLICY_VECTOR_INDEX_ROOT'}:
+            return None
+        raise AssertionError('default dry-run read a non-vector environment setting')
     def __getitem__(self, key):
         raise AssertionError('default dry-run read the environment')
     def __contains__(self, key):
@@ -46,12 +49,15 @@ class EvaluationTests(unittest.TestCase):
         with patch.object(sys, 'argv', ['evaluate_coordination.py', *args]), redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
             return evaluation.main()
 
-    def test_default_dry_run_is_network_free_and_never_reads_environment(self):
+    def test_default_dry_run_is_network_free_and_does_not_read_provider_environment(self):
         with patch('socket.socket', side_effect=AssertionError('network forbidden')), \
              patch.object(OpenAIClient, '__init__', side_effect=AssertionError('provider construction forbidden')):
-            with patch.object(evaluation.os, 'environ', NoEnvironment()):
+            with patch.object(evaluation.os, 'environ', LocalVectorOnlyEnvironment()):
                 corpus, states, plan = evaluation.prepare()
-            self.assertEqual(self.invoke([]), 0)
+                # ArgumentParser otherwise consults locale and terminal settings.
+                with patch('argparse._', side_effect=lambda message: message), \
+                     patch('shutil.get_terminal_size', return_value=SimpleNamespace(columns=80, lines=24)):
+                    self.assertEqual(self.invoke([]), 0)
         self.assertEqual(len(states), 9)
         self.assertEqual(plan['planned_provider_calls'], 27)
         self.assertEqual(plan['network_calls_made'], 0)

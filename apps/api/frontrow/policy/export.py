@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from importlib import resources
 from pathlib import Path
 
 from .evidence import Corpus, load_corpus
@@ -52,9 +53,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.'''
-RIGHTS_CAVEAT = ('These are original curated summaries, not full source texts. '
-                 'Source materials may have separate rights and reuse restrictions; '
-                 'consult each source and its terms before reuse.')
+RIGHTS_CAVEAT = ('Curated summaries and selected attributed source text have separate rights. '
+                 'Consult each source, locator and recorded reuse terms before reuse.')
 _SLUG = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*\Z')
 
 
@@ -95,8 +95,22 @@ def _json_bytes(value: object) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
 
 
+def _source_text(source) -> str | None:
+    path = getattr(source, 'text_path', None)
+    if not path:
+        return None
+    if not re.fullmatch(r'source_texts/[a-z0-9]+(?:-[a-z0-9]+)*\.txt', path):
+        raise ValueError(f'unsafe source text path: {path!r}')
+    data = resources.files('frontrow.policy').joinpath(*path.split('/')).read_bytes()
+    if hashlib.sha256(data).hexdigest() != getattr(source, 'text_sha256', None):
+        raise ValueError(f'source text hash mismatch: {source.id}')
+    if not all(getattr(source, name, None) for name in ('text_retrieved', 'text_locator', 'text_rights', 'text_status')):
+        raise ValueError(f'incomplete source text provenance: {source.id}')
+    return data.decode('utf-8')
+
+
 def _document(source) -> str:
-    lines = [f'# {source.title}', '', 'Original curated summary; not the source full text.',
+    lines = [f'# {source.title}', '', 'Original curated summary with any selected source text labelled below.',
              RIGHTS_CAVEAT, '', f'Source ID: {source.id}', f'Authority: {source.authority}',
              f'URL: {source.url}', f'Jurisdiction: {source.jurisdiction}',
              f'Institution: {source.institution or "general"}',
@@ -110,6 +124,12 @@ def _document(source) -> str:
     reuse_note = getattr(source, 'reuse_note', None)
     if reuse_note:
         lines.extend(['', '## Source rights and reuse', str(reuse_note)])
+    source_text = _source_text(source)
+    if source_text is not None:
+        lines.extend(['', '## Selected source text',
+                      f'Status: {source.text_status}', f'Locator: {source.text_locator}',
+                      f'Retrieved: {source.text_retrieved}', f'Rights: {source.text_rights}',
+                      f'SHA-256 of source text asset: {source.text_sha256}', '', source_text.rstrip()])
     return '\n'.join(lines) + '\n'
 
 
@@ -143,7 +163,12 @@ def build_bundle(corpus: Corpus | None = None, *, institution: str = 'general') 
             'institution': source.institution or 'general',
             'published': source.published, 'retrieved': source.retrieved,
             'sha256': hashlib.sha256(doc).hexdigest(),
-            'content_status': 'original_curated_summary_not_full_text',
+            'content_status': getattr(source, 'text_status', None) or 'original_curated_summary_not_full_text',
+            'text_path': getattr(source, 'text_path', None),
+            'text_sha256': getattr(source, 'text_sha256', None),
+            'text_retrieved': getattr(source, 'text_retrieved', None),
+            'text_locator': getattr(source, 'text_locator', None),
+            'text_rights': getattr(source, 'text_rights', None),
             'reuse_note': getattr(source, 'reuse_note', None),
             'verification': getattr(source, 'verification', None),
             'rights_caveat': RIGHTS_CAVEAT,
@@ -158,7 +183,7 @@ def build_bundle(corpus: Corpus | None = None, *, institution: str = 'general') 
         'status': 'local_notebook_input_prepared',
         'hosted_import_verified': False, 'embedding_index_built': False,
         'corpus_version': corpus.version, 'corpus_limitations': corpus.limitations,
-        'content_status': 'original_curated_summaries_not_full_text',
+        'content_status': 'curated_summaries_and_selected_source_text',
         'rights_caveat': RIGHTS_CAVEAT,
         'notebook_reference': {'repository': NOTEBOOK_URL, 'commit': NOTEBOOK_COMMIT,
                                'file': 'Colab Free Tier LLM Notebook.ipynb',

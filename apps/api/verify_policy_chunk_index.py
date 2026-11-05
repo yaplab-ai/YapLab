@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 from frontrow.policy.chunk_index import ChunkIndex
-from frontrow.policy.export import export_bundle
+from frontrow.policy.export import export_bundle, normalize_text
 
 
 class ChunkIndexTests(unittest.TestCase):
@@ -59,7 +59,9 @@ class ChunkIndexTests(unittest.TestCase):
         source = manifest['sources']['uae-personal-data-protection.md']
         partial = next(hit for hit in output['results']
                        if hit['source_id'] == source['id'] and hit['chunk_id'] == 1)
-        self.assertTrue(partial['text'].endswith('government data and'))
+        document = normalize_text((self.general / 'docs' / 'uae-personal-data-protection.md').read_text())
+        self.assertIn(partial['text'], document)
+        self.assertLess(len(partial['text']), len(document))
         for field in ('verification', 'document_type', 'jurisdiction', 'published', 'retrieved', 'scope'):
             self.assertEqual(partial['source_' + field], source[field])
         self.assertIn('Full current text and amendments require further verification',
