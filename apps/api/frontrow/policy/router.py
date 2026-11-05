@@ -3,6 +3,10 @@ from __future__ import annotations
 
 import asyncio
 import math
+import json
+import os
+import secrets
+from pathlib import Path
 import re
 import time
 from collections import deque
@@ -14,10 +18,11 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 from frontrow.llm.base import LLMClient
+from .audit import validate_recording, render_html
 from .agent import agent_review
 from .coordination import coordinate, Mode
 from .scenarios import _store
-from .evidence import CorpusUnavailable, Institution, Topic, load_corpus, scoped_sources, search
+from .evidence import CorpusUnavailable, Institution, Topic, load_corpus, scoped_sources, search_with_mode
 from .review import review
 
 ShortText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
@@ -68,10 +73,14 @@ class CoordinationRequest(BaseModel):
 class ModelCallLimits:
     """Process-local paid-call cap: 8/IP/hour, 20/IP/rolling day, 100/day total."""
 
-    def __init__(self, *, monotonic: Callable[[], float] = time.monotonic) -> None:
+    def __init__(self, *, monotonic: Callable[[], float] = time.monotonic,
+                 evaluation_limit: int | None = None) -> None:
+        if evaluation_limit is not None and (type(evaluation_limit) is not int or not 1 <= evaluation_limit <= 60):
+            raise ValueError('Synthetic evaluation call limit must be from 1 to 60')
         self._monotonic = monotonic
-        self._hourly = DemoLimits(sessions_per_ip_per_hour=8, max_sessions_per_day=100,
-                                  monotonic=monotonic)
+        self._per_ip_day = evaluation_limit or 20
+        self._hourly = DemoLimits(sessions_per_ip_per_hour=evaluation_limit or 8,
+                                  max_sessions_per_day=evaluation_limit or 100, monotonic=monotonic)
         self._daily: dict[str, deque[float]] = {}
 
     def reserve(self, address: str, count: int = 1) -> None:
@@ -84,7 +93,7 @@ class ModelCallLimits:
             if not entries:
                 del self._daily[ip]
         entries = self._daily.get(address)
-        if entries and len(entries) + count > 20:
+        if entries and len(entries) + count > self._per_ip_day:
             raise LimitExceeded('Model review daily limit reached.', math.ceil(entries[0] + 86400 - now))
         reservations = []
         try:
@@ -107,8 +116,11 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
     role_model = coordination_model or model
     # Separate from paid practice-session quotas, per FastAPI app instance.
     admission = DemoLimits(sessions_per_ip_per_hour=120, max_sessions_per_day=10000)
-    model_admission = ModelCallLimits()
+    # Explicit local synthetic-evaluation allowance; production defaults stay unchanged.
+    evaluation_limit = os.environ.get('FRONTROW_POLICY_EVALUATION_CALL_LIMIT')
+    model_admission = ModelCallLimits(evaluation_limit=int(evaluation_limit) if evaluation_limit else None)
     model_slots = asyncio.Semaphore(2)
+    recordings: dict[str, dict] = {}
 
     def admit(request: Request) -> None:
         address = client_ip(request.client.host if request.client else None,
@@ -132,7 +144,9 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
         admit(request)
         _check_input(body.query)
         response.headers['Cache-Control'] = 'no-store'
-        return {'query': body.query, 'institution': body.institution, 'results': search(_corpus(), body.query, body.limit, institution=body.institution)}
+        results, mode = await asyncio.to_thread(search_with_mode, _corpus(), body.query, body.limit,
+                                                institution=body.institution)
+        return {'query': body.query, 'institution': body.institution, 'retrieval_mode': mode, 'results': results}
 
     @router.post('/review')
     async def review_text(body: ReviewRequest, request: Request, response: Response):
@@ -157,7 +171,70 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
                 return await agent_review(corpus, body.text, body.topics, body.context, llm, model, institution=body.institution)
             finally:
                 model_slots.release()
-        return review(corpus, body.text, body.topics, body.context, institution=body.institution)
+        return await asyncio.to_thread(review, corpus, body.text, body.topics, body.context,
+                                       institution=body.institution)
+
+    @router.get('/gaps')
+    async def candidate_gaps(request: Request, response: Response, scenario_id: str | None = None):
+        admit(request)
+        from .gaps import load_gaps
+        response.headers['Cache-Control'] = 'no-store'
+        try:
+            return load_gaps(scenario_id)
+        except ValueError as exc:
+            raise HTTPException(404, 'Scenario not found') from exc
+
+    def recording_from_bytes(data: bytes) -> dict:
+        if len(data) > 1024 * 1024:
+            raise HTTPException(413, 'Recording is too large')
+        try:
+            return validate_recording(json.loads(data))
+        except (ValueError, TypeError, RecursionError, UnicodeError, AttributeError):
+            raise HTTPException(422, 'Invalid recorded live exercise') from None
+
+    @router.get('/replay')
+    async def configured_replay(request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        path = os.environ.get('FRONTROW_POLICY_REPLAY_PATH')
+        if not path:
+            raise HTTPException(404, 'No recorded live exercise configured')
+        try:
+            with Path(path).open('rb') as source:
+                data = source.read(1024 * 1024 + 1)
+        except OSError:
+            raise HTTPException(404, 'Recorded live exercise unavailable') from None
+        return recording_from_bytes(data)
+
+    @router.get('/replay/timeline.html')
+    async def configured_replay_html(request: Request):
+        replay = await configured_replay(request, Response())
+        return Response(render_html(replay['recording']), media_type='text/html',
+                        headers={'Cache-Control': 'no-store', 'Content-Disposition': 'attachment; filename=yaplab-audit.html'})
+
+    @router.post('/replays')
+    async def import_replay(request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        chunks = bytearray()
+        async for chunk in request.stream():
+            chunks.extend(chunk)
+            if len(chunks) > 1024 * 1024:
+                raise HTTPException(413, 'Recording is too large')
+        recording = recording_from_bytes(bytes(chunks))
+        if len(recordings) >= 50:
+            raise HTTPException(429, 'Replay capacity reached')
+        replay_id = secrets.token_urlsafe(24)
+        recordings[replay_id] = recording
+        return {'replay_id': replay_id, **recording}
+
+    @router.get('/replays/{replay_id}')
+    async def get_replay(replay_id: str, request: Request, response: Response):
+        admit(request)
+        response.headers['Cache-Control'] = 'no-store'
+        if replay_id not in recordings:
+            raise HTTPException(404, 'Replay not found')
+        return {'replay_id': replay_id, **recordings[replay_id]}
 
     @router.get('/coordination/status')
     async def coordination_status(request: Request, response: Response):

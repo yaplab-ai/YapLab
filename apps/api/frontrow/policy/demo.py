@@ -52,5 +52,5 @@ class PolicyDemoLLM(LLMClient):
         for action, fact in candidates:
             if action in ids['action_ids'] and fact in ids['fact_ids']:
                 return json.dumps({'proposals': [{'action_id': action, 'fact_ids': [fact],
-                                                  'source_ids': [source]}], 'questions': []})
+                                                  'source_ids': [source], 'rationale': 'This action responds to the released fact and supports a human decision.'}], 'questions': []})
         return json.dumps({'proposals': [], 'questions': []})

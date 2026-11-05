@@ -138,7 +138,7 @@ class ValidationTests(unittest.TestCase):
                         self.assertFalse(contract['additionalProperties'])
                         self.assertFalse(proposal['additionalProperties'])
                         self.assertEqual(set(contract['required']), {'proposals', 'questions'})
-                        self.assertEqual(set(proposal['required']), {'action_id', 'fact_ids', 'source_ids'})
+                        self.assertEqual(set(proposal['required']), {'action_id', 'fact_ids', 'source_ids', 'rationale'})
                         self.assertEqual(proposal['properties']['action_id']['enum'], allowed['action_ids'])
                         for field in ('fact_ids', 'source_ids'):
                             self.assertTrue(proposal['properties'][field]['uniqueItems'])

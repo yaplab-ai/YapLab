@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 from .diagnostics import VALIDATION_ISSUES
+from .audit import seal, render_html
 
 Role = Literal["teacher", "privacy", "accessibility"]
 ROLES = ("teacher", "privacy", "accessibility")
@@ -177,7 +178,7 @@ class ExerciseStore:
             while exercise_id in self.exercises:
                 exercise_id = secrets.token_urlsafe(24)
             exercise = {"scenario_id": scenario_id, "current_stage": 1,
-                        "expires_at": self.clock() + self.ttl, "events": [],
+                        "expires_at": self.clock() + self.ttl, "created_at": _now_iso(), "events": [],
                         "coordination_pending": None, "coordination_results": {}}
             self.exercises[exercise_id] = exercise
             return self._view(exercise_id, exercise, role)
@@ -350,7 +351,7 @@ class ExerciseStore:
                         for source in item["evidence"]
                     ]
                     assessment["proposals"] = [
-                        {key: proposal[key] for key in ("action_id", "owner", "text", "fact_ids", "source_ids") if key in proposal}
+                        {key: proposal[key] for key in ("action_id", "owner", "text", "fact_ids", "source_ids", "rationale", "rationale_rejected", "rationale_issue") if key in proposal}
                         for proposal in item["proposals"]
                     ]
                     assessment["questions"] = [
@@ -359,6 +360,50 @@ class ExerciseStore:
                     ]
                     events.append(json.loads(json.dumps({**event, "assessment": assessment})))
             return {"exercise_id": exercise_id, "events": events}
+
+
+    def timeline(self, exercise_id: str) -> dict:
+        """Facilitator export, in event order; no prompts or private reasoning."""
+        with self.lock:
+            exercise = self._get(exercise_id)
+            scenario = _BY_ID[exercise['scenario_id']]
+            events, rounds = [], []
+            def release(stage, at):
+                facts = scenario['stages'][stage - 1]['facts']
+                views = {role: [{k: v for k, v in fact.items() if k != 'roles'}
+                                for fact in facts if role in fact['roles']] for role in ROLES}
+                events.append({'type': 'stage_release', 'stage': stage, 'at': at,
+                               'fact_ids_by_role': {role: [fact['id'] for fact in views[role]] for role in ROLES},
+                               'views': views})
+            release(1, exercise['created_at'])
+            for event in exercise['events']:
+                if event['type'] == 'advance':
+                    release(event['stage'], event['at'])
+                elif event['type'] == 'decision':
+                    events.append(dict(event))
+                elif event['type'] == 'coordination':
+                    result = exercise['coordination_results'][event['round_id']]
+                    rounds.append(result)
+                    for role in result['roles']:
+                        events.append({'type': 'model_request', 'stage': event['stage'], 'at': role.get('started_at') or event['at'],
+                                       'role': role['role'], **result['model'], 'review_mode': result['review_mode'],
+                                       'protocol_version': result['protocol_version'], 'corpus_version': result['corpus_version'],
+                                       'prompt_sha256': role['prompt_sha256'], 'prompt_attempted': role['prompt_attempted'],
+                                       'usage': role.get('usage'), 'latency_ms': role.get('latency_ms'),
+                                       'status': role.get('provider_status') or ('unobserved' if role['prompt_attempted'] else 'not_attempted'),
+                                       'role_status': role['status'],
+                                       'evidence_refs': [{'id': source['id'], 'sha256': source['sha256']}
+                                                         for source in role['evidence']]})
+                        events.append({'type': 'validation', 'stage': event['stage'], 'at': role.get('finished_at') or event['at'],
+                                       'role': role['role'], 'status': role['status'], 'issue': role.get('validation_issue'),
+                                       'rationale_issues': [p['rationale_issue'] for p in role['proposals'] if p.get('rationale_rejected')]})
+                    events.append({'type': 'coordinator_plan', 'stage': event['stage'], 'at': event['at'],
+                                   'plan': result['plan'], 'unresolved': result['unresolved'],
+                                   'round_id': event['round_id']})
+            events.sort(key=lambda item: item['at'])
+            return seal(json.loads(json.dumps({'version': '1', 'exercise_id': exercise_id,
+                'scenario_id': exercise['scenario_id'], 'current_stage': exercise['current_stage'],
+                'events': events, 'rounds': rounds}, ensure_ascii=False)))
 
 
 def _store(request: Request) -> ExerciseStore:
@@ -435,3 +480,17 @@ def get_audit(exercise_id: str, request: Request, response: Response, role: Role
     _admit(request)
     response.headers["Cache-Control"] = "no-store"
     return _store(request).audit(exercise_id, role)
+
+
+@router.get("/exercises/{exercise_id}/timeline")
+def get_timeline(exercise_id: str, request: Request, response: Response) -> dict:
+    _admit(request)
+    response.headers["Cache-Control"] = "no-store"
+    return _store(request).timeline(exercise_id)
+
+
+@router.get("/exercises/{exercise_id}/timeline.html")
+def get_timeline_html(exercise_id: str, request: Request) -> Response:
+    _admit(request)
+    return Response(render_html(_store(request).timeline(exercise_id)), media_type="text/html",
+                    headers={"Cache-Control": "no-store", "Content-Disposition": "attachment; filename=yaplab-audit.html"})

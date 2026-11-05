@@ -108,13 +108,25 @@ class RecordedReviewTests(unittest.TestCase):
         base = review.ROOT / 'docs/evidence'
         document = json.loads((base / 'ai-for-good-coordination-live-v3-2026-11-05.json').read_text())
         responses = json.loads((base / 'ai-for-good-coordination-responses-v3-2026-11-05.json').read_text())
+        archived_plan = json.loads((base / 'ai-for-good-coordination-plan-v3-corpus4-2026-11-05.json').read_text())
         self.assertEqual(len(responses), 27)
         completed, partial = 0, 0
         for state in document['snapshots']:
             prepared = {item['role']: item for item in prepare_role_requests(load_corpus(), snapshot(state['scenario_id'], state['stage']))}
             for saved in state['roles']:
                 request = prepared[saved['role']]
-                self.assertEqual(request['prompt_sha256'], saved['prompt_sha256'])
+                archived = next(call for call in archived_plan['calls'] if
+                    (call['scenario_id'], call['stage'], call['role']) ==
+                    (state['scenario_id'], state['stage'], saved['role']))
+                # V3 prompts were not retained. Compare the two archived digest records,
+                # never claim that the current protocol 4 prompt has the same digest.
+                self.assertEqual(archived['prompt_sha256'], saved['prompt_sha256'])
+                self.assertEqual(archived['evidence'], saved['evidence'])
+                for source in saved['evidence']:
+                    data = {key: value for key, value in source.items() if key != 'sha256'}
+                    canonical = json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+                    self.assertEqual(source['sha256'], hashlib.sha256(canonical.encode('utf-8')).hexdigest())
+                request['source_ids'] = tuple(source['id'] for source in saved['evidence'])
                 raw = next(item['response'] for item in responses if
                            (item['scenario_id'], item['stage'], item['role']) ==
                            (state['scenario_id'], state['stage'], saved['role']))
