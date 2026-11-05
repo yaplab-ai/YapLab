@@ -1,0 +1,360 @@
+{
+  "label_status": "team-authored, not expert-validated",
+  "frozen_at_utc": "2026-11-05T07:47:35Z",
+  "labeling_basis": "Source titles, scopes and locators; written before inspecting retrieval rankings. Expected IDs identify relevant sources, not exclusive relevance.",
+  "metric_definition": "Recall@3 is mean per-query fraction of expected IDs in top 3; MRR is mean reciprocal rank of the first expected ID in top 3. Abstention is measured separately.",
+  "queries": [
+    {
+      "id": "q01",
+      "scenario": "transcript",
+      "query": "What UAE federal framework concerns identifiable student data in a recorded practice transcript?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-personal-data-protection"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q02",
+      "scenario": "transcript",
+      "query": "Who should classify and authorize access to UAEU institutional student records?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q03",
+      "scenario": "transcript",
+      "query": "What guidance discusses data privacy for generative AI used in education?",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q04",
+      "scenario": "transcript",
+      "query": "Which UAEU policy excludes exclusively scientific research data?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q05",
+      "scenario": "transcript",
+      "query": "Can an educator enter confidential material into a student credit assignment at UAEU?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q06",
+      "scenario": "transcript",
+      "query": "Which England education guidance discusses privacy and intellectual property when using generative AI?",
+      "institution": "general",
+      "expected_source_ids": [
+        "england-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q07",
+      "scenario": "transcript",
+      "query": "Which UAE self-assessment covers AI data use and accountability?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q08",
+      "scenario": "transcript",
+      "query": "Find the UAE federal personal data protection law and its scope exclusions.",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-personal-data-protection"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q09",
+      "scenario": "transcript",
+      "query": "What international recommendation links AI ethics and human rights?",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-ai-ethics-recommendation"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q10",
+      "scenario": "transcript",
+      "query": "Find UAEU institutional governance for retention and lifecycle of data.",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-institutional-data-governance"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q11",
+      "scenario": "captions",
+      "query": "Which UAE law addresses education for persons with disabilities across institutions?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-persons-with-disabilities-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q12",
+      "scenario": "captions",
+      "query": "What national digital accessibility policy specifies WCAG 2.1 AA public services?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-digital-accessibility-policy"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q13",
+      "scenario": "captions",
+      "query": "Who coordinates alternative formats and individual accommodation plans at UAEU?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q14",
+      "scenario": "captions",
+      "query": "Find the Ministry inclusive education policy scoped to schools.",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-inclusive-education-schools"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q15",
+      "scenario": "captions",
+      "query": "Which UAEU service provides assistive technology and faculty coordination?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q16",
+      "scenario": "captions",
+      "query": "Which national policy explains covered entities and public digital service accessibility?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-digital-accessibility-policy"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q17",
+      "scenario": "captions",
+      "query": "Which UNESCO education guidance considers inclusion in generative AI?",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q18",
+      "scenario": "captions",
+      "query": "Find federal disability rights education provisions relevant to higher education.",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-persons-with-disabilities-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q19",
+      "scenario": "captions",
+      "query": "Where does the UAE describe school barrier removal and assistive technology?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-inclusive-education-schools"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q20",
+      "scenario": "captions",
+      "query": "What institutional service helps UAEU faculty provide accessible reading formats?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-students-of-determination-services"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q21",
+      "scenario": "feedback",
+      "query": "What UAE guidance addresses AI systems informing significant decisions?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q22",
+      "scenario": "feedback",
+      "query": "Which UAE strategy discusses AI talent, infrastructure and governance?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-national-ai-strategy-2031"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q23",
+      "scenario": "feedback",
+      "query": "Find international guidance to review generated educational content before use.",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q24",
+      "scenario": "feedback",
+      "query": "Which UAEU student policy addresses AI use in academic credit work?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q25",
+      "scenario": "feedback",
+      "query": "Which voluntary UAE tool helps assess bias and accountability over an AI lifecycle?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q26",
+      "scenario": "feedback",
+      "query": "Find the UAE non-binding principles for AI human oversight and consequential decisions.",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-ai-ethics-principles-guidelines"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q27",
+      "scenario": "feedback",
+      "query": "Which global recommendation connects AI fairness with human oversight?",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-ai-ethics-recommendation"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q28",
+      "scenario": "feedback",
+      "query": "Which England school guidance addresses professional judgment and formal assessments?",
+      "institution": "general",
+      "expected_source_ids": [
+        "england-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q29",
+      "scenario": "feedback",
+      "query": "What UAEU student rules discuss permitted GenAI and academic integrity?",
+      "institution": "uaeu",
+      "expected_source_ids": [
+        "uaeu-student-generative-ai"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q30",
+      "scenario": "feedback",
+      "query": "What UAE strategy identifies AI skills development and enabling infrastructure?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-national-ai-strategy-2031"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q31",
+      "scenario": "feedback",
+      "query": "Which UAE self-assessment tool examines third-party AI methods and technical bias?",
+      "institution": "general",
+      "expected_source_ids": [
+        "uae-ai-ethics-self-assessment"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q32",
+      "scenario": "feedback",
+      "query": "What UNESCO guidance protects human agency in education and research AI?",
+      "institution": "general",
+      "expected_source_ids": [
+        "unesco-generative-ai-education"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q33",
+      "scenario": "out_of_scope",
+      "query": "How do I bake sourdough bread with rye flour?",
+      "institution": "general",
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "id": "q34",
+      "scenario": "out_of_scope",
+      "query": "What is the orbital period of Jupiter?",
+      "institution": "general",
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "id": "q35",
+      "scenario": "out_of_scope",
+      "query": "Find a bicycle repair shop near the train station.",
+      "institution": "general",
+      "expected_source_ids": [],
+      "should_abstain": true
+    },
+    {
+      "id": "q36",
+      "scenario": "out_of_scope",
+      "query": "When does the local football championship begin?",
+      "institution": "general",
+      "expected_source_ids": [],
+      "should_abstain": true
+    }
+  ]
+}
