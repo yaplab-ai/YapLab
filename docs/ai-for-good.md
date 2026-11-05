@@ -83,7 +83,7 @@ engineering plan, not a submission.
 | Knowledge base | 25-record scoped catalogue, selected text sections/excerpts, hybrid retrieval and a frozen 40-query benchmark | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
 | Policy reasoning | Retrieved evidence and scoped review; explicit review mode | Expert-labelled cases; bounded live-provider evaluation if enabled |
 | Staged errors | Synthetic role-specific releases and recorded human decisions | Facilitated multi-person exercise and verified domain-gap conclusions |
-| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Historical protocol 3:25 fully accepted/two partial; protocol 4 app run is currently blocked before execution and expert assessment is outstanding. Functional roles do not establish official institutional mandates |
+| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Protocol4 actual app:26 fully accepted/one partial; frozen rubric8 match/15 partial/4 miss. Source-fit/expert assessment remains outstanding. Functional roles do not establish official institutional mandates |
 | Audit | Structured evidence/decision records | Retention policy, authorised audit access and tamper-resistant export for deployment |
 | Standards mapping | Conceptual mapping below | Reviewer assessment; no certification claimed |
 
@@ -503,9 +503,12 @@ Parts 1–4 and the replay/evaluation implementation are committed separately.
 Corpus `2026-11-05.5` is frozen with 25 sources / 13 assets; protocol 4 is frozen.
 See [the final-push status](ai-for-good-v4-results.md), [source coverage](ai-for-good-local-kb.md),
 [retrieval benchmark](ai-for-good-retrieval.md), [recording guide](ai-for-good-demo.md)
-and [submission readiness](ai-for-good-readiness.md). No actual protocol 4 provider
-result exists: automatic approval review denied the proposed27-request app run
-before execution. Fresh approval is pending; no retry was made.
+and [submission readiness](ai-for-good-readiness.md). After fresh explicit prompt 11b
+approval, one27-request actual-app pass completed: 26 fully accepted roles/one
+partial/none unavailable, reported53,330 input/4,182 output tokens and list-price
+estimate $0.00420348, invoice unverified. All three final exports were browser-replayed.
+The frozen rubric scored 8 match/15 partial/4 miss; unsupported model rationale
+claims remain documented. The earlier denied operation never started.
 
 Add these offline verification scripts to the commands above:
 
@@ -537,3 +540,12 @@ tests, 3 real-vector tests and 100 frontend tests passed**. Both builds, scoped 
 checks, historical packet checks and extracted-wheel source-text/export smoke
 passed. Browser verification used fake/scripted providers plus cached local
 vectors; it was not a paid-model evaluation. See the [final evidence record](evidence/ai-for-good-final-push-2026-11-05.json).
+
+
+Prompt 11b verification additionally passed 90 core checks, 124 policy tests, 3 vector
+checks, 101 frontend tests and 2 launcher checks. Frontend build passed. Actual
+protocol4 results, scorer outputs and screenshots are in
+`docs/evidence/ai-for-good-protocol4-live-2026-11-05/`. Run the launcher from the
+checkout root; it auto-configures complete cached vector assets, respects explicit
+settings, and probes/prints actual hybrid/lexical mode. Replay uses fake providers
+and makes no new model calls. See the [updated recording guide](ai-for-good-demo.md).

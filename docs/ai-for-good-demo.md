@@ -1,78 +1,91 @@
-# Recording guide for the final-push build
+# Recording guide — approved protocol-4 evidence
 
-**5 November 2026.** Record from this build after code freeze. Video production
-is separate; this guide does not claim that a new video exists. The official
-initial video is optional, at most seven minutes; shortlisting makes it required.
+**5 November 2026.** The actual app run and all three saved replays are available.
+This guide prepares the separate video; no new video was recorded or edited here.
+The official initial demo is optional, at most seven minutes; shortlisting makes
+it required. Keep scripted classroom footage and recorded live policy evidence
+clearly labelled.
 
-## Launch the offline demo
+## Exact commands
+
+From the isolated checkout:
 
 ```bash
+cd /Users/zukhriddin/Documents/HackathonProjects/YapLab-ai-for-good
 python3 scripts/run-hackathon-demo.py
 ```
 
-Use `--api-port` and `--ui-port` if the defaults are occupied; do not stop another
-agent's server. The launcher sets fake classroom, scripted policy proposals,
-no speech providers and camera/audio off by default. It loads no provider key.
-Optional hybrid setup is in [the retrieval guide](ai-for-good-retrieval.md);
-without it search visibly reports lexical mode.
-
-Suggested six-minute route:
-
-1. **0:00–0:50 — classroom.** Start teaching, keep the demo deck, enter the room
-   and type a synthetic explanation. Take a fake Q&A question, type an answer,
-   then finish. The report explains that typed timing/scripted reactions are not
-   measured speaking or learning results. Retain the separate TalkMoves notice.
-2. **0:50–1:35 — sources.** Open Policy Lab. General shows 22 references; UAEU
-   explicitly adds three examples. Search captions/live web media. Show the
-   actual `Hybrid · lexical + local vectors` or `Lexical` label and the source's
-   jurisdiction/scope/verification. Full statutory coverage is not claimed.
-3. **1:35–3:15 — staged incident.** Start caption failure as Teacher/TA. Reveal
-   one stage at a time; Privacy and Accessibility expose different facts. View
-   role proposals at stage 2: they are explicitly Offline test / scripted-demo.
-   Rationales say `scripted offline example`; source details link each proposal
-   to its own facts and references. The conditional vendor plan requires privacy
-   terms and accessible-option confirmation; no action executes.
-4. **3:15–4:30 — gap and decision.** At stage 3 show Candidate gaps, reviewed UAE
-   sources, scoped global examples and evidence needed. Explain this is a
-   higher-education operational hypothesis, not a national-law defect. Select a
-   released fact, enter a synthetic facilitator decision and record it.
-5. **4:30–5:30 — audit.** Open Audit timeline. Show progressive releases,
-   request/validation/plan records, prompt/source digests and the decision's
-   evidence reference. Offline request usage is unavailable, not paid inference.
-   JSON and self-contained HTML exports preserve modes and hashes.
-6. **5:30–6:00 — expected versus actual.** Show the frozen team-authored rubric
-   and retrieval benchmark. Be explicit about 3/4 abstentions and hybrid's
-   unchanged/worse rank metric. Actual protocol-4 provider comparison remains
-   pending approval; do not present scripted output as a live result.
-
-## Replay an actual saved live exercise
-
-The read-only UI/launcher is implemented, but an actual protocol-4 recording is
-not yet available because the paid run was denied before execution. After a
-permitted run, select one exact scenario export:
+Ctrl+C stops that launcher and its children. Then open the main recording:
 
 ```bash
-python3 scripts/run-hackathon-demo.py --replay-live /absolute/path/to/protocol4-exercise.json
+python3 scripts/run-hackathon-demo.py --replay-live docs/evidence/ai-for-good-protocol4-live-2026-11-05/caption-failure.json
 ```
 
-Replay opens Policy Lab directly. The top badge says Recorded live replay, and
-the banner identifies date, Nemotron 3 Nano via Nebius, protocol 4 and **no new
-model calls**. It displays actual saved proposal/rationale/status/plan/timeline
-records and the scenario gap panel. No advance, generate or decision controls
-are offered. Do not use offline fixtures or relabel protocol-3 files; those are
-rejected by the replay's mode/protocol checks.
+For other scenarios, substitute `transcript-disclosure.json` or
+`feedback-as-grade.json` in that same directory. Run one launcher at a time on
+default API 8765/UI 5179. Use `--api-port`/`--ui-port` for distinct free ports when
+another agent is working; do not stop their process.
 
-## Exact screen changes from the prior recording guide
+The launcher sets fake classroom, scripted policy generation, speech providers
+off and camera/audio off. Replay opens Policy Lab directly and offers no advance,
+generate or decision controls. Its saved outputs remain the real Nebius run;
+reopening the page makes **no new model-provider calls**.
 
-- Expanded library: 22 general / 25 UAEU sources and corpus `.5`.
-- Source search displays the retrieval mode actually used.
-- Stated rationale appears under each proposal, with separate live-unverified
-  versus scripted-example labels.
-- Stage 3 adds the Candidate gaps debrief with explicit comparative scope.
-- View audit timeline opens a readable ordered record, with JSON/HTML exports.
-- `--replay-live` opens a read-only recorded-exercise screen with an origin/mode
-  banner; a hash is an integrity check, not proof of institutional authority.
+Cached local vector assets are auto-enabled when present, unless explicit
+`FRONTROW_POLICY_VECTOR_*` values were supplied. Startup probes and prints actual
+`general: hybrid` / `uaeu: hybrid` (or lexical/unknown). See
+[exact hybrid setup](ai-for-good-local-kb.md#record-with-hybrid-retrieval).
+The replay preserves the run's saved source choices; startup search probes do not
+recompute or alter those choices.
 
-The browser pass verified classroom → report → hybrid search → caption stages →
-scripted rationales → gaps → decision/audit. Actual live replay verification and
-expected/actual model footage remain pending. See [current results/status](ai-for-good-v4-results.md).
+## Suggested six-minute route
+
+1. **0:00–0:50 — classroom, offline.** Use the demo deck and typed synthetic
+   explanation, take a scripted Q&A question, then finish and show the report.
+   Typed timing and scripted reactions are not measured speaking or learning
+   results. Retain the separate TalkMoves notice.
+2. **0:50–1:25 — references, offline.** Open Policy Lab:22 general references,
+   with three explicitly UAEU-only examples. Search captions/live media; show
+   the actual Hybrid/Lexical label, source scope and verification limits. This
+   is a selective source corpus, not full statutory coverage.
+3. **1:25–3:15 — caption replay.** Switch launchers. Show the dated banner:
+   `Recorded live run · 2026-11-05 · Nemotron 3 Nano via Nebius · protocol 4 · no new model calls`.
+   Scroll through the three saved stages. Each role has actual model-written,
+   unverified rationales. In stage 2 privacy proposes identity protection and
+   omits vendor-terms verification; the teacher's vendor-resumption plan shows
+   **missing prerequisites**, with privacy/accessibility handoffs. Stage3 has
+   both prerequisite actions, so it becomes **awaiting human confirmation**.
+   No workshop action executes.
+4. **3:15–4:20 — timeline and gap.** Show actual request tokens/latency and
+   validation in Audit timeline, synthetic facilitator decision labels, exact
+   evidence IDs and JSON/HTML exports. Then show the caption candidate-gap
+   panel: reviewed UAE scope, global comparison and institution/vendor/usability
+   evidence still needed. This is a candidate operational question, not a
+   national-law defect.
+5. **4:20–5:15 — show a real limitation.** Open feedback replay:stage 3 teacher
+   is **partial**, with one retained question and no proposal; timeline issue
+   is `schema limits`. Sources/details in stage 1 show two `rationale_rejected`
+   omissions (`rationale_length`, `rationale_markdown`). An accepted stage 3
+   accessibility rationale names an unsupported “EQA team”/“Al-Qasimi policy”:
+   explicitly acknowledge that structural validation is not factual verification.
+   Transcript replay also has two screened legal-term rationale omissions.
+6. **5:15–6:00 — expected versus actual.** Show the frozen team-authored rubric
+   and [saved per-row comparison](evidence/ai-for-good-protocol4-live-2026-11-05/expected-actual.md).
+   Transcript0/7/2, caption 4/4/1, feedback 4/4/1 match/partial/miss: total 8/15/4.
+   All 27 provider responses succeeded, but only26 roles were fully structurally
+   accepted, one partial. Exact list-price estimate $0.00420348, invoice unverified.
+   The retrieval benchmark improved top-three coverage, not MRR or all abstentions;
+   it also uses provisional team labels.
+
+## Browser evidence and limits
+
+All three actual exports were browser-verified:banner, proposals/rationales,
+three plans, ordered timeline and candidate gaps. The four omission labels and
+partial feedback result were inspected where they occurred. No wholly unavailable
+role occurred in this run; do not stage one for the video.
+
+[Caption prerequisite screenshot](evidence/ai-for-good-protocol4-live-2026-11-05/replay-caption-prerequisite.jpg)
+and [partial feedback screenshot](evidence/ai-for-good-protocol4-live-2026-11-05/replay-feedback-partial.jpg)
+show useful recording moments. The default classroom/policy generation remains
+scripted. Historical protocol3 is not this app run. Hashes establish integrity,
+not institutional authority. See [actual results and substantive limits](ai-for-good-v4-results.md).

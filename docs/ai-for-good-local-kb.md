@@ -176,7 +176,7 @@ supports the action or supplies context only, actual institutional applicability
 and human ownership/dependencies. Keep abstentions, partial results and negative
 cases visible. Schema/ID acceptance is not semantic or legal validation. The
 [existing source-fit review](ai-for-good-source-review-and-next-steps.md) records
-concrete weak historical matches; no new live proposal was produced by this work.
+concrete weak historical matches; the later [protocol-4 app review](ai-for-good-v4-results.md#one-match-one-miss-and-substantive-limits) records actual matching/missing actions and unsupported rationale claims.
 
 ## Earlier protocol-3 evaluation status
 
@@ -210,8 +210,40 @@ frontend bundle-size warnings remain. See the [machine-readable record](evidence
 
 ## Final-push protocol4 status
 
-The current implementation uses corpus `2026-11-05.5` and protocol4. The new
-app-level paid run was denied before process creation: zero calls/new cost,
-fresh approval pending. [Current status and commands](ai-for-good-v4-results.md)
-supersede the earlier protocol3 status above. The historical results and source
-artifacts were not rewritten.
+The current implementation uses corpus `2026-11-05.5` and protocol4. After fresh
+explicit prompt 11b approval, the single 27-call actual-app pass completed: 26 fully
+accepted roles/one partial/zero unavailable, estimate $0.00420348 from reported
+usage, invoice unverified. All three saved replays were browser-verified.
+[Actual results and limits](ai-for-good-v4-results.md) supersede the earlier
+protocol3 status above. Historical artifacts and the frozen corpus/rubric remain
+unchanged.
+
+## Record with hybrid retrieval
+
+The launcher automatically uses these existing local assets when all are present:
+
+- Executable `/tmp/yaplab-vector-venv/bin/python` with the pinned macOS ARM/Python3.12 dependencies.
+- `/tmp/yaplab-vector-model`, containing all 10 hash-verified files of MiniLM revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`.
+- This checkout's `knowledge-base/local-vector/{general,uaeu}`, each with `config.json`, `metadata.json` and `faiss.index` matching the scoped bundles/current corpus.
+
+The isolated dependency/model setup and hash-verified public download commands
+are in [Reproduce setup and build](#reproduce-setup-and-build) above. Do not install
+into the shared application environment. Temporary assets may need rebuilding
+after cleanup; the launcher does not download or install anything automatically.
+
+For explicit paths, from the isolated checkout:
+
+```bash
+FRONTROW_POLICY_VECTOR_PYTHON=/tmp/yaplab-vector-venv/bin/python \
+FRONTROW_POLICY_VECTOR_MODEL=/tmp/yaplab-vector-model \
+FRONTROW_POLICY_VECTOR_INDEX_ROOT="$PWD/knowledge-base/local-vector" \
+python3 scripts/run-hackathon-demo.py --replay-live docs/evidence/ai-for-good-protocol4-live-2026-11-05/caption-failure.json
+```
+
+Any explicit vector setting takes precedence; all three must be correct.
+Startup probes both scoped collections through local `/policy/search`, printing
+the mode actually returned. An invalid or unavailable worker yields lexical;
+a failed probe reports unknown. A query without lexical overlap may still use
+lexical mode. The browser's actual search mode is shown per request. Replay
+uses saved source selections and never regenerates or upgrades them. The approved
+pass's 27 prompt digests match its pre-run hybrid plan.

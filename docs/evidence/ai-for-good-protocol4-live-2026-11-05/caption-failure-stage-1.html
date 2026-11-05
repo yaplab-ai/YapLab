@@ -1,0 +1,564 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>YapLab exercise audit</title><style>body{font:16px/1.5 system-ui;max-width:70rem;margin:2rem auto;padding:0 1rem;color:#17202a}li{padding:.5rem 0;border-bottom:1px solid #ddd}h2{font-size:1.1rem;margin:.5rem 0}dl{display:grid;grid-template-columns:minmax(9rem,13rem) 1fr;gap:.25rem 1rem}dt{font-weight:600}dd{margin:0;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f4f4;padding:1rem}@media(max-width:40rem){dl{display:block}dd{margin-bottom:.5rem}}</style></head><body><h1>YapLab exercise audit</h1><p>Synthetic exercise; saved model output is unverified. The SHA-256 digest checks file integrity, not origin or legal authority.</p><dl><dt>Scenario</dt><dd>caption-failure</dd><dt>Exercise</dt><dd>0-MocEUipLziUyIE5VN_0I18NVSNj8_t</dd><dt>Current stage</dt><dd>1</dd><dt>Audit SHA-256</dt><dd>4bf44423a01b2b651932fe0e49bb2f973cbcc6a1a1dfc34a8111166e407acea1</dd></dl><h2>Timeline</h2><ol><li><h2>Stage released</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:45.041819+00:00</dd><dt>Fact IDs by role</dt><dd>teacher: cf-1a, cf-1b; privacy: cf-1a, cf-1c; accessibility: cf-1a, cf-1c</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:51.097611+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>90f14c3f51ee6d28896047a1b81bdd2d4304371193ef659d231dadf8845a77e8</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 82, &quot;prompt_tokens&quot;: 1846, &quot;total_tokens&quot;: 1928}</dd><dt>Latency (ms)</dt><dd>799.2</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;wcag-22-captions&quot;, &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;}, {&quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;, &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;}, {&quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;, &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;}]</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:51.098218+00:00</dd><dt>Role</dt><dd>privacy</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>59d417a1aa160673ca4ea711958032abda3a2f780ef8105d3da5093df807c8b6</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 113, &quot;prompt_tokens&quot;: 1869, &quot;total_tokens&quot;: 1982}</dd><dt>Latency (ms)</dt><dd>811.2</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;uae-ai-charter-2024&quot;, &quot;sha256&quot;: &quot;14b1fb4871b914dfa09659dbc58827353e0d88b774abd598ec15c52ae429836b&quot;}, {&quot;id&quot;: &quot;uae-personal-data-protection&quot;, &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;}, {&quot;id&quot;: &quot;us-ferpa-education-records&quot;, &quot;sha256&quot;: &quot;be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56&quot;}]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:51.896810+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[]</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:51.897313+00:00</dd><dt>Role</dt><dd>accessibility</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>0974571899f74ed38d1f6904af6e5ba038688fcda6d39e96b6515c0ab1af40d5</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 126, &quot;prompt_tokens&quot;: 1826, &quot;total_tokens&quot;: 1952}</dd><dt>Latency (ms)</dt><dd>675.3</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;wcag-22-captions&quot;, &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;}, {&quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;, &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;}, {&quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;, &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;}]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:51.909423+00:00</dd><dt>Role</dt><dd>privacy</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:52.572652+00:00</dd><dt>Role</dt><dd>accessibility</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[]</dd></dl></li><li><h2>Coordinator plan</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:52.574217+00:00</dd><dt>Plan</dt><dd>delay_workshop: owner teacher, status awaiting_human_confirmation, handoffs []; protect_attendee_identity: owner privacy, status awaiting_human_confirmation, handoffs []; identify_access_needs: owner accessibility, status awaiting_human_confirmation, handoffs []</dd><dt>Unresolved</dt><dd>[]</dd><dt>Round ID</dt><dd>w2xDhI_qwvFfmmJ63tI-ZRRULwKs-BkV</dd></dl></li><li><h2>Human decision</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:45:52.582426+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Review mode</dt><dd>human_decision</dd><dt>Decision</dt><dd>Synthetic facilitator decision: ask the teaching team to consider a usable alternative and confirm it with the attendee.</dd><dt>Evidence fact IDs</dt><dd>[&quot;cf-1a&quot;]</dd></dl></li></ol><details><summary>Complete audit JSON</summary><pre>{
+  &quot;version&quot;: &quot;1&quot;,
+  &quot;exercise_id&quot;: &quot;0-MocEUipLziUyIE5VN_0I18NVSNj8_t&quot;,
+  &quot;scenario_id&quot;: &quot;caption-failure&quot;,
+  &quot;current_stage&quot;: 1,
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;stage_release&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:45.041819+00:00&quot;,
+      &quot;fact_ids_by_role&quot;: {
+        &quot;teacher&quot;: [
+          &quot;cf-1a&quot;,
+          &quot;cf-1b&quot;
+        ],
+        &quot;privacy&quot;: [
+          &quot;cf-1a&quot;,
+          &quot;cf-1c&quot;
+        ],
+        &quot;accessibility&quot;: [
+          &quot;cf-1a&quot;,
+          &quot;cf-1c&quot;
+        ]
+      },
+      &quot;views&quot;: {
+        &quot;teacher&quot;: [
+          {
+            &quot;id&quot;: &quot;cf-1a&quot;,
+            &quot;text&quot;: &quot;The live caption service for an English-language university workshop is unavailable shortly before it begins.&quot;
+          },
+          {
+            &quot;id&quot;: &quot;cf-1b&quot;,
+            &quot;text&quot;: &quot;The teacher can pause or change the activity but does not know which alternatives each student prefers.&quot;
+          }
+        ],
+        &quot;privacy&quot;: [
+          {
+            &quot;id&quot;: &quot;cf-1a&quot;,
+            &quot;text&quot;: &quot;The live caption service for an English-language university workshop is unavailable shortly before it begins.&quot;
+          },
+          {
+            &quot;id&quot;: &quot;cf-1c&quot;,
+            &quot;text&quot;: &quot;The accessibility adviser knows that at least one attendee depends on captions; the attendee has not agreed to disclose their identity to the class.&quot;
+          }
+        ],
+        &quot;accessibility&quot;: [
+          {
+            &quot;id&quot;: &quot;cf-1a&quot;,
+            &quot;text&quot;: &quot;The live caption service for an English-language university workshop is unavailable shortly before it begins.&quot;
+          },
+          {
+            &quot;id&quot;: &quot;cf-1c&quot;,
+            &quot;text&quot;: &quot;The accessibility adviser knows that at least one attendee depends on captions; the attendee has not agreed to disclose their identity to the class.&quot;
+          }
+        ]
+      }
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:51.097611+00:00&quot;,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;90f14c3f51ee6d28896047a1b81bdd2d4304371193ef659d231dadf8845a77e8&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1846,
+        &quot;completion_tokens&quot;: 82,
+        &quot;total_tokens&quot;: 1928
+      },
+      &quot;latency_ms&quot;: 799.2,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;wcag-22-captions&quot;,
+          &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+          &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+          &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:51.098218+00:00&quot;,
+      &quot;role&quot;: &quot;privacy&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;59d417a1aa160673ca4ea711958032abda3a2f780ef8105d3da5093df807c8b6&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1869,
+        &quot;completion_tokens&quot;: 113,
+        &quot;total_tokens&quot;: 1982
+      },
+      &quot;latency_ms&quot;: 811.2,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;uae-ai-charter-2024&quot;,
+          &quot;sha256&quot;: &quot;14b1fb4871b914dfa09659dbc58827353e0d88b774abd598ec15c52ae429836b&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-personal-data-protection&quot;,
+          &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;
+        },
+        {
+          &quot;id&quot;: &quot;us-ferpa-education-records&quot;,
+          &quot;sha256&quot;: &quot;be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:51.896810+00:00&quot;,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: []
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:51.897313+00:00&quot;,
+      &quot;role&quot;: &quot;accessibility&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;0974571899f74ed38d1f6904af6e5ba038688fcda6d39e96b6515c0ab1af40d5&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1826,
+        &quot;completion_tokens&quot;: 126,
+        &quot;total_tokens&quot;: 1952
+      },
+      &quot;latency_ms&quot;: 675.3,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;wcag-22-captions&quot;,
+          &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+          &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+          &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:51.909423+00:00&quot;,
+      &quot;role&quot;: &quot;privacy&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: []
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:52.572652+00:00&quot;,
+      &quot;role&quot;: &quot;accessibility&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: []
+    },
+    {
+      &quot;type&quot;: &quot;coordinator_plan&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:45:52.574217+00:00&quot;,
+      &quot;plan&quot;: [
+        {
+          &quot;action_id&quot;: &quot;delay_workshop&quot;,
+          &quot;owner&quot;: &quot;teacher&quot;,
+          &quot;text&quot;: &quot;Consider delaying the workshop while usable access is arranged.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;protect_attendee_identity&quot;,
+          &quot;owner&quot;: &quot;privacy&quot;,
+          &quot;text&quot;: &quot;Consider how to avoid disclosing an attendee’s identity unnecessarily.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;identify_access_needs&quot;,
+          &quot;owner&quot;: &quot;accessibility&quot;,
+          &quot;text&quot;: &quot;Privately ask about the immediate access need without singling anyone out.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        }
+      ],
+      &quot;unresolved&quot;: [],
+      &quot;round_id&quot;: &quot;w2xDhI_qwvFfmmJ63tI-ZRRULwKs-BkV&quot;
+    },
+    {
+      &quot;type&quot;: &quot;decision&quot;,
+      &quot;review_mode&quot;: &quot;human_decision&quot;,
+      &quot;stage&quot;: 1,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;decision&quot;: &quot;Synthetic facilitator decision: ask the teaching team to consider a usable alternative and confirm it with the attendee.&quot;,
+      &quot;source_ids&quot;: [
+        &quot;cf-1a&quot;
+      ],
+      &quot;at&quot;: &quot;2026-11-05T16:45:52.582426+00:00&quot;
+    }
+  ],
+  &quot;rounds&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;caption-failure&quot;,
+      &quot;stage&quot;: 1,
+      &quot;institution&quot;: &quot;general&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;model&quot;: {
+        &quot;provider&quot;: &quot;nebius&quot;,
+        &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;
+      },
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;roles&quot;: [
+        {
+          &quot;role&quot;: &quot;teacher&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;delay_workshop&quot;,
+              &quot;owner&quot;: &quot;teacher&quot;,
+              &quot;text&quot;: &quot;Consider delaying the workshop while usable access is arranged.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;cf-1a&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;wcag-22-captions&quot;
+              ],
+              &quot;rationale&quot;: &quot;The factual gap about unavailable captions means the workshop cannot proceed effectively&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_timing&quot;,
+              &quot;text&quot;: &quot;What timing and options should the teaching team consider?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;wcag-22-captions&quot;,
+              &quot;title&quot;: &quot;Web Content Accessibility Guidelines (WCAG) 2.2: captions&quot;,
+              &quot;url&quot;: &quot;https://www.w3.org/TR/WCAG22/#time-based-media&quot;,
+              &quot;authority&quot;: &quot;World Wide Web Consortium (W3C)&quot;,
+              &quot;jurisdiction&quot;: &quot;International&quot;,
+              &quot;document_type&quot;: &quot;technical standard&quot;,
+              &quot;scope&quot;: &quot;Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.&quot;,
+              &quot;summary&quot;: &quot;WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.&quot;,
+              &quot;limitations&quot;: [
+                &quot;A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.&quot;,
+                &quot;The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA&quot;,
+              &quot;verification&quot;: &quot;W3C Recommendation text reviewed 2026-11-05.&quot;,
+              &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+              &quot;title&quot;: &quot;National Policy for Digital Accessibility&quot;,
+              &quot;url&quot;: &quot;https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf&quot;,
+              &quot;authority&quot;: &quot;Telecommunications and Digital Government Regulatory Authority (TDRA)&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE — Article 3 entity/service scope&quot;,
+              &quot;document_type&quot;: &quot;government_policy&quot;,
+              &quot;scope&quot;: &quot;Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.&quot;,
+              &quot;summary&quot;: &quot;A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Do not assert blanket applicability to all private universities or all classroom activities.&quot;,
+                &quot;A citation or automated review does not establish WCAG conformance or legal compliance.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.&quot;,
+              &quot;verification&quot;: &quot;Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.&quot;,
+              &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+              &quot;title&quot;: &quot;Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs&quot;,
+              &quot;url&quot;: &quot;https://uaelegislation.gov.ae/en/legislations/1172&quot;,
+              &quot;authority&quot;: &quot;United Arab Emirates Government, UAE Legislation&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;law&quot;,
+              &quot;scope&quot;: &quot;Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.&quot;,
+              &quot;summary&quot;: &quot;The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.&quot;,
+              &quot;limitations&quot;: [
+                &quot;The English source uses historical terminology; use respectful current terminology in the product.&quot;,
+                &quot;Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Articles 12–13, education provisions&quot;,
+              &quot;verification&quot;: &quot;Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.&quot;,
+              &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;90f14c3f51ee6d28896047a1b81bdd2d4304371193ef659d231dadf8845a77e8&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1846,
+            &quot;completion_tokens&quot;: 82,
+            &quot;total_tokens&quot;: 1928
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:45:51.097611+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:45:51.896810+00:00&quot;,
+          &quot;latency_ms&quot;: 799.2
+        },
+        {
+          &quot;role&quot;: &quot;privacy&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;protect_attendee_identity&quot;,
+              &quot;owner&quot;: &quot;privacy&quot;,
+              &quot;text&quot;: &quot;Consider how to avoid disclosing an attendee’s identity unnecessarily.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;cf-1c&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;uae-ai-charter-2024&quot;
+              ],
+              &quot;rationale&quot;: &quot;Caption failure may reveal dependant on captions; privacy principle applied to avoid revealing identity without consent&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_data_owner&quot;,
+              &quot;text&quot;: &quot;Who can confirm the applicable data-handling process?&quot;
+            },
+            {
+              &quot;question_id&quot;: &quot;ask_data_terms&quot;,
+              &quot;text&quot;: &quot;What data-processing or retention terms need checking?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;uae-ai-charter-2024&quot;,
+              &quot;title&quot;: &quot;UAE Charter for the Development and Use of Artificial Intelligence&quot;,
+              &quot;url&quot;: &quot;https://ai.gov.ae/wp-content/uploads/2024/07/UAEAI-Methaq-EN2-3.pdf&quot;,
+              &quot;authority&quot;: &quot;UAE Artificial Intelligence, Digital Economy and Remote Work Applications Office&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;National guiding framework for development and use of AI; not an education-specific legal instrument.&quot;,
+              &quot;summary&quot;: &quot;The charter describes principles including safety, algorithmic bias, privacy, transparency, human oversight and inclusive AI awareness.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Guiding principles are not proof of a binding university-specific obligation, legal compliance or educational results.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;PDF pages 3–5, general principles, especially 3–7 and 11–12&quot;,
+              &quot;verification&quot;: &quot;Official AI Office PDF and 30 July 2024 launch announcement inspected on 2026-11-05; later amendment or replacement not established.&quot;,
+              &quot;sha256&quot;: &quot;14b1fb4871b914dfa09659dbc58827353e0d88b774abd598ec15c52ae429836b&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-personal-data-protection&quot;,
+              &quot;title&quot;: &quot;Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data&quot;,
+              &quot;url&quot;: &quot;https://uaelegislation.gov.ae/en/legislations/1972&quot;,
+              &quot;authority&quot;: &quot;United Arab Emirates Government, UAE Legislation&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;law&quot;,
+              &quot;scope&quot;: &quot;Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.&quot;,
+              &quot;summary&quot;: &quot;The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.&quot;,
+                &quot;Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.&quot;,
+                &quot;Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)&quot;,
+              &quot;verification&quot;: &quot;Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.&quot;,
+              &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;
+            },
+            {
+              &quot;id&quot;: &quot;us-ferpa-education-records&quot;,
+              &quot;title&quot;: &quot;Family Educational Rights and Privacy Act regulations&quot;,
+              &quot;url&quot;: &quot;https://studentprivacy.ed.gov/ferpa&quot;,
+              &quot;authority&quot;: &quot;United States Department of Education&quot;,
+              &quot;jurisdiction&quot;: &quot;United States&quot;,
+              &quot;document_type&quot;: &quot;regulation&quot;,
+              &quot;scope&quot;: &quot;Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.&quot;,
+              &quot;summary&quot;: &quot;FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.&quot;,
+              &quot;limitations&quot;: [
+                &quot;FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.&quot;,
+                &quot;At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31&quot;,
+              &quot;verification&quot;: &quot;Department of Education regulatory text reviewed 2026-11-05.&quot;,
+              &quot;sha256&quot;: &quot;be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;59d417a1aa160673ca4ea711958032abda3a2f780ef8105d3da5093df807c8b6&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1869,
+            &quot;completion_tokens&quot;: 113,
+            &quot;total_tokens&quot;: 1982
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:45:51.098218+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:45:51.909423+00:00&quot;,
+          &quot;latency_ms&quot;: 811.2
+        },
+        {
+          &quot;role&quot;: &quot;accessibility&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;identify_access_needs&quot;,
+              &quot;owner&quot;: &quot;accessibility&quot;,
+              &quot;text&quot;: &quot;Privately ask about the immediate access need without singling anyone out.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;cf-1a&quot;,
+                &quot;cf-1c&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;wcag-22-captions&quot;,
+                &quot;uae-persons-with-disabilities-education&quot;
+              ],
+              &quot;rationale&quot;: &quot;Both facts cite unavailability and private need; cited note urls confirm negative live captions overlap wcag-22-captions and uae-persons-with-disabilities-education.&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_usable_option&quot;,
+              &quot;text&quot;: &quot;Which option is usable for the affected person?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;wcag-22-captions&quot;,
+              &quot;title&quot;: &quot;Web Content Accessibility Guidelines (WCAG) 2.2: captions&quot;,
+              &quot;url&quot;: &quot;https://www.w3.org/TR/WCAG22/#time-based-media&quot;,
+              &quot;authority&quot;: &quot;World Wide Web Consortium (W3C)&quot;,
+              &quot;jurisdiction&quot;: &quot;International&quot;,
+              &quot;document_type&quot;: &quot;technical standard&quot;,
+              &quot;scope&quot;: &quot;Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.&quot;,
+              &quot;summary&quot;: &quot;WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.&quot;,
+              &quot;limitations&quot;: [
+                &quot;A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.&quot;,
+                &quot;The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA&quot;,
+              &quot;verification&quot;: &quot;W3C Recommendation text reviewed 2026-11-05.&quot;,
+              &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+              &quot;title&quot;: &quot;Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs&quot;,
+              &quot;url&quot;: &quot;https://uaelegislation.gov.ae/en/legislations/1172&quot;,
+              &quot;authority&quot;: &quot;United Arab Emirates Government, UAE Legislation&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;law&quot;,
+              &quot;scope&quot;: &quot;Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.&quot;,
+              &quot;summary&quot;: &quot;The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.&quot;,
+              &quot;limitations&quot;: [
+                &quot;The English source uses historical terminology; use respectful current terminology in the product.&quot;,
+                &quot;Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Articles 12–13, education provisions&quot;,
+              &quot;verification&quot;: &quot;Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.&quot;,
+              &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+              &quot;title&quot;: &quot;National Policy for Digital Accessibility&quot;,
+              &quot;url&quot;: &quot;https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf&quot;,
+              &quot;authority&quot;: &quot;Telecommunications and Digital Government Regulatory Authority (TDRA)&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE — Article 3 entity/service scope&quot;,
+              &quot;document_type&quot;: &quot;government_policy&quot;,
+              &quot;scope&quot;: &quot;Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.&quot;,
+              &quot;summary&quot;: &quot;A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Do not assert blanket applicability to all private universities or all classroom activities.&quot;,
+                &quot;A citation or automated review does not establish WCAG conformance or legal compliance.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.&quot;,
+              &quot;verification&quot;: &quot;Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.&quot;,
+              &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;0974571899f74ed38d1f6904af6e5ba038688fcda6d39e96b6515c0ab1af40d5&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1826,
+            &quot;completion_tokens&quot;: 126,
+            &quot;total_tokens&quot;: 1952
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:45:51.897313+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:45:52.572652+00:00&quot;,
+          &quot;latency_ms&quot;: 675.3
+        }
+      ],
+      &quot;plan&quot;: [
+        {
+          &quot;action_id&quot;: &quot;delay_workshop&quot;,
+          &quot;owner&quot;: &quot;teacher&quot;,
+          &quot;text&quot;: &quot;Consider delaying the workshop while usable access is arranged.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;protect_attendee_identity&quot;,
+          &quot;owner&quot;: &quot;privacy&quot;,
+          &quot;text&quot;: &quot;Consider how to avoid disclosing an attendee’s identity unnecessarily.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;identify_access_needs&quot;,
+          &quot;owner&quot;: &quot;accessibility&quot;,
+          &quot;text&quot;: &quot;Privately ask about the immediate access need without singling anyone out.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        }
+      ],
+      &quot;unresolved&quot;: [],
+      &quot;limitations&quot;: [
+        &quot;Synthetic exercise. Proposals are conditional and require human review; no action has been executed.&quot;,
+        &quot;Policy sources are starting points; scope and applicability require verification. Digests identify supplied notes, not legal authority.&quot;,
+        &quot;Roles receive only their own released facts; an unavailable role leaves a gap.&quot;
+      ],
+      &quot;round_id&quot;: &quot;w2xDhI_qwvFfmmJ63tI-ZRRULwKs-BkV&quot;
+    }
+  ],
+  &quot;sha256&quot;: &quot;4bf44423a01b2b651932fe0e49bb2f973cbcc6a1a1dfc34a8111166e407acea1&quot;
+}</pre></details></body></html>

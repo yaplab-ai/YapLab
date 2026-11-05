@@ -57,7 +57,7 @@ report behavior is preserved. The extension implements:
   digests, reported tokens, latency, validation, plans and facilitator decisions.
   JSON and self-contained HTML exports preserve modes and hashes.
 - Final-stage candidate-gap debriefs, a team-authored outcome rubric/scorer and
-  read-only replay of actual protocol-4 live exports once available.
+  read-only replay of actual protocol-4 live exports.
 
 The default demo uses fake/scripted providers, with no speech or model-provider
 requests. Configured coordination uses the direct Nebius adapter, a 400-output-
@@ -165,20 +165,36 @@ not a representative domain benchmark, an expert evaluation or a causal result.
 [Per-query evidence](evidence/ai-for-good-retrieval-benchmark.json) preserves hashes
 and negative cases.
 
-Earlier protocol-3 harness evidence returned 27 responses: 25 fully accepted,
-two partial and 7/9 fully accepted snapshots. Reported 46,864 input/3,075 output
-tokens gave $0.00354984 at recorded list prices, invoice unverified. Actual source-
-fit review found weak citations as well as meaningful comparisons. That run used
-the earlier corpus and is not a protocol-4 app result.
+One explicitly approved protocol-4 pass through the actual local app used Nebius
+Nano, synthetic/public-policy inputs, at most 27 requests×400 output tokens,
+without retries or fallback. Clean producer commit: `f2e2276`. All 27 provider
+responses succeeded: 26 fully accepted roles, one partial, none unavailable;
+8/9 stages had all roles fully accepted. Feedback stage 3 teacher retained a
+question but no proposal, with `schema_limits`. Four of 38 proposal rationales
+were omitted: two screened legal-term cases, one length and one Markdown case.
+34 remained model-written and unverified.
 
-The current protocol-4 app-level run is **not completed**: automatic approval
-review rejected process creation, so no request or new cost occurred. A fresh
-bounded approval is pending. HTTP-driver tests exercise actual FastAPI routes
-with an explicitly mocked provider; they are offline software evidence, not live
-provider outcomes. The integrated browser pass verified classroom/report,
-real local hybrid search, staged facts, scripted rationales, candidate gaps and
-a decision/audit. Recorded-live replay's backend/UI tests pass; final browser
-verification awaits an actual saved protocol-4 run.
+| Scenario | Rubric match / partial / miss |
+|---|---|
+| Transcript disclosure | 0 / 7 / 2 |
+| Caption failure | 4 / 4 / 1 |
+| Feedback as grade | 4 / 4 / 1 |
+
+Caption stage 2 accessibility matched `confirm_accessible_option` with `cf-2c`
+and the disability-education source. Privacy omitted `verify_vendor_terms`, so
+the teacher's vendor-resumption plan remained `missing_prerequisites`. ID-level
+matches still require substantive review: one accepted feedback rationale invoked
+an unsupported “EQA team” and “Al-Qasimi policy”; a FERPA citation did not establish
+US coverage or UAE applicability.
+
+Reported 53,330 input/4,182 output tokens yield exactly $0.00420348 at recorded
+$0.06/M input and $0.24/M output prices; invoice unverified. The
+[manifest, exact app responses/exports and frozen-rubric comparison](evidence/ai-for-good-protocol4-live-2026-11-05/)
+preserve successes and failures. All 27 prompt digests match the pre-run plan.
+All three read-only recordings were browser-verified with actual outcomes,
+rationale omissions, plans, ordered timeline, candidate gaps and a no-new-calls
+banner. Classroom/report demonstration remains fake/scripted. These are software
+and synthetic model observations, not measured educational outcomes.
 
 ## 8. Candidate gaps and remaining validation
 

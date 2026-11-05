@@ -1,0 +1,571 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>YapLab exercise audit</title><style>body{font:16px/1.5 system-ui;max-width:70rem;margin:2rem auto;padding:0 1rem;color:#17202a}li{padding:.5rem 0;border-bottom:1px solid #ddd}h2{font-size:1.1rem;margin:.5rem 0}dl{display:grid;grid-template-columns:minmax(9rem,13rem) 1fr;gap:.25rem 1rem}dt{font-weight:600}dd{margin:0;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f4f4;padding:1rem}@media(max-width:40rem){dl{display:block}dd{margin-bottom:.5rem}}</style></head><body><h1>YapLab exercise audit</h1><p>Synthetic exercise; saved model output is unverified. The SHA-256 digest checks file integrity, not origin or legal authority.</p><dl><dt>Scenario</dt><dd>feedback-as-grade</dd><dt>Exercise</dt><dd>Ii5GJwI2tFueAVaY5FeTiU3W64UYkOqT</dd><dt>Current stage</dt><dd>1</dd><dt>Audit SHA-256</dt><dd>2f4c97498871901ebb3d5bbe2fc8c41ea7ddea83dd20344d94cf8d58ceae739b</dd></dl><h2>Timeline</h2><ol><li><h2>Stage released</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:07.686556+00:00</dd><dt>Fact IDs by role</dt><dd>teacher: fg-1a, fg-1b; privacy: fg-1a; accessibility: fg-1a, fg-1c</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:13.229043+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>cdd7c00a30c8fba139642261d2cf40a51c9dc58bb4825fcc65a17e90ca84f961</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 139, &quot;prompt_tokens&quot;: 1830, &quot;total_tokens&quot;: 1969}</dd><dt>Latency (ms)</dt><dd>888.2</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;uae-caa-outcomes-framework&quot;, &quot;sha256&quot;: &quot;8b7c36130bdcd00766d92075c178d501cbd70a0d14f2f532b6cc6f9c3d19daa4&quot;}, {&quot;id&quot;: &quot;england-generative-ai-education&quot;, &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;}, {&quot;id&quot;: &quot;australia-teqsa-genai-assessment&quot;, &quot;sha256&quot;: &quot;2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba&quot;}]</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:13.229591+00:00</dd><dt>Role</dt><dd>privacy</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>6d805c5975cd3dcd96b6280226a46b1a1c8d6281bfa326e35e3e45744dc4b361</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 131, &quot;prompt_tokens&quot;: 1956, &quot;total_tokens&quot;: 2087}</dd><dt>Latency (ms)</dt><dd>890.2</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;uae-personal-data-protection&quot;, &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;}, {&quot;id&quot;: &quot;england-generative-ai-education&quot;, &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;}, {&quot;id&quot;: &quot;uae-ai-ethics-principles-guidelines&quot;, &quot;sha256&quot;: &quot;7422958d7fb24d8ccf56bc216f1c038d6aec83c9ea2ae02475940ba11d681edb&quot;}]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.117208+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[&quot;rationale_length&quot;]</dd></dl></li><li><h2>Model request</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.117508+00:00</dd><dt>Role</dt><dd>accessibility</dd><dt>Provider</dt><dd>nebius</dd><dt>Model</dt><dd>nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B</dd><dt>Review mode</dt><dd>model_assisted</dd><dt>Protocol</dt><dd>4</dd><dt>Corpus</dt><dd>2026-11-05.5</dd><dt>Request status</dt><dd>success</dd><dt>Role status</dt><dd>completed</dd><dt>Prompt attempted</dt><dd>True</dd><dt>Prompt SHA-256</dt><dd>5d450dadfe5a47ee75477cc65e953aba4adacf13efbd54b95584227288a980e9</dd><dt>Token usage</dt><dd>{&quot;completion_tokens&quot;: 85, &quot;prompt_tokens&quot;: 1821, &quot;total_tokens&quot;: 1906}</dd><dt>Latency (ms)</dt><dd>613.2</dd><dt>Evidence IDs and SHA-256</dt><dd>[{&quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;, &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;}, {&quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;, &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;}, {&quot;id&quot;: &quot;wcag-22-captions&quot;, &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;}]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.119806+00:00</dd><dt>Role</dt><dd>privacy</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[&quot;rationale_markdown&quot;]</dd></dl></li><li><h2>Validation</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.730725+00:00</dd><dt>Role</dt><dd>accessibility</dd><dt>Status</dt><dd>completed</dd><dt>Issue</dt><dd>unavailable</dd><dt>Rationale issues</dt><dd>[]</dd></dl></li><li><h2>Coordinator plan</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.731713+00:00</dd><dt>Plan</dt><dd>clarify_practice_feedback: owner teacher, status awaiting_human_confirmation, handoffs []; check_feedback_data: owner privacy, status awaiting_human_confirmation, handoffs []; check_feedback_access: owner accessibility, status awaiting_human_confirmation, handoffs []</dd><dt>Unresolved</dt><dd>[]</dd><dt>Round ID</dt><dd>QVBGCpl-VccYx-2_cV08oTDhwqcP0cNn</dd></dl></li><li><h2>Human decision</h2><dl><dt>Stage</dt><dd>1</dd><dt>Time</dt><dd>2026-11-05T16:46:14.738301+00:00</dd><dt>Role</dt><dd>teacher</dd><dt>Review mode</dt><dd>human_decision</dd><dt>Decision</dt><dd>Synthetic facilitator decision: ask the teaching team to review the practice feedback and prepare a clear explanation.</dd><dt>Evidence fact IDs</dt><dd>[&quot;fg-1a&quot;]</dd></dl></li></ol><details><summary>Complete audit JSON</summary><pre>{
+  &quot;version&quot;: &quot;1&quot;,
+  &quot;exercise_id&quot;: &quot;Ii5GJwI2tFueAVaY5FeTiU3W64UYkOqT&quot;,
+  &quot;scenario_id&quot;: &quot;feedback-as-grade&quot;,
+  &quot;current_stage&quot;: 1,
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;stage_release&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:07.686556+00:00&quot;,
+      &quot;fact_ids_by_role&quot;: {
+        &quot;teacher&quot;: [
+          &quot;fg-1a&quot;,
+          &quot;fg-1b&quot;
+        ],
+        &quot;privacy&quot;: [
+          &quot;fg-1a&quot;
+        ],
+        &quot;accessibility&quot;: [
+          &quot;fg-1a&quot;,
+          &quot;fg-1c&quot;
+        ]
+      },
+      &quot;views&quot;: {
+        &quot;teacher&quot;: [
+          {
+            &quot;id&quot;: &quot;fg-1a&quot;,
+            &quot;text&quot;: &quot;A student asks why a practice tool gave their presentation a failing grade, although the exercise was meant to be formative.&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fg-1b&quot;,
+            &quot;text&quot;: &quot;The teacher finds that the feedback display used a numerical score without clearly saying that it was not an official grade.&quot;
+          }
+        ],
+        &quot;privacy&quot;: [
+          {
+            &quot;id&quot;: &quot;fg-1a&quot;,
+            &quot;text&quot;: &quot;A student asks why a practice tool gave their presentation a failing grade, although the exercise was meant to be formative.&quot;
+          }
+        ],
+        &quot;accessibility&quot;: [
+          {
+            &quot;id&quot;: &quot;fg-1a&quot;,
+            &quot;text&quot;: &quot;A student asks why a practice tool gave their presentation a failing grade, although the exercise was meant to be formative.&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fg-1c&quot;,
+            &quot;text&quot;: &quot;The accessibility adviser has heard that the display was difficult to interpret with a screen reader, but has not yet tested it.&quot;
+          }
+        ]
+      }
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:13.229043+00:00&quot;,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;cdd7c00a30c8fba139642261d2cf40a51c9dc58bb4825fcc65a17e90ca84f961&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1830,
+        &quot;completion_tokens&quot;: 139,
+        &quot;total_tokens&quot;: 1969
+      },
+      &quot;latency_ms&quot;: 888.2,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;uae-caa-outcomes-framework&quot;,
+          &quot;sha256&quot;: &quot;8b7c36130bdcd00766d92075c178d501cbd70a0d14f2f532b6cc6f9c3d19daa4&quot;
+        },
+        {
+          &quot;id&quot;: &quot;england-generative-ai-education&quot;,
+          &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;
+        },
+        {
+          &quot;id&quot;: &quot;australia-teqsa-genai-assessment&quot;,
+          &quot;sha256&quot;: &quot;2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:13.229591+00:00&quot;,
+      &quot;role&quot;: &quot;privacy&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;6d805c5975cd3dcd96b6280226a46b1a1c8d6281bfa326e35e3e45744dc4b361&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1956,
+        &quot;completion_tokens&quot;: 131,
+        &quot;total_tokens&quot;: 2087
+      },
+      &quot;latency_ms&quot;: 890.2,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;uae-personal-data-protection&quot;,
+          &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;
+        },
+        {
+          &quot;id&quot;: &quot;england-generative-ai-education&quot;,
+          &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-ai-ethics-principles-guidelines&quot;,
+          &quot;sha256&quot;: &quot;7422958d7fb24d8ccf56bc216f1c038d6aec83c9ea2ae02475940ba11d681edb&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.117208+00:00&quot;,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: [
+        &quot;rationale_length&quot;
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;model_request&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.117508+00:00&quot;,
+      &quot;role&quot;: &quot;accessibility&quot;,
+      &quot;provider&quot;: &quot;nebius&quot;,
+      &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;,
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;prompt_sha256&quot;: &quot;5d450dadfe5a47ee75477cc65e953aba4adacf13efbd54b95584227288a980e9&quot;,
+      &quot;prompt_attempted&quot;: true,
+      &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1821,
+        &quot;completion_tokens&quot;: 85,
+        &quot;total_tokens&quot;: 1906
+      },
+      &quot;latency_ms&quot;: 613.2,
+      &quot;status&quot;: &quot;success&quot;,
+      &quot;role_status&quot;: &quot;completed&quot;,
+      &quot;evidence_refs&quot;: [
+        {
+          &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+          &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+        },
+        {
+          &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+          &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+        },
+        {
+          &quot;id&quot;: &quot;wcag-22-captions&quot;,
+          &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+        }
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.119806+00:00&quot;,
+      &quot;role&quot;: &quot;privacy&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: [
+        &quot;rationale_markdown&quot;
+      ]
+    },
+    {
+      &quot;type&quot;: &quot;validation&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.730725+00:00&quot;,
+      &quot;role&quot;: &quot;accessibility&quot;,
+      &quot;status&quot;: &quot;completed&quot;,
+      &quot;issue&quot;: null,
+      &quot;rationale_issues&quot;: []
+    },
+    {
+      &quot;type&quot;: &quot;coordinator_plan&quot;,
+      &quot;stage&quot;: 1,
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.731713+00:00&quot;,
+      &quot;plan&quot;: [
+        {
+          &quot;action_id&quot;: &quot;clarify_practice_feedback&quot;,
+          &quot;owner&quot;: &quot;teacher&quot;,
+          &quot;text&quot;: &quot;Consider clarifying the distinction between practice feedback and an official grade.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;check_feedback_data&quot;,
+          &quot;owner&quot;: &quot;privacy&quot;,
+          &quot;text&quot;: &quot;Ask the responsible team what feedback data is retained and how corrections can be requested.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;check_feedback_access&quot;,
+          &quot;owner&quot;: &quot;accessibility&quot;,
+          &quot;text&quot;: &quot;Check whether the explanation and challenge route are accessible.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        }
+      ],
+      &quot;unresolved&quot;: [],
+      &quot;round_id&quot;: &quot;QVBGCpl-VccYx-2_cV08oTDhwqcP0cNn&quot;
+    },
+    {
+      &quot;type&quot;: &quot;decision&quot;,
+      &quot;review_mode&quot;: &quot;human_decision&quot;,
+      &quot;stage&quot;: 1,
+      &quot;role&quot;: &quot;teacher&quot;,
+      &quot;decision&quot;: &quot;Synthetic facilitator decision: ask the teaching team to review the practice feedback and prepare a clear explanation.&quot;,
+      &quot;source_ids&quot;: [
+        &quot;fg-1a&quot;
+      ],
+      &quot;at&quot;: &quot;2026-11-05T16:46:14.738301+00:00&quot;
+    }
+  ],
+  &quot;rounds&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;feedback-as-grade&quot;,
+      &quot;stage&quot;: 1,
+      &quot;institution&quot;: &quot;general&quot;,
+      &quot;protocol_version&quot;: &quot;4&quot;,
+      &quot;corpus_version&quot;: &quot;2026-11-05.5&quot;,
+      &quot;model&quot;: {
+        &quot;provider&quot;: &quot;nebius&quot;,
+        &quot;model&quot;: &quot;nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B&quot;
+      },
+      &quot;review_mode&quot;: &quot;model_assisted&quot;,
+      &quot;roles&quot;: [
+        {
+          &quot;role&quot;: &quot;teacher&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;clarify_practice_feedback&quot;,
+              &quot;owner&quot;: &quot;teacher&quot;,
+              &quot;text&quot;: &quot;Consider clarifying the distinction between practice feedback and an official grade.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;fg-1a&quot;,
+                &quot;fg-1b&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;uae-caa-outcomes-framework&quot;,
+                &quot;england-generative-ai-education&quot;
+              ],
+              &quot;rationale_rejected&quot;: true,
+              &quot;rationale_issue&quot;: &quot;rationale_length&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_teaching_owner&quot;,
+              &quot;text&quot;: &quot;Who can make the teaching decision and communicate it?&quot;
+            },
+            {
+              &quot;question_id&quot;: &quot;ask_timing&quot;,
+              &quot;text&quot;: &quot;What timing and options should the teaching team consider?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;uae-caa-outcomes-framework&quot;,
+              &quot;title&quot;: &quot;Outcomes-Based Evaluation Framework University Guide&quot;,
+              &quot;url&quot;: &quot;https://caa.ae/Pages/Guidelines/Outcomes-based-Evaluation-framework-University-Guide.aspx&quot;,
+              &quot;authority&quot;: &quot;Commission for Academic Accreditation, Ministry of Higher Education and Scientific Research&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;Higher education institutional evaluation and accreditation guidance, including learning outcomes; not a classroom AI or assessment tool standard.&quot;,
+              &quot;summary&quot;: &quot;CAA describes an outcomes-based quality assurance framework for universities and data used for licensure and accreditation renewal.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Overview does not establish requirements for AI-generated assessments, student records or support.&quot;,
+                &quot;The former 2019 standards page was inaccessible; the relationship and detailed current provisions were not verified.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;University Guide overview and Data Submission Guidelines&quot;,
+              &quot;verification&quot;: &quot;CAA public overview and licensure page checked 2026-11-05. This record does not assert that a particular institution is subject to the framework.&quot;,
+              &quot;sha256&quot;: &quot;8b7c36130bdcd00766d92075c178d501cbd70a0d14f2f532b6cc6f9c3d19daa4&quot;
+            },
+            {
+              &quot;id&quot;: &quot;england-generative-ai-education&quot;,
+              &quot;title&quot;: &quot;Generative Artificial Intelligence (AI) in Education&quot;,
+              &quot;url&quot;: &quot;https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education&quot;,
+              &quot;authority&quot;: &quot;Department for Education, England&quot;,
+              &quot;jurisdiction&quot;: &quot;England&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.&quot;,
+              &quot;summary&quot;: &quot;The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.&quot;,
+              &quot;limitations&quot;: [
+                &quot;This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.&quot;,
+                &quot;The guidance is updated over time; the linked page was last updated on 12 August 2025.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments&quot;,
+              &quot;verification&quot;: &quot;Official source reviewed on 2026-11-04; confirm updates before consequential use.&quot;,
+              &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;
+            },
+            {
+              &quot;id&quot;: &quot;australia-teqsa-genai-assessment&quot;,
+              &quot;title&quot;: &quot;Assessment reform for the age of artificial intelligence&quot;,
+              &quot;url&quot;: &quot;https://www.teqsa.gov.au/guides-resources/resources/corporate-publications/assessment-reform-age-artificial-intelligence&quot;,
+              &quot;authority&quot;: &quot;Tertiary Education Quality and Standards Agency (TEQSA)&quot;,
+              &quot;jurisdiction&quot;: &quot;Australia&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;Expert-developed, non-prescriptive guidance for Australian higher education on assessment in a generative-AI context.&quot;,
+              &quot;summary&quot;: &quot;TEQSA’s expert paper offers guiding principles and propositions for assessment design that both assure learning and prepare students to engage ethically with generative AI.&quot;,
+              &quot;limitations&quot;: [
+                &quot;The paper describes directions for the sector, not a mandatory formula or a UAE policy.&quot;,
+                &quot;Related TEQSA resources appeared in 2025 and 2026; this entry is the 2023 paper.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6&quot;,
+              &quot;verification&quot;: &quot;TEQSA publication page and PDF pp. 2–6 reviewed 2026-11-05; https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf.&quot;,
+              &quot;sha256&quot;: &quot;2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;cdd7c00a30c8fba139642261d2cf40a51c9dc58bb4825fcc65a17e90ca84f961&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1830,
+            &quot;completion_tokens&quot;: 139,
+            &quot;total_tokens&quot;: 1969
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:46:13.229043+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:46:14.117208+00:00&quot;,
+          &quot;latency_ms&quot;: 888.2
+        },
+        {
+          &quot;role&quot;: &quot;privacy&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;check_feedback_data&quot;,
+              &quot;owner&quot;: &quot;privacy&quot;,
+              &quot;text&quot;: &quot;Ask the responsible team what feedback data is retained and how corrections can be requested.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;fg-1a&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;uae-personal-data-protection&quot;,
+                &quot;england-generative-ai-education&quot;
+              ],
+              &quot;rationale_rejected&quot;: true,
+              &quot;rationale_issue&quot;: &quot;rationale_markdown&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_data_owner&quot;,
+              &quot;text&quot;: &quot;Who can confirm the applicable data-handling process?&quot;
+            },
+            {
+              &quot;question_id&quot;: &quot;ask_data_terms&quot;,
+              &quot;text&quot;: &quot;What data-processing or retention terms need checking?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;uae-personal-data-protection&quot;,
+              &quot;title&quot;: &quot;Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data&quot;,
+              &quot;url&quot;: &quot;https://uaelegislation.gov.ae/en/legislations/1972&quot;,
+              &quot;authority&quot;: &quot;United Arab Emirates Government, UAE Legislation&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;law&quot;,
+              &quot;scope&quot;: &quot;Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.&quot;,
+              &quot;summary&quot;: &quot;The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.&quot;,
+                &quot;Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.&quot;,
+                &quot;Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)&quot;,
+              &quot;verification&quot;: &quot;Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.&quot;,
+              &quot;sha256&quot;: &quot;8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5&quot;
+            },
+            {
+              &quot;id&quot;: &quot;england-generative-ai-education&quot;,
+              &quot;title&quot;: &quot;Generative Artificial Intelligence (AI) in Education&quot;,
+              &quot;url&quot;: &quot;https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education&quot;,
+              &quot;authority&quot;: &quot;Department for Education, England&quot;,
+              &quot;jurisdiction&quot;: &quot;England&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.&quot;,
+              &quot;summary&quot;: &quot;The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.&quot;,
+              &quot;limitations&quot;: [
+                &quot;This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.&quot;,
+                &quot;The guidance is updated over time; the linked page was last updated on 12 August 2025.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments&quot;,
+              &quot;verification&quot;: &quot;Official source reviewed on 2026-11-04; confirm updates before consequential use.&quot;,
+              &quot;sha256&quot;: &quot;6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-ai-ethics-principles-guidelines&quot;,
+              &quot;title&quot;: &quot;AI Ethics: Principles and Guidelines&quot;,
+              &quot;url&quot;: &quot;https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf&quot;,
+              &quot;authority&quot;: &quot;UAE AI and Blockchain Council / UAE AI Office&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE — non-binding guidance&quot;,
+              &quot;document_type&quot;: &quot;guidance&quot;,
+              &quot;scope&quot;: &quot;Non-binding guidance whose section 1.2 addresses AI systems making or informing significant decisions, including critical decisions. For ordinary teaching rehearsal, the guidelines are a voluntary design reference unless the actual use meets that decision scope.&quot;,
+              &quot;summary&quot;: &quot;Ethical principles for decision-affecting AI, explicitly non-mandatory; distinct from the beta self-assessment tool.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Do not label these guidelines binding law, a certification or a general obligation for every rehearsal tool.&quot;,
+                &quot;Applicability to a particular deployment requires its actual purpose and effects.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Section 1.1: PDF page 3 (printed page 5); section 1.2: PDF page 4 (printed page 6); section 1.5: PDF page 5. Cover dated December 2022.&quot;,
+              &quot;verification&quot;: &quot;Sections 1.1, 1.2, 1.5 and selected principles checked in official PDF downloaded 2026-11-05; source PDF SHA-256 7733629e553ee21080a8b08215d6a9ef42e8c741f7cc302af86995519d380c54. No statutory text verified.&quot;,
+              &quot;sha256&quot;: &quot;7422958d7fb24d8ccf56bc216f1c038d6aec83c9ea2ae02475940ba11d681edb&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;6d805c5975cd3dcd96b6280226a46b1a1c8d6281bfa326e35e3e45744dc4b361&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1956,
+            &quot;completion_tokens&quot;: 131,
+            &quot;total_tokens&quot;: 2087
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:46:13.229591+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:46:14.119806+00:00&quot;,
+          &quot;latency_ms&quot;: 890.2
+        },
+        {
+          &quot;role&quot;: &quot;accessibility&quot;,
+          &quot;status&quot;: &quot;completed&quot;,
+          &quot;proposals&quot;: [
+            {
+              &quot;action_id&quot;: &quot;check_feedback_access&quot;,
+              &quot;owner&quot;: &quot;accessibility&quot;,
+              &quot;text&quot;: &quot;Check whether the explanation and challenge route are accessible.&quot;,
+              &quot;fact_ids&quot;: [
+                &quot;fg-1a&quot;
+              ],
+              &quot;source_ids&quot;: [
+                &quot;uae-persons-with-disabilities-education&quot;
+              ],
+              &quot;rationale&quot;: &quot;Fact fg-1a raises feedback-as-grade problem supporting this check.&quot;
+            }
+          ],
+          &quot;questions&quot;: [
+            {
+              &quot;question_id&quot;: &quot;ask_usable_option&quot;,
+              &quot;text&quot;: &quot;Which option is usable for the affected person?&quot;
+            }
+          ],
+          &quot;evidence&quot;: [
+            {
+              &quot;id&quot;: &quot;uae-persons-with-disabilities-education&quot;,
+              &quot;title&quot;: &quot;Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs&quot;,
+              &quot;url&quot;: &quot;https://uaelegislation.gov.ae/en/legislations/1172&quot;,
+              &quot;authority&quot;: &quot;United Arab Emirates Government, UAE Legislation&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE&quot;,
+              &quot;document_type&quot;: &quot;law&quot;,
+              &quot;scope&quot;: &quot;Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.&quot;,
+              &quot;summary&quot;: &quot;The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.&quot;,
+              &quot;limitations&quot;: [
+                &quot;The English source uses historical terminology; use respectful current terminology in the product.&quot;,
+                &quot;Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Articles 12–13, education provisions&quot;,
+              &quot;verification&quot;: &quot;Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.&quot;,
+              &quot;sha256&quot;: &quot;ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48&quot;
+            },
+            {
+              &quot;id&quot;: &quot;uae-digital-accessibility-policy&quot;,
+              &quot;title&quot;: &quot;National Policy for Digital Accessibility&quot;,
+              &quot;url&quot;: &quot;https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf&quot;,
+              &quot;authority&quot;: &quot;Telecommunications and Digital Government Regulatory Authority (TDRA)&quot;,
+              &quot;jurisdiction&quot;: &quot;UAE — Article 3 entity/service scope&quot;,
+              &quot;document_type&quot;: &quot;government_policy&quot;,
+              &quot;scope&quot;: &quot;Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.&quot;,
+              &quot;summary&quot;: &quot;A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.&quot;,
+              &quot;limitations&quot;: [
+                &quot;Do not assert blanket applicability to all private universities or all classroom activities.&quot;,
+                &quot;A citation or automated review does not establish WCAG conformance or legal compliance.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.&quot;,
+              &quot;verification&quot;: &quot;Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.&quot;,
+              &quot;sha256&quot;: &quot;cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec&quot;
+            },
+            {
+              &quot;id&quot;: &quot;wcag-22-captions&quot;,
+              &quot;title&quot;: &quot;Web Content Accessibility Guidelines (WCAG) 2.2: captions&quot;,
+              &quot;url&quot;: &quot;https://www.w3.org/TR/WCAG22/#time-based-media&quot;,
+              &quot;authority&quot;: &quot;World Wide Web Consortium (W3C)&quot;,
+              &quot;jurisdiction&quot;: &quot;International&quot;,
+              &quot;document_type&quot;: &quot;technical standard&quot;,
+              &quot;scope&quot;: &quot;Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.&quot;,
+              &quot;summary&quot;: &quot;WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.&quot;,
+              &quot;limitations&quot;: [
+                &quot;A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.&quot;,
+                &quot;The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility.&quot;
+              ],
+              &quot;institution&quot;: null,
+              &quot;source_locator&quot;: &quot;Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA&quot;,
+              &quot;verification&quot;: &quot;W3C Recommendation text reviewed 2026-11-05.&quot;,
+              &quot;sha256&quot;: &quot;b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88&quot;
+            }
+          ],
+          &quot;prompt_sha256&quot;: &quot;5d450dadfe5a47ee75477cc65e953aba4adacf13efbd54b95584227288a980e9&quot;,
+          &quot;prompt_attempted&quot;: true,
+          &quot;usage&quot;: {
+            &quot;prompt_tokens&quot;: 1821,
+            &quot;completion_tokens&quot;: 85,
+            &quot;total_tokens&quot;: 1906
+          },
+          &quot;provider_status&quot;: &quot;success&quot;,
+          &quot;started_at&quot;: &quot;2026-11-05T16:46:14.117508+00:00&quot;,
+          &quot;finished_at&quot;: &quot;2026-11-05T16:46:14.730725+00:00&quot;,
+          &quot;latency_ms&quot;: 613.2
+        }
+      ],
+      &quot;plan&quot;: [
+        {
+          &quot;action_id&quot;: &quot;clarify_practice_feedback&quot;,
+          &quot;owner&quot;: &quot;teacher&quot;,
+          &quot;text&quot;: &quot;Consider clarifying the distinction between practice feedback and an official grade.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;check_feedback_data&quot;,
+          &quot;owner&quot;: &quot;privacy&quot;,
+          &quot;text&quot;: &quot;Ask the responsible team what feedback data is retained and how corrections can be requested.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        },
+        {
+          &quot;action_id&quot;: &quot;check_feedback_access&quot;,
+          &quot;owner&quot;: &quot;accessibility&quot;,
+          &quot;text&quot;: &quot;Check whether the explanation and challenge route are accessible.&quot;,
+          &quot;depends_on&quot;: [],
+          &quot;handoffs&quot;: [],
+          &quot;status&quot;: &quot;awaiting_human_confirmation&quot;
+        }
+      ],
+      &quot;unresolved&quot;: [],
+      &quot;limitations&quot;: [
+        &quot;Synthetic exercise. Proposals are conditional and require human review; no action has been executed.&quot;,
+        &quot;Policy sources are starting points; scope and applicability require verification. Digests identify supplied notes, not legal authority.&quot;,
+        &quot;Roles receive only their own released facts; an unavailable role leaves a gap.&quot;
+      ],
+      &quot;round_id&quot;: &quot;QVBGCpl-VccYx-2_cV08oTDhwqcP0cNn&quot;
+    }
+  ],
+  &quot;sha256&quot;: &quot;2f4c97498871901ebb3d5bbe2fc8c41ea7ddea83dd20344d94cf8d58ceae739b&quot;
+}</pre></details></body></html>

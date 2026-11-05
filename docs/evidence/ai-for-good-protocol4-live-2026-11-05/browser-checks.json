@@ -1,0 +1,56 @@
+[
+  {
+    "scenario": "transcript-disclosure",
+    "banner": 1,
+    "plans": 3,
+    "gaps": 1,
+    "timeline": 1,
+    "modelRationales": 10,
+    "expectedRationales": 10,
+    "buttons": [
+      "YapLab",
+      "Modes",
+      "New session",
+      "Policy Lab",
+      "Last report",
+      " Modes",
+      "Export JSON"
+    ]
+  },
+  {
+    "scenario": "caption-failure",
+    "banner": 1,
+    "plans": 3,
+    "gaps": 1,
+    "timeline": 1,
+    "modelRationales": 14,
+    "expectedRationales": 14,
+    "buttons": [
+      "YapLab",
+      "Modes",
+      "New session",
+      "Policy Lab",
+      "Last report",
+      " Modes",
+      "Export JSON"
+    ]
+  },
+  {
+    "scenario": "feedback-as-grade",
+    "banner": 1,
+    "plans": 3,
+    "gaps": 1,
+    "timeline": 1,
+    "modelRationales": 10,
+    "expectedRationales": 10,
+    "buttons": [
+      "YapLab",
+      "Modes",
+      "New session",
+      "Policy Lab",
+      "Last report",
+      " Modes",
+      "Export JSON"
+    ]
+  }
+]

@@ -67,9 +67,12 @@ approval; the current result is 25 fully accepted and two partial roles.
 ## Final-push draft update
 
 Use the current local report, reordered to intro, use case, requirements,
-Y.3172, Readiness2.0, local policies, evaluation and gaps. It describes25 sources,
+Y.3172, Readiness2.0, local policies, evaluation and gaps. It describes 25 sources,
 13 text assets, hybrid retrieval, protocol 4 rationale/audit and the pre-authored
-rubric. It stays below 2,300 words. Actual protocol 4 live results are pending: the
-paid operation was denied before execution, so do not manufacture statistics or
-reuse protocol 3 outcomes as4. Team fields and five-page rendering still need
-verification. The prior Library copy was not uploaded/replaced.
+rubric. The prompt 11b update stays below 2,000 words and includes the actual
+protocol4 run:26 fully accepted roles/one partial, frozen-rubric 8/15/4 results,
+reported usage and$0.00420348 list-price estimate (invoice unverified), plus the
+unsupported model-claim limitation. All three saved replays were browser-verified.
+Use this current local draft, not historical protocol3 statistics. Team fields and
+five-page rendering still need verification. The prior Library copy was not
+uploaded/replaced.

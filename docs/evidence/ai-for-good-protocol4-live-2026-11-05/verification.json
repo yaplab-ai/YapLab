@@ -1,0 +1,148 @@
+{
+  "verified_at": "2026-11-05T16:57:55.945606+00:00",
+  "task": "prompt11b",
+  "producer_source_commit": "f2e22768ba56174ec3ae89b096238c84e2e5d90a",
+  "approval_reference": "user-approved-2026-11-05-protocol4-27",
+  "user_budget_usd": 5,
+  "pass_limit": 1,
+  "requests_attempted": 27,
+  "provider_successes": 27,
+  "max_output_tokens_per_request": 400,
+  "role_status_counts": {
+    "completed": 26,
+    "partial": 1
+  },
+  "rationale_rejection_counts": {
+    "rationale_legal_conclusion": 2,
+    "rationale_length": 1,
+    "rationale_markdown": 1
+  },
+  "proposals_retained": 38,
+  "rationales_retained": 34,
+  "frozen_rubric_score_counts": {
+    "transcript-disclosure": {
+      "partial": 7,
+      "miss": 2
+    },
+    "caption-failure": {
+      "partial": 4,
+      "match": 4,
+      "miss": 1
+    },
+    "feedback-as-grade": {
+      "partial": 4,
+      "miss": 1,
+      "match": 4
+    }
+  },
+  "cost_estimate": {
+    "complete": true,
+    "currency": "USD",
+    "estimated_observed_usd": "0.00420348",
+    "input_per_million_usd": 0.06,
+    "input_tokens_observed": 53330,
+    "invoice": false,
+    "invoice_verified": false,
+    "missing_usage_attempts": 0,
+    "note": "List-price estimate for reported usage only; not an invoice or a complete cost when usage is missing or an outcome is unknown.",
+    "output_per_million_usd": 0.24,
+    "output_tokens_observed": 4182
+  },
+  "checks": {
+    "manifest_file_hashes": 33,
+    "prompt_digests_matching_pre_run_plan": 27,
+    "audit_stage_and_final_hashes_valid": 12,
+    "scorer_reproduced_exactly": true,
+    "rationale_validator_unchanged": true,
+    "frozen_corpus_unchanged": true,
+    "frozen_rubric_unchanged": true,
+    "credential_value_scan_passed": true,
+    "all_three_replays_browser_verified": true,
+    "source_checkout_preserved": true,
+    "report_whitespace_words": 1880,
+    "updated_doc_local_links_exist": true,
+    "core_backend_tests": 90,
+    "policy_evidence_driver_tests": 124,
+    "real_vector_tests": 3,
+    "frontend_tests": 101,
+    "launcher_tests": 2,
+    "standalone_scenarios": "pass",
+    "general_kb_check": "pass",
+    "uaeu_kb_check": "pass",
+    "historical_v2_packet_check": "pass",
+    "historical_v3_packet_check": "pass",
+    "frontend_build": "pass",
+    "api_build": "pass"
+  },
+  "retrieval": {
+    "server_configured_for": "local_hybrid",
+    "actual_prompt_digests_match_configured_hybrid_plan": 27,
+    "replay_launcher_search_probes": {
+      "general": "hybrid",
+      "uaeu": "hybrid"
+    },
+    "per_role_retrieval_mode_independently_recorded": false,
+    "new_embedding_provider_calls": 0
+  },
+  "temporary_local_ports_after_cleanup": {
+    "8896": "free",
+    "5196": "free",
+    "8897": "free",
+    "8898": "free",
+    "5198": "free",
+    "8899": "free",
+    "5199": "free"
+  },
+  "limitations": [
+    "Synthetic scenarios and pre-authored synthetic facilitator decisions, not real educational outcomes.",
+    "ID-level rubric and rationale screen do not establish source entailment or legal applicability.",
+    "Unsupported EQA/Al-Qasimi rationale assertion preserved and documented.",
+    "All reported charges are list-price estimates; invoice_verified is false.",
+    "No further paid pass, push, deployment, external upload or submission occurred.",
+    "Original source checkout and existing video artifacts were not edited by this task."
+  ],
+  "artifact_sha256": {
+    "browser-checks.json": "e6f01f41701641187b2e8382d21bea0e76c6f34ec30aec668fc93ad1c1e96c31",
+    "caption-failure-stage-1-round.json": "bb361be7f20e3e62c22dbd4f3815ad0a084fa23a9e25be2518a279bc251246c6",
+    "caption-failure-stage-1.html": "dc59046e3d40f67686e1f43a9c6ecff3babf69cf7f74656ec4edf967715cbf8c",
+    "caption-failure-stage-1.json": "e882f9904bcf33c4b8129f0d984c5421c0e79567346d3b404e7934361ccbcb69",
+    "caption-failure-stage-2-round.json": "542ef5c2291250954bee4ce37775e13103253ad10cd073770469435c1760e271",
+    "caption-failure-stage-2.html": "45c5c3a5fd34dca8cfc74ca112d2139f78586242b201d3e372596e76b1b3306b",
+    "caption-failure-stage-2.json": "a79d111898a23856fdc39b7132f28c31332a016e7c285a30db23c514f9cbd1aa",
+    "caption-failure-stage-3-round.json": "399bab1cf8dd4d4892ebe0fc0903bbc67579195b154f376a7e2fe8df8c142485",
+    "caption-failure-stage-3.html": "595eae69560ce7e1e0ad457dd4e1f4f0987c28229acd5384b02c882dba42b1bb",
+    "caption-failure-stage-3.json": "44d01b12b38a91cb5ebbebefe5cf7ddf1f3253d48268499ea286a7f48000ccaa",
+    "caption-failure.html": "595eae69560ce7e1e0ad457dd4e1f4f0987c28229acd5384b02c882dba42b1bb",
+    "caption-failure.json": "44d01b12b38a91cb5ebbebefe5cf7ddf1f3253d48268499ea286a7f48000ccaa",
+    "expected-actual.json": "7f6e7db5f7b462cdcbfa2066cba55aa4f0daf3d8254059c2ff2a4ceb87c5e790",
+    "expected-actual.md": "551c7abcb65d83563add98175c0a939b8b0e7936490b53e703ddf7e8835506ce",
+    "feedback-as-grade-stage-1-round.json": "f7c3f8eb6dab9660914e26ad718e523025267d411a0854a669bca427bf30da85",
+    "feedback-as-grade-stage-1.html": "f99bfab29f7919ce02c4f19c1de04627b2d3cbbf443326730da14dd4cb4ffd41",
+    "feedback-as-grade-stage-1.json": "c7c5fc4e6cb1a4d5449092e0b8ecaa54b56c37f872d0d03b78f432d859418f4a",
+    "feedback-as-grade-stage-2-round.json": "a40f9d7aaeb634c87ef89d15fac03946d4154efaf49f8792f093825f714b3542",
+    "feedback-as-grade-stage-2.html": "6ada0e03429413f510714f09168882b9bbd171d9a6297e4e9d27f08d919e66a9",
+    "feedback-as-grade-stage-2.json": "7d7725379d4079ec146282e5c98da91313a426311210e721b79e61b2c0b7dcd6",
+    "feedback-as-grade-stage-3-round.json": "9f710f1a7afce9c9eec6d49cdef4a1b96d66f6233dfca8fee459e463b54fba1d",
+    "feedback-as-grade-stage-3.html": "56605e3efc59c778460275f12234e5c7df2728aad9b9d2417e9134c9996798d2",
+    "feedback-as-grade-stage-3.json": "e59f9c794116a5a385d40ea55ab30e9e007b2f4d69a94194c2405d0beb7f4a26",
+    "feedback-as-grade.html": "56605e3efc59c778460275f12234e5c7df2728aad9b9d2417e9134c9996798d2",
+    "feedback-as-grade.json": "e59f9c794116a5a385d40ea55ab30e9e007b2f4d69a94194c2405d0beb7f4a26",
+    "manifest.json": "eeff94596ed0f5082a7b9eb70dbb294b0ff7441047a934f1930ac324bc827e2b",
+    "replay-caption-prerequisite.jpg": "010a3f4298723c892eff5f18c13c34df435c4dd3fb2aaefb53fdb2e1cdda521d",
+    "replay-caption.jpg": "b407d457d9c2a52c5c2be25378b2e82382165b99be458576ff4ebbcfa1f919ad",
+    "replay-feedback-partial.jpg": "64eb47aa829531c113f5d9b1c833cc7e1f3eb2189f22498727ec8fa2e9e996cf",
+    "replay-feedback.jpg": "b48a1af4a4adbd3c768ac7727fc59852e2cf679ce775a068004bc3a520f00aa1",
+    "replay-transcript.jpg": "7050bd63b8eeea1140c2bb3562436c5f285f7b6649b6e8f06e4ca2d7fc797b41",
+    "transcript-disclosure-stage-1-round.json": "03622b6c01ce6ced4564da942d66e0ff1e147b138fc2ef0e9a4f422d09ddadcc",
+    "transcript-disclosure-stage-1.html": "6f57aaa90a7f19537c2fab49c7c0443abcb4d32eb7359cca07371061063b8298",
+    "transcript-disclosure-stage-1.json": "4817606c911d4bf580367a7c8553ea4c85d02ccbae53f5942ca3c6f2c8333430",
+    "transcript-disclosure-stage-2-round.json": "9a635189af8baf2aabcc35abeea3f6d6902f4dc13be380fe2228f8659f6e68d4",
+    "transcript-disclosure-stage-2.html": "336aed879dab13616be496e0a87682485c1f1fac6b65e66ac9fbefa9fc7029fd",
+    "transcript-disclosure-stage-2.json": "77adaa22a7a097c9e88e705038c59d77c13b4c832a99b33e83beb72a8d6c8f9c",
+    "transcript-disclosure-stage-3-round.json": "0838980c6e77efbba356f2afb549cc9c606f1ae18a9b75a730080778af24cfe3",
+    "transcript-disclosure-stage-3.html": "0456317fa21595a8dae5c994b55095524b79ece2fd510bb184c7c80874ce7c07",
+    "transcript-disclosure-stage-3.json": "5211807f36334b414df6fc0c503505b1246df90cb6897673f390bcd4fa283af4",
+    "transcript-disclosure.html": "0456317fa21595a8dae5c994b55095524b79ece2fd510bb184c7c80874ce7c07",
+    "transcript-disclosure.json": "5211807f36334b414df6fc0c503505b1246df90cb6897673f390bcd4fa283af4"
+  }
+}

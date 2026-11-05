@@ -31,15 +31,20 @@ final-stage gaps, decisions and audit exports. Optional cached vector setup is
 in the [retrieval guide](docs/ai-for-good-retrieval.md); otherwise search uses
 labelled lexical fallback.
 
-Recorded-live replay is implemented and read-only:
+Replay the actual saved protocol-4 app run, read-only with no new model calls:
 
 ```bash
-python3 scripts/run-hackathon-demo.py --replay-live /absolute/path/to/protocol4-exercise.json
+python3 scripts/run-hackathon-demo.py --replay-live docs/evidence/ai-for-good-protocol4-live-2026-11-05/caption-failure.json
 ```
 
-An actual protocol-4 recording is still pending provider approval; do not
-substitute a test fixture or relabel older protocol-3 evidence. See the
-[current status](docs/ai-for-good-v4-results.md).
+Stop the previous launcher with Ctrl+C before switching. The same evidence folder
+also contains `transcript-disclosure.json` and `feedback-as-grade.json`. All three
+were browser-verified. The launcher automatically uses the existing local vector
+assets and prints the actual search mode for both collections; see the
+[exact hybrid setup](docs/ai-for-good-local-kb.md#record-with-hybrid-retrieval).
+The live pass returned 26 fully accepted roles, one partial and zero unavailable;
+the provisional frozen rubric scored 8 matches / 15 partial / 4 misses. See
+[actual results and limits](docs/ai-for-good-v4-results.md).
 
 Knowledge base: [25 scoped records](apps/api/frontrow/policy/corpus.json),
 [primary text assets](apps/api/frontrow/policy/source_texts/),

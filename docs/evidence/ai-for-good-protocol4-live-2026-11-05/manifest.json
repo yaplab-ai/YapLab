@@ -1,0 +1,605 @@
+{
+  "approval_reference": "user-approved-2026-11-05-protocol4-27",
+  "code_hash_scope": "apps/api/frontrow .py and .json files and this driver",
+  "code_sha256": "01112c3a8c7216e884a53bd3eba09948a2bdb14e3ef85f1c490d43cbf054ff8e",
+  "completed_stages": [
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3
+    }
+  ],
+  "corpus_version": "2026-11-05.5",
+  "cost_estimate": {
+    "complete": true,
+    "currency": "USD",
+    "estimated_observed_usd": "0.00420348",
+    "input_per_million_usd": 0.06,
+    "input_tokens_observed": 53330,
+    "invoice": false,
+    "invoice_verified": false,
+    "missing_usage_attempts": 0,
+    "note": "List-price estimate for reported usage only; not an invoice or a complete cost when usage is missing or an outcome is unknown.",
+    "output_per_million_usd": 0.24,
+    "output_tokens_observed": 4182
+  },
+  "files": {
+    "caption-failure-stage-1-round.json": "bb361be7f20e3e62c22dbd4f3815ad0a084fa23a9e25be2518a279bc251246c6",
+    "caption-failure-stage-1.html": "dc59046e3d40f67686e1f43a9c6ecff3babf69cf7f74656ec4edf967715cbf8c",
+    "caption-failure-stage-1.json": "e882f9904bcf33c4b8129f0d984c5421c0e79567346d3b404e7934361ccbcb69",
+    "caption-failure-stage-2-round.json": "542ef5c2291250954bee4ce37775e13103253ad10cd073770469435c1760e271",
+    "caption-failure-stage-2.html": "45c5c3a5fd34dca8cfc74ca112d2139f78586242b201d3e372596e76b1b3306b",
+    "caption-failure-stage-2.json": "a79d111898a23856fdc39b7132f28c31332a016e7c285a30db23c514f9cbd1aa",
+    "caption-failure-stage-3-round.json": "399bab1cf8dd4d4892ebe0fc0903bbc67579195b154f376a7e2fe8df8c142485",
+    "caption-failure-stage-3.html": "595eae69560ce7e1e0ad457dd4e1f4f0987c28229acd5384b02c882dba42b1bb",
+    "caption-failure-stage-3.json": "44d01b12b38a91cb5ebbebefe5cf7ddf1f3253d48268499ea286a7f48000ccaa",
+    "caption-failure.html": "595eae69560ce7e1e0ad457dd4e1f4f0987c28229acd5384b02c882dba42b1bb",
+    "caption-failure.json": "44d01b12b38a91cb5ebbebefe5cf7ddf1f3253d48268499ea286a7f48000ccaa",
+    "feedback-as-grade-stage-1-round.json": "f7c3f8eb6dab9660914e26ad718e523025267d411a0854a669bca427bf30da85",
+    "feedback-as-grade-stage-1.html": "f99bfab29f7919ce02c4f19c1de04627b2d3cbbf443326730da14dd4cb4ffd41",
+    "feedback-as-grade-stage-1.json": "c7c5fc4e6cb1a4d5449092e0b8ecaa54b56c37f872d0d03b78f432d859418f4a",
+    "feedback-as-grade-stage-2-round.json": "a40f9d7aaeb634c87ef89d15fac03946d4154efaf49f8792f093825f714b3542",
+    "feedback-as-grade-stage-2.html": "6ada0e03429413f510714f09168882b9bbd171d9a6297e4e9d27f08d919e66a9",
+    "feedback-as-grade-stage-2.json": "7d7725379d4079ec146282e5c98da91313a426311210e721b79e61b2c0b7dcd6",
+    "feedback-as-grade-stage-3-round.json": "9f710f1a7afce9c9eec6d49cdef4a1b96d66f6233dfca8fee459e463b54fba1d",
+    "feedback-as-grade-stage-3.html": "56605e3efc59c778460275f12234e5c7df2728aad9b9d2417e9134c9996798d2",
+    "feedback-as-grade-stage-3.json": "e59f9c794116a5a385d40ea55ab30e9e007b2f4d69a94194c2405d0beb7f4a26",
+    "feedback-as-grade.html": "56605e3efc59c778460275f12234e5c7df2728aad9b9d2417e9134c9996798d2",
+    "feedback-as-grade.json": "e59f9c794116a5a385d40ea55ab30e9e007b2f4d69a94194c2405d0beb7f4a26",
+    "transcript-disclosure-stage-1-round.json": "03622b6c01ce6ced4564da942d66e0ff1e147b138fc2ef0e9a4f422d09ddadcc",
+    "transcript-disclosure-stage-1.html": "6f57aaa90a7f19537c2fab49c7c0443abcb4d32eb7359cca07371061063b8298",
+    "transcript-disclosure-stage-1.json": "4817606c911d4bf580367a7c8553ea4c85d02ccbae53f5942ca3c6f2c8333430",
+    "transcript-disclosure-stage-2-round.json": "9a635189af8baf2aabcc35abeea3f6d6902f4dc13be380fe2228f8659f6e68d4",
+    "transcript-disclosure-stage-2.html": "336aed879dab13616be496e0a87682485c1f1fac6b65e66ac9fbefa9fc7029fd",
+    "transcript-disclosure-stage-2.json": "77adaa22a7a097c9e88e705038c59d77c13b4c832a99b33e83beb72a8d6c8f9c",
+    "transcript-disclosure-stage-3-round.json": "0838980c6e77efbba356f2afb549cc9c606f1ae18a9b75a730080778af24cfe3",
+    "transcript-disclosure-stage-3.html": "0456317fa21595a8dae5c994b55095524b79ece2fd510bb184c7c80874ce7c07",
+    "transcript-disclosure-stage-3.json": "5211807f36334b414df6fc0c503505b1246df90cb6897673f390bcd4fa283af4",
+    "transcript-disclosure.html": "0456317fa21595a8dae5c994b55095524b79ece2fd510bb184c7c80874ce7c07",
+    "transcript-disclosure.json": "5211807f36334b414df6fc0c503505b1246df90cb6897673f390bcd4fa283af4"
+  },
+  "limitations": [
+    "Synthetic facilitator decisions; no educational outcomes measured.",
+    "Status endpoint reports model, provider and protocol; it does not independently attest running server code.",
+    "A reservation is an upper bound on possible provider attempts, not a claim they occurred."
+  ],
+  "mode": "model_assisted",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "note": "Checkout fingerprint only; does not independently attest the running server.",
+  "protocol_version": "4",
+  "provider": "nebius",
+  "request_bound": 27,
+  "reserved_provider_attempts": 27,
+  "role_results": [
+    {
+      "latency_ms": 1011.7,
+      "prompt_attempted": true,
+      "prompt_sha256": "dc6698ff06ce02186b12a7e4ecc5ecb1b5419969dc36eac2cbc63ac0be9b62e0",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 107,
+        "prompt_tokens": 1911,
+        "total_tokens": 2018
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 995.1,
+      "prompt_attempted": true,
+      "prompt_sha256": "d2f952c4e9fc8c570673fc9b133ba0f627bf38213c44b26e1b9a0d4509dfa96f",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 96,
+        "prompt_tokens": 1866,
+        "total_tokens": 1962
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 584.1,
+      "prompt_attempted": true,
+      "prompt_sha256": "f2e4ac6d0f6d8e09ebd65bf2cd07e2a100722af4cdc7514663bdc13e5d102e3c",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 107,
+        "prompt_tokens": 1934,
+        "total_tokens": 2041
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1305.7,
+      "prompt_attempted": true,
+      "prompt_sha256": "941229d1bbbb9d4176a60466339bb1282ed10aab2aa90d24e4703b84bce5c046",
+      "provider_status": "success",
+      "rationale_rejections": [
+        "rationale_legal_conclusion"
+      ],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 169,
+        "prompt_tokens": 2000,
+        "total_tokens": 2169
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1273.4,
+      "prompt_attempted": true,
+      "prompt_sha256": "4dfcac6e5835d69952eb1d7f30b487fc4e524c1cdf37cdfbc6c0015a697dfe58",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 195,
+        "prompt_tokens": 2131,
+        "total_tokens": 2326
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 564.4,
+      "prompt_attempted": true,
+      "prompt_sha256": "3ffd6796f2240a1defce333a353802686d2706af42c2467c64015ca1837e26bc",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 90,
+        "prompt_tokens": 2007,
+        "total_tokens": 2097
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 922.9,
+      "prompt_attempted": true,
+      "prompt_sha256": "f77c464bfe5a71c1dadf066cf3593182a3d447d7c4a6972143549995db226449",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 121,
+        "prompt_tokens": 2093,
+        "total_tokens": 2214
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 923.3,
+      "prompt_attempted": true,
+      "prompt_sha256": "8b8f081347ca9f944fcc5c6380d7f84fbdeb33d925e72060f58c76d7d7fee0e5",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 115,
+        "prompt_tokens": 2096,
+        "total_tokens": 2211
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1125.7,
+      "prompt_attempted": true,
+      "prompt_sha256": "15d77ab4161091627949408deaf916a70f187d9a5c993c03da3ea0cbf120e9cd",
+      "provider_status": "success",
+      "rationale_rejections": [
+        "rationale_legal_conclusion"
+      ],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 210,
+        "prompt_tokens": 2100,
+        "total_tokens": 2310
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 799.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "90f14c3f51ee6d28896047a1b81bdd2d4304371193ef659d231dadf8845a77e8",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 82,
+        "prompt_tokens": 1846,
+        "total_tokens": 1928
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 811.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "59d417a1aa160673ca4ea711958032abda3a2f780ef8105d3da5093df807c8b6",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 113,
+        "prompt_tokens": 1869,
+        "total_tokens": 1982
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 675.3,
+      "prompt_attempted": true,
+      "prompt_sha256": "0974571899f74ed38d1f6904af6e5ba038688fcda6d39e96b6515c0ab1af40d5",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 126,
+        "prompt_tokens": 1826,
+        "total_tokens": 1952
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 975.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "d49a5c568886133b853c3cc55c3caef5129bd833b3cd0e73d9f0e475ce3dd1a8",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 186,
+        "prompt_tokens": 1989,
+        "total_tokens": 2175
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 824.5,
+      "prompt_attempted": true,
+      "prompt_sha256": "4a94d84cfbc63faddd5c2b599ac6d4d3a27db3882cffdeecd838055a9ec3fba6",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 1965,
+        "total_tokens": 2050
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 933.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "e7276d2616b4567fe65f1c6c579d61f6eaa34a6ae0e32940412f6684c266fbbf",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 211,
+        "prompt_tokens": 1960,
+        "total_tokens": 2171
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1326.1,
+      "prompt_attempted": true,
+      "prompt_sha256": "fec3b762dbbf9a0fa3309dacf8571fa9cefa67e7d8cd9075e2ea8a6305040a7c",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 205,
+        "prompt_tokens": 2094,
+        "total_tokens": 2299
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1231.7,
+      "prompt_attempted": true,
+      "prompt_sha256": "3254a7dc5e4a3840d825f1029001846fd41c972b4606c8f1a6af9bfce649273f",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 186,
+        "prompt_tokens": 2061,
+        "total_tokens": 2247
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 965.5,
+      "prompt_attempted": true,
+      "prompt_sha256": "7640573253a72de8740d7d63436d9bbc2efa7e0fd7a4f3f06744318a2d2140c0",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 193,
+        "prompt_tokens": 2065,
+        "total_tokens": 2258
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 888.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "cdd7c00a30c8fba139642261d2cf40a51c9dc58bb4825fcc65a17e90ca84f961",
+      "provider_status": "success",
+      "rationale_rejections": [
+        "rationale_length"
+      ],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 139,
+        "prompt_tokens": 1830,
+        "total_tokens": 1969
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 890.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "6d805c5975cd3dcd96b6280226a46b1a1c8d6281bfa326e35e3e45744dc4b361",
+      "provider_status": "success",
+      "rationale_rejections": [
+        "rationale_markdown"
+      ],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 131,
+        "prompt_tokens": 1956,
+        "total_tokens": 2087
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 613.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "5d450dadfe5a47ee75477cc65e953aba4adacf13efbd54b95584227288a980e9",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 85,
+        "prompt_tokens": 1821,
+        "total_tokens": 1906
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1094.4,
+      "prompt_attempted": true,
+      "prompt_sha256": "cb474b530c23eef9588c8f7a6ab99d4812a04cb99c91e8c89f912460c27cfbad",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "teacher",
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 216,
+        "prompt_tokens": 1964,
+        "total_tokens": 2180
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1112.8,
+      "prompt_attempted": true,
+      "prompt_sha256": "14f898ae6b304e7d8b94bfdcd9c8ee8fc5a21fcefe4ec899843a2d616311ffcf",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 236,
+        "prompt_tokens": 1964,
+        "total_tokens": 2200
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 943.0,
+      "prompt_attempted": true,
+      "prompt_sha256": "773d44555bd01474055d723ab6f28c14b6d53bd67969d32d468cc4d597644f94",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 230,
+        "prompt_tokens": 1915,
+        "total_tokens": 2145
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 1387.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "5e85d7a8a02540894449b7d8b7045c6baa3e97f0e74238e5970eec7dc6890cd4",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": "invalid_response",
+      "role": "teacher",
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "status": "partial",
+      "usage": {
+        "completion_tokens": 263,
+        "prompt_tokens": 2103,
+        "total_tokens": 2366
+      },
+      "validation_issue": "schema_limits"
+    },
+    {
+      "latency_ms": 750.2,
+      "prompt_attempted": true,
+      "prompt_sha256": "8b8851c38f2e4ce07743a5e6dda37e407a300c6efd115b00d8a1dcf300a7fc5a",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "privacy",
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 114,
+        "prompt_tokens": 1956,
+        "total_tokens": 2070
+      },
+      "validation_issue": null
+    },
+    {
+      "latency_ms": 894.3,
+      "prompt_attempted": true,
+      "prompt_sha256": "30cd188aa38b0bc9438fbbc87accaaba2dc496f7cfa948f56c4c12c82ea45d3e",
+      "provider_status": "success",
+      "rationale_rejections": [],
+      "reason": null,
+      "role": "accessibility",
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 171,
+        "prompt_tokens": 2008,
+        "total_tokens": 2179
+      },
+      "validation_issue": null
+    }
+  ],
+  "run_status": "completed",
+  "source_commit": "f2e22768ba56174ec3ae89b096238c84e2e5d90a",
+  "uncertain_outcome": false,
+  "updated_at": "2026-11-05T16:46:29.910405+00:00",
+  "working_tree_dirty": false
+}
