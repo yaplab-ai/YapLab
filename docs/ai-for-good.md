@@ -1,6 +1,6 @@
 # YapLab · AI for Good UAE engineering plan
 
-Working reference: **2026-11-04**. Product: an English-language practice classroom
+Working reference: **2026-11-05**. Product: an English-language practice classroom
 for university teachers and teaching assistants, with a policy exercise alongside
 the existing AI audience. UAE material supplies a reference case; the research
 question concerns education-domain gaps that can be compared with global examples.
@@ -89,36 +89,42 @@ engineering plan, not a submission.
 
 ## Y.3172 mapping: an architectural analogy
 
-[ITU-T Y.3172 (06/2019), clause 8.1.1](https://www.itu.int/rec/T-REC-Y.3172-201906-I/en)
-describes an ML pipeline for telecommunications networks. Applying its component
-roles to this education prototype is an analogy, not a claim of network-standard
-conformance. In particular, its policy node constrains model outputs; it is not
-simply a legal-document database.
+[ITU-T Y.3172 (06/2019)](https://www.itu.int/rec/T-REC-Y.3172-201906-I/en)
+clauses 3.2 and 8.1 name the pipeline nodes and ML function orchestrator (MLFO).
+This is an **architectural analogy, not conformance**: the Recommendation targets
+telecommunication networks, while YapLab rehearses decisions in education.
 
-| Pipeline role | YapLab counterpart | Check or limitation |
+| Actual component | Concrete YapLab implementation | Practical limit |
 | --- | --- | --- |
-| Source | Presenter speech, slides; curated policy records | Source provenance and synthetic policy-exercise facts |
-| Collector | Transcript/PDF ingest; packaged corpus loader | Input limits, schema validation |
-| Preprocessor | Transcript windowing, quote normalisation, retrieval tokenisation | Deterministic checks and retrieval trace |
-| Model | Existing listener/summary/answer models; optional policy evidence selector | Offline doubles establish software behavior, not real-model quality |
-| Policy | Grounding gates, citation validation, review abstention, human supervision | A cited reference cannot establish compliance |
-| Distributor | REST/WebSocket delivery and policy API | Role/stage projection in the scenario API |
-| Sink | Presenter/teacher and recorded human decision | No automatic grading, enforcement or student action |
-| Orchestration/sandbox | Session orchestrator and staged synthetic exercise | No claim of an ITU-managed distributed sandbox |
+| SRC — source | `policy/corpus.json`, `source_texts/`, `scenarios.json` | Synthetic incidents and scoped primary material; incomplete national coverage |
+| C — collector | `evidence.load_corpus`, `export.export_bundle` | Packaged material, checked source hashes; no unattended ingestion |
+| PP — preprocessor | `export.py`, `evidence.py`, `scripts/vector_policy_kb.py` | Chunking, lexical cues and normalized embeddings; not legal interpretation |
+| M — model | Local MiniLM retrieval; direct Nano client in `coordination.py` | Model selections/rationales remain unverified |
+| P — policy | `_assess_response`, role/stage/source boundaries and conditional plan | Checks constrain model output; this is not the legal-source database alone |
+| D — distributor | `router.py`, role audits and `/policy/exercises/{id}/timeline` | Separate role views and facilitator export, not institutional authentication |
+| SINK — output target | `PolicyLab.jsx`, human `decision` endpoint | Human consideration/decision; no automatic grading or enforcement |
+| MLFO — ML function orchestrator | `coordinate`, store reservations and existing classroom orchestrator | Bounded dispatch and replay; no network placement or trained-model lifecycle manager |
+| ML sandbox | Synthetic exercises, fake providers, benchmark and saved-live comparison | Local test environment; no ITU hosting, underlay simulation or training claim |
 
 ## AI Readiness 2.0 mapping
 
-The [January 2026 Report 2.0](https://www.itu.int/dms_pub/itu-t/opb/ai4g/T-AI4G-AI4GOOD-2025-6-PDF-E.pdf)
-provides a framework for contextual self-assessment. These are proposed
-project-level evidence choices, not a national readiness score.
+The [official challenge](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485)
+lists the eight perspectives below. They are challenge lenses, **not a claim that
+the report has eight dimensions**. The January 2026 [Report 2.0](https://www.itu.int/dms_pub/itu-t/opb/ai4g/T-AI4G-AI4GOOD-2025-6-PDF-E.pdf)
+identifies six foundational factors and thirteen dimensions. The locators below
+are printed report pages; PDF page numbers are one higher. This crosswalk is our
+project-level interpretation, not a readiness score or ITU assessment.
 
-| Perspective | Project evidence to inspect | Remaining uncertainty |
+| Challenge perspective | Report 2.0 correspondence | Inspectable project evidence and limit |
 | --- | --- | --- |
-| Data | Provenance, scope, freshness and retrieval tests | Seed completeness and retrieval relevance |
-| Digital infrastructure | Local API/browser separation and bounded stores | ITU hosting, connectivity, energy and production scale |
-| Digital skills | Teacher/TA synthetic walkthrough | Usability and actual teacher learning |
-| Innovation ecosystem | Open code, reusable source records and recorded domain gaps | Participation, source rights and integration with institutional workflows |
-| AI policy | Applicability cautions, global examples and human review | Institution-specific duties and expert validation |
+| Open data and open-source management | Dimension 1, pp.18–19; six factors, p.7 | MIT code, separate TalkMoves terms, source rights/hash metadata; source coverage remains partial |
+| Generative AI content ecosystem | Dimension 2, p.20 | AI rehearsal, public stated rationales and replay; no marketplace or content-quality claim |
+| Contextualisation and regional focus | Dimension 4, pp.21–22; dimension 12, pp.32–33 | UAE/general/UAEU source boundaries, scoped foreign examples; no institutional endorsement |
+| AI integration in domains and cross-domain analysis | Dimensions 3 and 5, pp.20–23 | Teaching/privacy/accessibility exercise roles and handoffs; real institutional integration untested |
+| Human interaction and supervision | Dimensions 6, 8 and 9, pp.23–27 | Human decisions, source review, audit timeline, expected/actual comparison; expert validation outstanding |
+| AI policy and implementation opportunity identification | Dimension 10, pp.28–29 | `gaps.json`, evidence needed and conditional actions; no national-law deficiency inferred |
+| AI for social inclusion | Dimension 11, pp.29–32 | Caption fallback and accessible feedback scenarios; no measured access benefit or WCAG conformance |
+| Digital infrastructure and energy | Dimension 13, pp.33–34 | Local vectors, lexical fallback, API/browser separation and token usage; energy, hosting reliability and deployment scale unmeasured |
 
 ## Verification and local use
 
