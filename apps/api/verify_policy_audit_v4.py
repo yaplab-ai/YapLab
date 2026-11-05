@@ -37,6 +37,7 @@ class ProtocolAuditTests(unittest.TestCase):
         for text, label in [(None, 'rationale_missing'), ('x' * 201, 'rationale_length'),
                             ('https://example.org', 'rationale_url'), ('**bold**', 'rationale_markdown'),
                             ('This is illegal', 'rationale_legal_conclusion'),
+                            ('Data protection law supports restricting access.', 'rationale_legal_conclusion'),
                             ('Review ' + uncited_source, 'rationale_uncited_id'),
                             ('Review ' + uncited_fact.upper(), 'rationale_uncited_id')]:
             item = dict(base)
@@ -44,10 +45,13 @@ class ProtocolAuditTests(unittest.TestCase):
                 item['rationale'] = text
             proposals, _, issue = _assess_response(json.dumps({'proposals': [item], 'questions': []}), request, 'caption-failure')
             self.assertIsNone(issue)
+            self.assertEqual(len(proposals), 1)
+            self.assertEqual(proposals[0]['action_id'], base['action_id'])
             self.assertEqual(proposals[0]['rationale_issue'], label)
             self.assertTrue(proposals[0]['rationale_rejected'])
             self.assertNotIn('rationale', proposals[0])
-        for text in ('Use a human-centred and role-specific response.',
+        for text in ('The missing captions prevent equal participation, so pause until an accessible option is confirmed.',
+                     'Use a human-centred and role-specific response.',
                      'Check ' + base['fact_ids'][0] + ' and ' + base['source_ids'][0] + ' before a human decision.'):
             item = dict(base, rationale=text)
             proposals, _, _ = _assess_response(json.dumps({'proposals': [item], 'questions': []}), request, 'caption-failure')

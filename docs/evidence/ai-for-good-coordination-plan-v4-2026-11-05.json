@@ -1,0 +1,1774 @@
+{
+  "mode": "dry_run",
+  "network_calls_made": 0,
+  "institution": "general",
+  "protocol_version": "4",
+  "corpus_version": "2026-11-05.5",
+  "scenario_count": 3,
+  "stages_per_scenario": 3,
+  "roles_per_snapshot": 3,
+  "planned_provider_calls": 27,
+  "calls": [
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 8057,
+      "prompt_sha256": "dc6698ff06ce02186b12a7e4ecc5ecb1b5419969dc36eac2cbc63ac0be9b62e0",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 7850,
+      "prompt_sha256": "d2f952c4e9fc8c570673fc9b133ba0f627bf38213c44b26e1b9a0d4509dfa96f",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 7779,
+      "prompt_sha256": "f2e4ac6d0f6d8e09ebd65bf2cd07e2a100722af4cdc7514663bdc13e5d102e3c",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "us-ada-title-ii-web",
+          "title": "ADA Title II web and mobile accessibility rule",
+          "url": "https://www.ecfr.gov/current/title-28/chapter-I/part-35/subpart-H/section-35.200",
+          "authority": "United States Department of Justice; Electronic Code of Federal Regulations",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "State and local public entities, including public universities, and their web content and mobile apps, subject to exceptions and applicable undue burdens and fundamental alteration provisions.",
+          "summary": "The 2024 rule adopts WCAG 2.1 Level AA for covered state and local government web content and mobile applications; the 2026 interim final rule extended deadlines.",
+          "limitations": [
+            "The technical standard is WCAG 2.1 AA, not WCAG 2.2; US law is not automatically applicable to UAE institutions.",
+            "The interim final rule extended compliance dates to 26 April 2027 for entities with populations of 50,000 or more and 26 April 2028 for smaller entities and special district governments; public universities use the population of the relevant state or local government.",
+            "Other disability access duties can apply before those dates."
+          ],
+          "institution": null,
+          "source_locator": "28 CFR 35.200(a)–(b), 35.201; DOJ 2026 interim final rule",
+          "verification": "Current eCFR section and DOJ fact sheet reviewed 2026-11-05; https://www.ada.gov/resources/2024-03-08-web-rule/ and https://www.ada.gov/resources/web-rule-first-steps/.",
+          "sha256": "6cd480f346789315551d42aa424962a83c90ecd42cb77a7c3989976b3d73937b"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 8397,
+      "prompt_sha256": "941229d1bbbb9d4176a60466339bb1282ed10aab2aa90d24e4703b84bce5c046",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 8480,
+      "prompt_sha256": "4dfcac6e5835d69952eb1d7f30b487fc4e524c1cdf37cdfbc6c0015a697dfe58",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "uae-ai-ethics-principles-guidelines",
+          "title": "AI Ethics: Principles and Guidelines",
+          "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+          "authority": "UAE AI and Blockchain Council / UAE AI Office",
+          "jurisdiction": "UAE — non-binding guidance",
+          "document_type": "guidance",
+          "scope": "Non-binding guidance whose section 1.2 addresses AI systems making or informing significant decisions, including critical decisions. For ordinary teaching rehearsal, the guidelines are a voluntary design reference unless the actual use meets that decision scope.",
+          "summary": "Ethical principles for decision-affecting AI, explicitly non-mandatory; distinct from the beta self-assessment tool.",
+          "limitations": [
+            "Do not label these guidelines binding law, a certification or a general obligation for every rehearsal tool.",
+            "Applicability to a particular deployment requires its actual purpose and effects."
+          ],
+          "institution": null,
+          "source_locator": "Section 1.1: PDF page 3 (printed page 5); section 1.2: PDF page 4 (printed page 6); section 1.5: PDF page 5. Cover dated December 2022.",
+          "verification": "Sections 1.1, 1.2, 1.5 and selected principles checked in official PDF downloaded 2026-11-05; source PDF SHA-256 7733629e553ee21080a8b08215d6a9ef42e8c741f7cc302af86995519d380c54. No statutory text verified.",
+          "sha256": "7422958d7fb24d8ccf56bc216f1c038d6aec83c9ea2ae02475940ba11d681edb"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 8112,
+      "prompt_sha256": "3ffd6796f2240a1defce333a353802686d2706af42c2467c64015ca1837e26bc",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "us-ada-title-ii-web",
+          "title": "ADA Title II web and mobile accessibility rule",
+          "url": "https://www.ecfr.gov/current/title-28/chapter-I/part-35/subpart-H/section-35.200",
+          "authority": "United States Department of Justice; Electronic Code of Federal Regulations",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "State and local public entities, including public universities, and their web content and mobile apps, subject to exceptions and applicable undue burdens and fundamental alteration provisions.",
+          "summary": "The 2024 rule adopts WCAG 2.1 Level AA for covered state and local government web content and mobile applications; the 2026 interim final rule extended deadlines.",
+          "limitations": [
+            "The technical standard is WCAG 2.1 AA, not WCAG 2.2; US law is not automatically applicable to UAE institutions.",
+            "The interim final rule extended compliance dates to 26 April 2027 for entities with populations of 50,000 or more and 26 April 2028 for smaller entities and special district governments; public universities use the population of the relevant state or local government.",
+            "Other disability access duties can apply before those dates."
+          ],
+          "institution": null,
+          "source_locator": "28 CFR 35.200(a)–(b), 35.201; DOJ 2026 interim final rule",
+          "verification": "Current eCFR section and DOJ fact sheet reviewed 2026-11-05; https://www.ada.gov/resources/2024-03-08-web-rule/ and https://www.ada.gov/resources/web-rule-first-steps/.",
+          "sha256": "6cd480f346789315551d42aa424962a83c90ecd42cb77a7c3989976b3d73937b"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 8742,
+      "prompt_sha256": "f77c464bfe5a71c1dadf066cf3593182a3d447d7c4a6972143549995db226449",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 8771,
+      "prompt_sha256": "8b8f081347ca9f944fcc5c6380d7f84fbdeb33d925e72060f58c76d7d7fee0e5",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        }
+      ]
+    },
+    {
+      "scenario_id": "transcript-disclosure",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 8457,
+      "prompt_sha256": "15d77ab4161091627949408deaf916a70f187d9a5c993c03da3ea0cbf120e9cd",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "us-ada-title-ii-web",
+          "title": "ADA Title II web and mobile accessibility rule",
+          "url": "https://www.ecfr.gov/current/title-28/chapter-I/part-35/subpart-H/section-35.200",
+          "authority": "United States Department of Justice; Electronic Code of Federal Regulations",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "State and local public entities, including public universities, and their web content and mobile apps, subject to exceptions and applicable undue burdens and fundamental alteration provisions.",
+          "summary": "The 2024 rule adopts WCAG 2.1 Level AA for covered state and local government web content and mobile applications; the 2026 interim final rule extended deadlines.",
+          "limitations": [
+            "The technical standard is WCAG 2.1 AA, not WCAG 2.2; US law is not automatically applicable to UAE institutions.",
+            "The interim final rule extended compliance dates to 26 April 2027 for entities with populations of 50,000 or more and 26 April 2028 for smaller entities and special district governments; public universities use the population of the relevant state or local government.",
+            "Other disability access duties can apply before those dates."
+          ],
+          "institution": null,
+          "source_locator": "28 CFR 35.200(a)–(b), 35.201; DOJ 2026 interim final rule",
+          "verification": "Current eCFR section and DOJ fact sheet reviewed 2026-11-05; https://www.ada.gov/resources/2024-03-08-web-rule/ and https://www.ada.gov/resources/web-rule-first-steps/.",
+          "sha256": "6cd480f346789315551d42aa424962a83c90ecd42cb77a7c3989976b3d73937b"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 7482,
+      "prompt_sha256": "90f14c3f51ee6d28896047a1b81bdd2d4304371193ef659d231dadf8845a77e8",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 7595,
+      "prompt_sha256": "59d417a1aa160673ca4ea711958032abda3a2f780ef8105d3da5093df807c8b6",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-ai-charter-2024",
+          "title": "UAE Charter for the Development and Use of Artificial Intelligence",
+          "url": "https://ai.gov.ae/wp-content/uploads/2024/07/UAEAI-Methaq-EN2-3.pdf",
+          "authority": "UAE Artificial Intelligence, Digital Economy and Remote Work Applications Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "National guiding framework for development and use of AI; not an education-specific legal instrument.",
+          "summary": "The charter describes principles including safety, algorithmic bias, privacy, transparency, human oversight and inclusive AI awareness.",
+          "limitations": [
+            "Guiding principles are not proof of a binding university-specific obligation, legal compliance or educational results."
+          ],
+          "institution": null,
+          "source_locator": "PDF pages 3–5, general principles, especially 3–7 and 11–12",
+          "verification": "Official AI Office PDF and 30 July 2024 launch announcement inspected on 2026-11-05; later amendment or replacement not established.",
+          "sha256": "14b1fb4871b914dfa09659dbc58827353e0d88b774abd598ec15c52ae429836b"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 7402,
+      "prompt_sha256": "0974571899f74ed38d1f6904af6e5ba038688fcda6d39e96b6515c0ab1af40d5",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 8016,
+      "prompt_sha256": "d49a5c568886133b853c3cc55c3caef5129bd833b3cd0e73d9f0e475ce3dd1a8",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 8185,
+      "prompt_sha256": "4a94d84cfbc63faddd5c2b599ac6d4d3a27db3882cffdeecd838055a9ec3fba6",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 7939,
+      "prompt_sha256": "e7276d2616b4567fe65f1c6c579d61f6eaa34a6ae0e32940412f6684c266fbbf",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 8431,
+      "prompt_sha256": "fec3b762dbbf9a0fa3309dacf8571fa9cefa67e7d8cd9075e2ea8a6305040a7c",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 8523,
+      "prompt_sha256": "3254a7dc5e4a3840d825f1029001846fd41c972b4606c8f1a6af9bfce649273f",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        }
+      ]
+    },
+    {
+      "scenario_id": "caption-failure",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 8354,
+      "prompt_sha256": "7640573253a72de8740d7d63436d9bbc2efa7e0fd7a4f3f06744318a2d2140c0",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "teacher",
+      "input_utf8_bytes": 7448,
+      "prompt_sha256": "cdd7c00a30c8fba139642261d2cf40a51c9dc58bb4825fcc65a17e90ca84f961",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-caa-outcomes-framework",
+          "title": "Outcomes-Based Evaluation Framework University Guide",
+          "url": "https://caa.ae/Pages/Guidelines/Outcomes-based-Evaluation-framework-University-Guide.aspx",
+          "authority": "Commission for Academic Accreditation, Ministry of Higher Education and Scientific Research",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Higher education institutional evaluation and accreditation guidance, including learning outcomes; not a classroom AI or assessment tool standard.",
+          "summary": "CAA describes an outcomes-based quality assurance framework for universities and data used for licensure and accreditation renewal.",
+          "limitations": [
+            "Overview does not establish requirements for AI-generated assessments, student records or support.",
+            "The former 2019 standards page was inaccessible; the relationship and detailed current provisions were not verified."
+          ],
+          "institution": null,
+          "source_locator": "University Guide overview and Data Submission Guidelines",
+          "verification": "CAA public overview and licensure page checked 2026-11-05. This record does not assert that a particular institution is subject to the framework.",
+          "sha256": "8b7c36130bdcd00766d92075c178d501cbd70a0d14f2f532b6cc6f9c3d19daa4"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "australia-teqsa-genai-assessment",
+          "title": "Assessment reform for the age of artificial intelligence",
+          "url": "https://www.teqsa.gov.au/guides-resources/resources/corporate-publications/assessment-reform-age-artificial-intelligence",
+          "authority": "Tertiary Education Quality and Standards Agency (TEQSA)",
+          "jurisdiction": "Australia",
+          "document_type": "guidance",
+          "scope": "Expert-developed, non-prescriptive guidance for Australian higher education on assessment in a generative-AI context.",
+          "summary": "TEQSA’s expert paper offers guiding principles and propositions for assessment design that both assure learning and prepare students to engage ethically with generative AI.",
+          "limitations": [
+            "The paper describes directions for the sector, not a mandatory formula or a UAE policy.",
+            "Related TEQSA resources appeared in 2025 and 2026; this entry is the 2023 paper."
+          ],
+          "institution": null,
+          "source_locator": "Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6",
+          "verification": "TEQSA publication page and PDF pp. 2–6 reviewed 2026-11-05; https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf.",
+          "sha256": "2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "privacy",
+      "input_utf8_bytes": 7876,
+      "prompt_sha256": "6d805c5975cd3dcd96b6280226a46b1a1c8d6281bfa326e35e3e45744dc4b361",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "uae-ai-ethics-principles-guidelines",
+          "title": "AI Ethics: Principles and Guidelines",
+          "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+          "authority": "UAE AI and Blockchain Council / UAE AI Office",
+          "jurisdiction": "UAE — non-binding guidance",
+          "document_type": "guidance",
+          "scope": "Non-binding guidance whose section 1.2 addresses AI systems making or informing significant decisions, including critical decisions. For ordinary teaching rehearsal, the guidelines are a voluntary design reference unless the actual use meets that decision scope.",
+          "summary": "Ethical principles for decision-affecting AI, explicitly non-mandatory; distinct from the beta self-assessment tool.",
+          "limitations": [
+            "Do not label these guidelines binding law, a certification or a general obligation for every rehearsal tool.",
+            "Applicability to a particular deployment requires its actual purpose and effects."
+          ],
+          "institution": null,
+          "source_locator": "Section 1.1: PDF page 3 (printed page 5); section 1.2: PDF page 4 (printed page 6); section 1.5: PDF page 5. Cover dated December 2022.",
+          "verification": "Sections 1.1, 1.2, 1.5 and selected principles checked in official PDF downloaded 2026-11-05; source PDF SHA-256 7733629e553ee21080a8b08215d6a9ef42e8c741f7cc302af86995519d380c54. No statutory text verified.",
+          "sha256": "7422958d7fb24d8ccf56bc216f1c038d6aec83c9ea2ae02475940ba11d681edb"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 1,
+      "role": "accessibility",
+      "input_utf8_bytes": 7390,
+      "prompt_sha256": "5d450dadfe5a47ee75477cc65e953aba4adacf13efbd54b95584227288a980e9",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "teacher",
+      "input_utf8_bytes": 7943,
+      "prompt_sha256": "cb474b530c23eef9588c8f7a6ab99d4812a04cb99c91e8c89f912460c27cfbad",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "australia-teqsa-genai-assessment",
+          "title": "Assessment reform for the age of artificial intelligence",
+          "url": "https://www.teqsa.gov.au/guides-resources/resources/corporate-publications/assessment-reform-age-artificial-intelligence",
+          "authority": "Tertiary Education Quality and Standards Agency (TEQSA)",
+          "jurisdiction": "Australia",
+          "document_type": "guidance",
+          "scope": "Expert-developed, non-prescriptive guidance for Australian higher education on assessment in a generative-AI context.",
+          "summary": "TEQSA’s expert paper offers guiding principles and propositions for assessment design that both assure learning and prepare students to engage ethically with generative AI.",
+          "limitations": [
+            "The paper describes directions for the sector, not a mandatory formula or a UAE policy.",
+            "Related TEQSA resources appeared in 2025 and 2026; this entry is the 2023 paper."
+          ],
+          "institution": null,
+          "source_locator": "Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6",
+          "verification": "TEQSA publication page and PDF pp. 2–6 reviewed 2026-11-05; https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf.",
+          "sha256": "2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba"
+        },
+        {
+          "id": "uae-caa-outcomes-framework",
+          "title": "Outcomes-Based Evaluation Framework University Guide",
+          "url": "https://caa.ae/Pages/Guidelines/Outcomes-based-Evaluation-framework-University-Guide.aspx",
+          "authority": "Commission for Academic Accreditation, Ministry of Higher Education and Scientific Research",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Higher education institutional evaluation and accreditation guidance, including learning outcomes; not a classroom AI or assessment tool standard.",
+          "summary": "CAA describes an outcomes-based quality assurance framework for universities and data used for licensure and accreditation renewal.",
+          "limitations": [
+            "Overview does not establish requirements for AI-generated assessments, student records or support.",
+            "The former 2019 standards page was inaccessible; the relationship and detailed current provisions were not verified."
+          ],
+          "institution": null,
+          "source_locator": "University Guide overview and Data Submission Guidelines",
+          "verification": "CAA public overview and licensure page checked 2026-11-05. This record does not assert that a particular institution is subject to the framework.",
+          "sha256": "8b7c36130bdcd00766d92075c178d501cbd70a0d14f2f532b6cc6f9c3d19daa4"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "privacy",
+      "input_utf8_bytes": 8170,
+      "prompt_sha256": "14f898ae6b304e7d8b94bfdcd9c8ee8fc5a21fcefe4ec899843a2d616311ffcf",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-personal-data-protection",
+          "title": "Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+          "summary": "The federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.",
+          "limitations": [
+            "Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.",
+            "Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.",
+            "Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified."
+          ],
+          "institution": null,
+          "source_locator": "Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "8166f64ddaa5d6ffaf00a640eb38c2ab660428cb10dc7e09b92077d2ee8f13f5"
+        },
+        {
+          "id": "us-ferpa-education-records",
+          "title": "Family Educational Rights and Privacy Act regulations",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "authority": "United States Department of Education",
+          "jurisdiction": "United States",
+          "document_type": "regulation",
+          "scope": "Educational agencies or institutions receiving funds under a program administered by the U.S. Secretary of Education; covers defined education records, including in postsecondary institutions.",
+          "summary": "FERPA rules provide eligible students access and amendment rights and regulate disclosures of personally identifiable information from education records, including exceptions to prior consent.",
+          "limitations": [
+            "FERPA is US law and is not a general UAE rule. Not every recording or transcript necessarily meets the education-record definition.",
+            "At a postsecondary institution FERPA rights generally transfer to the eligible student; consent has exceptions, including a conditioned school-official exception."
+          ],
+          "institution": null,
+          "source_locator": "34 CFR 99.1, 99.3, 99.5, 99.10, 99.30–31",
+          "verification": "Department of Education regulatory text reviewed 2026-11-05.",
+          "sha256": "be431c32f396f1395538839ba2b86b55b44c8fd3c19dbb4cd8c6e4c92ff82f56"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies.",
+            "The underlying Principles and Guidelines are non-binding and section 1.2 targets significant or critical decisions; ordinary rehearsal uses them as voluntary design guidance, not a compliance obligation."
+          ],
+          "institution": null,
+          "source_locator": "What is the self-assessment tool for?; What does it contain?",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "5d882df83d66d541f146929207c75f66faefa25b0a8b6d6d77e5d7cd5468df56"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 2,
+      "role": "accessibility",
+      "input_utf8_bytes": 7755,
+      "prompt_sha256": "773d44555bd01474055d723ab6f28c14b6d53bd67969d32d468cc4d597644f94",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "teacher",
+      "input_utf8_bytes": 8457,
+      "prompt_sha256": "5e85d7a8a02540894449b7d8b7045c6baa3e97f0e74238e5970eec7dc6890cd4",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "australia-teqsa-genai-assessment",
+          "title": "Assessment reform for the age of artificial intelligence",
+          "url": "https://www.teqsa.gov.au/guides-resources/resources/corporate-publications/assessment-reform-age-artificial-intelligence",
+          "authority": "Tertiary Education Quality and Standards Agency (TEQSA)",
+          "jurisdiction": "Australia",
+          "document_type": "guidance",
+          "scope": "Expert-developed, non-prescriptive guidance for Australian higher education on assessment in a generative-AI context.",
+          "summary": "TEQSA’s expert paper offers guiding principles and propositions for assessment design that both assure learning and prepare students to engage ethically with generative AI.",
+          "limitations": [
+            "The paper describes directions for the sector, not a mandatory formula or a UAE policy.",
+            "Related TEQSA resources appeared in 2025 and 2026; this entry is the 2023 paper."
+          ],
+          "institution": null,
+          "source_locator": "Guiding principles pp. 2–3; propositions pp. 3–6; conclusion p. 6",
+          "verification": "TEQSA publication page and PDF pp. 2–6 reviewed 2026-11-05; https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf.",
+          "sha256": "2cf2581ec7274cfd626dea73e5153fa1cd0dafe89acb24700b55718d3e5672ba"
+        },
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "unesco-generative-ai-education",
+          "title": "Guidance for Generative AI in Education and Research",
+          "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+          "authority": "UNESCO",
+          "jurisdiction": "Global",
+          "document_type": "guidance",
+          "scope": "International policy and practice guidance for generative AI in education and research, including teachers, learners and researchers.",
+          "summary": "UNESCO advocates a human-centred approach to GenAI that protects privacy and human agency, evaluates risks and aligns pedagogical use with educational needs.",
+          "limitations": [
+            "International guidance is not by itself UAE legislation or university policy.",
+            "The 2023 publication predates later model and policy developments; verify current local rules and institutional guidance."
+          ],
+          "institution": null,
+          "source_locator": "Official UNESCO overview, human-centred approach and policy guidance",
+          "verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
+          "sha256": "9e48614387704f4ad64a98f2f43f75982cf8d3f00f2d206fa52237193d991b83"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "privacy",
+      "input_utf8_bytes": 8130,
+      "prompt_sha256": "8b8851c38f2e4ce07743a5e6dda37e407a300c6efd115b00d8a1dcf300a7fc5a",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "england-generative-ai-education",
+          "title": "Generative Artificial Intelligence (AI) in Education",
+          "url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+          "authority": "Department for Education, England",
+          "jurisdiction": "England",
+          "document_type": "guidance",
+          "scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+          "summary": "The guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.",
+          "limitations": [
+            "This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or university assessment rules.",
+            "The guidance is updated over time; the linked page was last updated on 12 August 2025."
+          ],
+          "institution": null,
+          "source_locator": "Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "6edde6654bf280fd5b629c90e8dbc30c1e4867592beef91bc4900b12024228e2"
+        },
+        {
+          "id": "uae-ai-ethics-self-assessment",
+          "title": "AI Ethics Self-Assessment Tool",
+          "url": "https://ai.gov.ae/aiethics-self-assessment/",
+          "authority": "UAE Artificial Intelligence Office",
+          "jurisdiction": "UAE",
+          "document_type": "guidance",
+          "scope": "Voluntary beta self-assessment for organisations developing or operating AI systems, based on the UAE AI Ethics Principles and Guidelines; not specific to education.",
+          "summary": "The tool encourages assessment of ethical issues throughout an AI system's lifecycle, including data use, accountability, third-party methods and bias.",
+          "limitations": [
+            "The source calls its recommendations non-compulsory and the tool beta; a self-assessment score is not a government audit, approval or certification.",
+            "General AI ethics guidance does not replace applicable law or university-specific policies.",
+            "The underlying Principles and Guidelines are non-binding and section 1.2 targets significant or critical decisions; ordinary rehearsal uses them as voluntary design guidance, not a compliance obligation."
+          ],
+          "institution": null,
+          "source_locator": "What is the self-assessment tool for?; What does it contain?",
+          "verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "sha256": "5d882df83d66d541f146929207c75f66faefa25b0a8b6d6d77e5d7cd5468df56"
+        },
+        {
+          "id": "unesco-generative-ai-education",
+          "title": "Guidance for Generative AI in Education and Research",
+          "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+          "authority": "UNESCO",
+          "jurisdiction": "Global",
+          "document_type": "guidance",
+          "scope": "International policy and practice guidance for generative AI in education and research, including teachers, learners and researchers.",
+          "summary": "UNESCO advocates a human-centred approach to GenAI that protects privacy and human agency, evaluates risks and aligns pedagogical use with educational needs.",
+          "limitations": [
+            "International guidance is not by itself UAE legislation or university policy.",
+            "The 2023 publication predates later model and policy developments; verify current local rules and institutional guidance."
+          ],
+          "institution": null,
+          "source_locator": "Official UNESCO overview, human-centred approach and policy guidance",
+          "verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
+          "sha256": "9e48614387704f4ad64a98f2f43f75982cf8d3f00f2d206fa52237193d991b83"
+        }
+      ]
+    },
+    {
+      "scenario_id": "feedback-as-grade",
+      "stage": 3,
+      "role": "accessibility",
+      "input_utf8_bytes": 8097,
+      "prompt_sha256": "30cd188aa38b0bc9438fbbc87accaaba2dc496f7cfa948f56c4c12c82ea45d3e",
+      "prompt_attempted": false,
+      "evidence": [
+        {
+          "id": "uae-persons-with-disabilities-education",
+          "title": "Federal Law No. (29) of 2006 Concerning the Rights of Persons with Special Needs",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1172",
+          "authority": "United Arab Emirates Government, UAE Legislation",
+          "jurisdiction": "UAE",
+          "document_type": "law",
+          "scope": "Federal disability-rights law; its education provisions address education across institutions and include the Ministry of Higher Education and Scientific Research.",
+          "summary": "The education provisions address equal educational opportunities for persons with disabilities and the role of education authorities in meeting their needs.",
+          "limitations": [
+            "The English source uses historical terminology; use respectful current terminology in the product.",
+            "Review amendments, implementing measures and the authoritative current text before making legal determinations; this entry does not specify a technical accessibility standard."
+          ],
+          "institution": null,
+          "source_locator": "Articles 12–13, education provisions",
+          "verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "sha256": "ea10430a863faebe892ebd1fb7a38210ff23a85f4203258d19cd30d2289dae48"
+        },
+        {
+          "id": "uae-digital-accessibility-policy",
+          "title": "National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "authority": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+          "jurisdiction": "UAE — Article 3 entity/service scope",
+          "document_type": "government_policy",
+          "scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+          "summary": "A scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.",
+          "limitations": [
+            "Do not assert blanket applicability to all private universities or all classroom activities.",
+            "A citation or automated review does not establish WCAG conformance or legal compliance."
+          ],
+          "institution": null,
+          "source_locator": "PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.",
+          "verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "sha256": "cc6974a1b84558c310b95a4b777d6c81afad5c3aa369adfa2db8311376f0f7ec"
+        },
+        {
+          "id": "wcag-22-captions",
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2: captions",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "authority": "World Wide Web Consortium (W3C)",
+          "jurisdiction": "International",
+          "document_type": "technical standard",
+          "scope": "Web accessibility technical standard, not education-specific; applies to synchronized media as specified in the success criteria.",
+          "summary": "WCAG 2.2 calls for captions for prerecorded synchronized media audio, subject to a labelled text-alternative exception, and for live synchronized media audio.",
+          "limitations": [
+            "A technical standard does not itself establish UAE legal duties; the US Title II rule separately incorporates WCAG 2.1 AA.",
+            "The prerecorded criterion excludes media that is a clearly labelled media alternative for text. Captions alone do not establish overall accessibility."
+          ],
+          "institution": null,
+          "source_locator": "Success Criteria 1.2.2 Captions (Prerecorded), Level A; 1.2.4 Captions (Live), Level AA",
+          "verification": "W3C Recommendation text reviewed 2026-11-05.",
+          "sha256": "b1e3bb8b5b2f33e8e953aeacc8c86e0b8a6824c393e6d599af03d9b726b7ca88"
+        }
+      ]
+    }
+  ],
+  "prompt_utf8_bytes_total": 217838,
+  "planning_input_tokens_proxy": 463324,
+  "max_output_tokens_per_request": 400,
+  "max_total_output_tokens": 10800,
+  "pricing": {
+    "provider": "nebius",
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "currency": "USD",
+    "input_per_million": 0.06,
+    "output_per_million": 0.24,
+    "as_of": "2026-11-04",
+    "estimated_envelope_usd": 0.03039144,
+    "planned_budget_usd": 0.1,
+    "note": "Input proxy is 2 tokens per prompt UTF-8 byte plus 1024 per call; not a tokenizer count, enforced input cap, or billing guarantee. Pricing and protocol overhead may change."
+  },
+  "structural_validation": "not_run",
+  "validation_issue_counts": {},
+  "human_semantic_quality": "unreviewed"
+}

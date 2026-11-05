@@ -119,6 +119,7 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(manifest['cost_estimate']['estimated_observed_usd'], '0.0002916')
         self.assertTrue(manifest['cost_estimate']['complete'])
         self.assertFalse(manifest['cost_estimate']['invoice'])
+        self.assertFalse(manifest['cost_estimate']['invoice_verified'])
         for (scenario, stage, ext), data in transport.saved_bytes.items():
             self.assertEqual((self.output / f'{scenario}-stage-{stage}.{ext}').read_bytes(), data)
             if stage == 3:

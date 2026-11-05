@@ -1,8 +1,8 @@
 # Protocol-4 final-push status — 5 November 2026
 
-**Implementation complete; paid app evaluation and actual replay are blocked on
-approval.** No protocol-4 live outcome, rubric result, tokens or invoice charge
-has been invented.
+**Pre-run preparation complete; one protocol-4 app evaluation is now explicitly
+approved under prompt 11b.** No protocol-4 live outcome, rubric result, tokens or
+invoice charge has been invented. The earlier denial below is historical.
 
 The final-push brief authorised up to 60 Nebius requests. The prepared operation
 uses one 27-request pass through the actual local app: three scenarios × three
@@ -17,8 +17,24 @@ Automatic approval review **denied process creation before execution**, stating
 that the available user text did not explicitly authorise this exact new paid
 run. Therefore the wrapper/server/driver did not start, no output directory was
 created by that attempt, **provider attempts are zero and new inference cost is
-$0**. A fresh explicit 27-request approval request is pending. No retry or indirect
-provider execution followed the denial.
+$0**. Prompt 11b now supplies fresh explicit approval for one 27-request pass. No
+provider execution followed the earlier denial before this new approval.
+
+## Prompt 11b revision before the approved pass
+
+The user explicitly approved one 27-request pass on 5 November, with a $5 budget.
+The pass retains the stricter request bound, model, 400-token limit and no retries
+or provider switch. No second pass is authorized by this brief.
+
+Before that pass, protocol 4's rationale instruction was aligned with its unchanged
+validator: explain the operational support from released facts and cited notes,
+avoid the screened legal terms, and prohibit free text **outside rationale**.
+Offline cases retain a plausible operational rationale, reject a rationale containing
+“law” as `rationale_legal_conclusion`, and preserve its otherwise valid proposal.
+The [regenerated protocol-4 plan](evidence/ai-for-good-coordination-plan-v4-2026-11-05.json)
+records the revised prompt digests with cached local hybrid retrieval. The corpus
+and frozen expected-outcome rubric are unchanged. This remains protocol 4; no
+protocol-4 live pass preceded the revision.
 
 ## What is ready
 

@@ -209,3 +209,25 @@ test('test fixture replay renders saved output, audit and scoped gaps without mu
     assert.match(html, /href="https:\/\/example.org\/uae"/);
   } finally { await server.close(); }
 });
+
+test('proposal details identify rejected rationales without altering accepted proposals', async () => {
+  const { createServer } = await import('vite');
+  const { fileURLToPath } = await import('node:url');
+  const { createElement } = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const server = await createServer({ root: fileURLToPath(new URL('../../../', import.meta.url)), server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error' });
+  try {
+    const { CoordinationResult } = await server.ssrLoadModule('/src/screens/PolicyLab.jsx');
+    const result = { stage: 1, review_mode: 'model_assisted', roles: [{ role: 'teacher', status: 'completed', proposals: [
+      { action_id: 'one', text: 'First action', fact_ids: ['f1'], source_ids: ['s1'], rationale_rejected: true, rationale_issue: 'rationale_legal_conclusion' },
+      { action_id: 'two', text: 'Second action', fact_ids: ['f2'], source_ids: ['s2'], rationale: 'The facts support review.' },
+    ] }], plan: [] };
+    const before = JSON.stringify(result);
+    const html = renderToStaticMarkup(createElement(CoordinationResult, { result }));
+    assert.match(html, /Rationale omitted · rationale_rejected · rationale_legal_conclusion/);
+    assert.match(html, /Stated rationale · model-written, not verified/);
+    assert.match(html, /The facts support review/);
+    assert.equal((html.match(/Rationale omitted/g) || []).length, 1);
+    assert.equal(JSON.stringify(result), before);
+  } finally { await server.close(); }
+});

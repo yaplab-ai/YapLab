@@ -135,7 +135,7 @@ def estimate(rows, uncertain, run_completed=False):
     return {'currency': 'USD', 'input_tokens_observed': observed_input, 'output_tokens_observed': observed_output,
             'input_per_million_usd': 0.06, 'output_per_million_usd': 0.24,
             'estimated_observed_usd': str(amount), 'missing_usage_attempts': missing,
-            'complete': run_completed and not missing and not uncertain, 'invoice': False,
+            'complete': run_completed and not missing and not uncertain, 'invoice': False, 'invoice_verified': False,
             'note': 'List-price estimate for reported usage only; not an invoice or a complete cost when usage is missing or an outcome is unknown.'}
 
 

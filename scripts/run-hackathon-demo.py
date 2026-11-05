@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 import shutil
@@ -11,9 +12,39 @@ import subprocess
 import sys
 import time
 from urllib.error import URLError
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+VECTOR_KEYS = ('FRONTROW_POLICY_VECTOR_PYTHON', 'FRONTROW_POLICY_VECTOR_MODEL',
+               'FRONTROW_POLICY_VECTOR_INDEX_ROOT')
+
+
+def configure_vectors(env: dict[str, str], root: Path = ROOT, defaults: tuple[str, str, str] | None = None) -> str:
+    """Use local defaults only when no vector setting was explicitly supplied."""
+    if any(key in env for key in VECTOR_KEYS):
+        return 'explicit settings'  # Incomplete or invalid settings fall back in the worker.
+    defaults = defaults or ('/tmp/yaplab-vector-venv/bin/python', '/tmp/yaplab-vector-model',
+                            str(root / 'knowledge-base/local-vector'))
+    python, model, indexes = map(Path, defaults)
+    if (python.is_file() and os.access(python, os.X_OK) and model.is_dir()
+            and all((indexes / scope / name).is_file() for scope in ('general', 'uaeu')
+                    for name in ('config.json', 'metadata.json', 'faiss.index'))):
+        env.update(dict(zip(VECTOR_KEYS, defaults)))
+        return 'automatic local defaults'
+    return 'local vector files unavailable'
+
+
+def retrieval_probe(api_url: str, institution: str) -> str:
+    """Ask the local search endpoint which mode actually served a known query."""
+    payload = json.dumps({'query': 'student data privacy', 'institution': institution, 'limit': 3}).encode()
+    request = Request(api_url + '/policy/search', data=payload,
+                      headers={'Content-Type': 'application/json'}, method='POST')
+    try:
+        with urlopen(request, timeout=50) as response:
+            mode = json.load(response).get('retrieval_mode')
+        return mode if mode in ('hybrid', 'lexical') else 'unknown'
+    except (OSError, ValueError, TypeError, AttributeError):
+        return 'unknown'
 
 
 def main() -> int:
@@ -52,6 +83,7 @@ def main() -> int:
         'VITE_API_URL': api_url, 'VITE_HACKATHON_DEMO': '1', 'PYTHONUNBUFFERED': '1',
         'VITE_POLICY_REPLAY': '1' if args.replay_live else '0',
     })
+    vector_config = configure_vectors(env)
     if args.replay_live:
         env['FRONTROW_POLICY_REPLAY_PATH'] = str(args.replay_live.resolve())
     else:
@@ -73,6 +105,13 @@ def main() -> int:
             if time.monotonic() >= deadline:
                 raise RuntimeError('The API did not become ready within 15 seconds.')
             time.sleep(.2)
+        print(f'Retrieval configuration: {vector_config}. Probing local search (no model-provider calls)…', flush=True)
+        for scope in ('general', 'uaeu'):
+            print(f'  {scope}: {retrieval_probe(api_url, scope)} (search probe)', flush=True)
+        print('Hybrid setup: /tmp/yaplab-vector-venv/bin/python, /tmp/yaplab-vector-model, '
+              f'and {ROOT / "knowledge-base/local-vector"}; see docs/ai-for-good-local-kb.md '
+              'for the complete setup. Explicit FRONTROW_POLICY_VECTOR_* settings override defaults. '
+              'The worker falls back to lexical on failure; each search reports its actual mode.', flush=True)
         processes.append(subprocess.Popen([node, str(ROOT / 'frontend/node_modules/vite/bin/vite.js'), '--host', '127.0.0.1',
             '--port', str(args.ui_port), '--strictPort'], cwd=ROOT / 'frontend', env=env))
         mode = ('Recorded live exercise replay (read-only); no new model calls.' if args.replay_live
