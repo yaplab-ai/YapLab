@@ -57,10 +57,10 @@ input manifests under `itu-reference` remain unchanged: their
 configs record `status=local_vector_index_built` and
 `hosted_import_verified=false`.
 
-The optional tooling runs separately from the application. No UI or app search
-routing changed; Policy Lab still uses its existing weighted lexical source
-search. Neither these small semantic probes nor similarity scores establish
-retrieval quality, policy correctness or legal applicability.
+The optional isolated vector worker now supplies app hybrid retrieval when
+configured; lexical mode remains the default fallback. The inspection CLI is
+separate. Neither similarity scores nor small probes establish policy correctness
+or legal applicability. The pre-labelled benchmark below is limited team evidence.
 
 ### Use the existing temporary environment
 
@@ -178,7 +178,7 @@ cases visible. Schema/ID acceptance is not semantic or legal validation. The
 [existing source-fit review](ai-for-good-source-review-and-next-steps.md) records
 concrete weak historical matches; no new live proposal was produced by this work.
 
-## Current paid evaluation status
+## Earlier protocol-3 evaluation status
 
 On 5 November the current protocol-3 / corpus-.4 plan matched all 27 saved prompt
 hashes and passed 43 focused preflight tests. The proposed run was one Nebius
@@ -207,3 +207,11 @@ standalone scenario and both bundle checks, 98 frontend tests, frontend build
 and an offline API package build. A fresh fake/scripted browser walkthrough
 verified classroom → report → staged policy review → decision/audit. Existing
 frontend bundle-size warnings remain. See the [machine-readable record](evidence/ai-for-good-kb-2026-11-05.json).
+
+## Final-push protocol4 status
+
+The current implementation uses corpus `2026-11-05.5` and protocol4. The new
+app-level paid run was denied before process creation: zero calls/new cost,
+fresh approval pending. [Current status and commands](ai-for-good-v4-results.md)
+supersede the earlier protocol3 status above. The historical results and source
+artifacts were not rewritten.

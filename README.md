@@ -17,6 +17,42 @@ First built at BU DS+X 2026. Runs on NVIDIA Nemotron through Nebius Token Factor
 
 > **Naming:** the product is **YapLab**. The original code name, FrontRow, remains in the Python package (`frontrow`), the settings (`FRONTROW_*`), and the internal docs.
 
+## AI for Good UAE: judges' quick start
+
+From this checkout, with the existing API `.venv` and frontend dependencies:
+
+```bash
+python3 scripts/run-hackathon-demo.py
+```
+
+This opens a fake classroom and scripted policy exercise, with no model calls.
+The [walkthrough](docs/ai-for-good-demo.md) covers sources, rationale labels,
+final-stage gaps, decisions and audit exports. Optional cached vector setup is
+in the [retrieval guide](docs/ai-for-good-retrieval.md); otherwise search uses
+labelled lexical fallback.
+
+Recorded-live replay is implemented and read-only:
+
+```bash
+python3 scripts/run-hackathon-demo.py --replay-live /absolute/path/to/protocol4-exercise.json
+```
+
+An actual protocol-4 recording is still pending provider approval; do not
+substitute a test fixture or relabel older protocol-3 evidence. See the
+[current status](docs/ai-for-good-v4-results.md).
+
+Knowledge base: [25 scoped records](apps/api/frontrow/policy/corpus.json),
+[primary text assets](apps/api/frontrow/policy/source_texts/),
+[notebook inputs](knowledge-base/itu-reference/) and
+[local FAISS indexes](knowledge-base/local-vector/).
+[Coverage/rights](docs/ai-for-good-local-kb.md) identify missing statutory material.
+The [pre-labelled benchmark](docs/evidence/ai-for-good-retrieval-benchmark.json)
+contains both positive results and failed abstention cases.
+
+Verify using [AGENTS.md](AGENTS.md) and the
+[engineering commands](docs/ai-for-good.md#verification-and-local-use).
+Code and evidence remain local; nothing has been submitted or deployed.
+
 ## AI for Good UAE: Policy Lab prototype
 
 See the [current submission-readiness checklist](docs/ai-for-good-readiness.md)
@@ -37,7 +73,7 @@ or speech-provider calls.
 
 The [local KB tools](docs/ai-for-good-local-kb.md) inspect prepared chunks and
 provide local MiniLM/FAISS indexes with source scope and verification notes. The
-[current provider results](docs/ai-for-good-v3-results.md) distinguish full/partial
+[historical protocol-3 provider results](docs/ai-for-good-v3-results.md) distinguish full/partial
 responses from citation relevance.
 
 See the [engineering plan, requirements mapping and local setup](docs/ai-for-good.md)

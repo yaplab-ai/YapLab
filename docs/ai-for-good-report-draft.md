@@ -1,195 +1,201 @@
 # YapLab Policy Lab technical report
 
-**AI for Good UAE · Education · 5 November 2026**
+**AI for Good UAE · Education · 5 November 2026 · review draft**
 
-Review draft for the organiser's template. Confirm team details and final
-pagination before submission. This draft describes a locally tested prototype;
-it does not claim legal compliance, educational effectiveness or deployment.
+Team/contact/repository fields and final five-page pagination remain to be
+completed in the official template. This report distinguishes implemented
+software, synthetic tests, recorded provider results and unmeasured outcomes.
 
-## 1. Use case and requirements
+## 1. Introduction
 
-YapLab is a practice classroom of AI listeners. This extension targets university
-teachers and teaching assistants rehearsing in English. Alongside explaining a
-lesson to simulated students, an educator can examine the policies relevant to
-using AI-supported teaching tools and practise responding when information is
-incomplete. UAE sources form a reference case, with global and England examples
-for comparison. The intended outcome is a more inspectable human review process;
-improved teaching or governance outcomes have not been measured.
+YapLab is an English-language practice classroom for university teachers and
+teaching assistants. Its simulated listeners ask questions while an educator
+rehearses a lesson; the session produces delivery and response feedback. Policy
+Lab adds a separate, source-cited exercise about failures involving those same
+kinds of artifacts: practice transcripts, captions/speech and feedback scores.
+The classroom transcript is not automatically analysed by Policy Lab.
 
-The prototype must retrieve attributable sources, distinguish their jurisdictions
-and scope, release incident facts progressively, show different role views, and
-record concise human decisions with evidence references. It must preserve the
-existing classroom and work offline for repeatable software verification.
+The intended value is an inspectable rehearsal of decisions under incomplete
+information. Improved learning, accessibility, institutional governance or legal
+compliance has not been measured. UAE material is a reference case for
+education-domain operational questions, compared with explicitly scoped global
+examples; the project does not recommend national policy changes.
 
-## 2. Implemented architecture
+## 2. Use case
 
-The existing React/Vite frontend connects to a FastAPI backend. Classroom
-rehearsal already uses a session orchestrator, parallel listener agents,
-source-grounded questions, moderation, answer evaluation and reports. The new
-Policy Lab has source search, structured review, staged exercises and an optional
-three-role coordination path.
+A teacher or TA explains a lesson to simulated AI students, then practices a
+policy incident. Three functional perspectives—teaching, privacy and
+accessibility—receive different released facts. New stages reveal more
+information. Separate model requests select conditional actions and citations;
+a deterministic coordinator assigns owners, dependencies and handoffs. A
+facilitator records a decision with evidence references.
 
-The knowledge base is a packaged thirteen-record catalogue of primary-source
-metadata and original paraphrases, including authority, URL, locator, dates,
-jurisdiction, document type and applicability cautions. Weighted lexical search
-uses a limited, disclosed alias list for terms such as captions and screen
-readers. This is a seed collection, not full-document ingestion, a distributed
-vector database or a complete account of applicable policy.
+These roles are simulation views, not authenticated institutional representatives.
+The same Nano model can serve all three independent requests. The coordinator
+merges constrained selections rather than performing autonomous negotiation or
+executing actions. Teachers retain responsibility for judging relevance and
+seeking their institution's procedures and qualified review.
 
-General university context exposes ten sources; an explicit UAEU selection
-adds three institution-only examples on student GenAI, data governance and
-accommodation services. A source's presence does not prove legal applicability.
-The legislation pages could not be directly re-fetched in the latest review;
-their indexed provisions were corroborated and this limit is recorded.
+## 3. Requirements and implementation
 
-Separate local Markdown input collections, provenance manifests and compatible
-chunks are prepared for the inspected ITU-linked notebook. Its commit is pinned
-in the package. Separate local MiniLM/FAISS indexes now contain 29 general and
-38 UAEU summary chunks, with 384-dimensional normalized vectors and JSON
-provenance/scope metadata. This preparation tool does not replace app retrieval;
-no ITU-hosted import occurred. The hosted import contract and final submission
-destination remain unconfirmed.
+The React/Vite frontend connects to FastAPI. Existing rehearsal, speech and
+report behavior is preserved. The extension implements:
 
-Review defaults to deterministic topic matching and source-consideration
-selection. An explicit opt-in mode reuses the configured LLM client to choose
-among retrieved source IDs and curated requirement indexes. Schema and citation
-validation prevent the display of a model-invented source. Invalid output,
-abstention, timeout or provider error yields a visibly labelled deterministic
-fallback. This constrains output provenance; it does not prove relevance or
-legal applicability. The separate coordination path has three bounded live-model
-evaluations, described below; the free-text review selector was not live-tested.
+- Attributable sources with dates, type, jurisdiction, institutional scope,
+  verification notes, locators and reuse information.
+- Source text and summary layers: real relevant sections or short locator
+  excerpts support retrieval; original paraphrases remain the display layer.
+- Hybrid lexical/local-vector retrieval with institutional filters, an explicit
+  mode label and lexical fallback when optional vector setup is unavailable.
+- Three incidents with three progressive stages and role-specific facts;
+  future facts are withheld from role prompts.
+- Protocol 4 proposals with action/fact/source IDs and a public stated rationale
+  of at most 200 characters. Screening removes an invalid rationale alone while
+  preserving valid proposal items. It is heuristic, not truth/legal verification.
+  The UI labels model-written rationales unverified and scripted examples offline.
+- An ordered audit timeline containing releases, request metadata, prompt/source
+  digests, reported tokens, latency, validation, plans and facilitator decisions.
+  JSON and self-contained HTML exports preserve modes and hashes.
+- Final-stage candidate-gap debriefs, a team-authored outcome rubric/scorer and
+  read-only replay of actual protocol-4 live exports once available.
 
-## 3. Policy mapping and candidate domain gaps
+The default demo uses fake/scripted providers, with no speech or model-provider
+requests. Configured coordination uses the direct Nebius adapter, a 400-output-
+token cap and no SDK retry/fallback. Saved stage results—including partial
+results—are reused without new model calls. No private chain-of-thought is
+requested or exposed; stated rationales are visible model outputs.
 
-The source catalogue includes UAE personal-data and disability legislation, AI
-ethics guidance, national AI strategy, a school inclusion example, UNESCO and
-England guidance, and three explicitly scoped UAEU institutional examples. School and
-foreign examples are labelled as comparative material rather than assumed UAE
-university obligations. The [source register](ai-for-good-policy-sources.md)
-contains links and locators; each result retains its applicability cautions.
+## 4. Mapping to ITU-T Y.3172
 
-The corpus also includes TDRA's March 2024 digital-accessibility policy and
-December 2022 AI ethics guidelines. The former has defined government/connected-party
-scope; its WCAG 2.1 AA clause is not a blanket private-university requirement.
-The latter is non-binding and targets significant/critical decisions; rehearsal
-uses it as voluntary guidance. UAEU's student policy does not automatically
-govern staff rehearsal. Verified PDF sections do not resolve PDPL or transfer law.
+This is an **architectural analogy, not conformance**. [Y.3172](https://www.itu.int/rec/T-REC-Y.3172-201906-I/en)
+clauses 3.2 and 8.1 describe telecommunications architecture, including these
+components; our mappings identify inspectable application counterparts.
 
-The scenarios expose three **candidate operational gaps** for institutional
-review, rather than established defects in national law:
+| Component | YapLab counterpart |
+|---|---|
+| SRC, source | `corpus.json`, hashed source texts and synthetic `scenarios.json` |
+| C, collector | `load_corpus` and the scoped KB exporter |
+| PP, preprocessor | Text chunking, lexical processing and normalized embeddings |
+| M, model | Local MiniLM retrieval and bounded Nano role requests |
+| P, policy | Response/citation validation, role/stage boundaries and conditional plan |
+| D, distributor | Policy HTTP responses, role audit and facilitator timeline |
+| SINK | Educator-facing proposals and the human-decision endpoint |
+| ML function orchestrator, MLFO | Bounded coordination/store reservations; existing session orchestrator |
+| ML sandbox | Local synthetic exercises, offline verification and saved-run comparison |
 
-| Scenario | Information released over three stages | Question requiring institutional evidence |
-| --- | --- | --- |
-| Transcript disclosure | A disclosure is reported; sharing/retention facts emerge; a coordinated response is requested | Who owns containment, retention and communication when a rehearsal transcript identifies a learner? |
-| Caption failure | Captions fail; alternative formats and vendor terms emerge; a tested fallback plan is requested | How should teaching, accessibility and privacy owners agree a usable alternative without unnecessary disclosure? |
-| Practice feedback mistaken for a grade | A score causes confusion; gradebook and usability facts emerge; communication and review are needed | How should formative AI feedback be distinguished from official assessment and challenged when unclear? |
+The policy node constrains model outputs; it is not merely the legal-document
+collection. The prototype does not implement network placement, model training,
+a telecommunication underlay or an ITU-managed sandbox.
 
-UNESCO and England sources provide examples for human review, privacy and
-pedagogical scrutiny. The UAEU examples supply concrete institutional permissions and governance
-processes. They do not establish duties for another university or resolve the
-fictional incidents without their deployment facts and responsible reviewers.
+## 5. Mapping to AI Readiness Report 2.0
 
-## 4. Standards, supervision and audit
+The [challenge](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485)
+lists eight perspectives. The January 2026 [Report 2.0](https://www.itu.int/dms_pub/itu-t/opb/ai4g/T-AI4G-AI4GOOD-2025-6-PDF-E.pdf)
+contains six foundational factors and thirteen dimensions; it does not define
+these eight lenses as its full dimensional structure. Our crosswalk is
+project-level evidence, not an ITU assessment or national readiness score.
 
-Our [Y.3172 mapping](ai-for-good.md#y3172-mapping-an-architectural-analogy) assigns
-source, collector, preprocessing, model, policy, distribution and sink roles to
-application components. It is a conceptual adaptation from the standard's
-telecommunications context, not a conformance assertion. Citation validation and
-human supervision constrain how model outputs are used.
+| Challenge perspective | Report dimension(s) | Evidence / limit |
+|---|---|---|
+| Open data and open-source management | 1 | Rights/hash metadata, MIT code; source coverage partial |
+| Generative AI content ecosystem | 2 | AI rehearsal and attributed public outputs; no marketplace claim |
+| Contextualisation and regional focus | 4, 12 | UAE/general/UAEU boundaries and foreign comparisons; no endorsement |
+| Domain integration and cross-domain analysis | 3, 5 | Teaching/privacy/accessibility handoffs; real integration untested |
+| Human interaction and supervision | 6, 8, 9 | Decisions, stated rationales, timeline and rubric; expert review outstanding |
+| AI policy and implementation opportunities | 10 | Candidate gaps and evidence needed; no national-law deficiency inferred |
+| AI for social inclusion | 11 | Caption and feedback scenarios; no measured access benefit |
+| Digital infrastructure and energy | 13 | Local vectors, fallback and usage records; energy/scale unmeasured |
 
-The [AI Readiness 2.0 mapping](ai-for-good.md#ai-readiness-20-mapping) identifies
-project evidence for data, infrastructure, skills, innovation and policy. No
-national readiness score is calculated. Deployment capacity, energy use,
-institutional adoption and educational value remain unevaluated.
+Detailed file/endpoint mappings and report page locators are in the
+[engineering runbook](ai-for-good.md#ai-readiness-20-mapping).
 
-An exercise has one shared stage counter and teacher, privacy and accessibility
-views. Future facts are withheld; each view receives only its released facts.
-Users can record a decision citing fact IDs. Optional coordination makes three
-separate model requests, each receiving only its role's facts, mandate, policy
-notes and stage-available action IDs. A deterministic coordinator validates IDs
-and assigns owners, handoffs and dependencies; conflicts or missing input require
-human review. This supports functional teaching/privacy/accessibility roles, not
-authenticated institutional representatives or autonomous negotiation.
+## 6. Requirements mapped to local policies
 
-Coordination uses direct OpenAI-compatible clients with a 400-token output cap,
-no retries or fake fallback, bounded concurrency and deadlines. It is disabled
-by default. A stage change during inference prevents commit. A saved round pins
-the corpus/protocol versions, provider/model, supplied source notes and hashes,
-prompt hashes, call-attempt status and validated proposals. Facilitators can see
-all role assessments; role audits return only their own. Auditability records
-concise decisions and evidence without private model chain-of-thought. These
-software paths have offline checks and three bounded live coordination runs;
-selected source pairs have an agent-led qualitative review, not complete expert
-validation. The facilitator has one action that generates or loads the saved stage/collection view, without another model call on replay.
+Frozen corpus `2026-11-05.5` contains 25 records: 22 general and three explicit
+UAEU institutional examples. Thirteen assets contain source text: three relevant-
+section assets and ten short attributed locator excerpts. The UAE ethics PDF's
+CC BY 4.0 sections cover scope and selected principles. Selected FERPA provisions
+and DOJ accessibility guidance supply foreign full-section comparisons. Broader
+reuse rights were not assumed where unclear.
 
-## 5. Evaluation, limitations and reproduction
+Both notebook-input bundles are rebuilt and checked: general 22 documents/126
+chunks; UAEU 25/135. Separate MiniLM/FAISS indexes contain 126/135 normalized
+384-dimensional vectors with JSON provenance. Actual app search can combine
+lexical and vector rankings; optional repository/model/index setup is required.
+There is no distributed service or ITU-hosted import, and acceptance of the final
+KB delivery format remains unconfirmed.
 
-The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 102 policy/evidence unit tests, three separate local-vector tests,
-standalone staged-scenario checks and 98 frontend tests. Frontend and offline API
-package builds succeeded; an earlier extracted-wheel check verified saved partial-round reuse without extra calls.
-A [local browser walkthrough](ai-for-good-demo.md) connects typed classroom input,
-Q&A and report to a separate staged policy exercise, scripted role proposals and
-human decisions/audit. This explicit offline demo does not call model providers.
-The [offline walkthrough](evidence/ai-for-good-offline.json) also records four
-hand-authored retrieval probes and 27 deterministic role/stage reviews. These
-are software checks, not a representative retrieval or educational benchmark.
+| Requirement | Reviewed reference and applicability limit |
+|---|---|
+| Personal-data handling | UAE PDPL indexed notes and ethics privacy principles; current statutory text, transfers and actual applicability unverified |
+| Human oversight | UAE AI charter and non-binding ethics guidance; ordinary rehearsal is a voluntary reference case, not automatic significant-decision coverage |
+| Accessibility | TDRA Article 3 / Annex 1 has defined entity/service scope; its WCAG 2.1 AA provision is not a blanket private-university duty |
+| Higher-education quality/assessment | CAA outcomes overview supplies university context; former 2019 detailed standards were inaccessible |
+| Institutional practice | UAEU student GenAI, governance and accommodation examples apply only within their own stated scope; student academic-credit policy does not automatically govern staff rehearsal |
+| IP, strategies and infrastructure | Copyright-law text inaccessible; dated digital/cyber strategy references are contextual and do not establish current university obligations |
 
-Three separately approved Nebius runs used the same Nano model and synthetic
-scenario/policy scope, each capped at 27 requests and 400 output tokens, with
-no retries, fallback or provider switch:
+Global examples include EU education-risk classification/AI literacy, US FERPA
+and public-entity web accessibility, WCAG 2.2 captions, Australian TEQSA, UK QAA
+and OECD principles. Their territories, sectors, binding status and verification
+limits remain explicit. School guidance from England/ADEK is comparative, not a
+UAE university obligation. [Source search limits](ai-for-good-source-search.md)
+record blocked endpoints and the bounded MoHESR search, which does not establish
+that AI teaching guidance is absent.
 
-| Observed measure | Protocol 1 | Protocol 2 | Protocol 3 |
-| --- | --- | --- | --- |
-| Provider responses | 27 | 27 | 27 |
-| Fully accepted role responses | 14 / 27 | 24 / 27 | 25 / 27 |
-| Partial role responses | Not supported | Not supported | 2 / 27 |
-| Snapshots passing for all three roles | 1 / 9 | 6 / 9 | 7 / 9 |
-| Reported input / output tokens | 26,604 / 3,289 | 40,132 / 3,412 | 46,864 / 3,075 |
-| List-price usage calculation | $0.0023856 | $0.0032268 | $0.00354984 |
+## 7. Evaluation scenarios and evidence
 
-No cost was verified against an invoice. Protocol 2 added clearer
-role-scoped schema/uniqueness instructions and fixed diagnostic categories. Its
-three remaining failures were duplicate actions, a schema limit and a source ID
-outside the supplied list. Raw completions were not retained; no specific cause
-was assigned retrospectively to protocol 1's thirteen rejections. All responses
-reported normal completion, below the output cap. The observed structural count
-increased, but these small non-randomised runs do not establish causation,
-policy correctness or educator benefit. See [recorded results](ai-for-good-v2-results-and-simplification.md).
+| YapLab artifact failure | Progressive facts | Expected conditional outcome |
+|---|---|---|
+| Practice transcript identifies a learner | Sharing concern; access/retention facts; coordinated response request | Investigate/contain with an identified institutional owner and scoped data review |
+| Captions/speech fail before a workshop | Service outage; alternatives/vendor terms; repeatable fallback request | Confirm a usable alternative and processing terms before any vendor-resumption plan |
+| Practice feedback resembles an official grade | Confusion; gradebook/usability facts; correction/review request | Clarify formative status, identify a human review owner and provide an accessible explanation |
 
-Protocol 3 retained valid items from a duplicate-action response and one with
-an invented action ID, marking both partial. Actual responses replay offline;
-all 27 provider events succeeded, distinct from structural acceptance. Selected
-source-fit review found contextual/weak citations alongside meaningful guidance
-matches. These runs use different prompts/corpora and validation behavior; their
-counts do not establish causal improvement or policy correctness. See the
-[current recorded review](ai-for-good-v3-results.md).
+The pre-authored rubric covers all 27 scenario/stage/role combinations, including
+acceptable/wrong actions, relevant facts/sources and expected ownership/dependencies.
+It is **team-authored, not expert-validated**. The scorer produces expected/actual
+match, partial or miss explanations from saved exports; ID matches do not prove
+semantic correctness or legal applicability.
 
-The UI uses one facilitator action, ordinary errors and manual retry. Saved
-results, including partial ones, are returned without fresh model calls. Source
-and model details remain available in collapsed sections; diagnosis adds no user
-step. Citation checks, stage/role boundaries and honest live/offline labels remain.
-The original rehearsal, voice and report behavior is preserved by regression tests.
+A separate 40-query retrieval benchmark was labelled and committed before
+rankings were inspected: 36 positive and four abstention queries. Lexical
+recall@3/MRR were 0.9722/0.9514; hybrid 1.0000/0.9444. MRR@3 was 0.9444 for both.
+Both correctly abstained on three of four unrelated queries. Thus hybrid improved
+this small set's top-three coverage, not MRR or all abstentions. These results are
+not a representative domain benchmark, an expert evaluation or a causal result.
+[Per-query evidence](evidence/ai-for-good-retrieval-benchmark.json) preserves hashes
+and negative cases.
 
-Exercises and quotas are process-local. Access expires after an hour with lazy
-cleanup; roles and random IDs are simulation views/capabilities rather than
-authentication. Cases have fixed sequences and do not branch on decisions. A
-cancelled call or process restart can permit another billed attempt, so saved
-replay is not exactly-once billing or account-level spending control. Use
-synthetic data; pattern checks cannot guarantee removal of identifying details.
+Earlier protocol-3 harness evidence returned 27 responses: 25 fully accepted,
+two partial and 7/9 fully accepted snapshots. Reported 46,864 input/3,075 output
+tokens gave $0.00354984 at recorded list prices, invoice unverified. Actual source-
+fit review found weak citations as well as meaningful comparisons. That run used
+the earlier corpus and is not a protocol-4 app result.
 
-Before submission, obtain educator/institutional review, broaden and benchmark
-the source corpus, resolve the remaining response-contract failures, confirm the
-final submission destination and hosted KB import contract, and verify the
-five-page layout in the supported rendering environment. No repository push,
-deployment, hosted import or submission occurred. Reproduction commands are in
-the [engineering runbook](ai-for-good.md#verification-and-local-use).
+The current protocol-4 app-level run is **not completed**: automatic approval
+review rejected process creation, so no request or new cost occurred. A fresh
+bounded approval is pending. HTTP-driver tests exercise actual FastAPI routes
+with an explicitly mocked provider; they are offline software evidence, not live
+provider outcomes. The integrated browser pass verified classroom/report,
+real local hybrid search, staged facts, scripted rationales, candidate gaps and
+a decision/audit. Recorded-live replay's backend/UI tests pass; final browser
+verification awaits an actual saved protocol-4 run.
 
+## 8. Candidate gaps and remaining validation
 
-An offline source-fit review found contextual or weak citations in some accepted
-samples; structural acceptance did not establish policy support. Protocol 3 now
-preserves valid items as explicit partial results and improves incident-source
-candidates while retaining verification notes. Its bounded live run is reported
-above. The
-[review and remaining requirements](ai-for-good-source-review-and-next-steps.md)
-identify institutional review and full-text verification still needed.
+| Candidate operational gap | Scoped global comparison | Evidence needed |
+|---|---|---|
+| Unclear ownership of transcript access/retention and response | FERPA's defined education-record regime, within covered US institutions | Actual institutional incident, retention, access and provider procedures |
+| Coordination of a tested caption fallback without unnecessary disclosure | WCAG caption criteria and US public-entity web rules; different scope and dates | Attendee usability tests, named teaching/access/privacy owners and vendor terms |
+| Standards/process for distinguishing and challenging formative AI feedback | TEQSA/QAA higher-education guidance and use-dependent EU classification | Institutional assessment/feedback rules, actual score use and challenge/correction process |
+
+These are deployment-level hypotheses, not established national legislative gaps.
+The gap register records what the reviewed material establishes, what remains
+unverified, source locators and needed evidence. Independent development-agent
+review is not human expert or institutional validation.
+
+Exercises/quotas are process-local, role views are not authentication, and file
+hashes check integrity rather than origin. No legal certification, WCAG
+conformance, educational gain, energy reduction or institutional adoption is
+claimed. Team details, official-template pagination and final delivery/hosted-KB
+instructions remain outstanding. No repository push, deployment or submission
+has occurred.

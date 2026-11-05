@@ -1,109 +1,35 @@
-# YapLab submission readiness — 5 November 2026
+# YapLab final-push readiness — 5 November 2026
 
-**Not ready to submit.** The local demonstration and draft evidence are ready for
-review. Final report production, delivery details and key evidence gaps remain.
-This update starts from local commit `be5dd5d`; no new deliverable has been
-uploaded, pushed, deployed or submitted.
+**Local implementation is ready for the approved app evaluation. Submission is
+not ready.** The paid operation was denied before execution; actual protocol-4
+results and its recorded replay remain pending fresh approval. Nothing was
+pushed, published, deployed or submitted.
 
-The [official brief and FAQ](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485),
-checked on 4 November, list a five-page technical report, GitHub repository and knowledge
-base. Initial video is optional (seven-minute maximum), becoming required for
-shortlisted teams. The submission date is 10 November 2026; the reviewed page does
-not give a cutoff time or timezone. The FAQ lists report topics and asks a video
-to distinguish expected and actual outcomes.
+The user's work plan is corpus/protocol freeze by **7 November, 18:00 ET**, code
+complete **8 November, 12:00 ET**, separate video work Sunday and official-template
+report work Monday, aiming for submission Monday **9 November evening ET**. These
+are the user's milestones. The [official event](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485)
+lists 10 November without a verified cutoff/timezone. Initial video is optional,
+max seven minutes, and required after shortlisting.
 
-Status meanings: **Complete locally** = present and checked for the stated scope;
-**Partial** = useful evidence exists but does not fully support the requirement;
-**Blocked** = a specific input/access/runtime or authorisation is needed;
-**Missing** = no corresponding final artifact/evidence exists.
-
-| Item | Status | Exact artifact/evidence and remaining action |
+| Deliverable | Status | Evidence / remaining action |
 |---|---|---|
-| Teaching → report → policy exercise demonstration | Complete locally | [Six-minute guide](ai-for-good-demo.md), launcher and [browser evidence](evidence/ai-for-good-demo-2026-11-04.json). Fake classroom, deterministic review, scripted proposals; policy exercise is selected separately, with no automatic transcript analysis. |
-| Progressive errors and audit implementation | Complete locally | Three scenarios × three stages; released role-specific facts, human decisions, evidence references and optional coordination. [Implementation/tests](../apps/api/frontrow/policy/) and browser audit checks. Role selection is not access control. |
-| Technical report | Partial / blocked | [Content draft](ai-for-good-report-draft.md) includes use case, requirements, mappings, scenarios, candidate gaps and results. Team/contact/repository fields are missing. [Template rendering](ai-for-good-rendering-handoff.md) needs a supported Documents runtime; no final DOCX/PDF or verified ≤5-page pagination exists. |
-| GitHub delivery | Partial / blocked | Code is isolated on `codex/yaplab-ai-for-good`, with MIT code and separate TalkMoves terms retained. Confirm the repository destination/access and approve publication of the chosen content. No hackathon branch publication or final submission URL is established. |
-| Knowledge-base content | Partial | Corpus `.4`: 10 general references plus three explicit UAEU examples. Both notebook-input bundles pass `--check`: 10/29 and 13/38 documents/chunks. They contain summaries/provenance, not full source texts. Current PDPL, cross-border conditions and institutional applicability remain unverified. |
-| Local vectorised / ITU-hosted KB | Complete locally / hosted blocked | [MiniLM/FAISS indexes](ai-for-good-local-kb.md) contain 29 general and 38 UAEU vectors (384 dimensions), JSON metadata and hash/model provenance; three real local tests pass. Input-bundle manifests remain unchanged; separate vector configs identify the built indexes and `hosted_import_verified=false`. Organiser must confirm format, summary/full-text acceptance, endpoint/access and timing. No hosted import or ITU receipt exists. |
-| Actual policy-agent provider evidence | Partial | Three bounded harness runs exist. Current protocol 3/corpus `.4` returned 27 responses: 25 fully accepted, two partial, 7/9 fully accepted snapshots. [Current recorded packet](evidence/ai-for-good-recorded-live-review-v3.html) and [actual source-fit review](ai-for-good-v3-results.md) expose mixed relevance. No live human-operated browser/provider session or expert validation exists; the two earlier runs remain historical. |
-| Domain gaps, global examples and source relevance | Partial | [Source-fit review](ai-for-good-source-review-and-next-steps.md) identifies weak/indirect historical matches. Transcript ownership, caption fallback and formative-feedback/grade boundaries are candidate operational gaps. An educator and institutional policy reviewer have not validated these findings or applicable mandates. |
-| Standards / readiness mapping | Partial | [Y.3172 and Readiness 2.0 mapping](ai-for-good.md#y3172-mapping-an-architectural-analogy) is drafted as an architectural analogy. No conformance assessment, national readiness score, energy measurement or adoption result is claimed. |
-| Audit format acceptance | Blocked on clarification | Concise decision summaries, stage/role, source references, hashes and modes exist. The brief requests reasoning traces; confirm that these reviewable summaries satisfy it. Private model chain-of-thought is neither requested nor exposed. |
-| Sandbox credits / fine-tuning | Missing; applicability unconfirmed | No ITU sandbox use or fine-tuned model. The brief mentions these resources; clarify whether this inference prototype must demonstrate them and how selected-participant access works. |
-| Video | Partial; optional initially | Existing classroom videos and two historical Devpost/YouTube entries are verified; they do not show Policy Lab. The six-minute guide and screenshot support new Policy Lab footage. No new recording was made in this increment; the user’s separate video work must be preserved. Shortlisting makes video delivery required. |
-| Final delivery instructions and team details | Blocked | Initial registration acknowledgment is not final acceptance/submission. Need final form/destination, detailed team sheet, lead/member/contact details (maximum four people per public brief), exact deadline/timezone and KB instructions. |
+| Primary material and scoped KB | Complete locally / coverage partial | 25 records; 13 text assets (three relevant-section assets, ten excerpts); general 22/126 and UAEU 25/135 documents/chunks. [Coverage/rights](ai-for-good-local-kb.md) and [search limits](ai-for-good-source-search.md) identify unverified national law, CAA detail, strategy successors and IP text. |
+| App hybrid retrieval | Complete locally | Real local MiniLM/FAISS126/135×384D, lexical fallback, scope filters and visible mode. Frozen40-query [benchmark](ai-for-good-retrieval.md): recall@3 .9722/1.0, MRR .9514/.9444; both 3/4 correct abstentions. Team-authored, not expert validated. |
+| Candidate gaps | Complete locally / validation partial | Three higher-education operational hypotheses with taxonomy, UAE reviewed coverage, scoped global examples and evidence needed. Stage 3 debrief verified in browser; institutional/expert review outstanding. |
+| Protocol4 rationale and audit | Complete locally | Public stated rationale with rationale-only rejection; ordered release/request/validation/plan/decision timeline and JSON/HTML. UI distinguishes scripted from model-written/unverified. No private chain-of-thought. Hashes are integrity, not origin/authentication. |
+| Expected outcomes/scorer | Complete locally / labels provisional | 27 pre-authored scenario×stage×role entries committed before final provider evidence; match/partial/miss scorer and offline tests. Not an expert or legal correctness measure. |
+| App-level live test | Blocked: denied before execution | One27-request HTTP pass was prepared within the brief's 60-request allowance. Automatic review did not recognise exact paid-run authorisation; process never started, requests 0, new provider cost $0. Fresh approval pending. [Exact status](ai-for-good-v4-results.md). |
+| Recorded-live replay | Implementation complete / actual evidence blocked | Read-only UI/launcher, correct banner, saved fields and JSON/HTML export; backend/UI tests pass. Actual protocol 4 recording and final replay browser pass depend on the permitted live run. No fixture or old protocol 3 output is relabelled live4. |
+| Offline demo | Complete locally | Browser verified typed classroom, Q&A/report, hybrid search, staged caption facts, scripted rationale labels, final gaps and recorded decision/audit. Default no-provider mode retained. [Recording guide](ai-for-good-demo.md). |
+| ITU mappings | Complete locally / analogy | Actual SRC/C/PP/M/P/D/SINK, MLFO and ML sandbox counterparts; eight challenge perspectives cross-checked to Report 2.0's actual 13 dimensions/six factors. No conformance or readiness score. |
+| Technical report | Partial | [Ordered draft](ai-for-good-report-draft.md) is below 2,300 words; team/contact/repository fields and supported official-template rendering/≤5-page verification remain. Older Library copy is unchanged. |
+| Video | Separate work | Existing classroom recordings lack this final build; guide lists exact screen changes. No video file was modified or produced here. |
+| Final external delivery | Blocked on inputs/approval | Need team details, final form/destination, deadline timezone and organiser KB acceptance/import instructions. No publication permission or submission is inferred. |
 
-## What the live evidence does and does not demonstrate
-
-The brief allows **one or more** listed agent roles. It does not explicitly demand
-all four role types or a new real-time provider request during initial submission.
-However, a scripted UI walkthrough alone is weak evidence for its AI-agent
-capability criterion. That is an assessment of the evidence gap, not an invented
-organiser rule.
-
-The saved protocol-2 run used independent role-specific model requests over
-synthetic staged cases. Models selected curated action/fact/source IDs; application
-code supplied the action wording and assembled a conditional plan. The result is
-not autonomous negotiation between authenticated institutions. It was a harness
-run over stage snapshots, not a recorded human-operated browser/provider session.
-The current offline demo's teacher vendor-route proposal differs from the saved
-caption-stage-2 teacher choice (`delay_workshop`); never substitute one for the other.
-
-The [historical viewer](evidence/ai-for-good-recorded-live-review.html) makes those
-actual saved choices inspectable without new calls. It preserves protocol 2,
-corpus `.3`, source commit, prompt/source digests and all three failed-role statuses.
-Raw rejected completions were not retained. Its accepted selections have not
-received a complete expert relevance assessment; 24/27 is a contract-validation
-count, not citation quality, legal compliance or learning gain.
-
-The current experiment used the reviewed
-[protocol-3/corpus-.4 plan](evidence/ai-for-good-coordination-plan-v3-corpus4-2026-11-05.json).
-After fresh user approval, one
-retry after the initial pre-execution denial completed 27 responses, 25 fully
-accepted and two partial. Seven snapshots passed for all roles. The retained
-valid items, actual JSON and independent agent source-fit observations are linked
-above. Human expert review remains outstanding. The
-$0.00354984 usage calculation is invoice-unverified. A human-operated model-assisted
-demonstration would additionally establish the browser-to-provider path; that
-has not been completed. This allowance is now consumed.
-
-## Decisions and inputs needed, in priority order
-
-1. **Organiser instructions:** supply the final submission/team sheet, exact
-   cutoff/timezone and KB access/format rules if already received. Confirm
-   summary-corpus acceptance, hosted-index timing, audit-summary acceptance and
-   sandbox/fine-tuning expectations. Questions are drafted in the workflow doc;
-   none were sent.
-2. **Report identity and delivery:** confirm lead/member/contact details and the
-   repository URL/access/publication scope, then render and inspect the official
-   template in a supported runtime. Publication and submission still require
-   explicit authorisation.
-3. **Evaluation:** nominate an educator/policy reviewer and choose an actual
-   institutional scope if available. Otherwise retain the explicitly synthetic,
-   conditional reference case. The approved protocol-3 harness run is complete;
-   choose whether a live browser/provider recording is wanted. Any new paid
-   run still needs a specific scope/allowance.
-4. **Video:** choose an optional initial recording using the guide, clearly
-   separating offline demo, historical provider evidence and expected outcomes.
-
-The new self-contained increment built real local vector indexes, added lexical
-chunk inspection, retained source scope/verification on hits and repeated the
-offline classroom-to-policy workflow. See [local KB use and verification](ai-for-good-local-kb.md).
-No legal certification, real educational outcome or hosted acceptance is implied.
-
-The prior 4 November increment passed three recorded-viewer tests, deterministic
-HTML `--check`, both scoped KB bundle checks, changed-document link checks and a
-browser inspection. See [the prior verification record](evidence/ai-for-good-readiness-2026-11-04.json).
-To reproduce the viewer check from `apps/api`:
-
-```bash
-.venv/bin/python -B verify_recorded_live_review.py
-.venv/bin/python -B scripts/export_recorded_live_review.py --check
-```
-
-The 5 November [verification record](evidence/ai-for-good-kb-2026-11-05.json) records
-90 existing backend checks, 100 policy/evidence tests, three optional real-vector
-tests, 98 frontend tests, both builds and a fresh fake/scripted browser walkthrough.
-
-The later [protocol-3 result](ai-for-good-v3-results.md) supersedes the earlier
-blocked provider status, not the earlier fake/scripted browser observations.
+Current final verification is recorded in the [local evidence record](evidence/ai-for-good-final-push-2026-11-05.json).
+Older protocols 1–3 provider results and their static packets remain historical;
+the latest protocol 3 result was25 fully accepted/two partial, not a protocol 4
+result or a semantic quality score. Fine-tuning, sandbox credits, hosted import,
+a fourth role and classroom-to-policy transcript linking were explicitly outside
+this build's scope.

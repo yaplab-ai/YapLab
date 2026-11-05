@@ -80,10 +80,10 @@ engineering plan, not a submission.
 | Area | Current implementation/evidence | Work before claiming full coverage |
 | --- | --- | --- |
 | Education application | Existing multi-listener teaching rehearsal | University teacher/TA walkthrough and expert feedback |
-| Knowledge base | Small versioned source catalogue and retrieval over curated summaries | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
+| Knowledge base | 25-record scoped catalogue, selected text sections/excerpts, hybrid retrieval and a frozen 40-query benchmark | Broader institution-specific corpus, source updates, retrieval benchmark, rights review and ITU KB ingestion |
 | Policy reasoning | Retrieved evidence and scoped review; explicit review mode | Expert-labelled cases; bounded live-provider evaluation if enabled |
 | Staged errors | Synthetic role-specific releases and recorded human decisions | Facilitated multi-person exercise and verified domain-gap conclusions |
-| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Latest recorded live run: 24/27 structurally accepted; current protocol changes are offline only and still need expert assessment. Functional roles do not establish official institutional mandates |
+| Coordination | Three independent role prompts, validated proposals and a deterministic owner/dependency/handoff plan; tested with offline doubles | Historical protocol 3:25 fully accepted/two partial; protocol 4 app run is currently blocked before execution and expert assessment is outstanding. Functional roles do not establish official institutional mandates |
 | Audit | Structured evidence/decision records | Retention policy, authorised audit access and tamper-resistant export for deployment |
 | Standards mapping | Conceptual mapping below | Reviewer assessment; no certification claimed |
 
@@ -167,7 +167,7 @@ tests before enabling any provider-backed policy mode. Model-assisted operation
 can send submitted text to the configured provider and consume that account's
 credits; no such call is part of offline verification.
 
-## Observed verification
+## Observed verification (initial seed increment)
 
 The isolated worktree passed **90 existing backend checks**, **14 policy tests**,
 the staged-scenario verification script, **97 frontend tests**, and a frontend
@@ -495,3 +495,45 @@ checks, 102 policy/evidence tests, 98 frontend tests and production build; the
 three optional vector tests and API build passed in the earlier same-day KB
 increment. No new browser/provider session, hosted import or external delivery
 is established, and the paid allowance is consumed.
+
+
+## Final-push build (5 November 2026)
+
+Parts 1–4 and the replay/evaluation implementation are committed separately.
+Corpus `2026-11-05.5` is frozen with 25 sources / 13 assets; protocol 4 is frozen.
+See [the final-push status](ai-for-good-v4-results.md), [source coverage](ai-for-good-local-kb.md),
+[retrieval benchmark](ai-for-good-retrieval.md), [recording guide](ai-for-good-demo.md)
+and [submission readiness](ai-for-good-readiness.md). No actual protocol 4 provider
+result exists: automatic approval review denied the proposed27-request app run
+before execution. Fresh approval is pending; no retry was made.
+
+Add these offline verification scripts to the commands above:
+
+```bash
+.venv/bin/python -B verify_policy_hybrid.py
+.venv/bin/python -B verify_policy_audit_v4.py
+.venv/bin/python -B verify_policy_outcomes.py
+.venv/bin/python -B verify_policy_app_driver.py
+.venv/bin/python -B verify_policy_export.py
+.venv/bin/python -B verify_policy_chunk_index.py
+.venv/bin/python -B verify_recorded_live_review.py
+```
+
+Optional real-vector checks use the separate cached environment:
+
+```bash
+/tmp/yaplab-vector-venv/bin/python -B verify_policy_vector.py
+```
+
+The normal policy quota stays 8 calls/IP/hour, 20/IP/day and 100 total/day. For an
+explicitly approved local synthetic evaluation only,
+`FRONTROW_POLICY_EVALUATION_CALL_LIMIT` can set a process quota from 1 to 60; the
+HTTP driver independently reserves at most 27 possible calls in one pass. This is
+not an account-level billing or dollar cap. The driver itself reads no key and
+never retries; only the separately configured backend performs inference.
+
+Final local verification: **90 existing backend checks, 124 policy/evidence/driver
+tests, 3 real-vector tests and 100 frontend tests passed**. Both builds, scoped KB
+checks, historical packet checks and extracted-wheel source-text/export smoke
+passed. Browser verification used fake/scripted providers plus cached local
+vectors; it was not a paid-model evaluation. See the [final evidence record](evidence/ai-for-good-final-push-2026-11-05.json).

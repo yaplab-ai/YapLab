@@ -41,7 +41,7 @@ class DemoTests(unittest.TestCase):
             with TestClient(create_app()) as client:
                 status = client.get('/policy/coordination/status')
                 self.assertEqual(status.status_code, 200)
-                self.assertEqual(status.json(), {'enabled': True, 'review_mode': 'offline_test', 'model': 'scripted-demo'})
+                self.assertEqual(status.json(), {'enabled': True, 'review_mode': 'offline_test', 'model': 'scripted-demo', 'provider': 'offline_test', 'protocol_version': '4'})
                 created = client.post('/policy/exercises?role=teacher', json={'scenario_id': 'caption-failure'})
                 self.assertEqual(created.status_code, 200)
                 exercise = created.json()['exercise_id']

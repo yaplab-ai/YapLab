@@ -62,3 +62,14 @@ local draft when preparing the next review copy. Current protocol 3 now has the
 separately approved 27-response harness run.
 The initial paid action was denied before execution, then retried once after new
 approval; the current result is 25 fully accepted and two partial roles.
+
+
+## Final-push draft update
+
+Use the current local report, reordered to intro, use case, requirements,
+Y.3172, Readiness2.0, local policies, evaluation and gaps. It describes25 sources,
+13 text assets, hybrid retrieval, protocol 4 rationale/audit and the pre-authored
+rubric. It stays below 2,300 words. Actual protocol 4 live results are pending: the
+paid operation was denied before execution, so do not manufacture statistics or
+reuse protocol 3 outcomes as4. Team fields and five-page rendering still need
+verification. The prior Library copy was not uploaded/replaced.

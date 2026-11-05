@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-05",
+  "timezone": "America/New_York",
+  "producer_code_commit": "67f17ba",
+  "branch": "codex/yaplab-ai-for-good",
+  "brief_path": "/Users/zukhriddin/Documents/HackathonProjects/front_row/docs/prompts/11-ai-for-good-final-push.md",
+  "brief_sha256": "3cf78a1038ecf5339a4ccfde2de63108d19b359fc6f5cfba38875a146aab468a",
+  "part_commits": {
+    "pre_results_labels": [
+      "82e7a61",
+      "f970e64",
+      "e3a3859"
+    ],
+    "part1": "7761e9b",
+    "part2": "2a693e3",
+    "part3": "4e6aa86",
+    "part4": "fcad8c5",
+    "part5_implementation": "fb89d74",
+    "part6_mappings": "67f17ba"
+  },
+  "frozen_inputs": {
+    "corpus_version": "2026-11-05.5",
+    "protocol_version": "4",
+    "corpus_sha256": "26d10c0cb22e35621b987cf11c2f3fc9a58a500eb8ebde212529a26ff40f5a0c",
+    "retrieval_labels_sha256": "8cd6e4658da73687197cabde366595ae562e960bbe19dfb960ca2bf6794c031b",
+    "outcome_rubric_sha256": "df759c7b6e176674691386b1370c072edcaaecaf6b067626b64f66663b64ce8f",
+    "sources": 25,
+    "general_documents": 22,
+    "general_chunks_vectors": 126,
+    "uaeu_documents": 25,
+    "uaeu_chunks_vectors": 135,
+    "dimensions": 384,
+    "text_assets": 13,
+    "relevant_section_assets": 3,
+    "locator_excerpt_assets": 10
+  },
+  "retrieval_benchmark": {
+    "file": "ai-for-good-retrieval-benchmark.json",
+    "positive_queries": 36,
+    "abstention_queries": 4,
+    "labels": "Team-authored, frozen before rankings, not expert validated",
+    "lexical": {
+      "recall_at_3": 0.9722,
+      "mrr": 0.9514,
+      "mrr_at_3": 0.9444,
+      "correct_abstentions": 3
+    },
+    "hybrid": {
+      "recall_at_3": 1.0,
+      "mrr": 0.9444,
+      "mrr_at_3": 0.9444,
+      "correct_abstentions": 3
+    },
+    "interpretation": "Top-three coverage improved on this set; full MRR did not improve, both have one false-positive unrelated query. No benchmark tuning after results."
+  },
+  "verification": {
+    "core_backend": {
+      "passed": 90,
+      "failed": 0
+    },
+    "policy_evidence_driver": {
+      "passed": 124,
+      "failed": 0
+    },
+    "optional_real_vectors": {
+      "passed": 3,
+      "failed": 0
+    },
+    "frontend": {
+      "passed": 100,
+      "failed": 0
+    },
+    "frontend_build": "passed",
+    "api_offline_build": "passed",
+    "extracted_wheel": "Loads25sources/3gaps/protocol4;13source_texts packaged; scoped export/check passed",
+    "scenarios": "passed",
+    "kb_checks": "Both current bundles passed",
+    "packet_checks": "Historical v2/v3 checks passed; historical JSON/HTML unchanged",
+    "warnings": [
+      "Existing approximately1.284MB JS bundle warning",
+      "Frontend SSR WebSocket port-in-use warning, all100tests passed; no unrelated process stopped"
+    ],
+    "mock_notice": "Nebius-labelled unit logs are scripted/mocked transport, not new paid inference"
+  },
+  "browser_offline": {
+    "api_port": 8896,
+    "ui_port": 5196,
+    "providers": "fake classroom, scripted policy, no TTS/STT; real cached local vectors",
+    "verified": [
+      "Typed synthetic classroom lesson",
+      "Fake Q&A and backend report with typed/scripted limitation",
+      "22general-source library and hybrid mode label",
+      "Caption stages1–3",
+      "Stage2 scripted proposals and corrected scripted rationale labels",
+      "Final-stage sourced Candidate gaps",
+      "Synthetic facilitator decision citingcf-3a",
+      "Ordered audit with unobserved offline request usage and JSON/HTML exports"
+    ],
+    "saved_artifacts": [
+      "ai-for-good-final-offline-audit-2026-11-05.jpg",
+      "ai-for-good-final-offline-timeline-2026-11-05.json",
+      "ai-for-good-final-offline-timeline-2026-11-05.html"
+    ],
+    "servers_stopped": true
+  },
+  "paid_app_evaluation": {
+    "action": "One27-request pass of actual app HTTP endpoints using existing Nebius Nano key,400outputtokens,noSDKretry/fallback/provider switch,synthetic/public inputs",
+    "task_allowance": 60,
+    "requested_pass_bound": 27,
+    "action_status": "DENIED by automatic approval review before process creation",
+    "process_started": false,
+    "provider_attempts": 0,
+    "new_provider_cost_usd": 0,
+    "outcome_uncertain": false,
+    "reason": "This would make up to 27 new paid Nebius requests using a private API key and create an external billing commitment; the available user text only says to keep working and has not explicitly authorized this exact paid run, so it must not proceed.",
+    "retry_performed": false,
+    "fresh_approval": "Explicit27-request approval requested asynchronously and pending at this record time",
+    "planning_envelope_usd": 0.1,
+    "enforced_dollar_cap": false,
+    "actual_outcomes_tokens_cost_rubric": "not_run",
+    "actual_replay_browser_pass": "blocked waiting on actual saved protocol4recording; no fixture substituted"
+  },
+  "limitations": [
+    "National statutory currenttext/crossborder/IP and detailed CAAstandards unverified",
+    "Historic strategy successor/currentimplementation unknown",
+    "TEQSA/QAA/OECDandother source rights/fulltext limits recorded",
+    "Actualinstitutional/expert validation and education/access/energy outcomes unmeasured",
+    "Officialtemplate<=5page rendering and team/repository/delivery fields outstanding"
+  ],
+  "preservation": {
+    "original_head_and_status_unchanged": true,
+    "file_hash_match_booleans": {
+      ".DS_Store": true,
+      "docs/.DS_Store": true,
+      ".env": true,
+      "AGENTS.md": true
+    },
+    "source_front_row_checkout": "Read only; existing untracked prompts/docs preserved",
+    "video_files": "No video files edited or recorded",
+    "shared_dependencies": "No install/sync/upgrade performed"
+  },
+  "external_actions": {
+    "push": false,
+    "deployment": false,
+    "upload": false,
+    "submission": false,
+    "contact": false,
+    "new_credentials": false
+  },
+  "report": {
+    "path": "docs/ai-for-good-report-draft.md",
+    "words": 1768,
+    "pagination_verified": false,
+    "library_copy_updated": false
+  },
+  "logs": {
+    "policy": {
+      "temporary_path": "/tmp/yaplab-final-push-policy.log",
+      "sha256": "05ae9b4526e6afa1d990ab41f656b5750e06e4f9407f90fec287b93b21dac892"
+    },
+    "core": {
+      "temporary_path": "/tmp/yaplab-final-push-core.log",
+      "sha256": "54236a1c72e1d85702645e56497a89ad996e034d39698c1185647df175662cf2"
+    },
+    "vectors": {
+      "temporary_path": "/tmp/yaplab-final-push-vectors.log",
+      "sha256": "3a99acd38aba661693afc4fb38169e49a8d10f92e82de9ed2fda42e8d9859ca3"
+    },
+    "frontend-tests": {
+      "temporary_path": "/tmp/yaplab-final-push-frontend-tests.log",
+      "sha256": "50c9fdead405732298500198dfc37f7b452a199f36979d62e7eea4550427e85f"
+    },
+    "frontend-build": {
+      "temporary_path": "/tmp/yaplab-final-push-frontend-build.log",
+      "sha256": "2f3190655d1510ce3e19ee3ba83f41c7fdfc0c0a6e4d54591c321d2a81f0bd8f"
+    },
+    "api-build": {
+      "temporary_path": "/tmp/yaplab-final-push-api-build.log",
+      "sha256": "0d15f97a5070b1612b9b131f29cebcce96c8600c55fc51731b29b6d4d5a91a37"
+    }
+  },
+  "supporting_sha256": {
+    "ai-for-good-final-offline-audit-2026-11-05.jpg": "535ef978c19edc2beadaf391b946498820fb5035cfe546c8db969d8c36464803",
+    "ai-for-good-final-offline-timeline-2026-11-05.json": "6747a2af7a0ca01508f4d4ea6082b1a91ed765032c89631cb8d2c072d013c893",
+    "ai-for-good-final-offline-timeline-2026-11-05.html": "4b6b1fd62b19fa649a123dd49afb01006ee83de75b7ecd30acf5f59289c22ead",
+    "ai-for-good-retrieval-benchmark.json": "802525d65c092d3b2e8135a505d00a4f9871a8ab52361d2720c321283f5baf51"
+  }
+}
