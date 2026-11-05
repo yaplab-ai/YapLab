@@ -20,7 +20,7 @@ from frontrow.limits import DemoLimits, LimitExceeded, client_ip
 from frontrow.llm.base import LLMClient
 from .audit import validate_recording, render_html
 from .agent import agent_review
-from .coordination import coordinate, Mode
+from .coordination import coordinate, Mode, PROTOCOL_VERSION
 from .scenarios import _store
 from .evidence import CorpusUnavailable, Institution, Topic, load_corpus, scoped_sources, search_with_mode
 from .review import review
@@ -242,7 +242,8 @@ def create_router(*, llm: LLMClient | None = None, model: str = 'gpt-4o-mini',
         response.headers['Cache-Control'] = 'no-store'
         return {'enabled': coordination_llm is not None,
                 'review_mode': coordination_mode if coordination_llm is not None else 'offline_test',
-                **({'model': role_model} if coordination_llm is not None else {})}
+                **({'model': role_model, 'provider': getattr(coordination_llm, 'provider_name', 'offline_test'),
+                    'protocol_version': PROTOCOL_VERSION} if coordination_llm is not None else {})}
 
     @router.post('/exercises/{exercise_id}/coordinate')
     async def coordinate_exercise(exercise_id: str, body: CoordinationRequest,

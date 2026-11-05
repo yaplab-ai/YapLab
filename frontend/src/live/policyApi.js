@@ -32,6 +32,11 @@ export function createPolicyApi(baseUrl = API_URL, fetchImpl = globalThis.fetch)
     search: (query, limit = 10, institution = 'general') => post('/policy/search', { query, limit, institution }),
     review: (text, topics = [], context = '', institution = 'general') => post('/policy/review', { text, topics, context, institution }),
     scenarios: () => request('/policy/scenarios'),
+    replay: () => request('/policy/replay'),
+    replayHtmlUrl: () => `${base}/policy/replay/timeline.html`,
+    timeline: (id) => request(`/policy/exercises/${encodeURIComponent(id)}/timeline`),
+    timelineHtmlUrl: (id) => `${base}/policy/exercises/${encodeURIComponent(id)}/timeline.html`,
+    gaps: (scenarioId) => request(`/policy/gaps?scenario_id=${encodeURIComponent(scenarioId)}`),
     coordinationStatus: () => request('/policy/coordination/status'),
     coordinate: (id, expectedStage, institution = 'general') => {
       requireStage(expectedStage);

@@ -23,6 +23,9 @@ test('offline demo entry and feature labels match available paths', async () => 
     assert.doesNotMatch(render(false), /AI for Good · Offline demo/);
     const status = renderToStaticMarkup(createElement(ModeIndicator, { hackathonDemo: true, view: 'setup', headerLive: true }));
     assert.match(status, /Offline demo/);
+    const replay = renderToStaticMarkup(createElement(ModeIndicator, { hackathonDemo: true, replayLive: true, view: 'policy', headerLive: true }));
+    assert.match(replay, /Recorded live replay/);
+    assert.doesNotMatch(replay, /Offline demo/);
     assert.doesNotMatch(status, /Backend live/);
     const normal = renderToStaticMarkup(createElement(ModeIndicator, { hackathonDemo: false, view: 'setup', headerLive: true }));
     assert.match(normal, /Backend live/);

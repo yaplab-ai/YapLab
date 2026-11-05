@@ -23,9 +23,10 @@ function Logo() {
   );
 }
 
-export function ModeIndicator({ hackathonDemo, view, headerLive }) {
-  const text = hackathonDemo ? 'Offline demo' : view === 'policy' ? 'Policy sandbox' : headerLive ? 'Backend live' : 'Simulated agents';
-  const title = hackathonDemo ? 'Offline demo configuration.' : view === 'policy' ? 'Policy Lab uses the configured policy API.' : headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.';
+export function ModeIndicator({ hackathonDemo, view, headerLive, replayLive = false }) {
+  const recordedReplay = replayLive && view === 'policy';
+  const text = recordedReplay ? 'Recorded live replay' : hackathonDemo ? 'Offline demo' : view === 'policy' ? 'Policy sandbox' : headerLive ? 'Backend live' : 'Simulated agents';
+  const title = recordedReplay ? 'Saved model outputs, viewed read-only with no new model calls.' : hackathonDemo ? 'Offline demo configuration.' : view === 'policy' ? 'Policy Lab uses the configured policy API.' : headerLive ? 'Teaching uses the configured backend.' : 'Agent behavior is simulated by the built-in demo engine.';
   return <span className={`mode-chip ${hackathonDemo || view === 'policy' ? '' : headerLive ? 'live' : 'demo'}`} title={title}><i />{text}</span>;
 }
 
@@ -35,7 +36,8 @@ export function makeSessionConfig(mode, variant, roster, hackathonDemo) {
 
 export default function App() {
   const hackathonDemo = import.meta.env?.VITE_HACKATHON_DEMO === '1';
-  const [view, setView] = useState('home');
+  const replayLive = import.meta.env?.VITE_POLICY_REPLAY === '1';
+  const [view, setView] = useState(replayLive ? 'policy' : 'home');
   const [roster, setRoster] = useState(PERSONAS);
   const [config, setConfig] = useState(() => makeSessionConfig('teaching', undefined, PERSONAS, hackathonDemo));
   const [result, setResult] = useState(null);
@@ -89,7 +91,7 @@ export default function App() {
                 </button>
               ))}
             </nav>
-            <ModeIndicator hackathonDemo={hackathonDemo} view={view} headerLive={headerLive} />
+            <ModeIndicator hackathonDemo={hackathonDemo} view={view} headerLive={headerLive} replayLive={replayLive} />
           </div>
         </header>
       )}

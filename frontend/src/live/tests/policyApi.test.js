@@ -181,3 +181,31 @@ test('a manual retry can load the stored partial round without client auto-retry
   assert.equal(recovered.roles[0].status, 'unavailable');
   assert.equal(recovered.roles[0].reason, 'timeout');
 });
+
+test('gap, timeline and configured replay use read-only endpoints', async () => {
+  const calls = [];
+  const api = createPolicyApi('https://api.example/', async (...args) => { calls.push(args); return response({ ok: true }); });
+  await api.gaps('scenario/1');
+  await api.timeline('exercise/1');
+  await api.replay();
+  assert.deepEqual(calls.map(([url]) => url), ['https://api.example/policy/gaps?scenario_id=scenario%2F1', 'https://api.example/policy/exercises/exercise%2F1/timeline', 'https://api.example/policy/replay']);
+  assert.ok(calls.every(([, options]) => !options.method || options.method === 'GET'));
+  assert.equal(api.timelineHtmlUrl('exercise/1'), 'https://api.example/policy/exercises/exercise%2F1/timeline.html');
+  assert.equal(api.replayHtmlUrl(), 'https://api.example/policy/replay/timeline.html');
+});
+
+test('test fixture replay renders saved output, audit and scoped gaps without mutation controls', async () => {
+  const { createServer } = await import('vite');
+  const { fileURLToPath } = await import('node:url');
+  const { createElement } = await import('react');
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const server = await createServer({ root: fileURLToPath(new URL('../../../', import.meta.url)), server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error' });
+  try {
+    const { ReplayContent } = await server.ssrLoadModule('/src/screens/PolicyLab.jsx');
+    // Synthetic fixture for rendering only; this is not a recorded live output.
+    const html = renderToStaticMarkup(createElement(ReplayContent, { replay: { banner: 'TEST FIXTURE · no new model calls', recording: { exercise_id: 'test', scenario_id: 'test-scenario', sha256: 'test-digest', rounds: [{ stage: 3, review_mode: 'model_assisted', roles: [{ role: 'teacher', status: 'partial', proposals: [{ action_id: 'a', text: 'Saved proposal', rationale: 'Saved rationale', fact_ids: [], source_ids: [] }] }], plan: [{ action_id: 'a', text: 'Saved plan', owner: 'teacher', status: 'missing_prerequisites' }] }], events: [{ type: 'stage_release', stage: 1, fact_ids_by_role: { teacher: ['f1'] } }, { type: 'model_request', stage: 1, role: 'teacher', model: 'test-model', prompt_sha256: 'test-prompt', usage: { total_tokens: 5 }, latency_ms: 10, status: 'partial', prompt_attempted: true }, { type: 'validation', status: 'partial', rationale_issues: ['rationale_rejected'] }, { type: 'decision', role: 'teacher', decision: 'Test decision', source_ids: ['f1'], review_mode: 'human' }] } }, gaps: { label: 'test', gaps: [{ id: 'gap-1', title: 'Test gap', gap_type: 'standards_gap', operational_gap: 'Test question', verification_status: 'candidate', uae_sources: [{ source_id: 'u1', title: 'UAE source', url: 'https://example.org/uae', locator: 'Article 1', says: 'Test says', does_not_say: 'Test does not say' }], global_examples: [{ source_id: 'g1', title: 'Global source', url: 'https://example.org/global', locator: 'Section 2', addresses: 'Test example', scope: 'Universities', binding_status: 'Guidance' }], evidence_needed: ['Test evidence'] }] } }));
+    for (const text of ['TEST FIXTURE', 'Saved proposal', 'Saved rationale', 'Stated rationale · model-written, not verified', 'partial', 'Saved plan', 'test-prompt', 'rationale_rejected', 'Test decision', 'Candidate gaps', 'Article 1', 'Universities', 'Guidance', 'Test evidence']) assert.ok(html.includes(text), text);
+    assert.doesNotMatch(html, /Reveal next stage|Record decision|View role proposals/);
+    assert.match(html, /href="https:\/\/example.org\/uae"/);
+  } finally { await server.close(); }
+});

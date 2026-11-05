@@ -55,7 +55,7 @@ export function CoordinationResult({ result }) {
     {(result.model || result.corpus_version || result.protocol_version) && <details className="policy-audit"><summary>Model and reference details</summary><p>{[result.model && [result.model.provider, result.model.model].filter(Boolean).join(' / '), result.corpus_version && `Corpus ${result.corpus_version}`, result.protocol_version && `Protocol ${result.protocol_version}`].filter(Boolean).join(' · ')}</p></details>}
     <div className="policy-coordination-roles">{(result.roles || []).map((item) => <article className="policy-coordination-role" key={item.role}><h4>{roleName(item.role)} <span className="policy-topic">{humanLabel(item.status)}</span></h4>
       {item.status === 'partial' ? <p>Some items could not be used; the remaining items are shown.</p> : item.reason && <p>Reason: {humanLabel(item.reason)}</p>}
-      {!!item.proposals?.length && <><h5>Proposals</h5><ul>{item.proposals.map((proposal) => <li key={proposal.action_id}>{proposal.text}</li>)}</ul></>}
+      {!!item.proposals?.length && <><h5>Proposals</h5><ul>{item.proposals.map((proposal) => <li key={proposal.action_id}>{proposal.text}{proposal.rationale && <p className="policy-rationale"><strong>{result.review_mode === 'model_assisted' ? 'Stated rationale · model-written, not verified' : 'Stated rationale · scripted offline example'}</strong><br />{proposal.rationale}</p>}</li>)}</ul></>}
       {!!item.questions?.length && <><h5>Questions</h5><ul>{item.questions.map((question, index) => <li key={question.question_id || index}>{question.text}</li>)}</ul></>}
       {(item.proposals?.length > 0 || item.evidence?.length > 0 || item.prompt_sha256) && <details className="policy-audit"><summary>Sources and details</summary>
         {!!item.proposals?.length && <p>Check whether each selected source supports the proposal in this context.</p>}
@@ -71,7 +71,76 @@ export function CoordinationResult({ result }) {
   </section>;
 }
 
-export default function PolicyLab({ onBack }) {
+function GapReference({ source, global = false }) {
+  return <li><strong>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title || source.source_id} ↗</a> : (source.title || source.source_id)}</strong>{source.locator && ` · ${source.locator}`}
+    {global ? <><p>{source.addresses}</p><p>Scope: {source.scope} · {source.binding_status}</p></> : <><p><strong>Says:</strong> {source.says}</p><p><strong>Does not say:</strong> {source.does_not_say}</p></>}
+  </li>;
+}
+
+export function CandidateGaps({ result }) {
+  if (!result) return null;
+  return <section className="policy-gaps" aria-label="Candidate gaps"><p className="eyebrow">Debrief · {result.label}</p><h3>Candidate gaps</h3><p>These are education-domain questions for further review, not country recommendations.</p>
+    {(result.gaps || []).map((gap) => <article className="policy-gap" key={gap.id}><h4>{gap.title}</h4><p className="policy-topic">{humanLabel(gap.gap_type)} · {gap.verification_status}</p><p>{gap.operational_gap}</p>
+      <h5>Reviewed UAE sources</h5><ul>{(gap.uae_sources || []).map((source, i) => <GapReference key={`${source.source_id}-${i}`} source={source} />)}</ul>
+      <h5>Global examples and scope</h5><ul>{(gap.global_examples || []).map((source, i) => <GapReference key={`${source.source_id}-${i}`} source={source} global />)}</ul>
+      <h5>Evidence needed</h5><ul>{(gap.evidence_needed || []).map((item, i) => <li key={i}>{item}</li>)}</ul>
+    </article>)}
+    {!result.gaps?.length && <p>No candidate gaps are available for this scenario.</p>}
+  </section>;
+}
+
+function saveJson(value, filename) {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
+  const link = document.createElement('a'); link.href = url; link.download = filename; link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export function AuditTimeline({ timeline, htmlUrl }) {
+  if (!timeline) return null;
+  return <section className="policy-timeline" aria-label="Exercise audit timeline"><p className="eyebrow">Exercise record</p><h3>Audit timeline</h3>
+    <p>Ordered events · Exercise {timeline.exercise_id} · SHA-256: {timeline.sha256 || 'unavailable'}</p>
+    <div className="policy-actions"><button className="btn btn-ghost" onClick={() => saveJson(timeline, `policy-timeline-${timeline.exercise_id}.json`)}>Export JSON</button>{htmlUrl && <a className="btn btn-ghost" href={htmlUrl} download>Export HTML</a>}</div>
+    <ol>{(timeline.events || []).map((event, i) => <li className="policy-timeline-event" key={i}><strong>{humanLabel(event.type)}</strong>{event.stage != null && ` · Stage ${event.stage}`}{event.role && ` · ${roleName(event.role)}`}{event.at && ` · ${event.at}`}
+      {event.type === 'stage_release' && <p>Released fact IDs by role: {Object.entries(event.fact_ids_by_role || {}).map(([role, ids]) => `${roleName(role)}: ${ids.join(', ') || 'none'}`).join(' · ')}</p>}
+      {event.type === 'model_request' && <><p>Provider / model: {[event.provider, event.model].filter(Boolean).join(' / ') || 'unavailable'} · Status: {humanLabel(event.status)} · Latency: {event.latency_ms == null ? 'unavailable' : `${event.latency_ms} ms`}</p><p>Prompt digest: {event.prompt_sha256 || 'unavailable'} · Usage: {event.usage ? JSON.stringify(event.usage) : 'unavailable'} · Prompt attempted: {String(event.prompt_attempted)}</p></>}
+      {event.type === 'validation' && <p>Status: {humanLabel(event.status)}{event.issue && ` · Issue: ${humanLabel(event.issue)}`}{event.rationale_issues?.length ? ` · Rationale issues: ${event.rationale_issues.join(', ')}` : ''}</p>}
+      {event.type === 'coordinator_plan' && <><ul>{(event.plan || []).map((item, index) => <li key={index}>{item.text || item.action_id} · Owner: {roleName(item.owner)} · {humanLabel(item.status)}{item.handoffs?.length ? ` · Handoffs: ${item.handoffs.map((h) => `${roleName(h.owner)}: ${h.action_id}`).join(', ')}` : ''}</li>)}</ul>{!!event.unresolved?.length && <p>Unresolved: {event.unresolved.join('; ')}</p>}</>}
+      {event.type === 'decision' && <p>{event.decision} · Evidence: {(event.source_ids || []).join(', ') || 'none'} · Mode: {humanLabel(event.review_mode)}</p>}
+    </li>)}</ol>
+  </section>;
+}
+
+export function ReplayContent({ replay, gaps }) {
+  return <><div className="policy-replay-banner" role="status">{replay.banner}</div><p className="policy-fact-hint">Read-only exercise record · {replay.recording.scenario_id}</p>
+    {(replay.recording.rounds || []).map((round, i) => <CoordinationResult key={round.round_id || i} result={round} />)}
+    <AuditTimeline timeline={replay.recording} htmlUrl={policyApi.replayHtmlUrl()} /><CandidateGaps result={gaps} />
+  </>;
+}
+
+function ReplayLab({ onBack }) {
+  const [replay, setReplay] = useState(null);
+  const [gaps, setGaps] = useState(null);
+  const [error, setError] = useState('');
+  useEffect(() => {
+    let active = true;
+    policyApi.replay().then(async (data) => {
+      if (!active) return;
+      setReplay(data);
+      try { const result = await policyApi.gaps(data.recording.scenario_id); if (active) setGaps(result); }
+      catch (err) { if (active) setError(`Candidate gaps unavailable: ${err.message}`); }
+    }).catch((err) => { if (active) setError(`Recorded run unavailable: ${err.message}`); });
+    return () => { active = false; };
+  }, []);
+  return <main className="wrap policy-lab"><button className="link-back" onClick={onBack}><Icon name="prev" size={16} /> Modes</button><header className="policy-intro"><div><p className="eyebrow">Policy Lab</p><h1>Recorded exercise<span>.</span></h1><p>Inspect the saved model outputs and decisions.</p></div></header>
+    {error && <div className="policy-alert" role="alert">{error}</div>}{!replay && !error && <p role="status">Loading recorded exercise…</p>}{replay && <ReplayContent replay={replay} gaps={gaps} />}
+  </main>;
+}
+
+export default function PolicyLab(props) {
+  return import.meta.env.VITE_POLICY_REPLAY === '1' ? <ReplayLab {...props} /> : <InteractivePolicyLab {...props} />;
+}
+
+function InteractivePolicyLab({ onBack }) {
   const [tab, setTab] = useState('search');
   const [institution, setInstitution] = useState('general');
   const [catalog, setCatalog] = useState(null);
@@ -92,6 +161,9 @@ export default function PolicyLab({ onBack }) {
   const [coordination, setCoordination] = useState(null);
   const [decision, setDecision] = useState('');
   const [audit, setAudit] = useState(null);
+  const [timeline, setTimeline] = useState(null);
+  const [gaps, setGaps] = useState(null);
+  const [gapsError, setGapsError] = useState('');
   const [decisionSaved, setDecisionSaved] = useState(false);
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
@@ -119,6 +191,16 @@ export default function PolicyLab({ onBack }) {
     return () => { active = false; };
   }, [institution]);
 
+  useEffect(() => {
+    let active = true;
+    setGaps(null); setGapsError('');
+    if (exercise && exercise.current_stage >= exercise.stage_count) {
+      policyApi.gaps(exercise.scenario_id).then((data) => { if (active) setGaps(data); })
+        .catch((err) => { if (active) setGapsError(err.message); });
+    }
+    return () => { active = false; };
+  }, [exercise?.exercise_id, exercise?.scenario_id, exercise?.current_stage, exercise?.stage_count]);
+
   async function run(key, fn, success, isCurrent = () => true) {
     setBusy(key); setError('');
     try { const data = await fn(); if (isCurrent()) success(data); } catch (err) { if (isCurrent()) setError(err.message); } finally { setBusy(''); }
@@ -129,7 +211,7 @@ export default function PolicyLab({ onBack }) {
     setInstitution(next);
   }
   function invalidateScenario() {
-    epoch.current += 1; coordinationEpoch.current += 1; setSelectedFacts([]); setScenarioReview(null); setCoordination(null); setDecision(''); setAudit(null); setDecisionSaved(false);
+    epoch.current += 1; coordinationEpoch.current += 1; setSelectedFacts([]); setScenarioReview(null); setCoordination(null); setDecision(''); setAudit(null); setTimeline(null); setDecisionSaved(false);
   }
   function changeRole(next) {
     invalidateScenario(); setRole(next); setError('');
@@ -137,7 +219,7 @@ export default function PolicyLab({ onBack }) {
   }
   function viewCoordination() {
     const current = coordinationEpoch.current;
-    setCoordination(null);
+    setCoordination(null); setTimeline(null);
     run('coordinate', () => policyApi.coordinate(exercise.exercise_id, exercise.current_stage, coordinationInstitution), setCoordination, () => current === coordinationEpoch.current);
   }
   const facts = exercise?.released_stages.flatMap((stage) => stage.facts) || [];
@@ -158,6 +240,7 @@ export default function PolicyLab({ onBack }) {
         <form className="policy-search-form" onSubmit={(event) => { event.preventDefault(); const current = scopeEpoch.current; run('search', () => policyApi.search(query, 10, institution), setSearch, () => current === scopeEpoch.current); }}>
           <label htmlFor="policy-search">Search sources</label><div><input id="policy-search" value={query} onChange={(e) => setQuery(e.target.value)} maxLength={500} placeholder="e.g. student data, captions, AI feedback" required /><button className="btn btn-primary" disabled={!!busy}>{busy === 'search' ? 'Searching…' : 'Search sources'} <Icon name="arrow" size={16} /></button></div>
         </form>
+        {search?.retrieval_mode && <p className="policy-fact-hint">Retrieval: {search.retrieval_mode === 'hybrid' ? 'Hybrid · lexical + local vectors' : 'Lexical'}</p>}
         <div className="policy-reference-head"><h3>{search ? `Results for “${search.query}”` : 'Reference library'}</h3>{search && <button className="link" onClick={() => setSearch(null)}>Show all sources</button>}</div>
         {(search ? search.results : catalog.entries)?.length ? (search ? search.results : catalog.entries).map((source) => <Source key={source.id} source={source} />) : <p className="policy-empty">No matching sources. Try a broader term or browse the reference library.</p>}
         {catalog.limitations && <p className="policy-audit">Library limits: {Array.isArray(catalog.limitations) ? catalog.limitations.join(' ') : catalog.limitations}</p>}
@@ -189,7 +272,10 @@ export default function PolicyLab({ onBack }) {
               <div className="policy-actions"><button className="btn btn-ghost" disabled={!!busy} onClick={viewCoordination}>{busy === 'coordinate' ? 'Loading proposals…' : 'View role proposals'}</button></div>
               <CoordinationResult result={coordination} />
           </section>
-          <form className="policy-form policy-decision" onSubmit={(event) => { event.preventDefault(); if (!selectedFacts.length) return; const stage = exercise.current_stage; run('decision', () => policyApi.decide(exercise.exercise_id, role, decision, selectedFacts, stage), () => { setDecision(''); setAudit(null); setDecisionSaved(true); }); }}><label htmlFor="policy-decision">Record your decision</label><textarea id="policy-decision" rows={3} maxLength={500} value={decision} onChange={(e) => setDecision(e.target.value)} required placeholder="What would you do next, and why?" /><p className="policy-fact-hint">Select at least one released fact above. Selected facts are attached as references to your decision.</p><button className="btn btn-ghost" disabled={!!busy || !selectedFacts.length}>{busy === 'decision' ? 'Recording…' : 'Record decision'}</button>{decisionSaved && <p role="status">Decision recorded.</p>}</form>
+          {exercise.current_stage >= exercise.stage_count && <>{gapsError && <p className="policy-alert" role="alert">Candidate gaps unavailable: {gapsError}</p>}<CandidateGaps result={gaps} /></>}
+          <form className="policy-form policy-decision" onSubmit={(event) => { event.preventDefault(); if (!selectedFacts.length) return; const stage = exercise.current_stage; run('decision', () => policyApi.decide(exercise.exercise_id, role, decision, selectedFacts, stage), () => { setDecision(''); setAudit(null); setTimeline(null); setDecisionSaved(true); }); }}><label htmlFor="policy-decision">Record your decision</label><textarea id="policy-decision" rows={3} maxLength={500} value={decision} onChange={(e) => setDecision(e.target.value)} required placeholder="What would you do next, and why?" /><p className="policy-fact-hint">Select at least one released fact above. Selected facts are attached as references to your decision.</p><button className="btn btn-ghost" disabled={!!busy || !selectedFacts.length}>{busy === 'decision' ? 'Recording…' : 'Record decision'}</button>{decisionSaved && <p role="status">Decision recorded.</p>}</form>
+          <div className="policy-actions"><button className="btn btn-ghost" disabled={!!busy} onClick={() => run('timeline', () => policyApi.timeline(exercise.exercise_id), setTimeline)}>{busy === 'timeline' ? 'Loading timeline…' : 'View audit timeline'}</button></div>
+          <AuditTimeline timeline={timeline} htmlUrl={policyApi.timelineHtmlUrl(exercise.exercise_id)} />
           <div className="policy-audit-block"><button className="link" disabled={!!busy} onClick={() => run('audit', () => policyApi.audit(exercise.exercise_id, role), setAudit)}>View role activity</button>{audit && <div aria-live="polite"><h4>Role activity</h4>{audit.events?.length ? audit.events.map((event, i) => <p key={i}><strong>{event.type === 'decision' ? 'Decision' : event.type}</strong> · Stage {event.stage}{event.decision && ` — ${event.decision}`}{event.source_ids?.length ? ` (facts: ${event.source_ids.join(', ')})` : ''}</p>) : <p>No activity recorded yet.</p>}</div>}</div>
         </>}
       </section>}

@@ -20,7 +20,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--api-port', type=int, default=8765)
     parser.add_argument('--ui-port', type=int, default=5179)
+    parser.add_argument('--replay-live', metavar='RECORDING.json', type=Path,
+                        help='Open a saved live exercise read-only; pass its exported JSON file.')
     args = parser.parse_args()
+    if args.replay_live and not args.replay_live.is_file():
+        parser.error('The replay recording must be an existing JSON file.')
     if not (1 <= args.api_port <= 65535 and 1 <= args.ui_port <= 65535) or args.api_port == args.ui_port:
         parser.error('Use two distinct ports from 1 to 65535.')
     api_url = f'http://127.0.0.1:{args.api_port}'
@@ -46,7 +50,12 @@ def main() -> int:
         'FRONTROW_TICK_INTERVAL_SECONDS': '3', 'FRONTROW_MODERATOR_WARMUP_SECONDS': '0',
         'FRONTROW_MODERATOR_WARMUP_MIN_WORDS': '0', 'FRONTROW_CORS_ORIGINS': ui_url,
         'VITE_API_URL': api_url, 'VITE_HACKATHON_DEMO': '1', 'PYTHONUNBUFFERED': '1',
+        'VITE_POLICY_REPLAY': '1' if args.replay_live else '0',
     })
+    if args.replay_live:
+        env['FRONTROW_POLICY_REPLAY_PATH'] = str(args.replay_live.resolve())
+    else:
+        env.pop('FRONTROW_POLICY_REPLAY_PATH', None)
     processes: list[subprocess.Popen] = []
     try:
         processes.append(subprocess.Popen([str(python), '-m', 'uvicorn', 'frontrow.server:app',
@@ -66,7 +75,9 @@ def main() -> int:
             time.sleep(.2)
         processes.append(subprocess.Popen([node, str(ROOT / 'frontend/node_modules/vite/bin/vite.js'), '--host', '127.0.0.1',
             '--port', str(args.ui_port), '--strictPort'], cwd=ROOT / 'frontend', env=env))
-        print(f'\nYapLab offline demo: {ui_url}\nFake classroom + scripted role proposals; no model or speech-provider requests.\nUse the demo deck and typed input. Ctrl+C stops both processes.\n', flush=True)
+        mode = ('Recorded live exercise replay (read-only); no new model calls.' if args.replay_live
+                else 'Fake classroom + scripted role proposals; no model or speech-provider requests.')
+        print(f'\nYapLab demo: {ui_url}\n{mode}\nUse the demo deck and typed input. Ctrl+C stops both processes.\n', flush=True)
         while all(process.poll() is None for process in processes):
             time.sleep(.3)
         raise RuntimeError('A demo process exited; see its output above.')
