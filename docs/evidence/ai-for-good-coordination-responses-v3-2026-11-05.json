@@ -1,0 +1,164 @@
+[
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 1,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"coordinate_transcript_response\",\n      \"fact_ids\": [\"td-1a\", \"td-1b\"],\n      \"source_ids\": [\"uae-personal-data-protection\", \"england-generative-ai-education\"]\n    }\n  ],\n  \"questions\": [\n    \"ask_timing\",\n    \"ask_teaching_owner\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 1,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"review_transcript_access\",\n      \"fact_ids\": [\"td-1a\"],\n      \"source_ids\": [\"uae-personal-data-protection\"]\n    },\n    {\n      \"action_id\": \"review_transcript_access\",\n      \"fact_ids\": [\"td-1b\"],\n      \"source_ids\": [\"england-generative-ai-education\"]\n    }\n  ],\n  \"questions\": [\n    \"ask_data_owner\",\n    \"ask_data_terms\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 1,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"offer_private_support\",\n      \"fact_ids\": [\n        \"td-1a\"\n      ],\n      \"source_ids\": [\n        \"uae-digital-accessibility-policy\",\n        \"uae-persons-with-disabilities-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_support_contact\",\n    \"ask_usable_option\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 2,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"review_transcript_access\",\n      \"fact_ids\": [\n        \"td-1a\",\n        \"td-2a\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_data_owner\",\n    \"ask_data_terms\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 2,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"coordinate_transcript_response\",\n      \"fact_ids\": [\n        \"td-1a\",\n        \"td-2a\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 2,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"offer_private_support\",\n      \"fact_ids\": [\n        \"td-2b\"\n      ],\n      \"source_ids\": [\n        \"uae-persons-with-disabilities-education\",\n        \"uae-digital-accessibility-policy\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_usable_option\",\n    \"ask_support_contact\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 3,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"review_transcript_access\",\n      \"fact_ids\": [\n        \"td-2a\",\n        \"td-3a\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_data_owner\",\n    \"ask_data_terms\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 3,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"pause_transcript_sharing\",\n      \"fact_ids\": [\n        \"td-1a\",\n        \"td-1b\",\n        \"td-2a\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    },\n    {\n      \"action_id\": \"coordinate_transcript_response\",\n      \"fact_ids\": [\n        \"td-2b\",\n        \"td-3a\",\n        \"td-3b\"\n      ],\n      \"source_ids\": [\n        \"uae-persons-with-disabilities-education\",\n        \"england-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "transcript-disclosure",
+    "stage": 3,
+    "role": "accessibility",
+    "response": "{ \"proposals\": [ { \"action_id\": \"offer_private_support\", \"fact_ids\": [ \"td-1c\", \"td-3a\" ], \"source_ids\": [ \"uae-persons-with-disabilities-education\" ] }, { \"action_id\": \"confirm_support_option\", \"fact_ids\": [ \"td-2b\" ], \"source_ids\": [ \"uae-digital-accessibility-policy\" ] } ], \"questions\": [ \"ask_usable_option\" ] }"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 1,
+    "role": "teacher",
+    "response": "{\n    \"proposals\": [\n        {\n            \"action_id\": \"delay_workshop\",\n            \"fact_ids\": [\n                \"cf-1a\"\n            ],\n            \"source_ids\": [\n                \"uae-digital-accessibility-policy\"\n            ]\n        }\n    ],\n    \"questions\": [\n        \"ask_teaching_owner\"\n    ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 1,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"protect_attendee_identity\",\n      \"fact_ids\": [\"cf-1a\", \"cf-1c\"],\n      \"source_ids\": [\"uae-personal-data-protection\", \"england-generative-ai-education\"]\n    }\n  ],\n  \"questions\": [\"ask_data_owner\"]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 1,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"identify_access_needs\",\n      \"fact_ids\": [\n        \"cf-1a\",\n        \"cf-1c\"\n      ],\n      \"source_ids\": [\n        \"uae-digital-accessibility-policy\",\n        \"uae-persons-with-disabilities-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_usable_option\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 2,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"protect_attendee_identity\",\n      \"fact_ids\": [\"cf-1c\"],\n      \"source_ids\": [\"uae-personal-data-protection\", \"england-generative-ai-education\"]\n    },\n    {\n      \"action_id\": \"verify_vendor_terms\",\n      \"fact_ids\": [\"cf-2b\"],\n      \"source_ids\": [\"uae-personal-data-protection\", \"england-generative-ai-education\"]\n    }\n  ],\n  \"questions\": [\"ask_data_owner\", \"ask_data_terms\"]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 2,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"resume_workshop_now\",\n      \"fact_ids\": [\n        \"cf-1a\",\n        \"cf-2a\",\n        \"cf-2b\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    },\n    {\n      \"action_id\": \"delay_workshop\",\n      \"fact_ids\": [\n        \"cf-2a\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"uae-digital-accessibility-policy\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 2,
+    "role": "accessibility",
+    "response": "{\n    \"proposals\": [\n        {\n            \"action_id\": \"identify_access_needs\",\n            \"fact_ids\": [\n                \"cf-1a\",\n                \"cf-2a\"\n            ],\n            \"source_ids\": [\n                \"uae-digital-accessibility-policy\",\n                \"uae-persons-with-disabilities-education\"\n            ]\n        },\n        {\n            \"action_id\": \"confirm_accessible_option\",\n            \"fact_ids\": [\n                \"cf-2c\"\n            ],\n            \"source_ids\": [\n                \"uae-persons-with-disabilities-education\"\n            ]\n        }\n    ],\n    \"questions\": [\n        \"ask_usable_option\",\n        \"ask_support_contact\"\n    ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 3,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"delay_workshop\",\n      \"fact_ids\": [\"cf-1a\", \"cf-2a\", \"cf-2b\"],\n      \"source_ids\": [\"uae-digital-accessibility-policy\"]\n    },\n    {\n      \"action_id\": \"resume_vendor_workshop\",\n      \"fact_ids\": [\"cf-3a\"],\n      \"source_ids\": [\"uae-personal-data-protection\"]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 3,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"protect_attendee_identity\",\n      \"fact_ids\": [\n        \"cf-1c\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    },\n    {\n      \"action_id\": \"verify_vendor_terms\",\n      \"fact_ids\": [\n        \"cf-2b\",\n        \"cf-3c\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"uae-ai-ethics-self-assessment\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_data_owner\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "caption-failure",
+    "stage": 3,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"identify_access_needs\",\n      \"fact_ids\": [\"cf-2a\", \"cf-3a\"],\n      \"source_ids\": [\"uae-digital-accessibility-policy\"]\n    }\n  ],\n  \"questions\": [\n    \"ask_usable_option\",\n    \"ask_support_contact\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 1,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [],\n  \"questions\": [\"ask_data_owner\"]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 1,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"clarify_practice_feedback\",\n      \"fact_ids\": [\n        \"fg-1a\",\n        \"fg-1b\"\n      ],\n      \"source_ids\": [\n        \"england-generative-ai-education\",\n        \"uae-digital-accessibility-policy\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 1,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"check_feedback_access\",\n      \"fact_ids\": [\n        \"fg-1a\"\n      ],\n      \"source_ids\": [\n        \"uae-digital-accessibility-policy\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_usable_option\",\n    \"ask_support_contact\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 2,
+    "role": "privacy",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"check_feedback_data\",\n      \"fact_ids\": [\n        \"fg-2c\"\n      ],\n      \"source_ids\": [\n        \"uae-personal-data-protection\",\n        \"england-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_data_owner\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 2,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"clarify_practice_feedback\",\n      \"fact_ids\": [\n        \"fg-1b\"\n      ],\n      \"source_ids\": [\n        \"england-generative-ai-education\"\n      ]\n    },\n    {\n      \"action_id\": \"plan_human_feedback_review\",\n      \"fact_ids\": [\n        \"fg-2a\",\n        \"fg-2b\"\n      ],\n      \"source_ids\": [\n        \"uae-digital-accessibility-policy\",\n        \"uae-personal-data-protection\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 2,
+    "role": "accessibility",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"check_feedback_access\",\n      \"fact_ids\": [\"fg-1a\", \"fg-1c\"],\n      \"source_ids\": [\"uae-digital-accessibility-policy\"]\n    },\n    {\n      \"action_id\": \"test_assistive_technology\",\n      \"fact_ids\": [\"fg-1c\", \"fg-2b\"],\n      \"source_ids\": [\"uae-persons-with-disabilities-education\"]\n    }\n  ],\n  \"questions\": [\n    \"ask_usable_option\",\n    \"ask_support_contact\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 3,
+    "role": "privacy",
+    "response": "{\"proposals\": [{\"action_id\": \"check_feedback_data\", \"fact_ids\": [\"fg-1a\", \"fg-2a\"], \"source_ids\": [\"england-generative-ai-education\", \"uae-ai-ethics-self-assessment\"]}, {\"action_id\": \"review_feedback_vendor\", \"fact_ids\": [\"fg-3a\"], \"source_ids\": [\"uae-personal-data-protection\"]}], \"questions\": [\"ask_data_owner\", \"ask_data_terms\"]}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 3,
+    "role": "teacher",
+    "response": "{\n  \"proposals\": [\n    {\n      \"action_id\": \"clarify_practice_feedback\",\n      \"fact_ids\": [\n        \"fg-1a\",\n        \"fg-1b\"\n      ],\n      \"source_ids\": [\n        \"england-generative-ai-education\",\n        \"unesco-ai-ethics-recommendation\"\n      ]\n    },\n    {\n      \"action_id\": \"plan_human_feedback_review\",\n      \"fact_ids\": [\n        \"fg-2a\",\n        \"fg-2b\"\n      ],\n      \"source_ids\": [\n        \"england-generative-ai-education\",\n        \"unesco-generative-ai-education\"\n      ]\n    }\n  ],\n  \"questions\": [\n    \"ask_teaching_owner\",\n    \"ask_timing\"\n  ]\n}"
+  },
+  {
+    "scenario_id": "feedback-as-grade",
+    "stage": 3,
+    "role": "accessibility",
+    "response": "{\n    \"proposals\": [\n        {\n            \"action_id\": \"check_feedback_access\",\n            \"fact_ids\": [\n                \"fg-1c\",\n                \"fg-2b\"\n            ],\n            \"source_ids\": [\n                \"uae-digital-accessibility-policy\",\n                \"uae-persons-with-disabilities-education\"\n            ]\n        },\n        {\n            \"action_id\": \"test_assistive_technology\",\n            \"fact_ids\": [\n                \"fg-3a\",\n                \"fg-3c\"\n            ],\n            \"source_ids\": [\n                \"uae-digital-accessibility-policy\",\n                \"uae-persons-with-disabilities-education\"\n            ]\n        }\n    ],\n    \"questions\": [\n        \"ask_usable_option\",\n        \"ask_support_contact\"\n    ]\n}"
+  }
+]

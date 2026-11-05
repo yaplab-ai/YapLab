@@ -126,7 +126,7 @@ test('facilitator result exposes role gaps, evidence and conditional handoffs', 
     const { CoordinationResult } = await server.ssrLoadModule('/src/screens/PolicyLab.jsx');
     const html = renderToStaticMarkup(createElement(CoordinationResult, { result: {
       stage: 2, institution: 'general', review_mode: 'offline_test', protocol_version: 'v1', corpus_version: 'corpus-1', model: { provider: 'fake', model: 'local' }, roles: [
-        { role: 'teacher', status: 'partial', reason: 'invalid_response', proposals: [{ action_id: 'continue', text: 'Consider continuing.', fact_ids: ['f1'], source_ids: ['s1'] }], questions: [{ question_id: 'q1', text: 'Who decides?' }], evidence: [{ id: 's1', title: 'Official source', url: 'https://example.org/policy', authority: 'Authority', jurisdiction: 'UAE', document_type: 'Guidance', scope: 'University context', source_locator: 'Section 3', verification: 'Check current version.', summary: 'Source overview.', limitations: ['Limited to context.'] }], prompt_sha256: 'digest-1' },
+        { role: 'teacher', status: 'partial', reason: 'invalid_response', proposals: [{ action_id: 'continue', text: 'Consider continuing.', fact_ids: ['f1'], source_ids: ['s1'] }, { action_id: 'pause', text: 'Pause for a review.', fact_ids: ['f2'], source_ids: ['s2'] }], questions: [{ question_id: 'q1', text: 'Who decides?' }], evidence: [{ id: 's1', title: 'Official source', url: 'https://example.org/policy', authority: 'Authority', jurisdiction: 'UAE', document_type: 'Guidance', scope: 'University context', source_locator: 'Section 3', verification: 'Check current version.', summary: 'Source overview.', limitations: ['Limited to context.'] }], prompt_sha256: 'digest-1' },
         { role: 'privacy', status: 'unavailable', reason: 'timeout', proposals: [], questions: [] },
       ], plan: [{ action_id: 'continue', owner: 'teacher', text: 'Consider continuing.', depends_on: ['check_terms'], handoffs: [{ action_id: 'check_terms', owner: 'privacy' }], status: 'missing_prerequisites' }],
       unresolved: ['Privacy review is needed.'], limitations: ['No action was executed.'],
@@ -135,7 +135,9 @@ test('facilitator result exposes role gaps, evidence and conditional handoffs', 
     assert.match(html, /Some items could not be used; the remaining items are shown/);
     assert.match(html, /Consider continuing/);
     assert.doesNotMatch(html, /invalid.response/);
-    assert.match(html, /Facts: f1 · Sources: s1/);
+    assert.match(html, /<p><strong>Consider continuing\.<\/strong><br\/>Facts: f1 · Sources: s1<\/p>/);
+    assert.match(html, /<p><strong>Pause for a review\.<\/strong><br\/>Facts: f2 · Sources: s2<\/p>/);
+    assert.match(html, /Check whether each selected source supports the proposal in this context/);
     assert.match(html, /Who decides\?/);
     assert.match(html, /Reason: timeout/);
     assert.match(html, /Depends on: check terms/);

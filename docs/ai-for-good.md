@@ -469,3 +469,23 @@ The proposed current-protocol Nebius test was **denied by automatic approval
 review before execution**, so it made zero provider requests and incurred no
 new inference cost. Fresh bounded approval is pending; no retry or provider
 switch occurred. See the [5 November evidence](evidence/ai-for-good-kb-2026-11-05.json).
+
+
+## Approved protocol-3 provider run (5 November 2026)
+
+After fresh approval, one retry of the initially denied operation completed the
+27-request Nebius Nano allowance, with no retry/fallback/provider switch within
+the run. It returned **25 fully accepted and two partial roles**, **7/9 fully
+accepted snapshots**, and no unavailable roles. Reported 46,864 input / 3,075
+output tokens give **$0.00354984** at checked list prices; invoice unverified.
+Both partial cases preserved valid items as designed. See [actual results and
+source-fit review](ai-for-good-v3-results.md) and the [new offline review packet](evidence/ai-for-good-recorded-live-review-v3.html).
+
+A lean UI change now labels each proposal beside its fact/source IDs in existing
+collapsed details. No new validator or automatic correction was added. The new
+real-response replay regression checks all 27 outputs without provider calls;
+the earlier protocol-2 packet stays byte-identical. Current verification: 90 core
+checks, 102 policy/evidence tests, 98 frontend tests and production build; the
+three optional vector tests and API build passed in the earlier same-day KB
+increment. No new browser/provider session, hosted import or external delivery
+is established, and the paid allowance is consumed.

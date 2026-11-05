@@ -56,7 +56,7 @@ among retrieved source IDs and curated requirement indexes. Schema and citation
 validation prevent the display of a model-invented source. Invalid output,
 abstention, timeout or provider error yields a visibly labelled deterministic
 fallback. This constrains output provenance; it does not prove relevance or
-legal applicability. The separate coordination path has two bounded live-model
+legal applicability. The separate coordination path has three bounded live-model
 evaluations, described below; the free-text review selector was not live-tested.
 
 ## 3. Policy mapping and candidate domain gaps
@@ -118,17 +118,16 @@ the corpus/protocol versions, provider/model, supplied source notes and hashes,
 prompt hashes, call-attempt status and validated proposals. Facilitators can see
 all role assessments; role audits return only their own. Auditability records
 concise decisions and evidence without private model chain-of-thought. These
-software paths have offline checks and two bounded live coordination runs;
-semantic quality is unreviewed. The facilitator has one action that generates or
-loads the saved stage/collection view, without another model call on replay.
+software paths have offline checks and three bounded live coordination runs;
+selected source pairs have an agent-led qualitative review, not complete expert
+validation. The facilitator has one action that generates or loads the saved stage/collection view, without another model call on replay.
 
 ## 5. Evaluation, limitations and reproduction
 
 The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 100 policy/evidence unit tests, three separate local-vector tests,
+checks, 102 policy/evidence unit tests, three separate local-vector tests,
 standalone staged-scenario checks and 98 frontend tests. Frontend and offline API
-package builds succeeded; an
-earlier extracted-wheel check verified saved partial-round reuse without extra calls.
+package builds succeeded; an earlier extracted-wheel check verified saved partial-round reuse without extra calls.
 A [local browser walkthrough](ai-for-good-demo.md) connects typed classroom input,
 Q&A and report to a separate staged policy exercise, scripted role proposals and
 human decisions/audit. This explicit offline demo does not call model providers.
@@ -136,19 +135,20 @@ The [offline walkthrough](evidence/ai-for-good-offline.json) also records four
 hand-authored retrieval probes and 27 deterministic role/stage reviews. These
 are software checks, not a representative retrieval or educational benchmark.
 
-Two separately approved Nebius runs used the same Nano model and synthetic
+Three separately approved Nebius runs used the same Nano model and synthetic
 scenario/policy scope, each capped at 27 requests and 400 output tokens, with
 no retries, fallback or provider switch:
 
-| Observed measure | Protocol 1 | Protocol 2 |
-| --- | --- | --- |
-| Provider responses | 27 | 27 |
-| Role responses passing schema/ID checks | 14 / 27 | 24 / 27 |
-| Snapshots passing for all three roles | 1 / 9 | 6 / 9 |
-| Reported input / output tokens | 26,604 / 3,289 | 40,132 / 3,412 |
-| List-price calculation from reported usage | $0.0023856 | $0.0032268 |
+| Observed measure | Protocol 1 | Protocol 2 | Protocol 3 |
+| --- | --- | --- | --- |
+| Provider responses | 27 | 27 | 27 |
+| Fully accepted role responses | 14 / 27 | 24 / 27 | 25 / 27 |
+| Partial role responses | Not supported | Not supported | 2 / 27 |
+| Snapshots passing for all three roles | 1 / 9 | 6 / 9 | 7 / 9 |
+| Reported input / output tokens | 26,604 / 3,289 | 40,132 / 3,412 | 46,864 / 3,075 |
+| List-price usage calculation | $0.0023856 | $0.0032268 | $0.00354984 |
 
-Neither cost was verified against an invoice. Protocol 2 added clearer
+No cost was verified against an invoice. Protocol 2 added clearer
 role-scoped schema/uniqueness instructions and fixed diagnostic categories. Its
 three remaining failures were duplicate actions, a schema limit and a source ID
 outside the supplied list. Raw completions were not retained; no specific cause
@@ -156,6 +156,14 @@ was assigned retrospectively to protocol 1's thirteen rejections. All responses
 reported normal completion, below the output cap. The observed structural count
 increased, but these small non-randomised runs do not establish causation,
 policy correctness or educator benefit. See [recorded results](ai-for-good-v2-results-and-simplification.md).
+
+Protocol 3 retained valid items from a duplicate-action response and one with
+an invented action ID, marking both partial. Actual responses replay offline;
+all 27 provider events succeeded, distinct from structural acceptance. Selected
+source-fit review found contextual/weak citations alongside meaningful guidance
+matches. These runs use different prompts/corpora and validation behavior; their
+counts do not establish causal improvement or policy correctness. See the
+[current recorded review](ai-for-good-v3-results.md).
 
 The UI uses one facilitator action, ordinary errors and manual retry. Saved
 results, including partial ones, are returned without fresh model calls. Source
@@ -181,6 +189,7 @@ the [engineering runbook](ai-for-good.md#verification-and-local-use).
 An offline source-fit review found contextual or weak citations in some accepted
 samples; structural acceptance did not establish policy support. Protocol 3 now
 preserves valid items as explicit partial results and improves incident-source
-candidates while retaining verification notes. It has not been live-tested. The
+candidates while retaining verification notes. Its bounded live run is reported
+above. The
 [review and remaining requirements](ai-for-good-source-review-and-next-steps.md)
 identify institutional review and full-text verification still needed.

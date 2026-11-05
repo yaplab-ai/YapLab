@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-05",
+  "implementation_base_commit": "be5dd5d",
+  "branch": "codex/yaplab-ai-for-good",
+  "paid_run": {
+    "status": "completed after one permitted retry following new explicit approval; prior denial was before process creation",
+    "source_commit": "be5dd5d694068266efcc865a7ac69e81a5107269",
+    "started_at": "2026-11-05T04:04:39.542413+00:00",
+    "updated_at": "2026-11-05T04:04:54.279226+00:00",
+    "approval_reference": "user-approved-new-protocol3-run-2026-11-05",
+    "provider": "nebius",
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "protocol_version": "3",
+    "corpus_version": "2026-11-04.4",
+    "provider_attempts": 27,
+    "provider_successes": 27,
+    "full_roles": 25,
+    "partial_roles": 2,
+    "unavailable_roles": 0,
+    "all_role_snapshots": 7,
+    "snapshots": 9,
+    "counting_note": "The two partial roles are included in the evaluator structurally_failed_roles count; these counts overlap.",
+    "sdk_retries": 0,
+    "fallback": false,
+    "provider_switch": false,
+    "additional_run": false,
+    "max_output_per_request": 400,
+    "observed_max_output": 185,
+    "finish_reasons": [
+      "stop"
+    ],
+    "input_tokens": 46864,
+    "output_tokens": 3075,
+    "reported_usage_list_price_usd": 0.00354984,
+    "invoice_verified": false,
+    "planning_estimate_usd": 0.02761824,
+    "enforced_dollar_cap": false,
+    "payload": "Only synthetic staged facts, curated IDs/role instructions and public policy summaries; no real student records or project upload",
+    "account": "Existing approved key/account; owner, retention and invoice unverified",
+    "prompt_hashes": "All27 match the reviewed current-protocol/corpus plan"
+  },
+  "confirmed_findings": {
+    "duplicate_action_case": "Transcript stage1 privacy repeated review_transcript_access; first evidence and valid questions retained",
+    "unknown_action_case": "Caption stage2 teacher invented resume_workshop_now; discarded while valid delay_workshop/questions retained",
+    "validator_bug_found": false,
+    "no_future_or_other_role_fact_ids_in_retained_proposals": true,
+    "retained_proposals_reviewed": 37,
+    "source_candidate_membership": "All retained source IDs were candidates for the relevant role",
+    "citation_quality": "Mixed qualitative relevance; some contextual/weak fact/source/action pairs. Not a complete expert or legal assessment.",
+    "reviewer_type": "Independent development agents; human expert/institutional evaluation remains outstanding"
+  },
+  "changes": {
+    "ui": "Curated proposal text now labels its own fact/source IDs in existing collapsed details; short relevance prompt",
+    "new_user_step": false,
+    "new_validation_layer": false,
+    "automatic_action_correction": false,
+    "offline_packet": "Separate protocol3 packet; original protocol2 HTML and historical results unchanged",
+    "actual_response_replay": "All27 saved responses re-assess to exact retained proposal/question IDs and issue labels, without inference"
+  },
+  "verification": {
+    "core": {
+      "passed": 90,
+      "failed": 0
+    },
+    "policy_and_evidence": {
+      "passed": 102,
+      "failed": 0,
+      "provider_behavior": "scripted/mocked or saved-text replay"
+    },
+    "frontend": {
+      "passed": 98,
+      "failed": 0,
+      "production_build": "passed",
+      "warnings": [
+        "Existing large JS bundle warning",
+        "SSR test emitted WebSocket port-in-use warning; all98 tests passed; no unrelated process stopped"
+      ]
+    },
+    "recorded_packets": "Both v2 default and v3 explicit --check passed; v2 byte-identical",
+    "kb_input_bundles": "General and UAEU exact --check passed; vector files unchanged",
+    "browser": "Actual saved protocol3 packet rendered; full/partial metrics, retained duplicate case and source caveats verified; screenshot is packet, not a live app/provider session",
+    "local_evidence_server": "Stopped, loopback8899 checked free",
+    "logs": {
+      "core": {
+        "path": "/tmp/yaplab-v3-2026-11-05-core.log",
+        "sha256": "54236a1c72e1d85702645e56497a89ad996e034d39698c1185647df175662cf2"
+      },
+      "policy": {
+        "path": "/tmp/yaplab-v3-2026-11-05-policy.log",
+        "sha256": "3c035d10be80e67ddf0f88ccad64792145e3f277f4bcc315568c137b89b955ea"
+      },
+      "frontend-tests": {
+        "path": "/tmp/yaplab-v3-2026-11-05-frontend-tests.log",
+        "sha256": "8062f02821af872f1b18174b5a8913c665847e508370fede482d0f34ab085873"
+      },
+      "frontend-build": {
+        "path": "/tmp/yaplab-v3-2026-11-05-frontend-build.log",
+        "sha256": "e3e8ba28032db10bf9be8754af04d22e9f821be1b274b96a13e5c3070844e93e"
+      }
+    },
+    "final_packet_tests": {
+      "passed": 5,
+      "failed": 0,
+      "note": "Narrow replay/viewer checks rerun after deriving the packet date from saved input; protocol2 remains byte-identical."
+    }
+  },
+  "supporting_files": {
+    "ai-for-good-coordination-live-v3-2026-11-05.json": {
+      "sha256": "408242ac7652a0e252133cacd8072a00b265ea33a0990aa6f787d04805452cd2"
+    },
+    "ai-for-good-coordination-responses-v3-2026-11-05.json": {
+      "sha256": "a8832bb0376b48fc08b72d291adf7b0135604429ab9c70dcea1327a08b072c68"
+    },
+    "ai-for-good-recorded-live-review-v3.html": {
+      "sha256": "f40c6af58f0a1d985e053d0ed1986e9fc979ee6264386e8802506e93f3273b24"
+    },
+    "ai-for-good-recorded-live-review-v3-2026-11-05.jpg": {
+      "sha256": "d75299682595bc595955844a58e0cf5409611e20f35b8cc6e8f2ecd01b3dca77"
+    }
+  },
+  "preservation": {
+    "original_head_and_status_unchanged": true,
+    "file_matches": {
+      ".DS_Store": true,
+      "docs/.DS_Store": true,
+      ".env": true,
+      "AGENTS.md": true
+    },
+    "credential_contents_exposed": false,
+    "video_files_changed": false
+  },
+  "remaining_gaps": [
+    "Institutional/source-fit and current statutory full-text review",
+    "Live human-operated browser/provider demonstration not performed",
+    "Organiser hostedKB access/format/acceptance",
+    "Final team/repository/delivery details and verified five-page report rendering"
+  ],
+  "external_delivery": {
+    "push": false,
+    "deployment": false,
+    "upload": false,
+    "submission": false,
+    "contact": false,
+    "credential_created": false
+  },
+  "allowance_status": "Consumed by this one27-request run; no further paid operation attempted"
+}

@@ -2,7 +2,7 @@
 
 **Not ready to submit.** The local demonstration and draft evidence are ready for
 review. Final report production, delivery details and key evidence gaps remain.
-This update starts from local commit `04b07af`; no new deliverable has been
+This update starts from local commit `be5dd5d`; no new deliverable has been
 uploaded, pushed, deployed or submitted.
 
 The [official brief and FAQ](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485),
@@ -25,7 +25,7 @@ Status meanings: **Complete locally** = present and checked for the stated scope
 | GitHub delivery | Partial / blocked | Code is isolated on `codex/yaplab-ai-for-good`, with MIT code and separate TalkMoves terms retained. Confirm the repository destination/access and approve publication of the chosen content. No hackathon branch publication or final submission URL is established. |
 | Knowledge-base content | Partial | Corpus `.4`: 10 general references plus three explicit UAEU examples. Both notebook-input bundles pass `--check`: 10/29 and 13/38 documents/chunks. They contain summaries/provenance, not full source texts. Current PDPL, cross-border conditions and institutional applicability remain unverified. |
 | Local vectorised / ITU-hosted KB | Complete locally / hosted blocked | [MiniLM/FAISS indexes](ai-for-good-local-kb.md) contain 29 general and 38 UAEU vectors (384 dimensions), JSON metadata and hash/model provenance; three real local tests pass. Input-bundle manifests remain unchanged; separate vector configs identify the built indexes and `hosted_import_verified=false`. Organiser must confirm format, summary/full-text acceptance, endpoint/access and timing. No hosted import or ITU receipt exists. |
-| Actual policy-agent provider evidence | Partial | Two historical runs exist; protocol 2 recorded 27 separate role requests, 24 accepted contracts, 6/9 fully accepted snapshots. [Recorded evidence viewer](evidence/ai-for-good-recorded-live-review.html) shows actual saved selections, failures and source notes. Current protocol 3/corpus `.4` has no live-provider run; a new 27-call action was denied before execution on 5 November and fresh approval is pending. |
+| Actual policy-agent provider evidence | Partial | Three bounded harness runs exist. Current protocol 3/corpus `.4` returned 27 responses: 25 fully accepted, two partial, 7/9 fully accepted snapshots. [Current recorded packet](evidence/ai-for-good-recorded-live-review-v3.html) and [actual source-fit review](ai-for-good-v3-results.md) expose mixed relevance. No live human-operated browser/provider session or expert validation exists; the two earlier runs remain historical. |
 | Domain gaps, global examples and source relevance | Partial | [Source-fit review](ai-for-good-source-review-and-next-steps.md) identifies weak/indirect historical matches. Transcript ownership, caption fallback and formative-feedback/grade boundaries are candidate operational gaps. An educator and institutional policy reviewer have not validated these findings or applicable mandates. |
 | Standards / readiness mapping | Partial | [Y.3172 and Readiness 2.0 mapping](ai-for-good.md#y3172-mapping-an-architectural-analogy) is drafted as an architectural analogy. No conformance assessment, national readiness score, energy measurement or adoption result is claimed. |
 | Audit format acceptance | Blocked on clarification | Concise decision summaries, stage/role, source references, hashes and modes exist. The brief requests reasoning traces; confirm that these reviewable summaries satisfy it. Private model chain-of-thought is neither requested nor exposed. |
@@ -56,14 +56,16 @@ Raw rejected completions were not retained. Its accepted selections have not
 received a complete expert relevance assessment; 24/27 is a contract-validation
 count, not citation quality, legal compliance or learning gain.
 
-For stronger current evidence, the next experiment would use the existing
-[protocol-3/corpus-.4 dry-run plan](evidence/ai-for-good-coordination-plan-v3-corpus4.json)
-under a separately authorised provider allowance, plus human source-fit review.
-A human-operated model-assisted demonstration would additionally establish the
-current browser-to-provider path. Neither has been completed. On 5 November,
-automatic approval review denied the new paid action before process execution:
-zero provider requests, no new inference cost. Fresh explicit approval is pending;
-the denied action has not been retried. Earlier allowances are consumed.
+The current experiment used the reviewed
+[protocol-3/corpus-.4 plan](evidence/ai-for-good-coordination-plan-v3-corpus4-2026-11-05.json).
+After fresh user approval, one
+retry after the initial pre-execution denial completed 27 responses, 25 fully
+accepted and two partial. Seven snapshots passed for all roles. The retained
+valid items, actual JSON and independent agent source-fit observations are linked
+above. Human expert review remains outstanding. The
+$0.00354984 usage calculation is invoice-unverified. A human-operated model-assisted
+demonstration would additionally establish the browser-to-provider path; that
+has not been completed. This allowance is now consumed.
 
 ## Decisions and inputs needed, in priority order
 
@@ -78,9 +80,9 @@ the denied action has not been retried. Earlier allowances are consumed.
    explicit authorisation.
 3. **Evaluation:** nominate an educator/policy reviewer and choose an actual
    institutional scope if available. Otherwise retain the explicitly synthetic,
-   conditional reference case. Decide whether a new bounded current-protocol
-   provider run or browser/provider recording is wanted; scope/cost approval is
-   still needed before paid calls.
+   conditional reference case. The approved protocol-3 harness run is complete;
+   choose whether a live browser/provider recording is wanted. Any new paid
+   run still needs a specific scope/allowance.
 4. **Video:** choose an optional initial recording using the guide, clearly
    separating offline demo, historical provider evidence and expected outcomes.
 
@@ -102,3 +104,6 @@ To reproduce the viewer check from `apps/api`:
 The 5 November [verification record](evidence/ai-for-good-kb-2026-11-05.json) records
 90 existing backend checks, 100 policy/evidence tests, three optional real-vector
 tests, 98 frontend tests, both builds and a fresh fake/scripted browser walkthrough.
+
+The later [protocol-3 result](ai-for-good-v3-results.md) supersedes the earlier
+blocked provider status, not the earlier fake/scripted browser observations.

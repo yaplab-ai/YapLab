@@ -58,7 +58,8 @@ export function CoordinationResult({ result }) {
       {!!item.proposals?.length && <><h5>Proposals</h5><ul>{item.proposals.map((proposal) => <li key={proposal.action_id}>{proposal.text}</li>)}</ul></>}
       {!!item.questions?.length && <><h5>Questions</h5><ul>{item.questions.map((question, index) => <li key={question.question_id || index}>{question.text}</li>)}</ul></>}
       {(item.proposals?.length > 0 || item.evidence?.length > 0 || item.prompt_sha256) && <details className="policy-audit"><summary>Sources and details</summary>
-        {(item.proposals || []).map((proposal) => <p key={proposal.action_id}>Facts: {(proposal.fact_ids || []).join(', ')} · Sources: {(proposal.source_ids || []).join(', ')}</p>)}
+        {!!item.proposals?.length && <p>Check whether each selected source supports the proposal in this context.</p>}
+        {(item.proposals || []).map((proposal) => <p key={proposal.action_id}><strong>{proposal.text}</strong><br />Facts: {(proposal.fact_ids || []).join(', ')} · Sources: {(proposal.source_ids || []).join(', ')}</p>)}
         <ul>{(item.evidence || []).filter((source) => (item.proposals || []).some((proposal) => (proposal.source_ids || []).includes(source.id))).map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} <span aria-label="opens in a new tab">↗</span></a><span className="policy-evidence">{[source.authority, source.jurisdiction, source.document_type, source.source_locator].filter(Boolean).join(' · ')}{source.summary && ` · Summary: ${source.summary}`}{source.scope && ` · Scope: ${source.scope}`}{source.verification && ` · Verification: ${source.verification}`}{source.limitations && ` · Limits: ${Array.isArray(source.limitations) ? source.limitations.join(' ') : source.limitations}`}</span></li>)}</ul>
         {item.prompt_sha256 && <p>Prompt digest: {item.prompt_sha256}</p>}
       </details>}

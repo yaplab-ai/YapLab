@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the saved protocol-2 evaluation as a static, offline review packet."""
+"""Render saved protocol-2/3 evaluations as static, offline review packets."""
 from __future__ import annotations
 
 import argparse
@@ -34,8 +34,17 @@ def render(document: dict, input_sha256: str) -> str:
     snapshots = document['snapshots']
     usage = document['usage']
     roles = [role for snapshot in snapshots for role in snapshot['roles']]
-    if document.get('protocol_version') != '2' or len(snapshots) != 9 or len(roles) != 27 or len(usage) != 27:
-        raise ValueError('Expected the recorded protocol-2 evaluation with 9 snapshots, 27 roles and 27 usage events')
+    protocol = document.get('protocol_version')
+    if protocol not in ('2', '3') or len(snapshots) != 9 or len(roles) != 27 or len(usage) != 27:
+        raise ValueError('Expected a recorded protocol-2/3 evaluation with 9 snapshots, 27 roles and 27 usage events')
+    partial = sum(role['status'] == 'partial' for role in roles)
+    lead = ('This packet displays saved synthetic-exercise results from protocol 2. The current application uses a later protocol; this record is not a current-protocol result.' if protocol == '2' else
+            'This packet displays the saved protocol-3 synthetic-exercise run of ' + esc(document['evaluation_date']) + '. It is recorded provider evidence, not a fresh browser/provider session.')
+    quality = ('Human semantic quality remains unreviewed. Raw rejected outputs are unavailable. Review the <a href="../ai-for-good-source-review-and-next-steps.md">source-fit review and known weak matches</a> before interpreting individual citations.' if protocol == '2' else
+               'Selected proposal/source pairs received a qualitative source-fit review; a complete expert assessment remains outstanding. Synthetic JSON responses were retained separately and are not included in this packet. Review the <a href="../ai-for-good-v3-results.md">actual partial cases and source-fit findings</a> before interpreting citations.')
+    issue_note = ('These labels describe validator failures; they do not reconstruct rejected content.' if protocol == '2' else
+                  'These labels describe validation issues. Partial roles retain independently valid items; they are included in the non-completed count, not additional failures.')
+    extra_stat = (f'<div class="stat"><strong>{partial} / 27</strong><span>partial role responses, shown separately from fully accepted responses</span></div>' if protocol == '3' else '')
     validated = sum(role['status'] == 'completed' for role in roles)
     passed = sum(snapshot['structural_validation'] == 'pass' for snapshot in snapshots)
     invalid = [role for role in roles if role['status'] != 'completed']
@@ -111,11 +120,11 @@ def render(document: dict, input_sha256: str) -> str:
 </style></head><body><main>
 <p class="eyebrow">YapLab · historical evidence</p>
 <h1>Recorded coordination, open for review</h1>
-<p class="lead"><strong>Recorded live-provider evidence, viewed offline; no new provider calls.</strong> This packet displays saved synthetic-exercise results from protocol 2. The current application uses a later protocol; this record is not a current-protocol result.</p>
-<div class="stats"><div class="stat"><strong>''' + esc(validated) + ''' / 27</strong><span>structurally accepted role responses</span></div><div class="stat"><strong>''' + esc(passed) + ''' / 9</strong><span>snapshots with every role structurally accepted</span></div><div class="stat"><strong>''' + esc(document['provider_success_events']) + ''' / 27</strong><span>provider events reported success</span></div></div>
-<div class="note"><strong>What this shows.</strong> The model selected from constrained, prewritten actions and IDs. The application validated and merged those selections; this is not free-form generation or multi-institution negotiation. Structural acceptance is not a semantic, legal, accessibility, or learning score. Human semantic quality remains unreviewed. Raw rejected outputs are unavailable. Review the <a href="../ai-for-good-source-review-and-next-steps.md">source-fit review and known weak matches</a> before interpreting individual citations.</div>
+<p class="lead"><strong>Recorded live-provider evidence, viewed offline; no new provider calls.</strong> ''' + lead + '''</p>
+<div class="stats"><div class="stat"><strong>''' + esc(validated) + ''' / 27</strong><span>structurally accepted role responses</span></div><div class="stat"><strong>''' + esc(passed) + ''' / 9</strong><span>snapshots with every role structurally accepted</span></div><div class="stat"><strong>''' + esc(document['provider_success_events']) + ''' / 27</strong><span>provider events reported success</span></div>''' + extra_stat + '''</div>
+<div class="note"><strong>What this shows.</strong> The model selected from constrained, prewritten actions and IDs. The application validated and merged those selections; this is not free-form generation or multi-institution negotiation. Structural acceptance is not a semantic, legal, accessibility, or learning score. ''' + quality + '''</div>
 <h2>Record provenance</h2><p><strong>Input JSON SHA-256:</strong> <code>''' + esc(input_sha256) + '''</code><br><strong>Protocol:</strong> ''' + esc(document['protocol_version']) + ''' · <strong>Corpus:</strong> ''' + esc(document['corpus_version']) + ''' · <strong>Source commit:</strong> <code>''' + esc(document['source_commit']) + '''</code><br><strong>Provider:</strong> ''' + esc(document['provider']) + ''' · <strong>Model:</strong> <code>''' + esc(document['model']['model']) + '''</code> · <strong>Evaluation date:</strong> ''' + esc(document['evaluation_date']) + '''</p>
-<p class="muted">Recorded validation issue categories: ''' + esc(issue_text) + '''. These labels describe validator failures; they do not reconstruct rejected content. Source notes are the saved historical notes, including their then-recorded caveats; they are not an update to current law or institutional policy.</p>
+<p class="muted">Recorded validation issue categories: ''' + esc(issue_text) + '''. ''' + issue_note + ''' Source notes are the saved historical notes, including their then-recorded caveats; they are not an update to current law or institutional policy.</p>
 <h2>Nine recorded snapshots</h2><div class="table-wrap"><table><thead><tr><th scope="col">Scenario</th><th scope="col">Stage</th><th scope="col">Structural result</th><th scope="col">Roles and recorded failures</th></tr></thead><tbody>''' + ''.join(overview) + '''</tbody></table></div>
 <h2>Role selections and saved plans</h2><p>Expand each role for its saved IDs, the exact supplied source notes and the recorded failure label, if any. Merged plans below reproduce saved action IDs, owners, statuses and dependencies; the record did not save plan prose.</p>''' + ''.join(detail_sections) + '''
 <h2>Provider usage events</h2><p>These are the 27 saved provider events. A successful provider event means a response was returned; it does not imply that downstream structural validation passed. Usage and estimated cost are not invoice verification.</p><div class="table-wrap"><table><thead><tr><th scope="col">Scenario</th><th scope="col">Stage</th><th scope="col">Role</th><th scope="col">Outcome</th><th scope="col">Finish</th><th scope="col">Error type</th><th scope="col">Latency ms</th><th scope="col">Input tokens</th><th scope="col">Output tokens</th></tr></thead><tbody>''' + ''.join(usage_rows) + '''</tbody></table></div>

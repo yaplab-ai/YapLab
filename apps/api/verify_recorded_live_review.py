@@ -81,6 +81,51 @@ class RecordedReviewTests(unittest.TestCase):
         self.assertIn('source-fit review and known weak matches', page)
         self.assertIn('not a semantic, legal, accessibility, or learning score', page)
 
+    def test_protocol3_full_partial_counts_and_provenance_without_changing_v2(self):
+        source = review.ROOT / 'docs/evidence/ai-for-good-coordination-live-v3-2026-11-05.json'
+        raw = source.read_bytes()
+        page = review.render(json.loads(raw), hashlib.sha256(raw).hexdigest())
+        self.assertIn('25 / 27', page)
+        self.assertIn('2 / 27', page)
+        self.assertIn('7 / 9', page)
+        self.assertIn('protocol-3', page)
+        self.assertIn('partial role responses', page)
+        self.assertIn('duplicate_action_ids', page)
+        self.assertIn('unknown_action_id', page)
+        self.assertIn('Synthetic JSON responses were retained separately', page)
+        self.assertIn('actual partial cases and source-fit findings', page)
+        self.assertIn('2026-11-04.4', page)
+        moved = json.loads(raw)
+        moved['evaluation_date'] = 'different-record-date'
+        self.assertIn('run of different-record-date.', review.render(moved, 'test-digest'))
+        self.assertNotIn('Raw rejected outputs are unavailable', page)
+        self.assertEqual(review.render(self.document, self.sha).encode(), review.DEFAULT_OUTPUT.read_bytes())
+
+    def test_actual_protocol3_responses_replay_offline_with_exact_retained_evidence(self):
+        from frontrow.policy.coordination import _assess_response, prepare_role_requests
+        from frontrow.policy.evidence import load_corpus
+        from verify_policy_coordination import snapshot
+        base = review.ROOT / 'docs/evidence'
+        document = json.loads((base / 'ai-for-good-coordination-live-v3-2026-11-05.json').read_text())
+        responses = json.loads((base / 'ai-for-good-coordination-responses-v3-2026-11-05.json').read_text())
+        self.assertEqual(len(responses), 27)
+        completed, partial = 0, 0
+        for state in document['snapshots']:
+            prepared = {item['role']: item for item in prepare_role_requests(load_corpus(), snapshot(state['scenario_id'], state['stage']))}
+            for saved in state['roles']:
+                request = prepared[saved['role']]
+                self.assertEqual(request['prompt_sha256'], saved['prompt_sha256'])
+                raw = next(item['response'] for item in responses if
+                           (item['scenario_id'], item['stage'], item['role']) ==
+                           (state['scenario_id'], state['stage'], saved['role']))
+                proposals, questions, issue = _assess_response(raw, request, state['scenario_id'])
+                self.assertEqual([{k: p[k] for k in ('action_id', 'fact_ids', 'source_ids')} for p in proposals], saved['proposals'])
+                self.assertEqual([q['question_id'] for q in questions], saved['question_ids'])
+                self.assertEqual(issue, saved.get('validation_issue'))
+                completed += saved['status'] == 'completed'
+                partial += saved['status'] == 'partial'
+        self.assertEqual((completed, partial), (25, 2))
+
     def test_no_active_content_or_external_assets_and_escape_hostile_text(self):
         document = copy.deepcopy(self.document)
         evidence = document['snapshots'][0]['roles'][0]['evidence'][0]

@@ -151,17 +151,19 @@ hashes and passed 43 focused preflight tests. The proposed run was one Nebius
 Nano evaluation, at most 27 attempts × 400 output tokens, no retries or fallback,
 using only synthetic facts and public-policy notes with the existing key.
 
-Automatic approval review **denied process creation before execution**, citing
-that prior bounded-test approval did not authorise another paid run and that
-the latest instructions prohibited additional paid calls. No SDK/provider
-attempt began and no new provider cost was incurred. A specific approval request
-is pending; the denied operation has not been retried.
-The current UI verification used fake/scripted providers only.
+Automatic approval review initially **denied process creation before execution**,
+with zero provider requests. The user then explicitly approved the corrected
+roughly $0.028 bounded estimate. One retry was permitted and completed all 27
+requests: **25 fully accepted roles, two partial, zero unavailable**. Reported
+usage gives **$0.00354984** at the checked list prices; invoice/account charge is
+unverified. No additional run, retry or fallback occurred. See the
+[actual results and source-fit review](ai-for-good-v3-results.md).
 
 The public [Nebius model page](https://nebius.com/services/token-factory/models/nvidia-nemotron-models-inference)
-was read in the browser on 5 November and showed Nano rates of $0.06/M input and
-$0.24/M output. The planning estimate is $0.02761824, not an enforced billing cap
-or account/invoice verification. Do not treat the blocked run as live evidence.
+was checked on 5 November: $0.06/M input, $0.24/M output. The $0.02761824 planning
+estimate was not an enforced dollar cap. The earlier [KB verification record](evidence/ai-for-good-kb-2026-11-05.json)
+records the initial blocked state; the separate live artifact records its later
+resolution. The local UI walkthrough in that earlier record remains fake/scripted.
 
 ## Verification record
 
