@@ -1,0 +1,162 @@
+{
+  "version": "1",
+  "label": "Candidate operational gaps · team-authored, not expert-validated",
+  "gaps": [
+    {
+      "id": "transcript-ownership",
+      "scenario_id": "transcript-disclosure",
+      "gap_type": "unclear responsibility",
+      "title": "Who owns a rehearsal transcript incident?",
+      "operational_gap": "A university needs to establish who contains sharing, determines retention and coordinates communication when a practice transcript identifies a learner.",
+      "uae_sources": [
+        {
+          "source_id": "uae-personal-data-protection",
+          "title": "UAE Personal Data Protection Law",
+          "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+          "locator": "Articles 2–5, 13–19 and 22–23",
+          "says": "Defines a scoped personal-data framework including processing controls and data-subject rights.",
+          "does_not_say": "The available indexed provisions and corpus summary do not establish an incident owner or retention schedule for this synthetic case. Full current statutory text and institutional applicability remain unverified.",
+          "scope": "Federal law; assess actual data, entity, exclusions and jurisdiction."
+        },
+        {
+          "source_id": "uae-ai-ethics-principles-guidelines",
+          "title": "UAE AI Ethics: Principles and Guidelines",
+          "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+          "locator": "Section 1.2, PDF page 4; principles on data and transparency",
+          "says": "Non-mandatory guidance addresses AI that makes or informs significant or critical decisions.",
+          "does_not_say": "Does not prescribe a university practice-transcript retention schedule, caption fallback or formative feedback scoring rule.",
+          "scope": "Non-binding; ordinary rehearsal is a voluntary design reference unless its decision scope applies."
+        }
+      ],
+      "global_examples": [
+        {
+          "source_id": "us-ferpa-education-records",
+          "title": "FERPA",
+          "url": "https://studentprivacy.ed.gov/ferpa",
+          "locator": "34 CFR 99.3, 99.5, 99.30–31",
+          "addresses": "Defines education records, eligible-student rights, consent and exceptions relevant to access and disclosure.",
+          "scope": "US covered educational institutions receiving specified federal funds; not every recording is necessarily an education record.",
+          "binding_status": "Binding US law and regulations for covered institutions; not UAE law."
+        }
+      ],
+      "verification_status": "Candidate operational question; reviewed source provisions do not determine this institution’s process or demonstrate a national legislative gap.",
+      "evidence_needed": [
+        "Applicable institutional incident, access and retention procedures and named owners.",
+        "Data classification, actual exposure, provider terms and applicable jurisdiction, including exclusions."
+      ]
+    },
+    {
+      "id": "caption-fallback",
+      "scenario_id": "caption-failure",
+      "gap_type": "coordination problem",
+      "title": "Who agrees and tests a usable caption fallback?",
+      "operational_gap": "Teaching, accessibility and privacy owners need a tested way to agree an accessible fallback without unnecessarily identifying a participant or using unchecked audio processing.",
+      "uae_sources": [
+        {
+          "source_id": "uae-digital-accessibility-policy",
+          "title": "UAE National Policy for Digital Accessibility",
+          "url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+          "locator": "Article 3, PDF page 7; Annex 1 section 1, PDF page 13",
+          "says": "Identifies covered entities and services and references WCAG 2.1 AA for public-service sites in the policy context.",
+          "does_not_say": "Does not establish a specific university workshop caption fallback or blanket coverage of every private university.",
+          "scope": "Federal/connected entities under Article 3; others are asked to consider best efforts."
+        },
+        {
+          "source_id": "uaeu-students-of-determination-services",
+          "title": "UAEU Students of Determination Services",
+          "url": "https://www.uaeu.ac.ae/en/student-services/special-needs/services.shtml",
+          "locator": "Services: accommodation plans, faculty coordination and alternative formats",
+          "says": "Describes individual accommodation plans and faculty coordination.",
+          "does_not_say": "Does not establish another university’s caption contingency or that a particular substitute is usable.",
+          "scope": "Institutional service example at UAEU, not a nationwide rule."
+        }
+      ],
+      "global_examples": [
+        {
+          "source_id": "wcag-22-captions",
+          "title": "WCAG 2.2",
+          "url": "https://www.w3.org/TR/WCAG22/#time-based-media",
+          "locator": "Success criteria 1.2.2 and 1.2.4",
+          "addresses": "Specifies captions for prerecorded and live synchronized media, with criteria-specific exceptions.",
+          "scope": "Technical accessibility standard; distinguishes prerecorded level A and live level AA.",
+          "binding_status": "Voluntary standard unless incorporated by an applicable legal or contractual instrument; no automatic UAE applicability."
+        },
+        {
+          "source_id": "us-ada-title-ii-web",
+          "title": "ADA Title II web accessibility rule",
+          "url": "https://www.ada.gov/resources/2024-03-08-web-rule/",
+          "locator": "28 CFR 35.200 and following",
+          "addresses": "Sets web and mobile accessibility requirements with a WCAG 2.1 AA technical standard and exceptions.",
+          "scope": "US public entities, including public universities; scope, exceptions and implementation deadlines matter.",
+          "binding_status": "Binding US rule for covered public entities; not UAE law."
+        }
+      ],
+      "verification_status": "Candidate operational question; scope and implementation at the specific institution remain unverified.",
+      "evidence_needed": [
+        "Institutional accommodations and continuity procedures, responsible owners and attendee preferences.",
+        "Vendor processing terms, approval route and practical testing of alternatives."
+      ]
+    },
+    {
+      "id": "formative-feedback-challenge",
+      "scenario_id": "feedback-as-grade",
+      "gap_type": "standards gap",
+      "title": "How is formative feedback distinguished and challenged?",
+      "operational_gap": "A university needs a clear, accessible explanation and human-owned correction or challenge route when AI practice feedback resembles an official grade.",
+      "uae_sources": [
+        {
+          "source_id": "uae-ai-ethics-principles-guidelines",
+          "title": "UAE AI Ethics: Principles and Guidelines",
+          "url": "https://ai.gov.ae/wp-content/uploads/2023/05/MOCAI-AI-Ethics-EN.pdf",
+          "locator": "Section 1.2, PDF page 4; principles on data and transparency",
+          "says": "Non-mandatory guidance addresses AI that makes or informs significant or critical decisions.",
+          "does_not_say": "Does not prescribe a university practice-transcript retention schedule, caption fallback or formative feedback scoring rule.",
+          "scope": "Non-binding; ordinary rehearsal is a voluntary design reference unless its decision scope applies."
+        },
+        {
+          "source_id": "uaeu-student-generative-ai",
+          "title": "UAEU Generative AI Usage by the Students Policy",
+          "url": "https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf",
+          "locator": "PDF page 2 scope; pages 2–4 Articles 1–7",
+          "says": "Addresses student GenAI use, permissions and academic work.",
+          "does_not_say": "Does not set a general university staff-rehearsal feedback or challenge procedure.",
+          "scope": "UAEU students and covered work for academic credit; not all UAE universities or staff rehearsal."
+        },
+        {
+          "source_id": "uae-caa-outcomes-framework",
+          "title": "CAA Outcomes-Based Evaluation Framework University Guide",
+          "url": "https://caa.ae/Pages/Guidelines/Outcomes-based-Evaluation-framework-University-Guide.aspx",
+          "locator": "University Guide overview and Data Submission Guidelines",
+          "says": "The reviewed public overview describes higher-education quality assurance and learning-outcome evaluation.",
+          "does_not_say": "This overview does not establish how a rehearsal tool must distinguish formative AI feedback from official assessment. Detailed former 2019 standard provisions were inaccessible.",
+          "scope": "UAE higher-education evaluation guidance; actual institutional coverage and detailed assessment/record/support provisions remain unverified."
+        }
+      ],
+      "global_examples": [
+        {
+          "source_id": "eu-ai-act-education",
+          "title": "EU AI Act",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
+          "locator": "Annex III 3(b); Article 6(3); Article 4",
+          "addresses": "Identifies some education systems intended to evaluate learning outcomes as high-risk and addresses AI literacy.",
+          "scope": "EU risk classification depends on intended use and statutory conditions; not every formative feedback tool is high-risk.",
+          "binding_status": "Binding EU regulation; phased application and exceptions apply, not UAE law."
+        },
+        {
+          "source_id": "australia-teqsa-genai-assessment",
+          "title": "TEQSA Assessment Reform for the Age of Artificial Intelligence",
+          "url": "https://www.teqsa.gov.au/sites/default/files/2023-09/assessment-reform-age-artificial-intelligence-discussion-paper.pdf",
+          "locator": "Pages 2–3, principles and propositions",
+          "addresses": "Discusses redesigning assessment and maintaining credible human assessment in the presence of AI.",
+          "scope": "Australian higher-education assessment context, not this UAE rehearsal deployment.",
+          "binding_status": "Non-prescriptive guidance/discussion paper, not a UAE requirement."
+        }
+      ],
+      "verification_status": "Candidate deployment-level standards question; reviewed material does not establish a deficiency in national law or any specific university policy.",
+      "evidence_needed": [
+        "Applicable institutional assessment and feedback policies, ownership and challenge process.",
+        "Accessibility and usability tests with affected students, evidence of score use, and vendor correction and retention terms."
+      ]
+    }
+  ]
+}
