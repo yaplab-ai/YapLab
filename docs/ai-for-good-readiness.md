@@ -1,12 +1,12 @@
-# YapLab submission readiness — 4 November 2026
+# YapLab submission readiness — 5 November 2026
 
 **Not ready to submit.** The local demonstration and draft evidence are ready for
 review. Final report production, delivery details and key evidence gaps remain.
-This assessment starts from local commit `190aeec`; nothing has been uploaded,
-pushed, deployed or submitted.
+This update starts from local commit `04b07af`; no new deliverable has been
+uploaded, pushed, deployed or submitted.
 
 The [official brief and FAQ](https://aiforgood.itu.int/event/ai-for-good-sandbox-hackathon-united-arab-emirates/?topic=485),
-rechecked today, list a five-page technical report, GitHub repository and knowledge
+checked on 4 November, list a five-page technical report, GitHub repository and knowledge
 base. Initial video is optional (seven-minute maximum), becoming required for
 shortlisted teams. The submission date is 10 November 2026; the reviewed page does
 not give a cutoff time or timezone. The FAQ lists report topics and asks a video
@@ -24,13 +24,13 @@ Status meanings: **Complete locally** = present and checked for the stated scope
 | Technical report | Partial / blocked | [Content draft](ai-for-good-report-draft.md) includes use case, requirements, mappings, scenarios, candidate gaps and results. Team/contact/repository fields are missing. [Template rendering](ai-for-good-rendering-handoff.md) needs a supported Documents runtime; no final DOCX/PDF or verified ≤5-page pagination exists. |
 | GitHub delivery | Partial / blocked | Code is isolated on `codex/yaplab-ai-for-good`, with MIT code and separate TalkMoves terms retained. Confirm the repository destination/access and approve publication of the chosen content. No hackathon branch publication or final submission URL is established. |
 | Knowledge-base content | Partial | Corpus `.4`: 10 general references plus three explicit UAEU examples. Both notebook-input bundles pass `--check`: 10/29 and 13/38 documents/chunks. They contain summaries/provenance, not full source texts. Current PDPL, cross-border conditions and institutional applicability remain unverified. |
-| Vectorised / ITU-hosted KB | Blocked; artifacts missing | Both manifests state `embedding_index_built=false` and `hosted_import_verified=false`. [Reference workflow](ai-for-good-submission-workflow.md) is inspected, not executed as hosted ingestion. Organiser must confirm format, summary/full-text acceptance, endpoint/access and timing. No FAISS/Chroma index or ITU receipt exists. |
-| Actual policy-agent provider evidence | Partial | Two historical runs exist; protocol 2 recorded 27 separate role requests, 24 accepted contracts, 6/9 fully accepted snapshots. [Recorded evidence viewer](evidence/ai-for-good-recorded-live-review.html) shows actual saved selections, failures and source notes. Current protocol 3/corpus `.4` has no live-provider run. |
+| Local vectorised / ITU-hosted KB | Complete locally / hosted blocked | [MiniLM/FAISS indexes](ai-for-good-local-kb.md) contain 29 general and 38 UAEU vectors (384 dimensions), JSON metadata and hash/model provenance; three real local tests pass. Input-bundle manifests remain unchanged; separate vector configs identify the built indexes and `hosted_import_verified=false`. Organiser must confirm format, summary/full-text acceptance, endpoint/access and timing. No hosted import or ITU receipt exists. |
+| Actual policy-agent provider evidence | Partial | Two historical runs exist; protocol 2 recorded 27 separate role requests, 24 accepted contracts, 6/9 fully accepted snapshots. [Recorded evidence viewer](evidence/ai-for-good-recorded-live-review.html) shows actual saved selections, failures and source notes. Current protocol 3/corpus `.4` has no live-provider run; a new 27-call action was denied before execution on 5 November and fresh approval is pending. |
 | Domain gaps, global examples and source relevance | Partial | [Source-fit review](ai-for-good-source-review-and-next-steps.md) identifies weak/indirect historical matches. Transcript ownership, caption fallback and formative-feedback/grade boundaries are candidate operational gaps. An educator and institutional policy reviewer have not validated these findings or applicable mandates. |
 | Standards / readiness mapping | Partial | [Y.3172 and Readiness 2.0 mapping](ai-for-good.md#y3172-mapping-an-architectural-analogy) is drafted as an architectural analogy. No conformance assessment, national readiness score, energy measurement or adoption result is claimed. |
 | Audit format acceptance | Blocked on clarification | Concise decision summaries, stage/role, source references, hashes and modes exist. The brief requests reasoning traces; confirm that these reviewable summaries satisfy it. Private model chain-of-thought is neither requested nor exposed. |
 | Sandbox credits / fine-tuning | Missing; applicability unconfirmed | No ITU sandbox use or fine-tuned model. The brief mentions these resources; clarify whether this inference prototype must demonstrate them and how selected-participant access works. |
-| Video | Missing; optional initially | Walkthrough and screenshot exist; no video recorded. User must choose whether to record now. Shortlisting would make video delivery required. |
+| Video | Partial; optional initially | Existing classroom videos and two historical Devpost/YouTube entries are verified; they do not show Policy Lab. The six-minute guide and screenshot support new Policy Lab footage. No new recording was made in this increment; the user’s separate video work must be preserved. Shortlisting makes video delivery required. |
 | Final delivery instructions and team details | Blocked | Initial registration acknowledgment is not final acceptance/submission. Need final form/destination, detailed team sheet, lead/member/contact details (maximum four people per public brief), exact deadline/timezone and KB instructions. |
 
 ## What the live evidence does and does not demonstrate
@@ -60,8 +60,10 @@ For stronger current evidence, the next experiment would use the existing
 [protocol-3/corpus-.4 dry-run plan](evidence/ai-for-good-coordination-plan-v3-corpus4.json)
 under a separately authorised provider allowance, plus human source-fit review.
 A human-operated model-assisted demonstration would additionally establish the
-current browser-to-provider path. Neither has been run or scheduled. Earlier
-allowances are consumed; this checklist authorises no further requests.
+current browser-to-provider path. Neither has been completed. On 5 November,
+automatic approval review denied the new paid action before process execution:
+zero provider requests, no new inference cost. Fresh explicit approval is pending;
+the denied action has not been retried. Earlier allowances are consumed.
 
 ## Decisions and inputs needed, in priority order
 
@@ -82,16 +84,21 @@ allowances are consumed; this checklist authorises no further requests.
 4. **Video:** choose an optional initial recording using the guide, clearly
    separating offline demo, historical provider evidence and expected outcomes.
 
-The most useful work possible without those inputs was to make the historical
-provider evidence directly inspectable and link this checklist to actual files.
+The new self-contained increment built real local vector indexes, added lexical
+chunk inspection, retained source scope/verification on hits and repeated the
+offline classroom-to-policy workflow. See [local KB use and verification](ai-for-good-local-kb.md).
 No legal certification, real educational outcome or hosted acceptance is implied.
 
-Local verification of this increment: three recorded-viewer tests, deterministic
+The prior 4 November increment passed three recorded-viewer tests, deterministic
 HTML `--check`, both scoped KB bundle checks, changed-document link checks and a
-browser inspection passed. See [the verification record](evidence/ai-for-good-readiness-2026-11-04.json).
+browser inspection. See [the prior verification record](evidence/ai-for-good-readiness-2026-11-04.json).
 To reproduce the viewer check from `apps/api`:
 
 ```bash
 .venv/bin/python -B verify_recorded_live_review.py
 .venv/bin/python -B scripts/export_recorded_live_review.py --check
 ```
+
+The 5 November [verification record](evidence/ai-for-good-kb-2026-11-05.json) records
+90 existing backend checks, 100 policy/evidence tests, three optional real-vector
+tests, 98 frontend tests, both builds and a fresh fake/scripted browser walkthrough.

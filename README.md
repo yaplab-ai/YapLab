@@ -35,6 +35,9 @@ with installed dependencies and follow the [six-minute demo guide](docs/ai-for-g
 It uses a fake classroom and explicitly scripted policy proposals, with no model
 or speech-provider calls.
 
+The [local KB tools](docs/ai-for-good-local-kb.md) inspect prepared chunks and
+provide local MiniLM/FAISS indexes with source scope and verification notes.
+
 See the [engineering plan, requirements mapping and local setup](docs/ai-for-good.md)
 and [policy source notes](docs/ai-for-good-policy-sources.md). The existing
 classroom measurements below predate this extension.

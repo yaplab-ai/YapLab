@@ -1,0 +1,623 @@
+{
+  "date": "2026-11-05",
+  "branch": "codex/yaplab-ai-for-good",
+  "implementation_base_commit": "04b07af",
+  "checkout": "/Users/zukhriddin/Documents/HackathonProjects/YapLab-ai-for-good",
+  "original_checkout": "/Users/zukhriddin/Documents/HackathonProjects/FrontRow",
+  "scope": "Local knowledge-base preparation/inspection, scoped source audit and offline workflow verification; no hosted ingestion or new model-provider inference",
+  "corpus_version": "2026-11-04.4",
+  "local_indexes": [
+    {
+      "institution": "general",
+      "status": "local_vector_index_built",
+      "vectors": 29,
+      "dimension": 384,
+      "index_type": "IndexFlatIP",
+      "encoding": {
+        "normalized": true,
+        "dtype": "float32",
+        "device": "cpu"
+      },
+      "corpus_version": "2026-11-04.4",
+      "hosted_import_verified": false,
+      "source_metadata": "Exact chunk plus source ID/URL/scope/institution/type/jurisdiction/dates/verification",
+      "files": {
+        "config.json": {
+          "bytes": 4527,
+          "sha256": "b10c88c6f433ff85c96e09f8aad1f5a599dec828bf18fbe474cf61622389310e"
+        },
+        "faiss.index": {
+          "bytes": 44589,
+          "sha256": "15705c513218fa2ea7899f845182dc3ea514853cbd2c9a35e15a2e6ed50b4772"
+        },
+        "metadata.json": {
+          "bytes": 42581,
+          "sha256": "92a9d3fa7e23736cf28005b61a8e51c8ab6d6c26275fb45452a9ee65a8ef4348"
+        }
+      }
+    },
+    {
+      "institution": "uaeu",
+      "status": "local_vector_index_built",
+      "vectors": 38,
+      "dimension": 384,
+      "index_type": "IndexFlatIP",
+      "encoding": {
+        "normalized": true,
+        "dtype": "float32",
+        "device": "cpu"
+      },
+      "corpus_version": "2026-11-04.4",
+      "hosted_import_verified": false,
+      "source_metadata": "Exact chunk plus source ID/URL/scope/institution/type/jurisdiction/dates/verification",
+      "files": {
+        "config.json": {
+          "bytes": 4917,
+          "sha256": "849198850a36f4d93afa63fe258e001672954397c0346d8ed63a680ce1aedeed"
+        },
+        "faiss.index": {
+          "bytes": 58413,
+          "sha256": "a75683a8f85e75b872a66fe0818a152ce94369f3ded7ce91aca335a999f9d9a7"
+        },
+        "metadata.json": {
+          "bytes": 55788,
+          "sha256": "7fe463a0accc50e619b40ff1339b528648491522ea099c4d778af69e01269a0c"
+        }
+      }
+    }
+  ],
+  "embedding": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "model_license": "Apache-2.0",
+    "model_license_reference": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/blob/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md",
+    "model_file_sha256": {
+      "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "config_sentence_transformers.json": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "library_versions": {
+      "python": "3.12.13",
+      "sentence_transformers": "3.4.1",
+      "transformers": "4.48.3",
+      "torch": "2.6.0",
+      "faiss": "1.10.0",
+      "numpy": "1.26.4"
+    },
+    "notebook_reference": "https://github.com/CrashingGuru/ITUAIReadiness",
+    "notebook_commit": "84010da9e9c443afcceeccb86d1700a662223395"
+  },
+  "setup": {
+    "environment": "/tmp/yaplab-vector-venv",
+    "model_directory": "/tmp/yaplab-vector-model",
+    "public_downloads": "Anonymous HTTPS PyPI wheels and pinned public model files only; no account/token or corpus upload",
+    "shared_app_dependencies_changed": false,
+    "build_and_query_network": "Forced offline/local_files_only; no provider API",
+    "platform": "macOS ARM64 / Python 3.12; hash-pinned optional wheel list supplied",
+    "native_issue_fixed": "Initial ARM64 native thread-pool crash resolved by limiting standalone process native pools to one thread"
+  },
+  "input_bundles": {
+    "general": {
+      "documents": 10,
+      "chunks": 29,
+      "exact_export_check": "passed"
+    },
+    "uaeu": {
+      "documents": 13,
+      "chunks": 38,
+      "exact_export_check": "passed"
+    },
+    "manifests_changed": false,
+    "embedding_index_built_false_explanation": "These existing manifests describe the input packages. New vector output configs separately identify local construction.",
+    "content": "Original summaries/provenance, not full source laws or PDFs"
+  },
+  "retrieval": {
+    "app_search_changed": false,
+    "app_mode": "Existing weighted lexical source search",
+    "new_lexical_tool": "Stdlib in-memory TF-IDF/cosine over exact prepared scoped chunks",
+    "new_vector_tool": "Separate local MiniLM normalized vectors + FAISS IndexFlatIP",
+    "lexical_probes": {
+      "general / WCAG digital accessibility": [
+        {
+          "source_id": "uae-digital-accessibility-policy",
+          "chunk_id": 0,
+          "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "score": 0.40364
+        },
+        {
+          "source_id": "uae-digital-accessibility-policy",
+          "chunk_id": 1,
+          "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "score": 0.17023
+        },
+        {
+          "source_id": "uae-persons-with-disabilities-education",
+          "chunk_id": 2,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.13615
+        }
+      ],
+      "general / UAEU student academic credit generative AI": [
+        {
+          "source_id": "england-generative-ai-education",
+          "chunk_id": 0,
+          "source_verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+          "score": 0.33056
+        },
+        {
+          "source_id": "unesco-generative-ai-education",
+          "chunk_id": 0,
+          "source_verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
+          "score": 0.32958
+        },
+        {
+          "source_id": "uae-national-ai-strategy-2031",
+          "chunk_id": 1,
+          "source_verification": "Official strategy page reviewed on 2026-11-04; publication date is not stated on the reviewed page.",
+          "score": 0.1469
+        }
+      ],
+      "general / transfer conditions": [
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 2,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.30899
+        },
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 1,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.2508
+        },
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 0,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.07005
+        }
+      ],
+      "general / quasar xylophone marsupial": [],
+      "uaeu / WCAG digital accessibility": [
+        {
+          "source_id": "uae-digital-accessibility-policy",
+          "chunk_id": 0,
+          "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "score": 0.4188
+        },
+        {
+          "source_id": "uae-digital-accessibility-policy",
+          "chunk_id": 1,
+          "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+          "score": 0.17506
+        },
+        {
+          "source_id": "uae-persons-with-disabilities-education",
+          "chunk_id": 2,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.13653
+        }
+      ],
+      "uaeu / UAEU student academic credit generative AI": [
+        {
+          "source_id": "uaeu-student-generative-ai",
+          "chunk_id": 0,
+          "source_verification": "Official PDF page 2 Scope and related provisions checked on 2026-11-04; student/academic-credit scope confirmed. Publication date is not stated; effective and review dates are separate.",
+          "score": 0.55449
+        },
+        {
+          "source_id": "uaeu-student-generative-ai",
+          "chunk_id": 1,
+          "source_verification": "Official PDF page 2 Scope and related provisions checked on 2026-11-04; student/academic-credit scope confirmed. Publication date is not stated; effective and review dates are separate.",
+          "score": 0.32098
+        },
+        {
+          "source_id": "unesco-generative-ai-education",
+          "chunk_id": 0,
+          "source_verification": "Official overview checked on 2026-11-04; the complete linked publication text and its individual sections were not independently inspected in this pass.",
+          "score": 0.22122
+        }
+      ],
+      "uaeu / transfer conditions": [
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 2,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.31628
+        },
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 1,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.26114
+        },
+        {
+          "source_id": "uae-personal-data-protection",
+          "chunk_id": 0,
+          "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+          "score": 0.07397
+        }
+      ],
+      "uaeu / quasar xylophone marsupial": []
+    },
+    "vector_probes": {
+      "general / WCAG digital accessibility": {
+        "retrieval": "local_minilm_normalized_faiss_inner_product",
+        "institution": "general",
+        "query": "WCAG digital accessibility",
+        "scope_warning": "General sources only; applicability depends on the institution, jurisdiction and activity.",
+        "corpus_limitations": [
+          "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
+          "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
+          "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
+          "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
+          "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+          "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
+        ],
+        "excerpt_notice": "Each chunk is an excerpt of a curated summary and may omit or cut off relevant context and caveats; consult the complete summary and original source.",
+        "limitations": "Similarity scores are not confidence or applicability; semantic retrieval can miss relevant context. No hosted import is implied.",
+        "results": [
+          {
+            "source_id": "uae-digital-accessibility-policy",
+            "source_url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+            "source_scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+            "source_institution": "general",
+            "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+            "source_document_type": "government_policy",
+            "source_jurisdiction": "UAE — Article 3 entity/service scope",
+            "source_published": "2024-03",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-digital-accessibility-policy.md",
+            "chunk_id": 0,
+            "text": "# National Policy for Digital Accessibility\n\nOriginal curated summary; not the source full text.\nThese are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.\n\nSource ID: uae-digital-accessibility-policy\nAuthority: Telecommunications and Digital Government Regulatory Authority (TDRA)\nURL: https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf\nJurisdiction: UAE — Article 3 entity/service scope\nInstitution: general\nDocument type: government_policy\nPublished: 2024-03\nRetrieved: 2026-11-04\nSource locator: PDF page 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.\n\n## Scope\nArticle 3 covers federal entities and",
+            "score": 0.4368155896663666
+          },
+          {
+            "source_id": "uae-digital-accessibility-policy",
+            "source_url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+            "source_scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+            "source_institution": "general",
+            "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+            "source_document_type": "government_policy",
+            "source_jurisdiction": "UAE — Article 3 entity/service scope",
+            "source_published": "2024-03",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-digital-accessibility-policy.md",
+            "chunk_id": 2,
+            "text": "on 1; elsewhere treat it as a design reference pending applicable-policy review.\n\n## Limitations\n- Do not assert blanket applicability to all private universities or all classroom activities.\n- A citation or automated review does not establish WCAG conformance or legal compliance.\n\n## Source rights and reuse\nPublisher rights remain separate. Only metadata, links and original paraphrases are packaged.",
+            "score": 0.43677210807800293
+          },
+          {
+            "source_id": "uae-digital-accessibility-policy",
+            "source_url": "https://dgov.tdra.gov.ae/-/media/dgov/pdfs/publications/national-digital-accessibility-policy-en.pdf",
+            "source_scope": "Article 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.",
+            "source_institution": "general",
+            "source_verification": "Official PDF scope and annex pages extracted and visually checked on 2026-11-04; this is not PDPL or institutional applicability verification.",
+            "source_document_type": "government_policy",
+            "source_jurisdiction": "UAE — Article 3 entity/service scope",
+            "source_published": "2024-03",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-digital-accessibility-policy.md",
+            "chunk_id": 1,
+            "text": "ge 7, Article 3; PDF page 13, Annex 1 section 1. Issue date: March 2024.\n\n## Scope\nArticle 3 covers federal entities and specified regulated or government-connected parties; local, semi-government and private entities are also asked to consider it with best efforts. Coverage of a particular private university is not established.\n\n## Summary\nA scoped digital-services policy. Annex 1 specifies WCAG 2.1 Level AA for public-service sites within that policy context.\n\n## Considerations\n- Check the entity, digital service and regulatory/contracting relationship against Article 3 before asserting applicability.\n- For covered public-service sites, examine Annex 1 section 1; elsewhere treat it as a design reference pending applicable-policy review.\n\n## Limitations\n- Do not assert blanket",
+            "score": 0.41458767652511597
+          }
+        ]
+      },
+      "uaeu / student academic credit generative AI": {
+        "retrieval": "local_minilm_normalized_faiss_inner_product",
+        "institution": "uaeu",
+        "query": "student academic credit generative AI",
+        "scope_warning": "Includes UAEU-specific sources alongside general sources; UAEU-specific material does not automatically apply to other institutions.",
+        "corpus_limitations": [
+          "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
+          "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
+          "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
+          "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
+          "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+          "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
+        ],
+        "excerpt_notice": "Each chunk is an excerpt of a curated summary and may omit or cut off relevant context and caveats; consult the complete summary and original source.",
+        "limitations": "Similarity scores are not confidence or applicability; semantic retrieval can miss relevant context. No hosted import is implied.",
+        "results": [
+          {
+            "source_id": "uaeu-student-generative-ai",
+            "source_url": "https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf",
+            "source_scope": "UAEU students and student work submitted for academic credit; university-related work on or off campus. Not a nationwide university policy or a generic staff-rehearsal policy.",
+            "source_institution": "uaeu",
+            "source_verification": "Official PDF page 2 Scope and related provisions checked on 2026-11-04; student/academic-credit scope confirmed. Publication date is not stated; effective and review dates are separate.",
+            "source_document_type": "institutional_policy",
+            "source_jurisdiction": "UAE — UAEU only",
+            "source_published": "unknown",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uaeu-student-generative-ai.md",
+            "chunk_id": 0,
+            "text": "# Generative AI Usage by the Students Policy\n\nOriginal curated summary; not the source full text.\nThese are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.\n\nSource ID: uaeu-student-generative-ai\nAuthority: United Arab Emirates University, DVC for Academic Affairs (Provost)\nURL: https://www.uaeu.ac.ae/en/about/pdfs/policies-2025/generative-ai-policy.pdf\nJurisdiction: UAE — UAEU only\nInstitution: uaeu\nDocument type: institutional_policy\nPublished: unknown\nRetrieved: 2026-11-04\nSource locator: PDF page 2: Overview and Scope; pages 2–4: Articles 1–7. Effective 2025-08-11; next review 2027-09-01.\n\n## Scope\nUAEU students and student work submitted for academic credit;",
+            "score": 0.5783728361129761
+          },
+          {
+            "source_id": "england-generative-ai-education",
+            "source_url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+            "source_scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+            "source_institution": "general",
+            "source_verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+            "source_document_type": "guidance",
+            "source_jurisdiction": "England",
+            "source_published": "2023-03-29",
+            "source_retrieved": "2026-11-04",
+            "source_file": "england-generative-ai-education.md",
+            "chunk_id": 0,
+            "text": "# Generative Artificial Intelligence (AI) in Education\n\nOriginal curated summary; not the source full text.\nThese are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.\n\nSource ID: england-generative-ai-education\nAuthority: Department for Education, England\nURL: https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education\nJurisdiction: England\nInstitution: general\nDocument type: guidance\nPublished: 2023-03-29\nRetrieved: 2026-11-04\nSource locator: Opportunities and challenges; Using AI responsibly: Data privacy; Intellectual property; Formal assessments\n\n## Scope\nEngland education-sector position,",
+            "score": 0.49743789434432983
+          },
+          {
+            "source_id": "england-generative-ai-education",
+            "source_url": "https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education",
+            "source_scope": "England education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.",
+            "source_institution": "general",
+            "source_verification": "Official source reviewed on 2026-11-04; confirm updates before consequential use.",
+            "source_document_type": "guidance",
+            "source_jurisdiction": "England",
+            "source_published": "2023-03-29",
+            "source_retrieved": "2026-11-04",
+            "source_file": "england-generative-ai-education.md",
+            "chunk_id": 1,
+            "text": "ing AI responsibly: Data privacy; Intellectual property; Formal assessments\n\n## Scope\nEngland education-sector position, principally aimed at schools and colleges; the Department notes that some considerations are relevant to other stages.\n\n## Summary\nThe guidance describes possible teacher-facing uses and advises professional judgement over AI outputs, data protection and attention to intellectual property and assessment integrity.\n\n## Considerations\n- Have an educator check generated material for accuracy and suitability before sharing or using it.\n- Consider the privacy and ownership of material entered into a tool and the rules governing assessment.\n\n## Limitations\n- This is an England example, focused on schools and colleges; its legal statements do not establish UAE requirements or",
+            "score": 0.3910214900970459
+          }
+        ]
+      },
+      "general / transfer conditions": {
+        "retrieval": "local_minilm_normalized_faiss_inner_product",
+        "institution": "general",
+        "query": "transfer conditions",
+        "scope_warning": "General sources only; applicability depends on the institution, jurisdiction and activity.",
+        "corpus_limitations": [
+          "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
+          "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
+          "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
+          "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
+          "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+          "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
+        ],
+        "excerpt_notice": "Each chunk is an excerpt of a curated summary and may omit or cut off relevant context and caveats; consult the complete summary and original source.",
+        "limitations": "Similarity scores are not confidence or applicability; semantic retrieval can miss relevant context. No hosted import is implied.",
+        "results": [
+          {
+            "source_id": "uae-personal-data-protection",
+            "source_url": "https://uaelegislation.gov.ae/en/legislations/1972",
+            "source_scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+            "source_institution": "general",
+            "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+            "source_document_type": "law",
+            "source_jurisdiction": "UAE",
+            "source_published": "2021",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-personal-data-protection.md",
+            "chunk_id": 2,
+            "text": "border transfer conditions when selecting and operating a tool.\n\n## Limitations\n- Article 2 excludes government data and government entities processing personal data, certain regulated health and banking data, and free-zone establishments with their own data-protection legislation. Do not assume this federal regime applies to every university.\n- Article references are starting points, not a complete account of duties, exceptions, implementing rules or later changes; verify the authoritative Arabic text and current instruments.\n- Current statutory full text, cross-border transfer conditions and applicability to this prototype have not been verified.\n\n## Source rights and reuse\nSource rights remain with the publisher. This record contains links and concise original paraphrases, not the",
+            "score": 0.41967493295669556
+          },
+          {
+            "source_id": "uae-personal-data-protection",
+            "source_url": "https://uaelegislation.gov.ae/en/legislations/1972",
+            "source_scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+            "source_institution": "general",
+            "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+            "source_document_type": "law",
+            "source_jurisdiction": "UAE",
+            "source_published": "2021",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-personal-data-protection.md",
+            "chunk_id": 1,
+            "text": "2–23 (cross-border transfer)\n\n## Scope\nFederal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.\n\n## Summary\nThe federal law regulates personal-data processing and sets processing controls, individual rights and conditions for transfers, subject to its scope and exceptions.\n\n## Considerations\n- Determine whether the law and an exception apply before processing identifiable learner or staff information; identify the relevant processing basis and purpose.\n- Consider data minimisation, security, data-subject rights and any applicable cross-border transfer conditions when selecting and operating a tool.\n\n## Limitations\n- Article 2 excludes government data and",
+            "score": 0.3792034983634949
+          },
+          {
+            "source_id": "uae-personal-data-protection",
+            "source_url": "https://uaelegislation.gov.ae/en/legislations/1972",
+            "source_scope": "Federal personal-data framework, subject to its territorial scope, exclusions and applicable regulations; potentially relevant when education tools process identifiable student or staff data.",
+            "source_institution": "general",
+            "source_verification": "Official indexed provisions corroborated on 2026-11-04; direct page returned HTTP 403 in this review. Full current text and amendments require further verification.",
+            "source_document_type": "law",
+            "source_jurisdiction": "UAE",
+            "source_published": "2021",
+            "source_retrieved": "2026-11-04",
+            "source_file": "uae-personal-data-protection.md",
+            "chunk_id": 0,
+            "text": "# Federal Decree by Law No. (45) of 2021 Concerning the Protection of Personal Data\n\nOriginal curated summary; not the source full text.\nThese are original curated summaries, not full source texts. Source materials may have separate rights and reuse restrictions; consult each source and its terms before reuse.\n\nSource ID: uae-personal-data-protection\nAuthority: United Arab Emirates Government, UAE Legislation\nURL: https://uaelegislation.gov.ae/en/legislations/1972\nJurisdiction: UAE\nInstitution: general\nDocument type: law\nPublished: 2021\nRetrieved: 2026-11-04\nSource locator: Articles 2–5 (scope and processing controls); Articles 13–19 (data-subject rights); Articles 22–23 (cross-border transfer)\n\n## Scope\nFederal personal-data framework, subject to its territorial scope, exclusions and",
+            "score": 0.20927734673023224
+          }
+        ]
+      }
+    },
+    "interpretation": "Hand-selected smoke checks; no representative retrieval benchmark, confidence/calibration claim or legal applicability conclusion"
+  },
+  "confirmed_issue_fixed": {
+    "observation": "A transfer-conditions chunk could end mid-sentence before later summary caveats",
+    "change": "Both chunk inspection paths retain source verification/scope and display corpus limitations plus excerpt notice",
+    "remaining_limit": "Current full statutory text, cross-border conditions and actual institutional applicability remain unverified"
+  },
+  "verification": {
+    "existing_backend": {
+      "passed": 90,
+      "failed": 0,
+      "mode": "fake LLM, no TTS/STT"
+    },
+    "policy_and_evidence": {
+      "passed": 100,
+      "failed": 0,
+      "includes_new_lexical_tests": 4,
+      "provider_transport": "scripted/mocked; log provider names do not imply network calls"
+    },
+    "optional_real_local_vector_tests": {
+      "passed": 3,
+      "failed": 0,
+      "checks": [
+        "Real semantic queries",
+        "Institutional collection isolation",
+        "Verification/limitation retention",
+        "Input, model, metadata and index drift rejection",
+        "Recorded library versions informational, not an exact-version runtime gate"
+      ]
+    },
+    "focused_preflight": {
+      "passed": 43,
+      "failed": 0,
+      "counting_note": "Subset of aggregate policy suite; do not add again"
+    },
+    "frontend": {
+      "passed": 98,
+      "failed": 0,
+      "production_build": "passed",
+      "existing_warning": "Minified JS chunk approximately 1.278 MB"
+    },
+    "api_package_build": {
+      "status": "passed offline",
+      "artifacts_directory": "/tmp/yaplab-kb-api-dist-2026-11-05",
+      "new_chunk_module_in_wheel": true
+    },
+    "standalone_staged_scenarios": "passed",
+    "logs": {
+      "core": {
+        "local_path": "/tmp/yaplab-2026-11-05-core.log",
+        "sha256": "54236a1c72e1d85702645e56497a89ad996e034d39698c1185647df175662cf2",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "policy-final": {
+        "local_path": "/tmp/yaplab-2026-11-05-policy-final.log",
+        "sha256": "ea6747ab734b373477024d727dc8316712768761b5c51f5be3e9d94af688ebab",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "frontend-tests": {
+        "local_path": "/tmp/yaplab-2026-11-05-frontend-tests.log",
+        "sha256": "6561257a982c913e9015f69d9a27c783a3d6c16534823e72867baf623e4ee9d7",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "frontend-build": {
+        "local_path": "/tmp/yaplab-2026-11-05-frontend-build.log",
+        "sha256": "81ff8b9b97b0a91df6f8a70e3fa93a414dd4a1bb0c36161b9a425adf22d8d3cd",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "preflight": {
+        "local_path": "/tmp/yaplab-2026-11-05-preflight.log",
+        "sha256": "9d46b0ff339a058f8662fc541166c416e30dc200deccf5f8e6d92ff6d10f5e47",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "vector-tests": {
+        "local_path": "/tmp/yaplab-2026-11-05-vector-tests.log",
+        "sha256": "ec3d92d529f6a6901efdb4f342e78b6700ca38762d22e91783b1faf6ddb48979",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "api-build": {
+        "local_path": "/tmp/yaplab-2026-11-05-api-build.log",
+        "sha256": "c337e249fb74ec4c6354db8c11c673c6c1615abea1f38b20052666675c389245",
+        "retention": "Temporary local verification log, not a submission artifact"
+      },
+      "stages": {
+        "local_path": "/tmp/yaplab-2026-11-05-stages.log",
+        "sha256": "3701c6c055537eb57df4d2678a750cf2ccaa18411490706ac6ee6819ab880270",
+        "retention": "Temporary local verification log, not a submission artifact"
+      }
+    }
+  },
+  "browser_walkthrough": {
+    "mode": "fake classroom + deterministic policy selector + scripted role proposals; no model-provider inference",
+    "ports": {
+      "api": 8895,
+      "frontend": 5195
+    },
+    "servers": "Stopped after verification; both ports checked free",
+    "observations": [
+      "Typed synthetic lesson, listener hand, typed answer, end Q&A and backend report",
+      "Report distinguishes typed timing/fake reactions from measured learning or speech",
+      "General collection 10 sources; explicit UAEU 13 with student/academic-credit scope",
+      "WCAG query selected TDRA with scoped applicability caution",
+      "Three caption-failure stages; teacher/privacy released views differed",
+      "Scripted conditional plan required privacy terms and accessibility confirmation",
+      "Human decisions appeared in audit with stage fact IDs cf-2b and cf-3a"
+    ],
+    "screenshot": {
+      "path": "ai-for-good-offline-flow-2026-11-05.jpg",
+      "sha256": "ad1b6123e9d2d3d3a8636147eba5efc341b3e43377ac570eceb055a795e1050d"
+    },
+    "interpretation": "Software path verification only; not live-provider, educator or educational-outcome evaluation"
+  },
+  "new_paid_evaluation": {
+    "provider": "nebius",
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "protocol_version": "3",
+    "corpus_version": "2026-11-04.4",
+    "proposed_max_requests": 27,
+    "max_output_tokens_per_request": 400,
+    "retries": 0,
+    "fallback": false,
+    "payload": "Synthetic stage/role facts, curated action IDs/instructions and public policy summaries; existing Nebius key/account",
+    "action_status": "DENIED before process creation by automatic approval review",
+    "process_started": false,
+    "provider_attempts": 0,
+    "new_inference_cost_usd": 0,
+    "reason": "This would make up to 27 new paid Nebius requests using a credential and create an external billing commitment; prior bounded-test approval does not authorize another run, and the latest instructions prohibit additional paid calls.",
+    "approval_request": "Fresh explicit bounded approval requested and pending; no response received at record time",
+    "retry_performed": false,
+    "prompt_hash_comparison": "All 27 prompts matched saved current protocol/corpus plan",
+    "plan": "ai-for-good-coordination-plan-v3-corpus4-2026-11-05.json",
+    "pricing": {
+      "provider": "nebius",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "currency": "USD",
+      "input_per_million": 0.06,
+      "output_per_million": 0.24,
+      "as_of": "2026-11-05",
+      "estimated_envelope_usd": 0.02761824,
+      "planned_budget_usd": 0.1,
+      "note": "Input proxy is 2 tokens per prompt UTF-8 byte plus 1024 per call; not a tokenizer count, enforced input cap, or billing guarantee. Pricing and protocol overhead may change.",
+      "source_url": "https://nebius.com/services/token-factory/models/nvidia-nemotron-models-inference",
+      "verification": "Public Nano model card read in browser on 2026-11-05: $0.06/M input, $0.24/M output. Account-specific rates and invoice unverified."
+    },
+    "structural_validation": "not_run",
+    "semantic_quality": "unreviewed",
+    "raw_live_output": "None; no live run occurred"
+  },
+  "historical_evidence": "Both earlier live runs remain unchanged. No current protocol-3 live result is inferred from them.",
+  "remaining_blockers": [
+    "Fresh bounded approval before retrying denied paid evaluation",
+    "ITU hosted import endpoint/access/schema and acceptance of summary corpus",
+    "Current statutory full-text and institutional applicability review",
+    "Educator/source-fit evaluation",
+    "Final team/repository/submission details and reviewed five-page report rendering"
+  ],
+  "external_actions": {
+    "push": false,
+    "deployment": false,
+    "submission": false,
+    "new_deliverable_upload": false,
+    "contact": false,
+    "credential_or_account_created": false
+  },
+  "video_files_changed": false,
+  "original_checkout_preservation": {
+    "head_unchanged": true,
+    "branch": "codex/remove-public-demo-links",
+    "tracked_changes": false,
+    "existing_untracked_paths": [
+      ".DS_Store",
+      "AGENTS.md",
+      "docs/.DS_Store"
+    ],
+    "preserved_file_comparisons": {
+      ".DS_Store": true,
+      "docs/.DS_Store": true,
+      ".env": true,
+      "AGENTS.md": true
+    },
+    "note": "Only match booleans retained; no credential contents copied or exposed. Video files were not modified."
+  }
+}

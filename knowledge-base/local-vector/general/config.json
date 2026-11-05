@@ -1,0 +1,66 @@
+{
+  "status": "local_vector_index_built",
+  "hosted_import_verified": false,
+  "institution": "general",
+  "corpus_version": "2026-11-04.4",
+  "notebook_reference": "https://github.com/CrashingGuru/ITUAIReadiness",
+  "notebook_commit": "84010da9e9c443afcceeccb86d1700a662223395",
+  "notebook_cell": "Cell 9",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "model_license": "Apache-2.0",
+  "model_license_reference": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/blob/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md",
+  "model_file_sha256": {
+    "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+    "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+    "config_sentence_transformers.json": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+    "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+    "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+    "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+    "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+    "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+    "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  "library_versions": {
+    "python": "3.12.13",
+    "sentence_transformers": "3.4.1",
+    "transformers": "4.48.3",
+    "torch": "2.6.0",
+    "faiss": "1.10.0",
+    "numpy": "1.26.4"
+  },
+  "encoding": {
+    "normalized": true,
+    "dtype": "float32",
+    "device": "cpu"
+  },
+  "index_type": "IndexFlatIP",
+  "dimension": 384,
+  "vectors": 29,
+  "bundle_sha256": {
+    "manifest.json": "2656b5321219ba7e4740f55508fa83660546d703b61b56f980930d59a36a6ff7",
+    "chunks.jsonl": "24b1fb6809d7bf1c8d8fe22b5974b520ab8491de00765902e843b9b881f3ac49",
+    "docs/england-generative-ai-education.md": "ace4859cbedc901a4a494046fb314d8631a034f8c6434be67319f27bffd7201e",
+    "docs/uae-ai-ethics-principles-guidelines.md": "1606b8cd864973a5d0e8445f66f382214ab39ad5a50629dd64271f3d6c3fe807",
+    "docs/uae-ai-ethics-self-assessment.md": "d2ba5c905d554cb9a9417e108b9549ded8c4ba45a089e3fb4365ece1e83ccf17",
+    "docs/uae-digital-accessibility-policy.md": "7aaa5a5034cb8314a764d07343f7b1b48651c40cc9cd0ef4c0c36180087b5096",
+    "docs/uae-inclusive-education-schools.md": "a14b31b8cbd869b9c3c778212eef150113476f1275e2bf6f8959e5521679711e",
+    "docs/uae-national-ai-strategy-2031.md": "b44eea807bf37d951cf17cc2a8933191faf12bebd6be3c30a0847e5181dc5c4e",
+    "docs/uae-personal-data-protection.md": "b4a2a3f851281dda862d442581d701d097aa6b1d95c74bc56634d9b04ae09c29",
+    "docs/uae-persons-with-disabilities-education.md": "d6aa359e15ec2739657b1c4cf5004840a70b14b57661bc20f7bc3cf8478d846b",
+    "docs/unesco-ai-ethics-recommendation.md": "ae75e4258d73308c9f9baa17fcd1cb8a8cd4bb0d662d5bf76bcbc5291c73cee0",
+    "docs/unesco-generative-ai-education.md": "e1cab24bd789b8dc537cafe220c7fb9d6855973453b3de903a5ecc406b4e52fe"
+  },
+  "metadata_sha256": "92a9d3fa7e23736cf28005b61a8e51c8ab6d6c26275fb45452a9ee65a8ef4348",
+  "index_sha256": "15705c513218fa2ea7899f845182dc3ea514853cbd2c9a35e15a2e6ed50b4772",
+  "scope_warning": "General sources only; applicability depends on the institution, jurisdiction and activity.",
+  "corpus_limitations": [
+    "This seed corpus is a selective research aid, not full legal or policy ingestion, legal advice, or a compliance certification.",
+    "Applicability depends on the institution, emirate, jurisdiction, data, activity, current law, and institutional rules; consult the original sources and qualified advisers.",
+    "Guidance and international examples do not automatically create UAE legal obligations. School-specific sources do not automatically govern universities.",
+    "Sources and translations may change; verify current authoritative texts and implementing instruments before relying on them.",
+    "UAEU records are institutional examples excluded from general search and review unless the UAEU reference collection is explicitly selected.",
+    "Verified policy and guidance PDFs do not verify current PDPL statutory text, cross-border transfer rules or applicability to a particular institution."
+  ]
+}

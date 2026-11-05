@@ -30,8 +30,9 @@ Use the current report draft, which now includes both approved live runs and
 the simplified facilitator. Keep offline verification separate from live
 structural acceptance:
 
-- Offline: 90 existing backend checks, 93 policy unit tests, standalone scenario
-  checks, 98 frontend tests, frontend/API builds and an extracted-wheel smoke.
+- Current offline: 90 existing backend checks, 100 policy/evidence tests, three
+  optional real-vector tests, standalone scenarios, 98 frontend tests and both
+  builds. The extracted-wheel smoke belongs to the earlier verification pass.
 - Protocol 1: 14/27 role responses accepted; 1/9 fully accepted snapshots;
   $0.0023856 calculated from reported usage at recorded list prices.
 - Protocol 2: 24/27 accepted; 6/9 fully accepted snapshots; $0.0032268 on the same
@@ -47,3 +48,12 @@ consumed. Preserve these distinctions while fitting the official template.
 The latest protocol-3 follow-up is offline only: partial item retention and improved source candidates. Do not convert the unchanged 24/27 protocol-2 structural result into a citation-quality score. Use the sample source review for current evidence limits and remaining steps.
 
 The corpus is now 13 records (10 general + 3 UAEU-only). Keep the newly verified TDRA, non-binding AI ethics and UAEU student-scope distinctions from the scope note; no current statutory PDPL or cross-border applicability verification was completed.
+
+
+5 November update: the current local draft describes the newly built local
+MiniLM/FAISS indexes (29 general / 38 UAEU vectors, 384 dimensions), with source
+scope and JSON provenance. The application's retrieval path remains lexical;
+no ITU-hosted import occurred. The prior 4 November Library handoff is an older
+copy and has not been replaced/uploaded by this increment. Render from the current
+local draft when preparing the next review copy. Current protocol 3 has no new
+live-provider evidence; the attempted paid action was denied before execution.

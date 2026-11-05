@@ -1,6 +1,6 @@
 # YapLab Policy Lab technical report
 
-**AI for Good UAE · Education · 4 November 2026**
+**AI for Good UAE · Education · 5 November 2026**
 
 Review draft for the organiser's template. Confirm team details and final
 pagination before submission. This draft describes a locally tested prototype;
@@ -44,9 +44,11 @@ their indexed provisions were corroborated and this limit is recorded.
 
 Separate local Markdown input collections, provenance manifests and compatible
 chunks are prepared for the inspected ITU-linked notebook. Its commit is pinned
-in the package. No embeddings were built and no ITU-hosted import occurred. The
-public reference code demonstrates local workflows; the hosted import contract
-and final submission destination remain unconfirmed.
+in the package. Separate local MiniLM/FAISS indexes now contain 29 general and
+38 UAEU summary chunks, with 384-dimensional normalized vectors and JSON
+provenance/scope metadata. This preparation tool does not replace app retrieval;
+no ITU-hosted import occurred. The hosted import contract and final submission
+destination remain unconfirmed.
 
 Review defaults to deterministic topic matching and source-consideration
 selection. An explicit opt-in mode reuses the configured LLM client to choose
@@ -123,8 +125,9 @@ loads the saved stage/collection view, without another model call on replay.
 ## 5. Evaluation, limitations and reproduction
 
 The isolated `codex/yaplab-ai-for-good` worktree passed 90 existing backend
-checks, 93 policy-related unit tests, standalone staged-scenario checks and 98
-frontend tests. Frontend and offline API package builds succeeded; an
+checks, 100 policy/evidence unit tests, three separate local-vector tests,
+standalone staged-scenario checks and 98 frontend tests. Frontend and offline API
+package builds succeeded; an
 earlier extracted-wheel check verified saved partial-round reuse without extra calls.
 A [local browser walkthrough](ai-for-good-demo.md) connects typed classroom input,
 Q&A and report to a separate staged policy exercise, scripted role proposals and

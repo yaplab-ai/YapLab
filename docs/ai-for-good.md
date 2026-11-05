@@ -447,3 +447,25 @@ API package builds pass. These supersede older software counts above, not the
 immutable live results. See [local demo evidence](evidence/ai-for-good-demo-2026-11-04.json).
 Default coordination stays off; `demo` requires fake LLM/no speech providers and
 labels results offline. No new paid calls, external upload or hosted import.
+
+
+## Local chunk inspection and real vector indexes (5 November 2026)
+
+The [local KB guide](ai-for-good-local-kb.md) documents a dependency-free lexical
+chunk inspection CLI and separate real MiniLM/FAISS indexes: general 29 vectors,
+UAEU 38, each 384 normalized dimensions. Results retain source scope, verification
+and corpus limitations, including the unresolved current statutory/privacy
+text. The optional model/environment live in `/tmp`; shared application
+dependencies and source search routing are unchanged. No hosted import occurred.
+
+Current offline checks passed **90 existing backend checks, 100 policy/evidence
+tests, three optional real-vector tests, standalone scenarios, both scoped input
+bundle checks and 98 frontend tests**, plus frontend and API package builds.
+A fresh browser walkthrough used only fake/scripted modes and checked typed
+classroom input, report, scoped review, role facts, coordination and human audit.
+These supersede older software counts, not historical live metrics.
+
+The proposed current-protocol Nebius test was **denied by automatic approval
+review before execution**, so it made zero provider requests and incurred no
+new inference cost. Fresh bounded approval is pending; no retry or provider
+switch occurred. See the [5 November evidence](evidence/ai-for-good-kb-2026-11-05.json).

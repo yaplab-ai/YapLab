@@ -1,7 +1,7 @@
 # AI for Good submission and knowledge base workflow
 
-Verified on 4 November 2026. This records public instructions, inspected reference
-code and what remains unconfirmed. No deliverable has been uploaded or submitted.
+Public instructions/reference code checked on 4 November 2026; local-vector
+status updated on 5 November. No new deliverable has been uploaded or submitted.
 
 ## Confirmed submission requirements
 
@@ -37,7 +37,7 @@ implements a local personal-Drive workflow:
 | 4 and 5 | Configure project folders and mount personal Google Drive | Requires the user's Drive authorization; this was not performed |
 | 7 | Accept PDF, TXT and MD uploads into `docs` | Input types, not a confirmed final-submission specification |
 | 8 | Read the immediate `docs` folder, normalize and chunk text | Flat folder; 800-character chunks, 120-character overlap, minimum 80 |
-| 9 | Embed with all-MiniLM-L6-v2 and save FAISS plus metadata/config | Downloads/loads models and writes the user's Drive; not executed here |
+| 9 | Embed with all-MiniLM-L6-v2 and save FAISS plus metadata/config | Not run in Drive; equivalent local MiniLM/FAISS preparation now exists separately |
 
 Cell 8 emits `{source: filename, chunk_id: integer, text: string}` records. Cell 9
 writes `faiss.index`, `metadata.pkl` and `config.json`. These are that notebook's
@@ -65,7 +65,14 @@ consumer; the reference notebook does not supply YapLab's API scope filter.
 
 The content is curated metadata and original summaries, not mirrored legislation
 or university PDFs. The local package is not a distributed vector store. Its
-manifest explicitly marks hosted import and embedding-index creation as false.
+manifest explicitly marks hosted import and embedding-index creation as false
+for these input packages. Separate [`local-vector`](../knowledge-base/local-vector/)
+outputs now contain real local MiniLM/FAISS indexes: 29 general / 38 UAEU vectors,
+384 normalized dimensions, JSON metadata and pinned model/input provenance.
+Their configs mark local construction and `hosted_import_verified=false`.
+This is an independent local adaptation of cell 9, not execution of the Drive
+notebook or a validated ITU-hosted schema. [Setup and tests](ai-for-good-local-kb.md)
+use a separate temporary environment; Policy Lab's application search is unchanged.
 
 From `apps/api` in the isolated worktree:
 
