@@ -1,6 +1,6 @@
 {
   "label_status": "team-authored, not expert-validated",
-  "frozen_at_utc": "2026-11-05T07:47:35Z",
+  "frozen_at_utc": "2026-11-05T07:49:38Z",
   "labeling_basis": "Source titles, scopes and locators; written before inspecting retrieval rankings. Expected IDs identify relevant sources, not exclusive relevance.",
   "metric_definition": "Recall@3 is mean per-query fraction of expected IDs in top 3; MRR is mean reciprocal rank of the first expected ID in top 3. Abstention is measured separately.",
   "queries": [
@@ -355,6 +355,51 @@
       "institution": "general",
       "expected_source_ids": [],
       "should_abstain": true
+    },
+    {
+      "id": "q37",
+      "scenario": "feedback",
+      "query": "Which international AI principles and EU law address AI literacy or responsible use?",
+      "institution": "general",
+      "expected_source_ids": [
+        "eu-ai-act-education",
+        "oecd-ai-principles"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q38",
+      "scenario": "captions",
+      "query": "Which US public-sector web accessibility rule and WCAG 2.2 guidance address captions?",
+      "institution": "general",
+      "expected_source_ids": [
+        "us-ada-title-ii-web",
+        "wcag-22-captions"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q39",
+      "scenario": "transcript",
+      "query": "Which US law protects education records?",
+      "institution": "general",
+      "expected_source_ids": [
+        "us-ferpa-education-records"
+      ],
+      "should_abstain": false
+    },
+    {
+      "id": "q40",
+      "scenario": "feedback",
+      "query": "Which Australian and UK higher education guidance addresses generative AI and assessment?",
+      "institution": "general",
+      "expected_source_ids": [
+        "australia-teqsa-genai-assessment",
+        "uk-qaa-genai-assessment",
+        "uk-russell-group-genai-principles"
+      ],
+      "should_abstain": false
     }
-  ]
+  ],
+  "supersedes": "Historical initial labels committed as 82e7a61; revised before inspecting any retrieval rankings to include forthcoming global source scopes."
 }
