@@ -19,17 +19,32 @@ First built at BU DS+X 2026. Runs on NVIDIA Nemotron through Nebius Token Factor
 
 ## AI for Good UAE: judges' quick start
 
-From this checkout, with the existing API `.venv` and frontend dependencies:
+Run Policy Lab live on Nemotron 3 Nano via Nebius, with the installed API `.venv`
+and frontend dependencies:
 
 ```bash
-python3 scripts/run-hackathon-demo.py
+NEBIUS_API_KEY='<your-key>' python3 scripts/run-hackathon-demo.py --live
 ```
 
-This opens a fake classroom and scripted policy exercise, with no model calls.
-The [walkthrough](docs/ai-for-good-demo.md) covers sources, rationale labels,
-final-stage gaps, decisions and audit exports. Optional cached vector setup is
-in the [retrieval guide](docs/ai-for-good-retrieval.md); otherwise search uses
-labelled lexical fallback.
+If `NEBIUS_API_KEY` is already in your environment or this checkout's root `.env`,
+use `python3 scripts/run-hackathon-demo.py --live`. Open the printed local URL and
+select **Policy Lab**. Use synthetic facts only. Each **View role proposals** sends
+up to three model requests; `--max-model-calls N` sets the server-side policy cap
+(default 27, range 1–60). The cap resets when the process restarts; it is not a
+billing cap. The live classroom also makes configured LLM calls **outside this
+policy cap**. TTS/STT providers stay off; use typed classroom input and turn camera
+and voices off in Setup. Policy coordination uses the direct provider rather than
+classroom fallback.
+
+No key? Run without `--live` for the offline mode with scripted role answers.
+It uses a fake classroom and scripted policy exercise, with no model or speech-
+provider calls. The [walkthrough](docs/ai-for-good-demo.md) distinguishes live,
+offline and recorded replay, rationale labels, gaps, decisions and audit exports.
+
+The [6 November live UI demo evidence](docs/evidence/ai-for-good-live-demo-2026-11-06/README.md)
+contains 18 recorded successful provider responses across two caption exercises;
+16 roles completed and two were partial. It is separate from the scored 5 November
+evaluation below. Its invoice is unverified; no educational outcomes were measured.
 
 Replay the actual saved protocol-4 app run, read-only with no new model calls:
 
@@ -56,7 +71,7 @@ contains both positive results and failed abstention cases.
 
 Verify using [AGENTS.md](AGENTS.md) and the
 [engineering commands](docs/ai-for-good.md#verification-and-local-use).
-Code and evidence remain local; nothing has been submitted or deployed.
+These launcher commands run locally and do not deploy or submit the project.
 
 ## AI for Good UAE: Policy Lab prototype
 
@@ -71,10 +86,11 @@ backend configured. Review mode and source applicability are shown with the
 results. The seed knowledge base is selective; the prototype does not certify
 legal compliance or measure educational outcomes.
 
-For the complete local walkthrough, run `python3 scripts/run-hackathon-demo.py`
-with installed dependencies and follow the [six-minute demo guide](docs/ai-for-good-demo.md).
-It uses a fake classroom and explicitly scripted policy proposals, with no model
-or speech-provider calls.
+For the live Policy Lab walkthrough shown in the v3 video, run
+`python3 scripts/run-hackathon-demo.py --live` with your existing Nebius key and
+follow the [demo guide](docs/ai-for-good-demo.md). Running without flags remains
+the convenient offline option, with fake classroom and scripted role proposals;
+replay displays saved live outputs without new model calls.
 
 The [local KB tools](docs/ai-for-good-local-kb.md) inspect prepared chunks and
 provide local MiniLM/FAISS indexes with source scope and verification notes. The
@@ -352,6 +368,7 @@ See `.env.example` for the rest.
 | `cd apps/api && uv run python verify.py` | Offline backend checks: moderator, sessions, grounding, memory, server, voice, natural hands, teaching moves, Nebius routing/usage, and demo hardening (the fitted-model check runs with the data extra) |
 | `cd frontend && npm run test:live` | Live-bridge/report tests: transport, replay, speech, audio, talk lifecycle, teaching moves, and quota fallback |
 | `cd frontend && npm run build` | Production build |
+| `python3 -B scripts/test_hackathon_demo.py` | Offline launcher checks: live/offline/replay settings, key lookup and call-cap bounds; no model calls |
 
 After changing `frontrow/protocol.py`, regenerate the schema with `uv run python -m frontrow.protocol > ../../packages/protocol/schema.json`.
 

@@ -193,8 +193,15 @@ $0.06/M input and $0.24/M output prices; invoice unverified. The
 preserve successes and failures. All 27 prompt digests match the pre-run plan.
 All three read-only recordings were browser-verified with actual outcomes,
 rationale omissions, plans, ordered timeline, candidate gaps and a no-new-calls
-banner. Classroom/report demonstration remains fake/scripted. These are software
-and synthetic model observations, not measured educational outcomes.
+banner. The 5 November classroom/report demonstration remains fake/scripted.
+These are software and synthetic model observations, not measured educational
+outcomes.
+
+The separate 6 November live UI demo recorded 18 successful provider responses
+(16 completed/two partial) across two caption exercises; the
+[archived exports](evidence/ai-for-good-live-demo-2026-11-06/README.md) retain both
+takes. Its facilitator decision was scripted synthetic input; this unscored demo
+is distinct from the 5 November evaluation and establishes no educational outcome.
 
 ## 8. Candidate gaps and remaining validation
 

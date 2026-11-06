@@ -1,0 +1,29 @@
+{
+  "description": "Unmodified source evidence files from the 6 November 2026 live UI demo. Hashes establish byte identity, not independent proof of provider, billing, approval, or recording context.",
+  "approval_reference": "user-approved-2026-11-06-video-live-36",
+  "approval_reference_source": "Prompt 12 brief; original approval message not independently examined",
+  "provider": "nebius",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "scenario_id": "caption-failure",
+  "recorded_provider_successes": 18,
+  "recorded_prompt_tokens": 35350,
+  "recorded_completion_tokens": 2557,
+  "input_list_price_usd_per_million": "0.06",
+  "output_list_price_usd_per_million": "0.24",
+  "estimated_list_price_usd": "0.00273468",
+  "invoice_verified": false,
+  "files": {
+    "timeline-9xaFkMz9q6tj02w2ZjTv3_6uQZlLXqpH.html": {
+      "sha256": "5d9f8abd27cb844586353626d36e0a840e46d6b6c2484c6d6d142a395b40bf53"
+    },
+    "timeline-9xaFkMz9q6tj02w2ZjTv3_6uQZlLXqpH.json": {
+      "sha256": "265379fbbe05f7c8a6e3c1d08208dd45be059de51abfe8364757a008f2ff9537"
+    },
+    "timeline-I2STSl3jQfrC85AziqmvLp84vBKtDUi_.html": {
+      "sha256": "bc4c70a629fb4b8006c3dd2e49762ec5b3e761a25a1b03862577f7d4a2d99435"
+    },
+    "timeline-I2STSl3jQfrC85AziqmvLp84vBKtDUi_.json": {
+      "sha256": "19fc07e7bd77f0f9937e655fd2ff931bca73a44e9d756967cc329602813b382f"
+    }
+  }
+}
