@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 from pathlib import Path
 import shutil
@@ -15,6 +16,7 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+LIVE_MODEL = 'nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B'
 VECTOR_KEYS = ('FRONTROW_POLICY_VECTOR_PYTHON', 'FRONTROW_POLICY_VECTOR_MODEL',
                'FRONTROW_POLICY_VECTOR_INDEX_ROOT')
 
@@ -47,17 +49,107 @@ def retrieval_probe(api_url: str, institution: str) -> str:
         return 'unknown'
 
 
-def main() -> int:
+def model_call_limit(value: str) -> int:
+    try:
+        result = int(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError('Model call limit must be an integer from 1 to 60.') from None
+    if not 1 <= result <= 60:
+        raise argparse.ArgumentTypeError('Model call limit must be an integer from 1 to 60.')
+    return result
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--api-port', type=int, default=8765)
     parser.add_argument('--ui-port', type=int, default=5179)
-    parser.add_argument('--replay-live', metavar='RECORDING.json', type=Path,
-                        help='Open a saved live exercise read-only; pass its exported JSON file.')
-    args = parser.parse_args()
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--live', action='store_true', help='Use Nebius for live policy coordination and classroom LLM calls.')
+    modes.add_argument('--replay-live', metavar='RECORDING.json', type=Path,
+                       help='Open a saved live exercise read-only; pass its exported JSON file.')
+    parser.add_argument('--max-model-calls', type=model_call_limit, default=27,
+                        help='Policy coordination call cap for live mode, 1–60 (default: 27).')
+    args = parser.parse_args(argv)
     if args.replay_live and not args.replay_live.is_file():
         parser.error('The replay recording must be an existing JSON file.')
     if not (1 <= args.api_port <= 65535 and 1 <= args.ui_port <= 65535) or args.api_port == args.ui_port:
         parser.error('Use two distinct ports from 1 to 65535.')
+    return args
+
+
+def nebius_key(env: dict[str, str], root: Path | None = None) -> str | None:
+    root = ROOT if root is None else root
+    # Match config.py's load_dotenv(override=False): an existing environment
+    # variable, even an empty one, takes precedence over the repo-root file.
+    if 'NEBIUS_API_KEY' in env:
+        return env['NEBIUS_API_KEY'] if env['NEBIUS_API_KEY'].strip() else None
+    path = root / '.env'
+    if not path.is_file():
+        return None
+    # The launcher runs under system python3; python-dotenv is installed in the
+    # API venv and is pure Python. Do not require a global installation.
+    for site in (root / 'apps/api/.venv/lib').glob('python*/site-packages'):
+        if (site / 'dotenv').is_dir():
+            sys.path.insert(0, str(site))
+            break
+    try:
+        from dotenv.main import DotEnv
+        logger = logging.getLogger('dotenv.main')
+        was_disabled = logger.disabled
+        logger.disabled = True
+        try:
+            key = DotEnv(path, verbose=False, override=False, encoding='utf-8').dict().get('NEBIUS_API_KEY')
+        finally:
+            logger.disabled = was_disabled
+        return key if key and key.strip() else None
+    except Exception:  # Never expose loader errors or configuration contents.
+        return None
+
+
+def configure_mode(env: dict[str, str], args: argparse.Namespace, api_url: str, ui_url: str) -> None:
+    env.update({
+        'FRONTROW_LLM': 'nebius' if args.live else 'fake', 'FRONTROW_POLICY_LLM': 'off',
+        'FRONTROW_POLICY_COORDINATION': 'configured' if args.live else 'demo',
+        'FRONTROW_TTS': 'none', 'FRONTROW_STT': 'none',
+        'FRONTROW_TICK_INTERVAL_SECONDS': '3', 'FRONTROW_MODERATOR_WARMUP_SECONDS': '0',
+        'FRONTROW_MODERATOR_WARMUP_MIN_WORDS': '0', 'FRONTROW_CORS_ORIGINS': ui_url,
+        'VITE_API_URL': api_url, 'VITE_HACKATHON_DEMO': '0' if args.live else '1',
+        'PYTHONUNBUFFERED': '1', 'VITE_POLICY_REPLAY': '1' if args.replay_live else '0',
+    })
+    if args.live:
+        env.update({
+            'FRONTROW_LLM_MODEL': LIVE_MODEL,
+            'FRONTROW_LLM_MODEL_FAST': LIVE_MODEL,
+            'FRONTROW_LLM_MODEL_REASONING': LIVE_MODEL,
+            'FRONTROW_POLICY_EVALUATION_CALL_LIMIT': str(args.max_model_calls),
+        })
+    if args.replay_live:
+        env['FRONTROW_POLICY_REPLAY_PATH'] = str(args.replay_live.resolve())
+    else:
+        env.pop('FRONTROW_POLICY_REPLAY_PATH', None)
+
+
+def mode_description(args: argparse.Namespace) -> str:
+    if args.live:
+        return (f'Live policy coordination: {LIVE_MODEL} via Nebius; synthetic facts only. '
+                f'Policy coordination cap: {args.max_model_calls} model requests; cap resets on process restart. '
+                "Each 'View role proposals' sends up to 3 model requests. "
+                'The practice classroom also calls the configured LLM; its calls are outside this policy coordination cap. '
+                'Typed input only; no speech-provider calls.')
+    if args.replay_live:
+        return 'Recorded live exercise replay (read-only); no new model calls.'
+    return 'Fake classroom + scripted role proposals; no model or speech-provider requests.'
+
+
+def main() -> int:
+    args = parse_args()
+    env = os.environ.copy()
+    if args.live:
+        key = nebius_key(env)
+        if not key:
+            print('Live mode requires NEBIUS_API_KEY in the environment or repo-root .env.', file=sys.stderr)
+            return 1
+        env['NEBIUS_API_KEY'] = key
     api_url = f'http://127.0.0.1:{args.api_port}'
     ui_url = f'http://127.0.0.1:{args.ui_port}'
     python = ROOT / 'apps/api/.venv/bin/python'
@@ -74,20 +166,8 @@ def main() -> int:
         except OSError:
             print(f'Port {port} is occupied. Stop the process using it, then retry.', file=sys.stderr)
             return 1
-    env = os.environ.copy()
-    env.update({
-        'FRONTROW_LLM': 'fake', 'FRONTROW_POLICY_LLM': 'off',
-        'FRONTROW_POLICY_COORDINATION': 'demo', 'FRONTROW_TTS': 'none', 'FRONTROW_STT': 'none',
-        'FRONTROW_TICK_INTERVAL_SECONDS': '3', 'FRONTROW_MODERATOR_WARMUP_SECONDS': '0',
-        'FRONTROW_MODERATOR_WARMUP_MIN_WORDS': '0', 'FRONTROW_CORS_ORIGINS': ui_url,
-        'VITE_API_URL': api_url, 'VITE_HACKATHON_DEMO': '1', 'PYTHONUNBUFFERED': '1',
-        'VITE_POLICY_REPLAY': '1' if args.replay_live else '0',
-    })
+    configure_mode(env, args, api_url, ui_url)
     vector_config = configure_vectors(env)
-    if args.replay_live:
-        env['FRONTROW_POLICY_REPLAY_PATH'] = str(args.replay_live.resolve())
-    else:
-        env.pop('FRONTROW_POLICY_REPLAY_PATH', None)
     processes: list[subprocess.Popen] = []
     try:
         processes.append(subprocess.Popen([str(python), '-m', 'uvicorn', 'frontrow.server:app',
@@ -114,8 +194,7 @@ def main() -> int:
               'The worker falls back to lexical on failure; each search reports its actual mode.', flush=True)
         processes.append(subprocess.Popen([node, str(ROOT / 'frontend/node_modules/vite/bin/vite.js'), '--host', '127.0.0.1',
             '--port', str(args.ui_port), '--strictPort'], cwd=ROOT / 'frontend', env=env))
-        mode = ('Recorded live exercise replay (read-only); no new model calls.' if args.replay_live
-                else 'Fake classroom + scripted role proposals; no model or speech-provider requests.')
+        mode = mode_description(args)
         print(f'\nYapLab demo: {ui_url}\n{mode}\nUse the demo deck and typed input. Ctrl+C stops both processes.\n', flush=True)
         while all(process.poll() is None for process in processes):
             time.sleep(.3)
